@@ -67,6 +67,36 @@ async def get_heatmap_data(city: str = Query(default="Delhi")):
     return {"city": city, "grid": grid}
 
 
+@router.get("/risk")
+async def get_risk_scores(city: str = Query(default="Delhi")):
+    """Get compound risk scores for all zones."""
+    from app.services.cpcb import CPCBService
+    from app.services.weather import WeatherService
+    from app.services.wards import WardService
+    from app.services.risk import RiskService
+
+    cpcb = CPCBService()
+    weather_svc = WeatherService()
+
+    try:
+        readings = await cpcb.get_city_readings(city)
+        weather = await weather_svc.get_current(city)
+        zones = WardService().get_zones(city)
+
+        risk_svc = RiskService()
+        scores = risk_svc.score_all_zones(zones, readings, weather)
+
+        return {
+            "city": city,
+            "zones": scores,
+            "highest_risk": scores[0] if scores else None,
+            "zones_needing_action": len([s for s in scores if s["action_needed"]]),
+        }
+    finally:
+        await cpcb.close()
+        await weather_svc.close()
+
+
 @router.get("/zones")
 async def get_zones(city: str = Query(default="Delhi")):
     """Get zone/ward boundaries as GeoJSON."""
