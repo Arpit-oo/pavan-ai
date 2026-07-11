@@ -75,6 +75,11 @@ export default function Dashboard() {
                 Simulator
               </Button>
             </Link>
+            <Link href="/compliance">
+              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
+                GRAP
+              </Button>
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
