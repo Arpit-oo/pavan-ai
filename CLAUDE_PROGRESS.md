@@ -1,7 +1,7 @@
 # Claude's Build Progress — VayuBudhi
 
-## Status: BUILDING — Phase 1 in progress
-Last updated: 2026-07-11 (session 1)
+## Status: BUILDING — Phase 3 done, Phase 4 starting
+Last updated: 2026-07-12 (session 2)
 
 ---
 
@@ -33,10 +33,15 @@ Last updated: 2026-07-11 (session 1)
 - [x] Intervention simulator (5 types: truck_ban, construction_halt, industrial_shutdown, odd_even, burning_ban)
 - [x] Enforcement recommendation agent (prioritized, evidence-backed)
 - [x] Attribution agent with confidence scores
-- [ ] Compound risk scoring system
+- [x] Compound risk scoring (AQI + weather + population + vulnerability + trend)
+- [x] XGBoost forecast model (MAE 4.88, 1-72hr predictions with confidence)
+- [x] Forecast chart UI (Recharts, 24/48/72hr toggle, confidence bands)
+- [x] Intervention simulator page (/simulate)
+- [x] Intervention comparison (all 5 types ranked by impact)
 
 ## Phase 4: Citizen Layer (Days 8-9) — July 18-19
-- [ ] GRAP compliance auto-reporter
+- [x] GRAP compliance auto-reporter with full agent pipeline
+- [x] Compliance page (/compliance) with all 4 GRAP stages
 - [ ] WhatsApp/citizen alert system
 - [ ] Multilingual support (Hindi + 2 regional)
 - [ ] Health impact quantifier
