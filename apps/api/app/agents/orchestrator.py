@@ -7,6 +7,7 @@ from app.agents.sensor_agent import SensorAgent
 from app.agents.weather_agent import WeatherAgent
 from app.agents.anomaly_agent import AnomalyAgent
 from app.agents.attribution_agent import AttributionAgent
+from app.agents.enforcement_agent import EnforcementAgent
 
 
 class Orchestrator:
@@ -18,6 +19,7 @@ class Orchestrator:
         self.weather = WeatherAgent()
         self.anomaly = AnomalyAgent()
         self.attribution = AttributionAgent()
+        self.enforcement = EnforcementAgent()
         self.run_log = []  # type: List[Dict[str, Any]]
 
     async def full_analysis(self, city="Delhi"):
@@ -51,11 +53,26 @@ class Orchestrator:
             self._run_agent(self.attribution, context=analysis_context),
         )
 
+        # Phase 3: Enforcement (needs anomaly + attribution results)
+        enforcement_context = {
+            "city": city,
+            "readings": readings,
+            "attributions": attribution_result.data.get("attributions", []),
+            "anomalies": anomaly_result.data.get("anomalies", []),
+            "wind_analysis": wind,
+        }
+
+        self._log("Running enforcement agent", "orchestrator")
+        enforcement_result = await self._run_agent(self.enforcement, context=enforcement_context)
+
         elapsed = (datetime.now() - start).total_seconds()
 
         # Compile summary
         summary = self._build_summary(
             sensor_result, weather_result, anomaly_result, attribution_result, city
+        )
+        summary["enforcement_recs"] = len(
+            enforcement_result.data.get("recommendations", [])
         )
 
         return {
@@ -68,6 +85,7 @@ class Orchestrator:
                 "weather": weather_result.to_dict(),
                 "anomaly": anomaly_result.to_dict(),
                 "attribution": attribution_result.to_dict(),
+                "enforcement": enforcement_result.to_dict(),
             },
             "run_log": self.run_log,
         }
