@@ -15,23 +15,24 @@ Last updated: 2026-07-11 (session 1)
 - [x] Map dashboard page with Deck.gl + Mapbox
 - [x] Stats bar component (avg AQI, PM2.5, worst/best station)
 - [x] All API router stubs (aqi, forecast, agents, simulate, alerts, compliance)
-- [ ] Build OpenWeatherMap data pipeline
+- [x] Build OpenWeatherMap data pipeline (with wind analysis, stagnation detection)
 - [ ] Set up Supabase schema (stations, readings, forecasts, alerts)
-- [ ] Connect frontend to live backend data
+- [x] Agent panel UI component with run log
+- [ ] Connect frontend to live backend data (partially done — needs API running)
 
 ## Phase 2: Intelligence Core (Days 3-5) — July 13-15
 - [ ] XGBoost forecast model (24hr ward-level AQI prediction)
-- [ ] Source attribution engine (wind + land use correlation)
-- [ ] Agent orchestrator (Claude multi-agent coordination)
-- [ ] Sensor agent implementation
-- [ ] Weather agent implementation
-- [ ] Ward-level AQI interpolation (IDW from sparse stations)
+- [x] Source attribution engine (wind + land use correlation + temporal patterns)
+- [x] Agent orchestrator (5 agents coordinated in optimal order)
+- [x] Sensor agent (CPCB data pull + analysis)
+- [x] Weather agent (wind patterns + stagnation + inversion risk)
+- [x] Ward/zone boundaries (12 Delhi MCD zones with land use profiles)
 
 ## Phase 3: Power Features (Days 5-7) — July 15-17
-- [ ] Anomaly detection agent (real-time spike flagging)
-- [ ] Intervention simulator (counterfactual modeling)
-- [ ] Enforcement recommendation agent
-- [ ] Attribution agent with confidence scores
+- [x] Anomaly detection agent (spatial spikes + PM ratio anomalies)
+- [x] Intervention simulator (5 types: truck_ban, construction_halt, industrial_shutdown, odd_even, burning_ban)
+- [x] Enforcement recommendation agent (prioritized, evidence-backed)
+- [x] Attribution agent with confidence scores
 - [ ] Compound risk scoring system
 
 ## Phase 4: Citizen Layer (Days 8-9) — July 18-19
