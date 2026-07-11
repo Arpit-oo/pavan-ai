@@ -1,5 +1,11 @@
 import os
+from pathlib import Path
 from functools import lru_cache
+
+from dotenv import load_dotenv
+
+_env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(_env_path)
 
 
 class Settings:

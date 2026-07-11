@@ -2,10 +2,13 @@
 
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { fetchAPI, type StationReading, type HeatmapData } from "@/lib/api";
 import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";
+import ForecastChart from "@/components/dashboard/forecast-chart";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
   ssr: false,
@@ -61,6 +64,18 @@ export default function Dashboard() {
           >
             Air Quality Intelligence
           </Badge>
+          <nav className="hidden md:flex items-center gap-1 ml-4">
+            <Link href="/">
+              <Button variant="ghost" size="sm" className="text-xs text-zinc-300 h-7">
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/simulate">
+              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
+                Simulator
+              </Button>
+            </Link>
+          </nav>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
@@ -81,23 +96,26 @@ export default function Dashboard() {
         <StatsBar stations={stations} city={city} />
 
         <div className="flex-1 min-h-0 flex gap-4">
-          <div className="flex-1">
-            {loading ? (
-              <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
-                <div className="text-center space-y-3">
-                  <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto" />
-                  <p className="text-zinc-500 text-sm">
-                    Loading air quality data...
-                  </p>
+          <div className="flex-1 flex flex-col gap-4">
+            <div className="flex-1 min-h-0">
+              {loading ? (
+                <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
+                  <div className="text-center space-y-3">
+                    <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p className="text-zinc-500 text-sm">
+                      Loading air quality data...
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <AQIMap
-                stations={stations}
-                heatmapPoints={heatmapData?.points}
-                onStationClick={setSelectedStation}
-              />
-            )}
+              ) : (
+                <AQIMap
+                  stations={stations}
+                  heatmapPoints={heatmapData?.points}
+                  onStationClick={setSelectedStation}
+                />
+              )}
+            </div>
+            <ForecastChart />
           </div>
 
           <div className="w-80 shrink-0 hidden lg:block">
