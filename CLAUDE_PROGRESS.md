@@ -1,19 +1,23 @@
 # Claude's Build Progress — VayuBudhi
 
-## Status: DESIGN PHASE
-Last updated: 2026-07-11
+## Status: BUILDING — Phase 1 in progress
+Last updated: 2026-07-11 (session 1)
 
 ---
 
 ## Phase 1: Foundation (Days 1-2) — July 11-12
-- [ ] Write design spec doc
-- [ ] Scaffold monorepo (apps/web, apps/api, packages/shared)
-- [ ] Set up Next.js 15 + Tailwind + shadcn/ui
-- [ ] Set up FastAPI backend with project structure
-- [ ] Build CPCB data ingestion pipeline
+- [x] Write design spec doc
+- [x] Scaffold monorepo (apps/web, apps/api, packages/shared)
+- [x] Set up Next.js 16 + Tailwind + shadcn/ui
+- [x] Set up FastAPI backend with project structure
+- [x] Build CPCB data ingestion pipeline (30 Delhi + 9 Mumbai stations)
+- [x] AQI heatmap interpolation service (IDW)
+- [x] Map dashboard page with Deck.gl + Mapbox
+- [x] Stats bar component (avg AQI, PM2.5, worst/best station)
+- [x] All API router stubs (aqi, forecast, agents, simulate, alerts, compliance)
 - [ ] Build OpenWeatherMap data pipeline
 - [ ] Set up Supabase schema (stations, readings, forecasts, alerts)
-- [ ] Basic Deck.gl map with real CPCB station data
+- [ ] Connect frontend to live backend data
 
 ## Phase 2: Intelligence Core (Days 3-5) — July 13-15
 - [ ] XGBoost forecast model (24hr ward-level AQI prediction)
@@ -53,6 +57,8 @@ Last updated: 2026-07-11
 | 2026-07-11 | No LangChain — raw Claude API | Less abstraction, fewer bugs |
 | 2026-07-11 | XGBoost over deep learning | Fast training, no GPU, interpretable |
 | 2026-07-11 | Deck.gl over plain Mapbox | 3D heatmaps, hex bins, visual wow |
+| 2026-07-11 | Python 3.8 compat | Arpit's system has 3.8, used typing imports |
+| 2026-07-11 | DM Sans font (not Geist) | Per global CLAUDE.md rule |
 
 ## Blockers
 | Blocker | Status | Owner |
