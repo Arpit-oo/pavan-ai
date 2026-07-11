@@ -43,6 +43,20 @@ async def get_stations(city: str = Query(default="Delhi")):
     return {"city": city, "stations": stations, "count": len(stations)}
 
 
+@router.get("/weather")
+async def get_weather(city: str = Query(default="Delhi")):
+    """Get current weather and wind analysis."""
+    from app.services.weather import WeatherService
+
+    svc = WeatherService()
+    try:
+        current = await svc.get_current(city)
+        wind = await svc.get_wind_analysis(city)
+        return {"city": city, "current": current, "wind": wind}
+    finally:
+        await svc.close()
+
+
 @router.get("/heatmap")
 async def get_heatmap_data(city: str = Query(default="Delhi")):
     """Get interpolated AQI grid for heatmap rendering."""
@@ -51,3 +65,14 @@ async def get_heatmap_data(city: str = Query(default="Delhi")):
     svc = InterpolationService()
     grid = await svc.get_interpolated_grid(city)
     return {"city": city, "grid": grid}
+
+
+@router.get("/zones")
+async def get_zones(city: str = Query(default="Delhi")):
+    """Get zone/ward boundaries as GeoJSON."""
+    from app.services.wards import WardService
+
+    svc = WardService()
+    geojson = svc.to_geojson(city)
+    zones = svc.get_zones(city)
+    return {"city": city, "geojson": geojson, "zones": zones, "count": len(zones)}

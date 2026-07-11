@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { fetchAPI, type StationReading, type HeatmapData } from "@/lib/api";
 import StatsBar from "@/components/dashboard/stats-bar";
+import AgentPanel from "@/components/dashboard/agent-panel";
 import { Badge } from "@/components/ui/badge";
 
 const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
@@ -79,23 +80,29 @@ export default function Dashboard() {
       <main className="flex-1 flex flex-col gap-4 p-4 overflow-hidden">
         <StatsBar stations={stations} city={city} />
 
-        <div className="flex-1 min-h-0">
-          {loading ? (
-            <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
-              <div className="text-center space-y-3">
-                <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto" />
-                <p className="text-zinc-500 text-sm">
-                  Loading air quality data...
-                </p>
+        <div className="flex-1 min-h-0 flex gap-4">
+          <div className="flex-1">
+            {loading ? (
+              <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
+                <div className="text-center space-y-3">
+                  <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                  <p className="text-zinc-500 text-sm">
+                    Loading air quality data...
+                  </p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <AQIMap
-              stations={stations}
-              heatmapPoints={heatmapData?.points}
-              onStationClick={setSelectedStation}
-            />
-          )}
+            ) : (
+              <AQIMap
+                stations={stations}
+                heatmapPoints={heatmapData?.points}
+                onStationClick={setSelectedStation}
+              />
+            )}
+          </div>
+
+          <div className="w-80 shrink-0 hidden lg:block">
+            <AgentPanel />
+          </div>
         </div>
       </main>
     </div>
