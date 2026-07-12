@@ -85,6 +85,11 @@ export default function Dashboard() {
                 Alerts
               </Button>
             </Link>
+            <Link href="/agents">
+              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
+                Agents
+              </Button>
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
