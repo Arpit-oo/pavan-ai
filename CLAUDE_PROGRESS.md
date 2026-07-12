@@ -1,4 +1,4 @@
-# Claude's Build Progress — VayuBudhi
+# Claude's Build Progress — Pavan
 
 ## Status: BUILDING — Phase 3 done, Phase 4 starting
 Last updated: 2026-07-12 (session 2)

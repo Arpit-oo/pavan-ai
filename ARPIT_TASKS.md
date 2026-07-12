@@ -1,4 +1,4 @@
-# Arpit's Task Board — VayuBudhi
+# Arpit's Task Board — Pavan
 
 ## NOW (Do Today - July 11)
 - [ ] Get **Mapbox** API key (free tier) — mapbox.com/signup

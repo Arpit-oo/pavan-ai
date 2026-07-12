@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import aqi, forecast, agents, simulate, alerts, compliance
 
 app = FastAPI(
-    title="VayuBudhi API",
+    title="Pavan API",
     description="Urban Air Quality Intelligence Platform",
     version="0.1.0",
 )
@@ -20,7 +20,7 @@ app.add_middleware(
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "service": "vayubudhi-api"}
+    return {"status": "ok", "service": "pavan-api"}
 
 
 app.include_router(aqi.router, prefix="/api/v1/aqi", tags=["aqi"])

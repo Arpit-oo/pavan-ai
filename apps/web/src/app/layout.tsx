@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VayuBudhi — Air Quality Intelligence",
+  title: "Pavan — Air Quality Intelligence",
   description:
     "AI-powered urban air quality intelligence platform for smart city intervention",
 };

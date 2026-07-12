@@ -101,8 +101,8 @@ export default function SimulatePage() {
       <header className="flex items-center justify-between px-6 py-3 border-b border-zinc-800 bg-zinc-950">
         <div className="flex items-center gap-3">
           <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-orange-400">Vayu</span>
-            <span className="text-zinc-100">Budhi</span>
+            <span className="text-orange-400">Pa</span>
+            <span className="text-zinc-100">van</span>
           </Link>
           <Badge variant="outline" className="text-xs text-zinc-400 border-zinc-700">
             Intervention Simulator
