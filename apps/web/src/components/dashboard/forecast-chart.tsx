@@ -49,18 +49,25 @@ export default function ForecastChart() {
         `/api/v1/forecast/city?city=Delhi&hours=${hours}`
       );
       setData(res);
-    } catch (err) {
-      console.error("Forecast failed:", err);
+      setUseMock(false);
+    } catch {
+      setUseMock(true);
     } finally {
       setLoading(false);
     }
   };
+
+  const [useMock, setUseMock] = useState(false);
 
   useEffect(() => {
     loadForecast();
   }, [hours]);
 
   const getChartData = () => {
+    if (useMock) {
+      const { MOCK_FORECAST } = require("@/lib/mock-data");
+      return MOCK_FORECAST.slice(0, hours);
+    }
     if (!data) return [];
 
     const stationIds = Object.keys(data.forecasts);

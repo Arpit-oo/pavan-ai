@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { fetchAPI, type StationReading, type HeatmapData } from "@/lib/api";
+import { MOCK_STATIONS, generateMockHeatmapPoints } from "@/lib/mock-data";
 import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";
 import ForecastChart from "@/components/dashboard/forecast-chart";
@@ -21,12 +22,13 @@ const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
 
 export default function Dashboard() {
   const [stations, setStations] = useState<StationReading[]>([]);
-  const [heatmapData, setHeatmapData] = useState<HeatmapData | null>(null);
+  const [heatmapPoints, setHeatmapPoints] = useState<HeatmapData["points"]>([]);
   const [selectedStation, setSelectedStation] =
     useState<StationReading | null>(null);
   const [city] = useState("Delhi");
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [dataSource, setDataSource] = useState<"live" | "mock">("live");
 
   const fetchData = useCallback(async () => {
     try {
@@ -35,10 +37,14 @@ export default function Dashboard() {
         fetchAPI<HeatmapData>(`/api/v1/aqi/heatmap?city=${city}`),
       ]);
       setStations(aqiRes.stations);
-      setHeatmapData(heatmap);
+      setHeatmapPoints(heatmap.points);
       setLastUpdated(new Date());
-    } catch (err) {
-      console.error("Failed to fetch AQI data:", err);
+      setDataSource("live");
+    } catch {
+      setStations(MOCK_STATIONS);
+      setHeatmapPoints(generateMockHeatmapPoints());
+      setLastUpdated(new Date());
+      setDataSource("mock");
     } finally {
       setLoading(false);
     }
@@ -94,13 +100,18 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <div className={`w-2 h-2 rounded-full animate-pulse ${dataSource === "live" ? "bg-green-500" : "bg-yellow-500"}`} />
             <span className="text-xs text-zinc-500">
               {lastUpdated
-                ? `Updated ${lastUpdated.toLocaleTimeString()}`
+                ? `${dataSource === "mock" ? "Demo " : ""}Updated ${lastUpdated.toLocaleTimeString()}`
                 : "Connecting..."}
             </span>
           </div>
+          {dataSource === "mock" && (
+            <Badge className="bg-yellow-500/20 text-yellow-400 text-[10px]">
+              DEMO MODE
+            </Badge>
+          )}
           <Badge className="bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
             {city}
           </Badge>
@@ -125,7 +136,7 @@ export default function Dashboard() {
               ) : (
                 <AQIMap
                   stations={stations}
-                  heatmapPoints={heatmapData?.points}
+                  heatmapPoints={heatmapPoints}
                   onStationClick={setSelectedStation}
                 />
               )}
