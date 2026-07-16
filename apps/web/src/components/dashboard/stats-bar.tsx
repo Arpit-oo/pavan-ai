@@ -1,10 +1,23 @@
 "use client";
 
-import { type StationReading, getAQICategory, getAQIGradientColor } from "@/lib/api";
+import { type StationReading, getAQICategory } from "@/lib/api";
 
 interface StatsBarProps {
   stations: StationReading[];
   city: string;
+}
+
+function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactNode; tilt?: number; dark?: boolean }) {
+  return (
+    <span
+      style={{ transform: `rotate(${tilt}deg)` }}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] shadow-[0_1px_3px_rgba(0,0,0,0.08)] ${
+        dark ? "bg-[#0a0a0c] text-[#f5f0e6]" : "bg-white text-[#0a0a0c]"
+      }`}
+    >
+      {children}
+    </span>
+  );
 }
 
 export default function StatsBar({ stations, city }: StatsBarProps) {
@@ -24,63 +37,107 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
 
   const category = getAQICategory(avgAQI);
 
+  const aqiEntityColor = avgAQI <= 100
+    ? "var(--entity-good)"
+    : avgAQI <= 200
+    ? "var(--entity-moderate)"
+    : avgAQI <= 300
+    ? "var(--entity-poor)"
+    : "var(--entity-severe)";
+
+  const aqiFgColor = avgAQI <= 200 && avgAQI > 100 ? "#1a1a18" : "#ffffff";
+
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-      <div className="bento-tile rounded-2xl p-5 bg-card">
-        <p className="h-eyebrow">City AQI</p>
-        <div className="mt-2 flex items-baseline gap-3">
-          <span
-            className="text-5xl font-bold font-heading tracking-tight"
-            style={{ color: getAQIGradientColor(avgAQI) }}
-          >
-            {avgAQI}
-          </span>
-          <span
-            className="text-sm font-semibold"
-            style={{ color: getAQIGradientColor(avgAQI) }}
-          >
-            {category.label}
-          </span>
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+      {/* City AQI — saturated entity tile */}
+      <div
+        className="ru-bento md:col-span-1"
+        style={{ "--bento-bg": aqiEntityColor, "--bento-fg": aqiFgColor } as React.CSSProperties}
+      >
+        <div className="flex h-full flex-col p-6">
+          <div className="flex items-start justify-between">
+            <Sticker tilt={-3}>aqi</Sticker>
+            <Sticker tilt={2} dark>{category.label.toLowerCase()}</Sticker>
+          </div>
+          <div className="flex-1 flex items-end mt-3">
+            <span
+              className="font-display leading-[0.82] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(72px, 10vw, 96px)" }}
+            >
+              {avgAQI}
+            </span>
+          </div>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] opacity-70">
+            {stations.length} stations · {city.toLowerCase()}
+          </p>
         </div>
-        <p className="text-xs text-muted-foreground mt-2">
-          {stations.length} stations · {city}
-        </p>
       </div>
 
-      <div className="bento-tile rounded-2xl p-5 bg-card">
-        <p className="h-eyebrow">PM2.5 Average</p>
-        <span className="text-5xl font-bold font-heading tracking-tight text-foreground mt-2 block">
-          {avgPM25.toFixed(0)}
-        </span>
-        <p className="text-xs text-muted-foreground mt-2">
-          WHO limit: 15 · <span className="text-amber-600 font-semibold">{(avgPM25 / 15).toFixed(1)}x over</span>
-        </p>
+      {/* PM2.5 — cream tile with colored number */}
+      <div className="ru-bento">
+        <div className="flex h-full flex-col p-6">
+          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-50 mb-4">
+            pm2.5 average
+          </div>
+          <div className="flex-1 flex items-end">
+            <span
+              className="font-display leading-[0.82] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(64px, 8vw, 80px)", color: "var(--entity-moderate)" }}
+            >
+              {avgPM25.toFixed(0)}
+            </span>
+          </div>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            who limit: 15 · <span style={{ color: "var(--entity-poor)" }}>{(avgPM25 / 15).toFixed(1)}x over</span>
+          </p>
+        </div>
       </div>
 
-      <div className="bento-tile rounded-2xl p-5 bg-card">
-        <p className="h-eyebrow">Worst Station</p>
-        <span
-          className="text-5xl font-bold font-heading tracking-tight mt-2 block"
-          style={{ color: getAQIGradientColor(worstStation.aqi) }}
-        >
-          {worstStation.aqi}
-        </span>
-        <p className="text-xs text-muted-foreground mt-2 truncate">
-          {worstStation.station_name.split(",")[0]}
-        </p>
+      {/* Worst station — charcoal tile */}
+      <div
+        className="ru-bento"
+        style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}
+      >
+        <div className="flex h-full flex-col p-6">
+          <div className="flex items-start justify-between">
+            <Sticker tilt={-2}>worst</Sticker>
+          </div>
+          <div className="flex-1 flex items-end mt-3">
+            <span
+              className="font-display leading-[0.82] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(64px, 8vw, 80px)", color: "var(--entity-poor)" }}
+            >
+              {worstStation.aqi}
+            </span>
+          </div>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] opacity-60 truncate">
+            {worstStation.station_name.split(",")[0].toLowerCase()}
+          </p>
+        </div>
       </div>
 
-      <div className="bento-tile rounded-2xl p-5 bg-card">
-        <p className="h-eyebrow">Best Station</p>
-        <span
-          className="text-5xl font-bold font-heading tracking-tight mt-2 block"
-          style={{ color: getAQIGradientColor(bestStation.aqi) }}
-        >
-          {bestStation.aqi}
-        </span>
-        <p className="text-xs text-muted-foreground mt-2 truncate">
-          {bestStation.station_name.split(",")[0]}
-        </p>
+      {/* Best station — teal entity tile */}
+      <div
+        className="ru-bento"
+        style={{ "--bento-bg": "var(--entity-wind)", "--bento-fg": "var(--entity-wind-fg)" } as React.CSSProperties}
+      >
+        <div className="flex h-full flex-col p-6">
+          <div className="flex items-start justify-between">
+            <Sticker tilt={-2}>best</Sticker>
+            <Sticker tilt={3} dark>cleanest</Sticker>
+          </div>
+          <div className="flex-1 flex items-end mt-3">
+            <span
+              className="font-display leading-[0.82] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(64px, 8vw, 80px)" }}
+            >
+              {bestStation.aqi}
+            </span>
+          </div>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] opacity-60 truncate">
+            {bestStation.station_name.split(",")[0].toLowerCase()}
+          </p>
+        </div>
       </div>
     </div>
   );

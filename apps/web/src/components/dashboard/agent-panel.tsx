@@ -39,14 +39,6 @@ const agentIcons: Record<string, string> = {
   enforcement: "🛡️",
 };
 
-const urgencyStyles: Record<string, string> = {
-  low: "bg-green-50 text-green-800 dark:bg-green-500/10 dark:text-green-400",
-  medium: "bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400",
-  high: "bg-orange-50 text-orange-800 dark:bg-orange-500/10 dark:text-orange-400",
-  critical: "bg-red-50 text-red-800 dark:bg-red-500/10 dark:text-red-400",
-  emergency: "bg-rose-50 text-rose-800 dark:bg-rose-500/10 dark:text-rose-400",
-};
-
 export default function AgentPanel() {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -69,69 +61,89 @@ export default function AgentPanel() {
   };
 
   return (
-    <div className="bento-tile rounded-2xl bg-card p-5 h-full flex flex-col border border-border">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <p className="h-eyebrow">Agents</p>
-          <p className="text-sm font-semibold text-foreground mt-0.5">Multi-Agent Pipeline</p>
-        </div>
-        <button
-          onClick={runAnalysis}
-          disabled={loading}
-          className="px-3 py-1.5 rounded-full text-[12px] font-semibold bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-50"
-        >
-          {loading ? "..." : "Run"}
-        </button>
-      </div>
-
-      {!analysis && !loading && (
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center space-y-2">
-            <span className="text-3xl">🧠</span>
-            <p className="text-xs text-muted-foreground">Tap Run to activate agents</p>
-          </div>
-        </div>
-      )}
-
-      {loading && (
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center space-y-2">
-            <div className="w-5 h-5 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-muted-foreground">Coordinating...</p>
-          </div>
-        </div>
-      )}
-
-      {analysis && !loading && (
-        <div className="flex-1 overflow-y-auto space-y-3 fade-edge-bottom">
-          <div className={`rounded-xl p-3 ${urgencyStyles[analysis.summary.urgency] || urgencyStyles.medium}`}>
-            <p className="text-[13px] font-medium leading-snug">
-              {analysis.summary.headline}
+    <div
+      className="ru-bento h-full flex flex-col"
+      style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "var(--entity-forecast-fg)" } as React.CSSProperties}
+    >
+      <div className="flex h-full flex-col p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-1">
+              agents
+            </div>
+            <p className="text-[15px]" style={{ fontVariationSettings: "'wght' 620" }}>
+              multi-agent pipeline
             </p>
           </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-secondary/60 rounded-xl p-2.5">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">GRAP</span>
-              <p className="text-[13px] font-semibold text-foreground truncate">{analysis.summary.grap_stage || "—"}</p>
-            </div>
-            <div className="bg-secondary/60 rounded-xl p-2.5">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Source</span>
-              <p className="text-[13px] font-semibold text-foreground capitalize">{analysis.summary.dominant_source}</p>
-            </div>
-          </div>
-
-          <div className="space-y-1.5 pt-1">
-            <p className="h-eyebrow">Log · {analysis.elapsed_seconds}s</p>
-            {analysis.run_log.map((log, i) => (
-              <div key={i} className="flex items-start gap-2">
-                <span className="shrink-0 text-sm leading-none mt-0.5">{agentIcons[log.agent] || "•"}</span>
-                <span className="text-[12px] text-muted-foreground leading-snug">{log.message}</span>
-              </div>
-            ))}
-          </div>
+          <button
+            onClick={runAnalysis}
+            disabled={loading}
+            className="ru-pill !bg-white/20 !text-white text-[12px] !px-3 !py-1.5 backdrop-blur-sm disabled:opacity-50"
+          >
+            {loading ? "..." : "run"}
+          </button>
         </div>
-      )}
+
+        {!analysis && !loading && (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center space-y-2 opacity-80">
+              <span className="text-4xl">🧠</span>
+              <p className="text-[12px] opacity-70">tap run to activate 6 agents</p>
+            </div>
+          </div>
+        )}
+
+        {loading && (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center space-y-2">
+              <div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin mx-auto" />
+              <p className="text-[12px] opacity-70">coordinating...</p>
+            </div>
+          </div>
+        )}
+
+        {analysis && !loading && (
+          <div className="flex-1 overflow-y-auto space-y-3 fade-edge-bottom">
+            <div className="rounded-2xl bg-white/15 backdrop-blur-sm p-3">
+              <p className="text-[13px] leading-snug" style={{ fontVariationSettings: "'wght' 540" }}>
+                {analysis.summary.headline.toLowerCase()}
+              </p>
+              {analysis.summary.stagnation && (
+                <span className="inline-flex items-center mt-1.5 rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider">
+                  ⚠ stagnation
+                </span>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-xl bg-white/10 p-2.5">
+                <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">grap</span>
+                <p className="text-[12px] truncate" style={{ fontVariationSettings: "'wght' 580" }}>
+                  {analysis.summary.grap_stage?.toLowerCase() || "—"}
+                </p>
+              </div>
+              <div className="rounded-xl bg-white/10 p-2.5">
+                <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">source</span>
+                <p className="text-[12px]" style={{ fontVariationSettings: "'wght' 580" }}>
+                  {analysis.summary.dominant_source}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-1.5 pt-1">
+              <div className="font-mono text-[9px] uppercase tracking-wider opacity-50">
+                log · {analysis.elapsed_seconds}s
+              </div>
+              {analysis.run_log.map((log, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className="shrink-0 text-sm leading-none mt-0.5">{agentIcons[log.agent] || "•"}</span>
+                  <span className="text-[11px] opacity-70 leading-snug">{log.message.toLowerCase()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

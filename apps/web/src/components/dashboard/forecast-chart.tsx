@@ -112,16 +112,16 @@ export default function ForecastChart() {
   const chartData = getChartData();
 
   return (
-    <div className="bento-tile rounded-2xl bg-card p-5">
+    <div className="ru-bento p-6">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <p className="h-eyebrow text-muted-foreground">Forecast</p>
-          <h3 className="text-sm font-semibold text-foreground">
-            AQI Forecast — Delhi
+          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-1">forecast</div>
+          <h3 className="text-[15px]" style={{ fontVariationSettings: "'wght' 620" }}>
+            aqi forecast — delhi
           </h3>
           {data?.model_info?.metrics && (
-            <p className="text-[10px] text-muted-foreground mt-0.5">
-              XGBoost v1 · MAE: {data.model_info.metrics.mae}
+            <p className="font-mono text-[10px] text-muted-foreground mt-0.5 uppercase tracking-wider">
+              xgboost v1 · mae: {data.model_info.metrics.mae}
             </p>
           )}
         </div>

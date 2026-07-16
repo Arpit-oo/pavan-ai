@@ -80,7 +80,7 @@ export default function AQIMap({
   }
 
   return (
-    <div className="w-full h-full relative rounded-2xl overflow-hidden border border-border shadow-sm">
+    <div className="w-full h-full relative rounded-[28px] overflow-hidden shadow-[0_1px_0_var(--hairline-soft)]">
       <DeckGL
         viewState={viewState}
         onViewStateChange={({ viewState: vs }) => setViewState(vs as typeof viewState)}
