@@ -9,13 +9,12 @@ import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";
 import ForecastChart from "@/components/dashboard/forecast-chart";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl">
-      <div className="animate-pulse text-zinc-500">Loading map...</div>
+    <div className="w-full h-full flex items-center justify-center bg-card rounded-2xl">
+      <div className="animate-pulse text-muted-foreground">Loading map...</div>
     </div>
   ),
 });
@@ -58,61 +57,52 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex items-center justify-between px-6 py-3 border-b border-zinc-800 bg-zinc-950">
-        <div className="flex items-center gap-3">
-          <h1 className="text-xl font-bold tracking-tight">
-            <span className="text-orange-400">Pa</span>
-            <span className="text-zinc-100">van</span>
+      {/* Header — clean, editorial */}
+      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
+        <div className="flex items-center gap-4">
+          <h1 className="text-2xl font-bold tracking-tight font-heading">
+            Pavan
           </h1>
-          <Badge
-            variant="outline"
-            className="text-xs text-zinc-400 border-zinc-700"
-          >
-            Air Quality Intelligence
-          </Badge>
-          <nav className="hidden md:flex items-center gap-1 ml-4">
-            <Link href="/">
-              <Button variant="ghost" size="sm" className="text-xs text-zinc-300 h-7">
-                Dashboard
-              </Button>
-            </Link>
-            <Link href="/simulate">
-              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
-                Simulator
-              </Button>
-            </Link>
-            <Link href="/compliance">
-              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
-                GRAP
-              </Button>
-            </Link>
-            <Link href="/alerts">
-              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
-                Alerts
-              </Button>
-            </Link>
-            <Link href="/agents">
-              <Button variant="ghost" size="sm" className="text-xs text-zinc-500 h-7">
-                Agents
-              </Button>
-            </Link>
+
+          {/* Floating pill nav — Ru style */}
+          <nav className="hidden md:flex items-center gap-0.5 bg-secondary rounded-full px-1.5 py-1 floating-pill border border-border">
+            {[
+              { href: "/", label: "Dashboard", active: true },
+              { href: "/simulate", label: "Simulator" },
+              { href: "/compliance", label: "GRAP" },
+              { href: "/alerts", label: "Alerts" },
+              { href: "/agents", label: "Agents" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  item.active
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </div>
-        <div className="flex items-center gap-4">
+
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full animate-pulse ${dataSource === "live" ? "bg-green-500" : "bg-yellow-500"}`} />
-            <span className="text-xs text-zinc-500">
+            <div className={`w-2 h-2 rounded-full relative ${dataSource === "live" ? "bg-green-500" : "bg-yellow-500"} ping-dot`} />
+            <span className="text-xs text-muted-foreground">
               {lastUpdated
-                ? `${dataSource === "mock" ? "Demo " : ""}Updated ${lastUpdated.toLocaleTimeString()}`
+                ? `${dataSource === "mock" ? "Demo · " : ""}${lastUpdated.toLocaleTimeString()}`
                 : "Connecting..."}
             </span>
           </div>
           {dataSource === "mock" && (
-            <Badge className="bg-yellow-500/20 text-yellow-400 text-[10px]">
-              DEMO MODE
+            <Badge className="bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 text-[10px] rounded-full border-0">
+              DEMO
             </Badge>
           )}
-          <Badge className="bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
+          <Badge className="bg-secondary text-foreground text-xs rounded-full border border-border">
             {city}
           </Badge>
         </div>
@@ -125,10 +115,10 @@ export default function Dashboard() {
           <div className="flex-1 flex flex-col gap-4">
             <div className="flex-1 min-h-0">
               {loading ? (
-                <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
+                <div className="w-full h-full flex items-center justify-center bg-card rounded-2xl">
                   <div className="text-center space-y-3">
-                    <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-zinc-500 text-sm">
+                    <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p className="text-muted-foreground text-sm">
                       Loading air quality data...
                     </p>
                   </div>

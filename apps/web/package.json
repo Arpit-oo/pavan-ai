@@ -13,6 +13,7 @@
     "@deck.gl/core": "^9.3.6",
     "@deck.gl/layers": "^9.3.6",
     "@deck.gl/react": "^9.3.6",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.10",
     "@types/mapbox-gl": "^3.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -112,30 +112,32 @@ export default function ForecastChart() {
   const chartData = getChartData();
 
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800 p-4">
+    <div className="bento-tile rounded-2xl bg-card p-5">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h3 className="text-sm font-semibold text-zinc-300">
+          <p className="h-eyebrow text-muted-foreground">Forecast</p>
+          <h3 className="text-sm font-semibold text-foreground">
             AQI Forecast — Delhi
           </h3>
           {data?.model_info?.metrics && (
-            <p className="text-[10px] text-zinc-600 mt-0.5">
-              XGBoost v1 | MAE: {data.model_info.metrics.mae} | RMSE:{" "}
-              {data.model_info.metrics.rmse}
+            <p className="text-[10px] text-muted-foreground mt-0.5">
+              XGBoost v1 · MAE: {data.model_info.metrics.mae}
             </p>
           )}
         </div>
         <div className="flex gap-1">
           {[24, 48, 72].map((h) => (
-            <Button
+            <button
               key={h}
-              size="sm"
-              variant={hours === h ? "default" : "outline"}
               onClick={() => setHours(h)}
-              className="text-xs h-6 px-2"
+              className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+                hours === h
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {h}h
-            </Button>
+            </button>
           ))}
         </div>
       </div>
@@ -192,6 +194,6 @@ export default function ForecastChart() {
           No forecast data
         </div>
       )}
-    </Card>
+    </div>
   );
 }

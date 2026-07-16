@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { fetchAPI } from "@/lib/api";
 
 interface AgentLog {
@@ -33,6 +31,23 @@ interface AnalysisResult {
   elapsed_seconds: number;
 }
 
+const agentIcons: Record<string, string> = {
+  orchestrator: "🧠",
+  sensor: "📡",
+  weather: "🌤️",
+  anomaly: "⚡",
+  attribution: "🔍",
+  enforcement: "🛡️",
+};
+
+const urgencyBg: Record<string, string> = {
+  low: "bg-green-500",
+  medium: "bg-yellow-500",
+  high: "bg-orange-500",
+  critical: "bg-red-500",
+  emergency: "bg-rose-700",
+};
+
 export default function AgentPanel() {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -54,92 +69,79 @@ export default function AgentPanel() {
     }
   };
 
-  const urgencyColor: Record<string, string> = {
-    low: "text-green-400",
-    medium: "text-yellow-400",
-    high: "text-orange-400",
-    critical: "text-red-400",
-    emergency: "text-rose-500",
-  };
-
-  const agentColor: Record<string, string> = {
-    orchestrator: "bg-blue-500/20 text-blue-400",
-    sensor: "bg-green-500/20 text-green-400",
-    weather: "bg-cyan-500/20 text-cyan-400",
-    anomaly: "bg-red-500/20 text-red-400",
-    attribution: "bg-purple-500/20 text-purple-400",
-  };
-
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800 p-4 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-          <h3 className="text-sm font-semibold text-zinc-300">Agent Console</h3>
+    <div className="bento-tile rounded-2xl bg-card p-5 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <p className="h-eyebrow text-muted-foreground">Agent Console</p>
+          <p className="text-sm font-semibold text-foreground mt-0.5">Multi-Agent Pipeline</p>
         </div>
-        <Button
-          size="sm"
-          variant="outline"
+        <button
           onClick={runAnalysis}
           disabled={loading}
-          className="text-xs h-7 border-zinc-700"
+          className="px-3 py-1.5 rounded-full text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          {loading ? "Analyzing..." : "Run Analysis"}
-        </Button>
+          {loading ? "Working..." : "Run"}
+        </button>
       </div>
 
       {!analysis && !loading && (
-        <div className="flex-1 flex items-center justify-center text-zinc-600 text-sm">
-          Click &quot;Run Analysis&quot; to activate agents
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center space-y-2">
+            <span className="text-3xl">🧠</span>
+            <p className="text-xs text-muted-foreground">Tap Run to activate 6 agents</p>
+          </div>
         </div>
       )}
 
       {loading && (
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-2">
-            <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-zinc-500">Agents working...</p>
+            <div className="w-6 h-6 border-2 border-foreground border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-xs text-muted-foreground">Agents coordinating...</p>
           </div>
         </div>
       )}
 
       {analysis && !loading && (
-        <div className="flex-1 overflow-y-auto space-y-3">
-          <div className="bg-zinc-800/50 rounded-lg p-3">
-            <p className={`text-sm font-medium ${urgencyColor[analysis.summary.urgency] || "text-zinc-300"}`}>
+        <div className="flex-1 overflow-y-auto space-y-3 fade-edge-bottom">
+          {/* Headline tile — entity-colored */}
+          <div className={`rounded-xl p-3 ${urgencyBg[analysis.summary.urgency] || "bg-orange-500"}`}>
+            <p className="text-xs font-semibold text-white leading-snug">
               {analysis.summary.headline}
             </p>
-            <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-zinc-400">
-              <span>GRAP: {analysis.summary.grap_stage || "N/A"}</span>
-              <span>Source: {analysis.summary.dominant_source}</span>
-              <span>Outlook: {analysis.summary.pollution_outlook}</span>
-              <span>Wind: {analysis.summary.wind_speed} m/s</span>
-            </div>
             {analysis.summary.stagnation && (
-              <Badge className="mt-2 bg-red-500/20 text-red-400 text-xs">
-                STAGNATION ALERT
+              <Badge className="mt-1.5 bg-white/20 text-white text-[10px] rounded-full border-0">
+                ⚠ STAGNATION
               </Badge>
             )}
           </div>
 
-          <div className="space-y-1">
-            <p className="text-xs text-zinc-500 font-medium">
-              Agent Log ({analysis.elapsed_seconds}s)
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="bg-secondary rounded-xl p-2.5">
+              <span className="text-muted-foreground">GRAP</span>
+              <p className="font-semibold text-foreground truncate">{analysis.summary.grap_stage || "—"}</p>
+            </div>
+            <div className="bg-secondary rounded-xl p-2.5">
+              <span className="text-muted-foreground">Source</span>
+              <p className="font-semibold text-foreground capitalize">{analysis.summary.dominant_source}</p>
+            </div>
+          </div>
+
+          {/* Agent log */}
+          <div className="space-y-1.5">
+            <p className="h-eyebrow text-muted-foreground">
+              Run Log · {analysis.elapsed_seconds}s
             </p>
             {analysis.run_log.map((log, i) => (
               <div key={i} className="flex items-start gap-2 text-xs">
-                <Badge
-                  variant="outline"
-                  className={`text-[10px] px-1.5 py-0 shrink-0 ${agentColor[log.agent] || "bg-zinc-500/20 text-zinc-400"}`}
-                >
-                  {log.agent}
-                </Badge>
-                <span className="text-zinc-500 truncate">{log.message}</span>
+                <span className="shrink-0 text-sm">{agentIcons[log.agent] || "•"}</span>
+                <span className="text-muted-foreground leading-snug">{log.message}</span>
               </div>
             ))}
           </div>
         </div>
       )}
-    </Card>
+    </div>
   );
 }

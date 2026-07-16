@@ -1,13 +1,20 @@
 "use client";
 
 import { type StationReading, getAQICategory } from "@/lib/api";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 interface StatsBarProps {
   stations: StationReading[];
   city: string;
 }
+
+const tileColors: Record<string, { bg: string; text: string }> = {
+  Good: { bg: "bg-green-500", text: "text-white" },
+  Satisfactory: { bg: "bg-yellow-400", text: "text-yellow-950" },
+  Moderate: { bg: "bg-orange-500", text: "text-white" },
+  Poor: { bg: "bg-red-500", text: "text-white" },
+  "Very Poor": { bg: "bg-purple-500", text: "text-white" },
+  Severe: { bg: "bg-rose-700", text: "text-white" },
+};
 
 export default function StatsBar({ stations, city }: StatsBarProps) {
   if (!stations.length) return null;
@@ -15,8 +22,6 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
   const avgAQI = Math.round(
     stations.reduce((sum, s) => sum + (s.aqi || 0), 0) / stations.length
   );
-  const maxAQI = Math.max(...stations.map((s) => s.aqi || 0));
-  const minAQI = Math.min(...stations.map((s) => s.aqi || 0));
   const avgPM25 =
     stations.reduce((sum, s) => sum + (s.pm25 || 0), 0) / stations.length;
   const worstStation = stations.reduce((worst, s) =>
@@ -27,61 +32,58 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
   );
 
   const category = getAQICategory(avgAQI);
+  const colors = tileColors[category.label] || tileColors.Moderate;
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-      <Card className="p-4 bg-zinc-900/50 border-zinc-800">
-        <p className="text-xs text-zinc-500 uppercase tracking-wider">
-          City Average AQI
-        </p>
+      {/* City AQI — bold entity-colored tile like Ru */}
+      <div className={`bento-tile rounded-2xl p-5 ${colors.bg}`}>
+        <p className={`h-eyebrow ${colors.text} opacity-70`}>City AQI</p>
         <div className="mt-1 flex items-baseline gap-2">
-          <span className={`text-3xl font-bold ${category.color}`}>
+          <span className={`text-4xl font-bold font-heading ${colors.text}`}>
             {avgAQI}
           </span>
-          <Badge variant="outline" className={category.bgColor}>
+          <span className={`text-sm font-medium ${colors.text} opacity-80`}>
             {category.label}
-          </Badge>
+          </span>
         </div>
-        <p className="text-xs text-zinc-500 mt-1">
-          {stations.length} active stations
+        <p className={`text-xs mt-1 ${colors.text} opacity-60`}>
+          {stations.length} stations · {city}
         </p>
-      </Card>
+      </div>
 
-      <Card className="p-4 bg-zinc-900/50 border-zinc-800">
-        <p className="text-xs text-zinc-500 uppercase tracking-wider">
-          PM2.5 Average
-        </p>
-        <span className="text-3xl font-bold text-zinc-100">
+      {/* PM2.5 — warm neutral tile */}
+      <div className="bento-tile rounded-2xl p-5 bg-card">
+        <p className="h-eyebrow text-muted-foreground">PM2.5 Average</p>
+        <span className="text-4xl font-bold font-heading text-foreground">
           {avgPM25.toFixed(1)}
         </span>
-        <p className="text-xs text-zinc-500 mt-1">
-          WHO limit: 15 ug/m3 ({(avgPM25 / 15).toFixed(1)}x over)
+        <p className="text-xs text-muted-foreground mt-1">
+          WHO limit: 15 · <span className="text-orange-500 font-semibold">{(avgPM25 / 15).toFixed(1)}x over</span>
         </p>
-      </Card>
+      </div>
 
-      <Card className="p-4 bg-zinc-900/50 border-zinc-800">
-        <p className="text-xs text-zinc-500 uppercase tracking-wider">
-          Worst Station
-        </p>
-        <span className="text-xl font-bold text-red-400">
+      {/* Worst Station — coral/red entity */}
+      <div className="bento-tile rounded-2xl p-5 bg-card">
+        <p className="h-eyebrow text-muted-foreground">Worst Station</p>
+        <span className="text-3xl font-bold font-heading text-red-500">
           {worstStation.aqi}
         </span>
-        <p className="text-xs text-zinc-400 mt-1 truncate">
+        <p className="text-xs text-muted-foreground mt-1 truncate">
           {worstStation.station_name.split(",")[0]}
         </p>
-      </Card>
+      </div>
 
-      <Card className="p-4 bg-zinc-900/50 border-zinc-800">
-        <p className="text-xs text-zinc-500 uppercase tracking-wider">
-          Best Station
-        </p>
-        <span className="text-xl font-bold text-green-400">
+      {/* Best Station — green entity */}
+      <div className="bento-tile rounded-2xl p-5 bg-card">
+        <p className="h-eyebrow text-muted-foreground">Best Station</p>
+        <span className="text-3xl font-bold font-heading text-green-500">
           {bestStation.aqi}
         </span>
-        <p className="text-xs text-zinc-400 mt-1 truncate">
+        <p className="text-xs text-muted-foreground mt-1 truncate">
           {bestStation.station_name.split(",")[0]}
         </p>
-      </Card>
+      </div>
     </div>
   );
 }
