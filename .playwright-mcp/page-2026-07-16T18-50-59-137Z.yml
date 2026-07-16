@@ -1,0 +1,53 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e2]:
+    - banner [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - generic [ref=f8e5]:
+          - link "pavan" [ref=f8e6] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f8e9]: agent console
+        - link "← dashboard" [ref=f8e10] [cursor=pointer]:
+          - /url: /
+    - main [ref=f8e11]:
+      - generic [ref=f8e12]:
+        - generic [ref=f8e13]:
+          - generic [ref=f8e14]:
+            - generic [ref=f8e15]: intelligence
+            - heading "multi-agent pipeline" [level=1] [ref=f8e16]
+            - paragraph [ref=f8e17]: 6 specialized agents coordinate in 3 phases to analyze delhi's air quality
+          - button "run full analysis →" [ref=f8e18]
+        - generic [ref=f8e19]:
+          - generic [ref=f8e21] [cursor=pointer]:
+            - generic [ref=f8e22]: 🧠
+            - paragraph [ref=f8e23]: orchestrator
+            - paragraph [ref=f8e24]: coordinates all agents
+          - generic [ref=f8e26] [cursor=pointer]:
+            - generic [ref=f8e27]: 📡
+            - paragraph [ref=f8e28]: sensor
+            - paragraph [ref=f8e29]: cpcb station data
+          - generic [ref=f8e31] [cursor=pointer]:
+            - generic [ref=f8e32]: 🌤️
+            - paragraph [ref=f8e33]: weather
+            - paragraph [ref=f8e34]: wind & weather
+          - generic [ref=f8e36] [cursor=pointer]:
+            - generic [ref=f8e37]: ⚡
+            - paragraph [ref=f8e38]: anomaly
+            - paragraph [ref=f8e39]: spike detection
+          - generic [ref=f8e41] [cursor=pointer]:
+            - generic [ref=f8e42]: 🔍
+            - paragraph [ref=f8e43]: attribution
+            - paragraph [ref=f8e44]: source decomposition
+          - generic [ref=f8e46] [cursor=pointer]:
+            - generic [ref=f8e47]: 🛡️
+            - paragraph [ref=f8e48]: enforcement
+            - paragraph [ref=f8e49]: inspector recs
+        - generic [ref=f8e51]:
+          - text: 🧠
+          - paragraph [ref=f8e52]: tap "run full analysis" to see all 6 agents coordinate
+          - generic [ref=f8e53]:
+            - generic [ref=f8e54]: "phase 1: data"
+            - generic [ref=f8e55]: →
+            - generic [ref=f8e56]: "phase 2: analysis"
+            - generic [ref=f8e57]: →
+            - generic [ref=f8e58]: "phase 3: enforcement"
+  - button "Open Next.js Dev Tools" [ref=f8e64] [cursor=pointer]
