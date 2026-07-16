@@ -55,3 +55,27 @@ TypeError: Cannot convert undefined or null to object
 [  382432ms] [LOG] [Fast Refresh] done in 310ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
 [  382554ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
 [  382921ms] [LOG] [Fast Refresh] done in 480ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  552055ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  552056ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[  755739ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  757734ms] [LOG] [Fast Refresh] done in 1766ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  758028ms] [ERROR] Error: Invalid LngLat object: (NaN, 28.704099999999997)
+    at new bl (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:7351:51)
+    at hm.unproject (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:14636:24)
+    at qi.unproject (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:32742:40)
+    at qi._constrain (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:33018:88)
+    at qi.resize (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:32726:25)
+    at Map.resize (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:52321:101)
+    at new Map (http://localhost:3000/_next/static/chunks/node_modules_mapbox-gl_dist_mapbox-gl_1fege8z.js:52282:26)
+    at Mapbox._initialize (http://localhost:3000/_next/static/chunks/node_modules_1434x7t._.js:689:21)
+    at new Mapbox (http://localhost:3000/_next/static/chunks/node_modules_1434x7t._.js:588:14)
+    at _Map.useEffect (http://localhost:3000/_next/static/chunks/node_modules_1434x7t._.js:1188:34) @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[  758087ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  758087ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[  758103ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  758618ms] [LOG] [Fast Refresh] done in 817ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  758745ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  759317ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  759484ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  761134ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  761134ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
