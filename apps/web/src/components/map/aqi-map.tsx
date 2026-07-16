@@ -68,10 +68,10 @@ export default function AQIMap({
 
   if (!MAPBOX_TOKEN) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl border border-zinc-800">
+      <div className="w-full h-full flex items-center justify-center bg-card rounded-2xl border border-border">
         <div className="text-center space-y-2">
-          <p className="text-zinc-400 text-sm">Mapbox token not configured</p>
-          <p className="text-zinc-500 text-xs">
+          <p className="text-muted-foreground text-sm">Mapbox token not configured</p>
+          <p className="text-muted-foreground/60 text-xs">
             Add NEXT_PUBLIC_MAPBOX_TOKEN to .env.local
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function AQIMap({
   }
 
   return (
-    <div className="w-full h-full relative rounded-xl overflow-hidden border border-zinc-800">
+    <div className="w-full h-full relative rounded-2xl overflow-hidden border border-border shadow-sm">
       <DeckGL
         viewState={viewState}
         onViewStateChange={({ viewState: vs }) => setViewState(vs as typeof viewState)}
@@ -89,7 +89,7 @@ export default function AQIMap({
       >
         <Map
           mapboxAccessToken={MAPBOX_TOKEN}
-          mapStyle="mapbox://styles/mapbox/dark-v11"
+          mapStyle="mapbox://styles/mapbox/light-v11"
           style={{ width: "100%", height: "100%" }}
         >
           <NavigationControl position="top-right" />
@@ -146,8 +146,8 @@ export default function AQIMap({
 function StationPopup({ station }: { station: StationReading }) {
   const category = getAQICategory(station.aqi);
   return (
-    <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-3 min-w-[220px] shadow-xl">
-      <p className="font-semibold text-sm text-white truncate">
+    <div className="bg-card border border-border rounded-2xl p-3 min-w-[220px] shadow-lg">
+      <p className="font-semibold text-sm text-foreground truncate">
         {station.station_name.split(",")[0]}
       </p>
       <div className="mt-2 flex items-center gap-2">
@@ -159,7 +159,7 @@ function StationPopup({ station }: { station: StationReading }) {
         </span>
         <span className={`text-xs ${category.color}`}>{category.label}</span>
       </div>
-      <div className="mt-2 grid grid-cols-2 gap-1 text-xs text-zinc-400">
+      <div className="mt-2 grid grid-cols-2 gap-1 text-xs text-muted-foreground">
         <span>PM2.5: {station.pm25 ?? "—"}</span>
         <span>PM10: {station.pm10 ?? "—"}</span>
         <span>NO2: {station.no2 ?? "—"}</span>
@@ -182,8 +182,8 @@ function AQILegend() {
   ];
 
   return (
-    <div className="absolute bottom-4 left-4 bg-zinc-900/90 backdrop-blur border border-zinc-700 rounded-lg p-3">
-      <p className="text-xs font-semibold text-zinc-300 mb-2">AQI Scale</p>
+    <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur border border-border rounded-2xl p-3 shadow-sm">
+      <p className="h-eyebrow mb-2">AQI Scale</p>
       <div className="space-y-1">
         {levels.map((level) => (
           <div key={level.label} className="flex items-center gap-2 text-xs">
@@ -191,8 +191,8 @@ function AQILegend() {
               className="w-3 h-3 rounded-sm"
               style={{ backgroundColor: level.color }}
             />
-            <span className="text-zinc-400">{level.range}</span>
-            <span className="text-zinc-500">{level.label}</span>
+            <span className="text-muted-foreground">{level.range}</span>
+            <span className="text-muted-foreground/60">{level.label}</span>
           </div>
         ))}
       </div>

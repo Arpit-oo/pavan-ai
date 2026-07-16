@@ -159,19 +159,22 @@ export default function ForecastChart() {
                 <stop offset="95%" stopColor="#f97316" stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
             <XAxis
               dataKey="hour"
-              tick={{ fontSize: 10, fill: "#71717a" }}
+              tick={{ fontSize: 10, fill: "#6b6a64" }}
               interval={Math.floor(chartData.length / 6)}
+              axisLine={{ stroke: "rgba(0,0,0,0.08)" }}
+              tickLine={false}
             />
-            <YAxis tick={{ fontSize: 10, fill: "#71717a" }} domain={[0, "auto"]} />
+            <YAxis tick={{ fontSize: 10, fill: "#6b6a64" }} domain={[0, "auto"]} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #3f3f46",
-                borderRadius: 8,
+                backgroundColor: "#ffffff",
+                border: "1px solid rgba(0,0,0,0.08)",
+                borderRadius: 12,
                 fontSize: 12,
+                boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
               }}
               formatter={(value, name) => {
                 const labels: Record<string, string> = {

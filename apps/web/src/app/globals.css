@@ -46,94 +46,75 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-
-  /* AQI entity colors — like Ru's bold tile system */
-  --color-aqi-good: #22c55e;
-  --color-aqi-satisfactory: #eab308;
-  --color-aqi-moderate: #f97316;
-  --color-aqi-poor: #ef4444;
-  --color-aqi-very-poor: #a855f7;
-  --color-aqi-severe: #be123c;
-
-  /* Agent identity colors */
-  --color-agent-orchestrator: #3b82f6;
-  --color-agent-sensor: #22c55e;
-  --color-agent-weather: #06b6d4;
-  --color-agent-anomaly: #ef4444;
-  --color-agent-attribution: #a855f7;
-  --color-agent-enforcement: #f97316;
-  --color-agent-citizen: #ec4899;
 }
 
 :root {
-  /* Ru-inspired warm cream palette */
   --background: #f5f0e6;
   --foreground: #1a1a18;
-  --card: #fffdf7;
+  --card: #ffffff;
   --card-foreground: #1a1a18;
-  --popover: #fffdf7;
+  --popover: #ffffff;
   --popover-foreground: #1a1a18;
   --primary: #1a1a18;
   --primary-foreground: #f5f0e6;
-  --secondary: #ebe5d6;
+  --secondary: #ede7d8;
   --secondary-foreground: #1a1a18;
-  --muted: #ebe5d6;
-  --muted-foreground: #78756d;
-  --accent: #ebe5d6;
+  --muted: #ede7d8;
+  --muted-foreground: #6b6a64;
+  --accent: #e3dcc8;
   --accent-foreground: #1a1a18;
-  --destructive: #ef4444;
-  --border: #ddd7c8;
-  --input: #ddd7c8;
-  --ring: #1a1a18;
-  --chart-1: #f97316;
-  --chart-2: #22c55e;
-  --chart-3: #3b82f6;
-  --chart-4: #a855f7;
-  --chart-5: #ef4444;
+  --destructive: #dc2626;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #9a9890;
+  --chart-1: #16a34a;
+  --chart-2: #d97706;
+  --chart-3: #6b6a64;
+  --chart-4: #9a9890;
+  --chart-5: #c7c3b6;
   --radius: 1.25rem;
-  --sidebar: #f5f0e6;
+  --sidebar: #ede7d8;
   --sidebar-foreground: #1a1a18;
   --sidebar-primary: #1a1a18;
   --sidebar-primary-foreground: #f5f0e6;
-  --sidebar-accent: #ebe5d6;
+  --sidebar-accent: #e3dcc8;
   --sidebar-accent-foreground: #1a1a18;
-  --sidebar-border: #ddd7c8;
-  --sidebar-ring: #1a1a18;
+  --sidebar-border: rgba(0, 0, 0, 0.06);
+  --sidebar-ring: #9a9890;
 }
 
 .dark {
-  /* Ru-inspired graphite dark */
-  --background: #1c1c1e;
+  --background: #2c2c2e;
   --foreground: #f5f5f7;
-  --card: #2c2c2e;
+  --card: #3a3a3c;
   --card-foreground: #f5f5f7;
-  --popover: #2c2c2e;
+  --popover: #3a3a3c;
   --popover-foreground: #f5f5f7;
   --primary: #f5f5f7;
-  --primary-foreground: #1c1c1e;
-  --secondary: #3a3a3c;
+  --primary-foreground: #2c2c2e;
+  --secondary: #48484a;
   --secondary-foreground: #f5f5f7;
-  --muted: #3a3a3c;
-  --muted-foreground: #98989d;
-  --accent: #3a3a3c;
+  --muted: #48484a;
+  --muted-foreground: #aeaeb2;
+  --accent: #545458;
   --accent-foreground: #f5f5f7;
-  --destructive: #ff453a;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #f5f5f7;
-  --chart-1: #f97316;
-  --chart-2: #22c55e;
-  --chart-3: #3b82f6;
-  --chart-4: #a855f7;
-  --chart-5: #ef4444;
-  --sidebar: #2c2c2e;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #8e8e93;
+  --chart-1: #22c55e;
+  --chart-2: #f59e0b;
+  --chart-3: #a1a1aa;
+  --chart-4: #52525b;
+  --chart-5: #3f3f46;
+  --sidebar: #3a3a3c;
   --sidebar-foreground: #f5f5f7;
   --sidebar-primary: #f5f5f7;
-  --sidebar-primary-foreground: #1c1c1e;
-  --sidebar-accent: #3a3a3c;
+  --sidebar-primary-foreground: #2c2c2e;
+  --sidebar-accent: #48484a;
   --sidebar-accent-foreground: #f5f5f7;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #f5f5f7;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #8e8e93;
 }
 
 @layer base {
@@ -143,6 +124,7 @@
   body {
     @apply bg-background text-foreground;
     font-size: 15.5px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -150,63 +132,48 @@
     @apply font-sans;
   }
 
-  /* Hide scrollbars globally — Ru pattern */
   ::-webkit-scrollbar { display: none; }
   * { scrollbar-width: none; }
-}
 
-/* Ru-style editorial headings */
-.h-page {
-  font-weight: 700;
-  font-size: 1.75rem;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-.h-section {
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--foreground);
+    letter-spacing: -0.03em;
+  }
+  h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.02; font-weight: 700; }
+  h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); line-height: 1.1; font-weight: 680; }
+  h3 { font-size: 1.25rem; line-height: 1.2; font-weight: 620; }
 }
 
 .h-eyebrow {
-  font-size: 0.6875rem;
-  font-weight: 600;
+  font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.5;
+  letter-spacing: 0.16em;
+  color: var(--muted-foreground);
+  font-weight: 600;
 }
 
-/* Bento tile hover lift — Ru's signature */
 .bento-tile {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .bento-tile:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 .dark .bento-tile:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
-/* Floating pill style */
-.floating-pill {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Fade edge mask for scroll areas */
 .fade-edge-bottom {
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
-/* Status dot ping animation — Ru pattern */
 @keyframes ping-soft {
   0% { transform: scale(1); opacity: 1; }
   75% { transform: scale(1.8); opacity: 0; }
   100% { transform: scale(1.8); opacity: 0; }
 }
+.ping-dot { position: relative; }
 .ping-dot::after {
   content: '';
   position: absolute;

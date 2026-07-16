@@ -57,15 +57,13 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Header — clean, editorial */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold tracking-tight font-heading">
-            Pavan
+      <header className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-5">
+          <h1 className="text-xl font-bold tracking-tight">
+            pavan<span className="text-muted-foreground">.</span>
           </h1>
 
-          {/* Floating pill nav — Ru style */}
-          <nav className="hidden md:flex items-center gap-0.5 bg-secondary rounded-full px-1.5 py-1 floating-pill border border-border">
+          <nav className="hidden md:flex items-center gap-0.5 bg-card rounded-full px-1 py-0.5 border border-border shadow-sm">
             {[
               { href: "/", label: "Dashboard", active: true },
               { href: "/simulate", label: "Simulator" },
@@ -76,9 +74,9 @@ export default function Dashboard() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-[13px] font-medium transition-all ${
                   item.active
-                    ? "bg-foreground text-background"
+                    ? "bg-foreground text-background shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -89,22 +87,20 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-3">
+          {dataSource === "mock" && (
+            <span className="text-[11px] text-amber-600 font-medium bg-amber-50 dark:bg-amber-500/10 px-2.5 py-0.5 rounded-full">
+              demo
+            </span>
+          )}
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full relative ${dataSource === "live" ? "bg-green-500" : "bg-yellow-500"} ping-dot`} />
-            <span className="text-xs text-muted-foreground">
-              {lastUpdated
-                ? `${dataSource === "mock" ? "Demo · " : ""}${lastUpdated.toLocaleTimeString()}`
-                : "Connecting..."}
+            <div className={`w-1.5 h-1.5 rounded-full ${dataSource === "live" ? "bg-green-500" : "bg-amber-500"}`} />
+            <span className="text-[11px] text-muted-foreground">
+              {lastUpdated ? lastUpdated.toLocaleTimeString() : "..."}
             </span>
           </div>
-          {dataSource === "mock" && (
-            <Badge className="bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 text-[10px] rounded-full border-0">
-              DEMO
-            </Badge>
-          )}
-          <Badge className="bg-secondary text-foreground text-xs rounded-full border border-border">
+          <span className="text-[11px] text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">
             {city}
-          </Badge>
+          </span>
         </div>
       </header>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { fetchAPI } from "@/lib/api";
 
 interface AgentLog {
@@ -40,12 +39,12 @@ const agentIcons: Record<string, string> = {
   enforcement: "🛡️",
 };
 
-const urgencyBg: Record<string, string> = {
-  low: "bg-green-500",
-  medium: "bg-yellow-500",
-  high: "bg-orange-500",
-  critical: "bg-red-500",
-  emergency: "bg-rose-700",
+const urgencyStyles: Record<string, string> = {
+  low: "bg-green-50 text-green-800 dark:bg-green-500/10 dark:text-green-400",
+  medium: "bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400",
+  high: "bg-orange-50 text-orange-800 dark:bg-orange-500/10 dark:text-orange-400",
+  critical: "bg-red-50 text-red-800 dark:bg-red-500/10 dark:text-red-400",
+  emergency: "bg-rose-50 text-rose-800 dark:bg-rose-500/10 dark:text-rose-400",
 };
 
 export default function AgentPanel() {
@@ -70,18 +69,18 @@ export default function AgentPanel() {
   };
 
   return (
-    <div className="bento-tile rounded-2xl bg-card p-5 h-full flex flex-col">
+    <div className="bento-tile rounded-2xl bg-card p-5 h-full flex flex-col border border-border">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="h-eyebrow text-muted-foreground">Agent Console</p>
+          <p className="h-eyebrow">Agents</p>
           <p className="text-sm font-semibold text-foreground mt-0.5">Multi-Agent Pipeline</p>
         </div>
         <button
           onClick={runAnalysis}
           disabled={loading}
-          className="px-3 py-1.5 rounded-full text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="px-3 py-1.5 rounded-full text-[12px] font-semibold bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          {loading ? "Working..." : "Run"}
+          {loading ? "..." : "Run"}
         </button>
       </div>
 
@@ -89,7 +88,7 @@ export default function AgentPanel() {
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-2">
             <span className="text-3xl">🧠</span>
-            <p className="text-xs text-muted-foreground">Tap Run to activate 6 agents</p>
+            <p className="text-xs text-muted-foreground">Tap Run to activate agents</p>
           </div>
         </div>
       )}
@@ -97,46 +96,37 @@ export default function AgentPanel() {
       {loading && (
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-2">
-            <div className="w-6 h-6 border-2 border-foreground border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-muted-foreground">Agents coordinating...</p>
+            <div className="w-5 h-5 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin mx-auto" />
+            <p className="text-xs text-muted-foreground">Coordinating...</p>
           </div>
         </div>
       )}
 
       {analysis && !loading && (
         <div className="flex-1 overflow-y-auto space-y-3 fade-edge-bottom">
-          {/* Headline tile — entity-colored */}
-          <div className={`rounded-xl p-3 ${urgencyBg[analysis.summary.urgency] || "bg-orange-500"}`}>
-            <p className="text-xs font-semibold text-white leading-snug">
+          <div className={`rounded-xl p-3 ${urgencyStyles[analysis.summary.urgency] || urgencyStyles.medium}`}>
+            <p className="text-[13px] font-medium leading-snug">
               {analysis.summary.headline}
             </p>
-            {analysis.summary.stagnation && (
-              <Badge className="mt-1.5 bg-white/20 text-white text-[10px] rounded-full border-0">
-                ⚠ STAGNATION
-              </Badge>
-            )}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="bg-secondary rounded-xl p-2.5">
-              <span className="text-muted-foreground">GRAP</span>
-              <p className="font-semibold text-foreground truncate">{analysis.summary.grap_stage || "—"}</p>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-secondary/60 rounded-xl p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">GRAP</span>
+              <p className="text-[13px] font-semibold text-foreground truncate">{analysis.summary.grap_stage || "—"}</p>
             </div>
-            <div className="bg-secondary rounded-xl p-2.5">
-              <span className="text-muted-foreground">Source</span>
-              <p className="font-semibold text-foreground capitalize">{analysis.summary.dominant_source}</p>
+            <div className="bg-secondary/60 rounded-xl p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Source</span>
+              <p className="text-[13px] font-semibold text-foreground capitalize">{analysis.summary.dominant_source}</p>
             </div>
           </div>
 
-          {/* Agent log */}
-          <div className="space-y-1.5">
-            <p className="h-eyebrow text-muted-foreground">
-              Run Log · {analysis.elapsed_seconds}s
-            </p>
+          <div className="space-y-1.5 pt-1">
+            <p className="h-eyebrow">Log · {analysis.elapsed_seconds}s</p>
             {analysis.run_log.map((log, i) => (
-              <div key={i} className="flex items-start gap-2 text-xs">
-                <span className="shrink-0 text-sm">{agentIcons[log.agent] || "•"}</span>
-                <span className="text-muted-foreground leading-snug">{log.message}</span>
+              <div key={i} className="flex items-start gap-2">
+                <span className="shrink-0 text-sm leading-none mt-0.5">{agentIcons[log.agent] || "•"}</span>
+                <span className="text-[12px] text-muted-foreground leading-snug">{log.message}</span>
               </div>
             ))}
           </div>
