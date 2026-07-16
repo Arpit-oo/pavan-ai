@@ -1,72 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { fetchAPI } from "@/lib/api";
 import Link from "next/link";
 
-interface GRAPStage {
-  name: string;
-  trigger_aqi: number;
-  color: string;
-  actions: string[];
-}
-
+interface GRAPStage { name: string; trigger_aqi: number; color: string; actions: string[]; }
 interface GRAPStatus {
-  city: string;
-  avg_aqi: number;
-  total_stations: number;
-  stations_exceeding_poor: number;
-  stations_exceeding_severe: number;
-  grap_stage: string | null;
-  grap_details: GRAPStage | null;
+  city: string; avg_aqi: number; total_stations: number;
+  stations_exceeding_poor: number; stations_exceeding_severe: number;
+  grap_stage: string | null; grap_details: GRAPStage | null;
   all_stages: Record<string, GRAPStage>;
 }
-
 interface ComplianceReport {
-  title: string;
-  generated_at: string;
-  period: string;
-  executive_summary: {
-    overall_status: string;
-    avg_aqi: number;
-    max_aqi: number;
-    stations_monitored: number;
-    hotspots_detected: number;
-    anomalies_flagged: number;
-    dominant_pollution_source: string;
-    weather_outlook: string;
-    headline: string;
-  };
-  grap_compliance: {
-    current_stage: string | null;
-    required_actions: string[];
-  };
-  enforcement_recommendations: Array<{
-    priority: number;
-    type: string;
-    action: string;
-    urgency: string;
-  }>;
+  title: string; period: string;
+  executive_summary: { overall_status: string; avg_aqi: number; max_aqi: number; stations_monitored: number; hotspots_detected: number; anomalies_flagged: number; dominant_pollution_source: string; weather_outlook: string; headline: string; };
+  grap_compliance: { current_stage: string | null; required_actions: string[]; };
+  enforcement_recommendations: Array<{ priority: number; action: string; urgency: string }>;
   attribution_summary: Record<string, number>;
   disclaimer?: string;
 }
 
-const stageColors: Record<string, string> = {
-  I: "border-orange-500 bg-orange-500/10",
-  II: "border-red-500 bg-red-500/10",
-  III: "border-purple-500 bg-purple-500/10",
-  IV: "border-rose-700 bg-rose-700/10",
+const STAGE_COLORS: Record<string, { bg: string; fg: string }> = {
+  I: { bg: "var(--entity-moderate)", fg: "#1a1a18" },
+  II: { bg: "var(--entity-poor)", fg: "#ffffff" },
+  III: { bg: "var(--entity-severe)", fg: "#ffffff" },
+  IV: { bg: "var(--entity-charcoal)", fg: "var(--entity-charcoal-fg)" },
 };
 
-const stageBadgeColors: Record<string, string> = {
-  I: "bg-orange-500/20 text-orange-400",
-  II: "bg-red-500/20 text-red-400",
-  III: "bg-purple-500/20 text-purple-400",
-  IV: "bg-rose-700/20 text-rose-400",
-};
+function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactNode; tilt?: number; dark?: boolean }) {
+  return (
+    <span style={{ transform: `rotate(${tilt}deg)` }} className={`inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] shadow-[0_1px_3px_rgba(0,0,0,0.08)] ${dark ? "bg-[#0a0a0c] text-[#f5f0e6]" : "bg-white text-[#0a0a0c]"}`}>
+      {children}
+    </span>
+  );
+}
 
 export default function CompliancePage() {
   const [grap, setGrap] = useState<GRAPStatus | null>(null);
@@ -77,174 +44,185 @@ export default function CompliancePage() {
   useEffect(() => {
     fetchAPI<GRAPStatus>("/api/v1/compliance/grap?city=Delhi")
       .then(setGrap)
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
   const generateReport = async () => {
     setReportLoading(true);
-    try {
-      const res = await fetchAPI<ComplianceReport>("/api/v1/compliance/report?city=Delhi");
-      setReport(res);
-    } finally {
-      setReportLoading(false);
-    }
+    try { setReport(await fetchAPI<ComplianceReport>("/api/v1/compliance/report?city=Delhi")); }
+    catch {} finally { setReportLoading(false); }
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="flex items-center justify-between px-6 py-3 border-b border-zinc-800 bg-zinc-950">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-orange-400">Pa</span>
-            <span className="text-zinc-100">van</span>
-          </Link>
-          <Badge variant="outline" className="text-xs text-zinc-400 border-zinc-700">
-            GRAP Compliance
-          </Badge>
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-5">
+            <Link href="/" className="flex items-baseline gap-0.5 text-lg">
+              <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
+              <span className="inline-block h-[8px] w-[8px] translate-y-[-2px] rounded-full" style={{ background: "var(--entity-poor)" }} />
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">grap compliance</span>
+          </div>
+          <Link href="/" className="ru-pill !text-[12px] !px-3 !py-1.5">← dashboard</Link>
         </div>
-        <div className="flex gap-2">
-          <Link href="/simulate">
-            <Button variant="outline" size="sm" className="text-xs border-zinc-700">Simulator</Button>
-          </Link>
-          <Link href="/">
-            <Button variant="outline" size="sm" className="text-xs border-zinc-700">Dashboard</Button>
-          </Link>
-        </div>
+        <div className="pointer-events-none h-[2px] opacity-90" style={{ background: "linear-gradient(90deg, transparent 0%, var(--entity-poor) 30%, var(--entity-poor) 70%, transparent 100%)" }} />
       </header>
 
-      <main className="flex-1 overflow-y-auto p-6 space-y-6">
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="w-6 h-6 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : grap && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Current AQI</p>
-                <p className="text-4xl font-bold text-zinc-100 mt-1">{grap.avg_aqi}</p>
-                <p className="text-xs text-zinc-500 mt-1">{grap.total_stations} stations</p>
-              </Card>
-              <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">GRAP Stage</p>
-                <p className="text-2xl font-bold text-zinc-100 mt-1">
-                  {grap.grap_stage ? `Stage ${grap.grap_stage}` : "None triggered"}
-                </p>
-                {grap.grap_details && (
-                  <Badge className={`mt-1 ${stageBadgeColors[grap.grap_stage!] || ""}`}>
-                    {grap.grap_details.name}
-                  </Badge>
-                )}
-              </Card>
-              <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Stations in Violation</p>
-                <p className="text-4xl font-bold text-red-400 mt-1">{grap.stations_exceeding_poor}</p>
-                <p className="text-xs text-zinc-500 mt-1">{grap.stations_exceeding_severe} severe</p>
-              </Card>
-            </div>
+      <main className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 space-y-6">
+          <header className="flex flex-col gap-2.5">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">regulatory</div>
+            <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(36px, 5.6vw, 56px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
+              grap compliance
+            </h1>
+          </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(grap.all_stages).map(([key, stage]) => {
-                const isActive = grap.grap_stage === key;
-                return (
-                  <Card
-                    key={key}
-                    className={`p-4 border ${isActive ? stageColors[key] : "border-zinc-800 bg-zinc-900/30 opacity-60"}`}
-                  >
-                    <div className="flex items-center justify-between">
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="w-6 h-6 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin" />
+            </div>
+          ) : grap && (
+            <>
+              {/* Top stats */}
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                <div className="ru-bento">
+                  <div className="flex flex-col p-6">
+                    <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">current aqi</div>
+                    <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "clamp(64px, 8vw, 80px)" }}>
+                      {grap.avg_aqi.toFixed(0)}
+                    </span>
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{grap.total_stations} stations</p>
+                  </div>
+                </div>
+
+                <div
+                  className="ru-bento"
+                  style={{
+                    "--bento-bg": grap.grap_stage ? STAGE_COLORS[grap.grap_stage.split(" ")[0]]?.bg || "var(--card)" : "var(--entity-good)",
+                    "--bento-fg": grap.grap_stage ? STAGE_COLORS[grap.grap_stage.split(" ")[0]]?.fg || "var(--card-foreground)" : "#ffffff",
+                  } as React.CSSProperties}
+                >
+                  <div className="flex flex-col p-6">
+                    <div className="flex items-start justify-between">
+                      <Sticker tilt={-3}>grap</Sticker>
+                      {grap.grap_stage && <Sticker tilt={2} dark>active</Sticker>}
+                    </div>
+                    <p className="mt-4 text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>
+                      {grap.grap_stage ? `stage ${grap.grap_stage}` : "no stage triggered"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-poor)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                  <div className="flex flex-col p-6">
+                    <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-4">violations</div>
+                    <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "clamp(56px, 7vw, 72px)" }}>
+                      {grap.stations_exceeding_poor}
+                    </span>
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-wider opacity-60">{grap.stations_exceeding_severe} severe</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* GRAP stages */}
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                {Object.entries(grap.all_stages).map(([key, stage]) => {
+                  const isActive = grap.grap_stage?.includes(key);
+                  const colors = STAGE_COLORS[key] || { bg: "var(--card)", fg: "var(--card-foreground)" };
+                  return (
+                    <div
+                      key={key}
+                      className={`ru-bento ${!isActive ? "opacity-50" : ""}`}
+                      style={isActive ? { "--bento-bg": colors.bg, "--bento-fg": colors.fg } as React.CSSProperties : undefined}
+                    >
+                      <div className="flex flex-col p-6">
+                        <div className="flex items-start justify-between mb-3">
+                          <Sticker tilt={-2}>stage {key}</Sticker>
+                          {isActive && <Sticker tilt={3} dark>active</Sticker>}
+                        </div>
+                        <p className="text-[14px] lowercase mb-1" style={{ fontVariationSettings: "'wght' 600" }}>{stage.name.toLowerCase()}</p>
+                        <p className="font-mono text-[10px] uppercase tracking-wider opacity-60 mb-3">trigger: aqi &gt; {stage.trigger_aqi}</p>
+                        <ul className="space-y-1">
+                          {stage.actions.slice(0, isActive ? undefined : 3).map((action, i) => (
+                            <li key={i} className="text-[12px] leading-snug lowercase opacity-80 flex gap-2">
+                              <span className="shrink-0 opacity-50">{isActive ? "→" : "·"}</span>
+                              {action.toLowerCase()}
+                            </li>
+                          ))}
+                          {!isActive && stage.actions.length > 3 && (
+                            <li className="text-[11px] opacity-40 lowercase">+{stage.actions.length - 3} more</li>
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Report generation */}
+              <div className="pt-4">
+                <button onClick={generateReport} disabled={reportLoading} className="ru-pill">
+                  {reportLoading ? "generating report..." : "generate compliance report →"}
+                </button>
+                <p className="mt-2 font-mono text-[10px] text-muted-foreground uppercase tracking-wider">runs full multi-agent analysis pipeline</p>
+              </div>
+
+              {report && (
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
+                  <div className="p-6 space-y-4">
+                    <div className="flex items-start justify-between">
                       <div>
-                        <Badge className={isActive ? stageBadgeColors[key] : "bg-zinc-700/30 text-zinc-500"}>
-                          Stage {key}
-                        </Badge>
-                        <p className="text-sm font-medium text-zinc-300 mt-1">{stage.name}</p>
-                        <p className="text-xs text-zinc-500">Trigger: AQI &gt; {stage.trigger_aqi}</p>
+                        <div className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-50 mb-1">generated report</div>
+                        <p className="text-[15px] lowercase" style={{ fontVariationSettings: "'wght' 620" }}>{report.title.toLowerCase()}</p>
                       </div>
-                      {isActive && (
-                        <Badge className="bg-red-500/20 text-red-400 animate-pulse">ACTIVE</Badge>
-                      )}
+                      <Sticker tilt={2}>{report.period}</Sticker>
                     </div>
-                    <ul className="mt-3 space-y-1">
-                      {stage.actions.slice(0, isActive ? undefined : 3).map((action, i) => (
-                        <li key={i} className="text-xs text-zinc-400 flex gap-2">
-                          <span className={isActive ? "text-orange-400" : "text-zinc-600"}>
-                            {isActive ? "!" : "-"}
+
+                    <div className="bg-white/10 rounded-2xl p-4">
+                      <p className="text-[14px] leading-snug lowercase opacity-90">{report.executive_summary.headline.toLowerCase()}</p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+                        {[
+                          ["status", report.executive_summary.overall_status],
+                          ["aqi", String(report.executive_summary.avg_aqi)],
+                          ["source", report.executive_summary.dominant_pollution_source],
+                          ["outlook", report.executive_summary.weather_outlook.split("—")[0]],
+                        ].map(([k, v]) => (
+                          <div key={k}>
+                            <span className="font-mono text-[9px] uppercase tracking-wider opacity-40">{k}</span>
+                            <p className="text-[12px] lowercase" style={{ fontVariationSettings: "'wght' 540" }}>{v?.toLowerCase()}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {report.enforcement_recommendations.length > 0 && (
+                      <div>
+                        <div className="font-mono text-[10px] uppercase tracking-wider opacity-50 mb-2">enforcement</div>
+                        {report.enforcement_recommendations.map((rec, i) => (
+                          <div key={i} className="flex items-start gap-2 mb-2" style={{ boxShadow: rec.urgency === "immediate" ? "inset 4px 0 0 0 var(--entity-poor)" : "inset 4px 0 0 0 var(--entity-moderate)" }}>
+                            <p className="text-[12px] opacity-80 lowercase pl-4">{rec.action.toLowerCase()}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {report.attribution_summary && Object.keys(report.attribution_summary).length > 0 && (
+                      <div className="flex gap-2 flex-wrap">
+                        {Object.entries(report.attribution_summary).map(([src, pct]) => (
+                          <span key={src} className="font-mono text-[10px] uppercase tracking-wider bg-white/10 rounded-full px-2.5 py-1">
+                            {src}: {(Number(pct) * 100).toFixed(0)}%
                           </span>
-                          {action}
-                        </li>
-                      ))}
-                      {!isActive && stage.actions.length > 3 && (
-                        <li className="text-xs text-zinc-600">+{stage.actions.length - 3} more actions</li>
-                      )}
-                    </ul>
-                  </Card>
-                );
-              })}
-            </div>
-
-            <div className="border-t border-zinc-800 pt-6">
-              <Button onClick={generateReport} disabled={reportLoading} className="bg-orange-500 hover:bg-orange-600">
-                {reportLoading ? "Generating Report..." : "Generate Compliance Report"}
-              </Button>
-              <p className="text-xs text-zinc-600 mt-1">Runs full multi-agent analysis pipeline</p>
-            </div>
-
-            {report && (
-              <Card className="p-6 bg-zinc-900/50 border-zinc-800 space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-zinc-300">{report.title}</h3>
-                  <span className="text-xs text-zinc-600">{report.period}</span>
-                </div>
-
-                <div className="bg-zinc-800/50 rounded-lg p-4">
-                  <p className="text-sm text-zinc-200 font-medium">{report.executive_summary.headline}</p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 text-xs text-zinc-400">
-                    <span>Status: {report.executive_summary.overall_status}</span>
-                    <span>Avg AQI: {report.executive_summary.avg_aqi}</span>
-                    <span>Max AQI: {report.executive_summary.max_aqi}</span>
-                    <span>Source: {report.executive_summary.dominant_pollution_source}</span>
-                    <span>Hotspots: {report.executive_summary.hotspots_detected}</span>
-                    <span>Anomalies: {report.executive_summary.anomalies_flagged}</span>
-                    <span>Outlook: {report.executive_summary.weather_outlook}</span>
-                    <span>Stations: {report.executive_summary.stations_monitored}</span>
-                  </div>
-                </div>
-
-                {report.enforcement_recommendations.length > 0 && (
-                  <div>
-                    <p className="text-xs font-medium text-zinc-400 mb-2">Enforcement Recommendations</p>
-                    {report.enforcement_recommendations.map((rec, i) => (
-                      <div key={i} className="flex items-start gap-2 mb-2">
-                        <Badge
-                          className={`shrink-0 text-[10px] ${
-                            rec.urgency === "immediate" ? "bg-red-500/20 text-red-400" : "bg-yellow-500/20 text-yellow-400"
-                          }`}
-                        >
-                          P{rec.priority}
-                        </Badge>
-                        <p className="text-xs text-zinc-400">{rec.action}</p>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
-
-                {report.attribution_summary && Object.keys(report.attribution_summary).length > 0 && (
-                  <div>
-                    <p className="text-xs font-medium text-zinc-400 mb-2">Source Attribution</p>
-                    <div className="flex gap-2 flex-wrap">
-                      {Object.entries(report.attribution_summary).map(([src, pct]) => (
-                        <Badge key={src} variant="outline" className="text-xs border-zinc-700">
-                          {src}: {(Number(pct) * 100).toFixed(0)}%
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <p className="text-[10px] text-zinc-700 italic">{report.disclaimer}</p>
-              </Card>
-            )}
-          </>
-        )}
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </main>
     </div>
   );

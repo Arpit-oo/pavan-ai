@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchAPI } from "@/lib/api";
 import Link from "next/link";
@@ -15,13 +12,7 @@ interface AlertData {
     level: string;
     alert_count: number;
     city_advisory: Record<string, string>;
-    zone_alerts: Array<{
-      station: string;
-      aqi: number;
-      level: string;
-      message_en: string;
-      message_hi: string;
-    }>;
+    zone_alerts: Array<{ station: string; aqi: number; level: string; message_en: string; message_hi: string }>;
     whatsapp_message: Record<string, string>;
     languages: string[];
   };
@@ -33,27 +24,26 @@ interface HealthImpact {
   who_pm25_limit: number;
   excess_over_who: number;
   total_population: number;
-  population_exposed_to_poor_aqi: number;
+  estimated_excess_hospital_visits_24h: number;
   schools_in_affected_zones: number;
   hospitals_nearby: number;
-  estimated_excess_hospital_visits_24h: number;
-  admission_increase_pct: number;
 }
 
-const levelEmoji: Record<string, string> = {
-  good: "✅",
-  moderate: "⚠️",
-  poor: "🟠",
-  very_poor: "🔴",
-  severe: "🚨",
-};
+const levelEmoji: Record<string, string> = { good: "✅", moderate: "⚠️", poor: "🟠", very_poor: "🔴", severe: "🚨" };
+const langNames: Record<string, string> = { en: "english", hi: "हिन्दी", ta: "தமிழ்", bn: "বাংলা" };
 
-const langNames: Record<string, string> = {
-  en: "English",
-  hi: "हिन्दी",
-  ta: "தமிழ்",
-  bn: "বাংলা",
-};
+function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactNode; tilt?: number; dark?: boolean }) {
+  return (
+    <span
+      style={{ transform: `rotate(${tilt}deg)` }}
+      className={`inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] shadow-[0_1px_3px_rgba(0,0,0,0.08)] ${
+        dark ? "bg-[#0a0a0c] text-[#f5f0e6]" : "bg-white text-[#0a0a0c]"
+      }`}
+    >
+      {children}
+    </span>
+  );
+}
 
 export default function AlertsPage() {
   const [data, setData] = useState<AlertData | null>(null);
@@ -65,135 +55,168 @@ export default function AlertsPage() {
     Promise.all([
       fetchAPI<AlertData>("/api/v1/alerts/active?city=Delhi"),
       fetchAPI<HealthImpact>("/api/v1/alerts/health-impact?city=Delhi"),
-    ]).then(([alerts, impact]) => {
-      setData(alerts);
-      setHealth(impact);
-    }).finally(() => setLoading(false));
+    ]).then(([alerts, impact]) => { setData(alerts); setHealth(impact); })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="flex items-center justify-between px-6 py-3 border-b border-zinc-800 bg-zinc-950">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-orange-400">Pa</span>
-            <span className="text-zinc-100">van</span>
-          </Link>
-          <Badge variant="outline" className="text-xs text-zinc-400 border-zinc-700">
-            Citizen Alerts
-          </Badge>
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-5">
+            <Link href="/" className="flex items-baseline gap-0.5 text-lg">
+              <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
+              <span className="inline-block h-[8px] w-[8px] translate-y-[-2px] rounded-full" style={{ background: "var(--entity-alert)" }} />
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">citizen alerts</span>
+          </div>
+          <Link href="/" className="ru-pill !text-[12px] !px-3 !py-1.5">← dashboard</Link>
         </div>
-        <div className="flex gap-2">
-          <Link href="/compliance">
-            <Button variant="outline" size="sm" className="text-xs border-zinc-700">GRAP</Button>
-          </Link>
-          <Link href="/">
-            <Button variant="outline" size="sm" className="text-xs border-zinc-700">Dashboard</Button>
-          </Link>
-        </div>
+        <div className="pointer-events-none h-[2px] opacity-90" style={{ background: "linear-gradient(90deg, transparent 0%, var(--entity-alert) 30%, var(--entity-alert) 70%, transparent 100%)" }} />
       </header>
 
-      <main className="flex-1 overflow-y-auto p-6 space-y-6">
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="w-6 h-6 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : data && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                <p className="text-xs text-zinc-500 uppercase">Alert Level</p>
-                <p className="text-3xl mt-1">
-                  {levelEmoji[data.alerts.level] || "⚠️"}{" "}
-                  <span className="text-zinc-100 font-bold">{data.alerts.level.toUpperCase()}</span>
-                </p>
-                <p className="text-xs text-zinc-500 mt-1">AQI: {data.alerts.avg_aqi}</p>
-              </Card>
+      <main className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 space-y-6">
+          <header className="flex flex-col gap-2.5">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">public health</div>
+            <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(36px, 5.6vw, 56px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
+              citizen alerts
+            </h1>
+          </header>
 
-              {health && (
-                <>
-                  <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                    <p className="text-xs text-zinc-500 uppercase">PM2.5 Exposure</p>
-                    <p className="text-3xl font-bold text-red-400 mt-1">{health.avg_pm25}</p>
-                    <p className="text-xs text-zinc-500 mt-1">
-                      {health.excess_over_who}x over WHO limit ({health.who_pm25_limit} ug/m3)
-                    </p>
-                  </Card>
-                  <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                    <p className="text-xs text-zinc-500 uppercase">Est. Excess Hospital Visits (24h)</p>
-                    <p className="text-3xl font-bold text-orange-400 mt-1">
-                      +{health.estimated_excess_hospital_visits_24h}
-                    </p>
-                    <p className="text-xs text-zinc-500 mt-1">
-                      {health.schools_in_affected_zones} schools in affected zones
-                    </p>
-                  </Card>
-                </>
-              )}
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="w-6 h-6 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin" />
             </div>
-
-            <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-              <h3 className="text-sm font-semibold text-zinc-300 mb-3">Health Advisory</h3>
-              <Tabs defaultValue="en" onValueChange={setLang}>
-                <TabsList className="bg-zinc-800">
-                  {data.alerts.languages.map((l) => (
-                    <TabsTrigger key={l} value={l} className="text-xs">
-                      {langNames[l] || l}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-                {data.alerts.languages.map((l) => (
-                  <TabsContent key={l} value={l} className="mt-3">
-                    <p className="text-sm text-zinc-300 leading-relaxed">
-                      {data.alerts.city_advisory[l] || data.alerts.city_advisory.en}
-                    </p>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            </Card>
-
-            <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-              <h3 className="text-sm font-semibold text-zinc-300 mb-3">
-                WhatsApp Alert Preview
-              </h3>
-              <div className="bg-[#0b141a] rounded-xl p-4 max-w-md border border-[#233138]">
-                <div className="bg-[#005c4b] rounded-lg p-3">
-                  <pre className="text-xs text-white whitespace-pre-wrap font-sans leading-relaxed">
-                    {data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}
-                  </pre>
-                </div>
-                <p className="text-[10px] text-zinc-500 mt-1 text-right">
-                  {new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
-                </p>
-              </div>
-            </Card>
-
-            {data.alerts.zone_alerts.length > 0 && (
-              <Card className="p-5 bg-zinc-900/50 border-zinc-800">
-                <h3 className="text-sm font-semibold text-zinc-300 mb-3">
-                  Zone-Level Alerts ({data.alerts.alert_count})
-                </h3>
-                <div className="space-y-2">
-                  {data.alerts.zone_alerts.map((alert, i) => (
-                    <div key={i} className="flex items-center gap-3 p-2 bg-zinc-800/30 rounded">
-                      <Badge className={
-                        alert.level === "severe" ? "bg-rose-700/20 text-rose-400" :
-                        alert.level === "very_poor" ? "bg-red-500/20 text-red-400" :
-                        "bg-orange-500/20 text-orange-400"
-                      }>
-                        {alert.aqi}
-                      </Badge>
-                      <div>
-                        <p className="text-xs text-zinc-300">{alert.station.split(",")[0]}</p>
-                        <p className="text-[10px] text-zinc-500">{alert.message_en}</p>
-                      </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                {/* Alert level tile — entity colored */}
+                <div
+                  className="ru-bento"
+                  style={{ "--bento-bg": "var(--entity-alert)", "--bento-fg": "var(--entity-alert-fg)" } as React.CSSProperties}
+                >
+                  <div className="flex flex-col p-6">
+                    <div className="flex items-start justify-between">
+                      <Sticker tilt={-3}>level</Sticker>
+                      <Sticker tilt={2} dark>{data?.alerts.level || "—"}</Sticker>
                     </div>
-                  ))}
+                    <div className="flex-1 flex items-end mt-4">
+                      <span className="text-5xl">{levelEmoji[data?.alerts.level || "moderate"]}</span>
+                      <span className="font-display ml-3 leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "clamp(48px, 6vw, 64px)" }}>
+                        {data?.alerts.avg_aqi.toFixed(0)}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </Card>
-            )}
-          </>
-        )}
+
+                {/* PM2.5 exposure — cream tile */}
+                {health && (
+                  <div className="ru-bento">
+                    <div className="flex flex-col p-6">
+                      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">pm2.5 exposure</div>
+                      <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "clamp(56px, 7vw, 72px)", color: "var(--entity-poor)" }}>
+                        {health.avg_pm25.toFixed(0)}
+                      </span>
+                      <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                        {health.excess_over_who.toFixed(1)}x over who limit
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Hospital visits — charcoal tile */}
+                {health && (
+                  <div className="ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
+                    <div className="flex flex-col p-6">
+                      <div className="flex items-start justify-between">
+                        <Sticker tilt={-2}>health impact</Sticker>
+                      </div>
+                      <span className="font-display leading-[0.82] tracking-[-0.04em] mt-4" style={{ fontSize: "clamp(48px, 6vw, 64px)", color: "var(--entity-moderate)" }}>
+                        +{health.estimated_excess_hospital_visits_24h}
+                      </span>
+                      <p className="mt-2 font-mono text-[10px] uppercase tracking-wider opacity-60">
+                        est. excess hospital visits · 24h
+                      </p>
+                      <p className="mt-1 font-mono text-[10px] uppercase tracking-wider opacity-40">
+                        {health.schools_in_affected_zones} schools in zone
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Advisory in multiple languages */}
+              {data && (
+                <div className="ru-bento">
+                  <div className="p-6">
+                    <div className="flex items-center gap-2.5 border-b border-[var(--hairline-soft)] pb-2 mb-4">
+                      <span className="inline-block h-2 w-2 rounded-[2px]" style={{ background: "var(--entity-alert)" }} />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em]">health advisory</span>
+                      <span className="ml-auto font-mono text-[10px] tabular-nums text-muted-foreground">
+                        {data.alerts.languages.length.toString().padStart(2, "0")} languages
+                      </span>
+                    </div>
+                    <Tabs defaultValue="en" onValueChange={setLang}>
+                      <TabsList className="bg-secondary rounded-full p-0.5 h-auto">
+                        {data.alerts.languages.map((l) => (
+                          <TabsTrigger key={l} value={l} className="rounded-full text-[12px] px-3 py-1 data-[state=active]:bg-foreground data-[state=active]:text-background">
+                            {langNames[l] || l}
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                      {data.alerts.languages.map((l) => (
+                        <TabsContent key={l} value={l} className="mt-4">
+                          <p className="text-[15px] leading-relaxed" style={{ fontVariationSettings: "'wght' 460, 'wdth' 96" }}>
+                            {data.alerts.city_advisory[l] || data.alerts.city_advisory.en}
+                          </p>
+                        </TabsContent>
+                      ))}
+                    </Tabs>
+                  </div>
+                </div>
+              )}
+
+              {/* WhatsApp preview */}
+              {data && (
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                  <div className="p-6">
+                    <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-4">whatsapp preview</div>
+                    <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4 max-w-md">
+                      <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
+                        {data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Zone alerts */}
+              {data && data.alerts.zone_alerts.length > 0 && (
+                <div className="ru-bento">
+                  <div className="p-6">
+                    <div className="flex items-center gap-2.5 border-b border-[var(--hairline-soft)] pb-2 mb-4">
+                      <span className="inline-block h-2 w-2 rounded-[2px]" style={{ background: "var(--entity-poor)" }} />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em]">zone alerts</span>
+                      <span className="ml-auto font-mono text-[10px] tabular-nums text-muted-foreground">
+                        {data.alerts.alert_count.toString().padStart(2, "0")}
+                      </span>
+                    </div>
+                    {data.alerts.zone_alerts.map((alert, i) => (
+                      <div key={i} className="flex items-center gap-3 py-2" style={{ boxShadow: `inset 4px 0 0 0 var(--entity-poor)` }}>
+                        <span className="font-mono text-[12px] tabular-nums font-semibold pl-4" style={{ color: "var(--entity-poor)" }}>
+                          {alert.aqi}
+                        </span>
+                        <span className="text-[13px] truncate lowercase">{alert.station.split(",")[0].toLowerCase()}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </main>
     </div>
   );

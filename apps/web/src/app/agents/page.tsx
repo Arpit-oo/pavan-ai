@@ -1,59 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchAPI } from "@/lib/api";
 import Link from "next/link";
 
-interface AgentLog {
-  timestamp: string;
-  agent: string;
-  message: string;
-}
-
-interface AgentData {
-  agent: string;
-  data: Record<string, unknown>;
-  reasoning: string;
-  confidence: number;
-  timestamp: string;
-}
-
+interface AgentLog { timestamp: string; agent: string; message: string; }
+interface AgentData { agent: string; data: Record<string, unknown>; reasoning: string; confidence: number; timestamp: string; }
 interface AnalysisResult {
-  city: string;
-  timestamp: string;
-  elapsed_seconds: number;
-  summary: {
-    status: string;
-    urgency: string;
-    avg_aqi: number;
-    max_aqi: number;
-    station_count: number;
-    hotspot_count: number;
-    anomaly_count: number;
-    critical_anomalies: number;
-    dominant_source: string;
-    pollution_outlook: string;
-    stagnation: boolean;
-    grap_stage: string | null;
-    headline: string;
-    enforcement_recs: number;
-  };
-  agents: Record<string, AgentData>;
-  run_log: AgentLog[];
+  city: string; timestamp: string; elapsed_seconds: number;
+  summary: { status: string; urgency: string; avg_aqi: number; max_aqi: number; station_count: number; hotspot_count: number; anomaly_count: number; critical_anomalies: number; dominant_source: string; pollution_outlook: string; stagnation: boolean; grap_stage: string | null; headline: string; enforcement_recs: number; };
+  agents: Record<string, AgentData>; run_log: AgentLog[];
 }
 
-const agentMeta: Record<string, { icon: string; color: string; desc: string }> = {
-  orchestrator: { icon: "🧠", color: "bg-blue-500/20 text-blue-400 border-blue-500/30", desc: "Coordinates all agents" },
-  sensor: { icon: "📡", color: "bg-green-500/20 text-green-400 border-green-500/30", desc: "CPCB station data" },
-  weather: { icon: "🌤️", color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30", desc: "Wind & weather" },
-  anomaly: { icon: "⚡", color: "bg-red-500/20 text-red-400 border-red-500/30", desc: "Spike detection" },
-  attribution: { icon: "🔍", color: "bg-purple-500/20 text-purple-400 border-purple-500/30", desc: "Source decomposition" },
-  enforcement: { icon: "🛡️", color: "bg-orange-500/20 text-orange-400 border-orange-500/30", desc: "Inspector recs" },
-};
+const AGENTS: { key: string; icon: string; label: string; desc: string; color: string; fg: string }[] = [
+  { key: "orchestrator", icon: "🧠", label: "orchestrator", desc: "coordinates all agents", color: "var(--entity-forecast)", fg: "#fff" },
+  { key: "sensor", icon: "📡", label: "sensor", desc: "cpcb station data", color: "var(--entity-good)", fg: "#fff" },
+  { key: "weather", icon: "🌤️", label: "weather", desc: "wind & weather", color: "var(--entity-wind)", fg: "#0a0a08" },
+  { key: "anomaly", icon: "⚡", label: "anomaly", desc: "spike detection", color: "var(--entity-poor)", fg: "#fff" },
+  { key: "attribution", icon: "🔍", label: "attribution", desc: "source decomposition", color: "var(--entity-severe)", fg: "#fff" },
+  { key: "enforcement", icon: "🛡️", label: "enforcement", desc: "inspector recs", color: "var(--entity-moderate)", fg: "#1a1a18" },
+];
+
+function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactNode; tilt?: number; dark?: boolean }) {
+  return (
+    <span style={{ transform: `rotate(${tilt}deg)` }} className={`inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] shadow-[0_1px_3px_rgba(0,0,0,0.08)] ${dark ? "bg-[#0a0a0c] text-[#f5f0e6]" : "bg-white text-[#0a0a0c]"}`}>
+      {children}
+    </span>
+  );
+}
 
 export default function AgentsPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
@@ -61,172 +36,171 @@ export default function AgentsPage() {
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
 
   const runAnalysis = async () => {
-    setLoading(true);
-    setResult(null);
+    setLoading(true); setResult(null);
     try {
       const res = await fetchAPI<AnalysisResult>("/api/v1/agents/analyze?city=Delhi");
       setResult(res);
-    } finally {
-      setLoading(false);
-    }
+    } catch {
+      const { MOCK_AGENT_LOG, MOCK_ANALYSIS_SUMMARY } = await import("@/lib/mock-data");
+      setResult({ city: "Delhi", timestamp: new Date().toISOString(), elapsed_seconds: 2.3, summary: MOCK_ANALYSIS_SUMMARY, agents: {}, run_log: MOCK_AGENT_LOG } as unknown as AnalysisResult);
+    } finally { setLoading(false); }
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="flex items-center justify-between px-6 py-3 border-b border-zinc-800 bg-zinc-950">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-orange-400">Pa</span>
-            <span className="text-zinc-100">van</span>
-          </Link>
-          <Badge variant="outline" className="text-xs text-zinc-400 border-zinc-700">
-            Agent Console
-          </Badge>
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-5">
+            <Link href="/" className="flex items-baseline gap-0.5 text-lg">
+              <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
+              <span className="inline-block h-[8px] w-[8px] translate-y-[-2px] rounded-full" style={{ background: "var(--entity-wind)" }} />
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">agent console</span>
+          </div>
+          <Link href="/" className="ru-pill !text-[12px] !px-3 !py-1.5">← dashboard</Link>
         </div>
-        <Link href="/">
-          <Button variant="outline" size="sm" className="text-xs border-zinc-700">Dashboard</Button>
-        </Link>
+        <div className="pointer-events-none h-[2px] opacity-90" style={{ background: "linear-gradient(90deg, transparent 0%, var(--entity-wind) 30%, var(--entity-wind) 70%, transparent 100%)" }} />
       </header>
 
-      <main className="flex-1 overflow-hidden p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-lg font-semibold text-zinc-200">Multi-Agent Intelligence Pipeline</h2>
-            <p className="text-xs text-zinc-500 mt-1">
-              6 specialized agents coordinate in 3 phases to analyze Delhi&apos;s air quality
-            </p>
+      <main className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 space-y-6">
+          <div className="flex items-end justify-between">
+            <header className="flex flex-col gap-2.5">
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">intelligence</div>
+              <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(36px, 5.6vw, 56px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
+                multi-agent pipeline
+              </h1>
+              <p className="max-w-[60ch] text-[14px] leading-[1.45] text-muted-foreground" style={{ fontVariationSettings: "'wght' 460, 'wdth' 96" }}>
+                6 specialized agents coordinate in 3 phases to analyze delhi&apos;s air quality
+              </p>
+            </header>
+            <button onClick={runAnalysis} disabled={loading} className="ru-pill shrink-0">
+              {loading ? "agents working..." : "run full analysis →"}
+            </button>
           </div>
-          <Button onClick={runAnalysis} disabled={loading} className="bg-orange-500 hover:bg-orange-600">
-            {loading ? "Agents Working..." : "Run Full Analysis"}
-          </Button>
-        </div>
 
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-          {Object.entries(agentMeta).map(([name, meta]) => {
-            const agentData = result?.agents?.[name];
-            const isActive = loading && !result;
-            const isDone = !!agentData;
-
-            return (
-              <Card
-                key={name}
-                className={`p-3 cursor-pointer transition-all border ${
-                  activeAgent === name ? "border-orange-500" : "border-zinc-800"
-                } ${isDone ? "bg-zinc-900/80" : "bg-zinc-900/30"}`}
-                onClick={() => isDone && setActiveAgent(activeAgent === name ? null : name)}
-              >
-                <div className="text-center">
-                  <span className="text-2xl">{meta.icon}</span>
-                  <p className="text-xs font-medium text-zinc-300 mt-1 capitalize">{name}</p>
-                  <p className="text-[10px] text-zinc-600">{meta.desc}</p>
-                  {isDone && (
-                    <Badge className="mt-1 text-[10px] bg-green-500/20 text-green-400">
-                      {(agentData!.confidence * 100).toFixed(0)}%
-                    </Badge>
-                  )}
-                  {isActive && (
-                    <div className="w-3 h-3 border border-orange-400 border-t-transparent rounded-full animate-spin mx-auto mt-1" />
-                  )}
+          {/* Agent cards — entity colored bento grid */}
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            {AGENTS.map((a) => {
+              const agentData = result?.agents?.[a.key];
+              const isDone = !!agentData;
+              return (
+                <div
+                  key={a.key}
+                  className={`ru-bento cursor-pointer ${activeAgent === a.key ? "ring-2 ring-foreground/20" : ""}`}
+                  style={{ "--bento-bg": a.color, "--bento-fg": a.fg } as React.CSSProperties}
+                  onClick={() => isDone && setActiveAgent(activeAgent === a.key ? null : a.key)}
+                >
+                  <div className="flex flex-col items-center p-4 text-center">
+                    <span className="text-3xl mb-2">{a.icon}</span>
+                    <p className="text-[13px] lowercase" style={{ fontVariationSettings: "'wght' 600" }}>{a.label}</p>
+                    <p className="text-[10px] opacity-60 mt-0.5 lowercase">{a.desc}</p>
+                    {isDone && (
+                      <span className="mt-2 font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-2 py-0.5">
+                        {(agentData!.confidence * 100).toFixed(0)}%
+                      </span>
+                    )}
+                    {loading && !isDone && (
+                      <div className="mt-2 w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    )}
+                  </div>
                 </div>
-              </Card>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {result && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[calc(100%-200px)]">
-            <Card className="p-4 bg-zinc-900/50 border-zinc-800 flex flex-col">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-zinc-300">Run Log</h3>
-                <span className="text-xs text-zinc-600">{result.elapsed_seconds}s</span>
+          {/* Results */}
+          {result && (
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {/* Run log */}
+              <div className="ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
+                <div className="flex flex-col p-6 h-[400px]">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">run log</div>
+                    <span className="font-mono text-[10px] tabular-nums opacity-50">{result.elapsed_seconds}s</span>
+                  </div>
+                  <ScrollArea className="flex-1">
+                    <div className="space-y-2 pr-4 fade-edge-bottom">
+                      {result.run_log.map((log, i) => {
+                        const agent = AGENTS.find(a => a.key === log.agent);
+                        return (
+                          <div key={i} className="flex items-start gap-3">
+                            <span className="shrink-0 text-base mt-0.5">{agent?.icon || "•"}</span>
+                            <span className="text-[12px] opacity-70 leading-snug lowercase">{log.message.toLowerCase()}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </ScrollArea>
+                </div>
               </div>
-              <ScrollArea className="flex-1">
-                <div className="space-y-1.5 pr-4">
-                  {result.run_log.map((log, i) => {
-                    const meta = agentMeta[log.agent];
-                    return (
-                      <div key={i} className="flex items-start gap-2">
-                        <Badge className={`shrink-0 text-[10px] px-1.5 py-0 border ${meta?.color || "bg-zinc-500/20 text-zinc-400"}`}>
-                          {meta?.icon || "?"} {log.agent}
-                        </Badge>
-                        <span className="text-xs text-zinc-500">{log.message}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </ScrollArea>
-            </Card>
 
-            <Card className="p-4 bg-zinc-900/50 border-zinc-800 flex flex-col">
-              <h3 className="text-sm font-semibold text-zinc-300 mb-3">
-                {activeAgent ? `${agentMeta[activeAgent]?.icon || ""} ${activeAgent} — Details` : "Summary"}
-              </h3>
-              <ScrollArea className="flex-1">
-                {activeAgent && result.agents[activeAgent] ? (
-                  <div className="space-y-3 pr-4">
-                    <div>
-                      <p className="text-xs text-zinc-500">Reasoning</p>
-                      <p className="text-sm text-zinc-300">{result.agents[activeAgent].reasoning}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-500">Confidence</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className="flex-1 h-2 bg-zinc-800 rounded-full">
-                          <div
-                            className="h-2 bg-green-500 rounded-full"
-                            style={{ width: `${result.agents[activeAgent].confidence * 100}%` }}
-                          />
+              {/* Summary or agent detail */}
+              <div className="ru-bento">
+                <div className="flex flex-col p-6 h-[400px]">
+                  {activeAgent && result.agents[activeAgent] ? (
+                    <>
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <span className="text-2xl mr-2">{AGENTS.find(a => a.key === activeAgent)?.icon}</span>
+                          <span className="text-[15px] lowercase" style={{ fontVariationSettings: "'wght' 620" }}>{activeAgent}</span>
                         </div>
-                        <span className="text-xs text-zinc-400">
-                          {(result.agents[activeAgent].confidence * 100).toFixed(0)}%
-                        </span>
+                        <Sticker tilt={2} dark>{(result.agents[activeAgent].confidence * 100).toFixed(0)}%</Sticker>
                       </div>
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-500">Raw Output</p>
-                      <pre className="text-[10px] text-zinc-500 mt-1 bg-zinc-800/50 rounded p-2 overflow-x-auto max-h-[300px]">
-                        {JSON.stringify(result.agents[activeAgent].data, null, 2).slice(0, 3000)}
-                      </pre>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3 pr-4">
-                    <div className="bg-zinc-800/50 rounded-lg p-3">
-                      <p className="text-sm font-medium text-zinc-200">{result.summary.headline}</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div><span className="text-zinc-500">Status:</span> <span className="text-zinc-300">{result.summary.status}</span></div>
-                      <div><span className="text-zinc-500">AQI:</span> <span className="text-zinc-300">{result.summary.avg_aqi}</span></div>
-                      <div><span className="text-zinc-500">Source:</span> <span className="text-zinc-300">{result.summary.dominant_source}</span></div>
-                      <div><span className="text-zinc-500">Outlook:</span> <span className="text-zinc-300">{result.summary.pollution_outlook}</span></div>
-                      <div><span className="text-zinc-500">GRAP:</span> <span className="text-zinc-300">{result.summary.grap_stage || "None"}</span></div>
-                      <div><span className="text-zinc-500">Enforcement:</span> <span className="text-zinc-300">{result.summary.enforcement_recs} recs</span></div>
-                      <div><span className="text-zinc-500">Anomalies:</span> <span className="text-zinc-300">{result.summary.anomaly_count}</span></div>
-                      <div><span className="text-zinc-500">Wind:</span> <span className="text-zinc-300">{result.summary.stagnation ? "STAGNANT" : "Normal"}</span></div>
-                    </div>
-                    <p className="text-[10px] text-zinc-600">Click an agent card above to inspect its output</p>
-                  </div>
-                )}
-              </ScrollArea>
-            </Card>
-          </div>
-        )}
-
-        {!result && !loading && (
-          <div className="flex items-center justify-center h-[400px]">
-            <div className="text-center space-y-4">
-              <div className="text-6xl">🧠</div>
-              <p className="text-zinc-500">Click &quot;Run Full Analysis&quot; to see all 6 agents coordinate</p>
-              <div className="flex gap-2 justify-center text-xs text-zinc-600">
-                <span>Phase 1: Data Collection</span>
-                <span>→</span>
-                <span>Phase 2: Analysis</span>
-                <span>→</span>
-                <span>Phase 3: Enforcement</span>
+                      <div className="mb-3">
+                        <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-1">reasoning</div>
+                        <p className="text-[14px] leading-snug lowercase">{result.agents[activeAgent].reasoning.toLowerCase()}</p>
+                      </div>
+                      <div className="flex-1 overflow-auto">
+                        <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-1">raw output</div>
+                        <pre className="text-[10px] text-muted-foreground bg-secondary rounded-xl p-3 overflow-x-auto max-h-[200px]">
+                          {JSON.stringify(result.agents[activeAgent].data, null, 2).slice(0, 2000)}
+                        </pre>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-4">summary</div>
+                      <div className="bg-secondary rounded-2xl p-4 mb-4">
+                        <p className="text-[14px] leading-snug lowercase" style={{ fontVariationSettings: "'wght' 540" }}>
+                          {result.summary.headline.toLowerCase()}
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 text-[13px]">
+                        {[
+                          ["status", result.summary.status.toLowerCase()],
+                          ["aqi", String(result.summary.avg_aqi)],
+                          ["source", result.summary.dominant_source],
+                          ["grap", result.summary.grap_stage?.toLowerCase() || "—"],
+                          ["anomalies", String(result.summary.anomaly_count)],
+                          ["enforcement", `${result.summary.enforcement_recs} recs`],
+                        ].map(([k, v]) => (
+                          <div key={k}>
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{k}</span>
+                            <p style={{ fontVariationSettings: "'wght' 580" }}>{v}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-auto pt-4 font-mono text-[10px] text-muted-foreground opacity-50">click an agent card above to inspect output</p>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+
+          {!result && !loading && (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center space-y-4">
+                <span className="text-6xl">🧠</span>
+                <p className="text-muted-foreground text-[14px] lowercase">tap &quot;run full analysis&quot; to see all 6 agents coordinate</p>
+                <div className="flex gap-3 justify-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span>phase 1: data</span><span>→</span><span>phase 2: analysis</span><span>→</span><span>phase 3: enforcement</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

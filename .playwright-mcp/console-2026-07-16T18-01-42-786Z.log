@@ -5,3 +5,47 @@
 [    2594ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
 [    2594ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
 [    3945ms] [WARNING] luma.gl: Binding weightsTexture not set: Not found in shader layout. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  301091ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  301091ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[  601082ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  601082ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[  901083ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[  901084ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 1201091ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 1201091ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 1501118ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 1501118ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 1801087ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 1801088ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 2101087ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 2101087ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 2276573ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2276668ms] [LOG] [Fast Refresh] done in 199ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2293542ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2294202ms] [LOG] [Fast Refresh] done in 767ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2401119ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 2401119ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 2425096ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2425115ms] [LOG] [Fast Refresh] done in 42ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2425227ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2425377ms] [LOG] [Fast Refresh] done in 259ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2589042ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2590153ms] [LOG] [Fast Refresh] done in 632ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2590366ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2590597ms] [LOG] [Fast Refresh] done in 333ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2590935ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2590936ms] [LOG] [Fast Refresh] done in 306ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2649234ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2649357ms] [LOG] [Fast Refresh] done in 198ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2701083ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
+[ 2701083ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
+[ 2710680ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2710990ms] [LOG] [Fast Refresh] done in 391ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2768297ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2768506ms] [LOG] [Fast Refresh] done in 307ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2768616ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2768875ms] [LOG] [Fast Refresh] done in 365ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2769063ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2769234ms] [LOG] [Fast Refresh] done in 358ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2769437ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 2769509ms] [LOG] [Fast Refresh] done in 176ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
