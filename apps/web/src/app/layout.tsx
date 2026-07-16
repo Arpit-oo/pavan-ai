@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Fraunces } from "next/font/google";
 import "./globals.css";
-import FloatingBalloons from "@/components/decorations/balloons";
 import GeoPatterns from "@/components/decorations/geo-patterns";
 import ChatWidget from "@/components/chat/chat-widget";
 
@@ -36,7 +35,6 @@ export default function RootLayout({
       className={`${bricolage.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
-        <FloatingBalloons />
         <GeoPatterns />
         {children}
         <ChatWidget />

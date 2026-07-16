@@ -13,12 +13,23 @@ class AgentQuery(BaseModel):
 
 @router.post("/ask")
 async def ask_agent(req: AgentQuery):
-    """Query the orchestrator agent with a natural language question."""
+    """Query the orchestrator with natural language, get LLM-powered response."""
     from app.agents.orchestrator import Orchestrator
+    from app.services.llm import LLMService
 
     orch = Orchestrator()
-    result = await orch.ask(req.query, req.city)
-    return result
+    analysis = await orch.full_analysis(req.city)
+
+    llm = LLMService()
+    response = llm.generate_response(req.query, analysis)
+
+    return {
+        "query": req.query,
+        "response": response,
+        "analysis": analysis["summary"],
+        "agents_used": list(analysis["agents"].keys()),
+        "elapsed": analysis["elapsed_seconds"],
+    }
 
 
 @router.get("/analyze")

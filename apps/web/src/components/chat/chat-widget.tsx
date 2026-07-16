@@ -44,20 +44,12 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await fetchAPI<{ query: string; analysis: Record<string, unknown> }>("/api/v1/agents/ask", {
+      const res = await fetchAPI<{ response: string; agents_used: string[]; elapsed: number }>("/api/v1/agents/ask", {
         method: "POST",
         body: JSON.stringify({ query: userMsg.content, city: "Delhi" }),
       });
 
-      const summary = res.analysis as Record<string, unknown>;
-      const headline = (summary.headline as string) || "";
-      const outlook = (summary.pollution_outlook as string) || "";
-      const source = (summary.dominant_source as string) || "";
-      const aqi = summary.avg_aqi || 0;
-
-      const answer = `based on current data:\n\n**aqi: ${aqi}** — ${headline.toLowerCase()}\n\n**dominant source:** ${source}\n**outlook:** ${outlook}\n\nthe multi-agent analysis ran across sensor, weather, anomaly, attribution, and enforcement agents to generate this assessment.`;
-
-      setMessages((prev) => [...prev, { role: "assistant", content: answer, timestamp: new Date() }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: res.response, timestamp: new Date() }]);
     } catch {
       setMessages((prev) => [
         ...prev,
