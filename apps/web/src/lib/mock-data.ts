@@ -19,6 +19,34 @@ export const MOCK_STATIONS: StationReading[] = [
   { station_id: "site_1570", station_name: "Sonia Vihar, Delhi - DPCC", latitude: 28.7100, longitude: 77.2493, timestamp: new Date().toISOString(), pm25: 112, pm10: 198, no2: 62, so2: 17, co: 2.2, o3: 26, aqi: 205, temperature: 41, humidity: 22, wind_speed: 3.0, wind_direction: 305 },
   { station_id: "site_1572", station_name: "Vivek Vihar, Delhi - DPCC", latitude: 28.6724, longitude: 77.3150, timestamp: new Date().toISOString(), pm25: 128, pm10: 225, no2: 68, so2: 20, co: 2.4, o3: 24, aqi: 238, temperature: 41, humidity: 21, wind_speed: 2.6, wind_direction: 310 },
   { station_id: "site_1573", station_name: "Wazirpur, Delhi - DPCC", latitude: 28.6997, longitude: 77.1640, timestamp: new Date().toISOString(), pm25: 145, pm10: 258, no2: 75, so2: 24, co: 2.9, o3: 20, aqi: 275, temperature: 41, humidity: 20, wind_speed: 2.0, wind_direction: 315 },
+  // Mumbai
+  { station_id: "site_5085", station_name: "Bandra, Mumbai", latitude: 19.0596, longitude: 72.8295, timestamp: new Date().toISOString(), pm25: 45, pm10: 85, no2: 38, so2: 8, co: 1.2, o3: 35, aqi: 92, temperature: 32, humidity: 72, wind_speed: 5.5, wind_direction: 250 },
+  { station_id: "site_5088", station_name: "Colaba, Mumbai", latitude: 18.9067, longitude: 72.8147, timestamp: new Date().toISOString(), pm25: 38, pm10: 72, no2: 32, so2: 6, co: 0.9, o3: 40, aqi: 78, temperature: 31, humidity: 75, wind_speed: 6.2, wind_direction: 240 },
+  { station_id: "site_5091", station_name: "Powai, Mumbai", latitude: 19.1176, longitude: 72.9060, timestamp: new Date().toISOString(), pm25: 52, pm10: 98, no2: 42, so2: 10, co: 1.4, o3: 30, aqi: 108, temperature: 33, humidity: 68, wind_speed: 4.8, wind_direction: 260 },
+  // Bangalore
+  { station_id: "site_3001", station_name: "BTM Layout, Bangalore", latitude: 12.9166, longitude: 77.6101, timestamp: new Date().toISOString(), pm25: 35, pm10: 65, no2: 28, so2: 5, co: 0.8, o3: 45, aqi: 68, temperature: 28, humidity: 60, wind_speed: 3.5, wind_direction: 180 },
+  { station_id: "site_3003", station_name: "Silk Board, Bangalore", latitude: 12.9173, longitude: 77.6225, timestamp: new Date().toISOString(), pm25: 42, pm10: 78, no2: 45, so2: 7, co: 1.5, o3: 32, aqi: 88, temperature: 29, humidity: 55, wind_speed: 3.2, wind_direction: 190 },
+  // Chennai
+  { station_id: "site_4001", station_name: "Alandur, Chennai", latitude: 13.0025, longitude: 80.2065, timestamp: new Date().toISOString(), pm25: 40, pm10: 75, no2: 35, so2: 8, co: 1.0, o3: 38, aqi: 82, temperature: 34, humidity: 70, wind_speed: 4.5, wind_direction: 200 },
+  // Kolkata
+  { station_id: "site_6001", station_name: "Jadavpur, Kolkata", latitude: 22.4991, longitude: 88.3714, timestamp: new Date().toISOString(), pm25: 72, pm10: 135, no2: 48, so2: 14, co: 1.8, o3: 25, aqi: 148, temperature: 35, humidity: 78, wind_speed: 2.8, wind_direction: 170 },
+  { station_id: "site_6003", station_name: "Bidhannagar, Kolkata", latitude: 22.5958, longitude: 88.4087, timestamp: new Date().toISOString(), pm25: 65, pm10: 120, no2: 42, so2: 12, co: 1.6, o3: 28, aqi: 132, temperature: 34, humidity: 80, wind_speed: 3.0, wind_direction: 160 },
+  // Hyderabad
+  { station_id: "site_7001", station_name: "Jubilee Hills, Hyderabad", latitude: 17.4326, longitude: 78.4071, timestamp: new Date().toISOString(), pm25: 48, pm10: 90, no2: 35, so2: 9, co: 1.1, o3: 38, aqi: 98, temperature: 33, humidity: 55, wind_speed: 4.0, wind_direction: 220 },
+  // Lucknow
+  { station_id: "site_2001", station_name: "Lalbagh, Lucknow", latitude: 26.8524, longitude: 80.9365, timestamp: new Date().toISOString(), pm25: 95, pm10: 175, no2: 55, so2: 16, co: 2.0, o3: 22, aqi: 178, temperature: 38, humidity: 45, wind_speed: 2.5, wind_direction: 280 },
+  // Jaipur
+  { station_id: "site_2101", station_name: "Adarsh Nagar, Jaipur", latitude: 26.9237, longitude: 75.7868, timestamp: new Date().toISOString(), pm25: 82, pm10: 155, no2: 48, so2: 12, co: 1.7, o3: 30, aqi: 162, temperature: 40, humidity: 30, wind_speed: 3.8, wind_direction: 270 },
+  // Ahmedabad
+  { station_id: "site_9001", station_name: "Maninagar, Ahmedabad", latitude: 23.0038, longitude: 72.6006, timestamp: new Date().toISOString(), pm25: 58, pm10: 110, no2: 40, so2: 10, co: 1.3, o3: 35, aqi: 118, temperature: 37, humidity: 40, wind_speed: 4.5, wind_direction: 260 },
+  // Patna
+  { station_id: "site_2201", station_name: "IGSC Planetarium, Patna", latitude: 25.6122, longitude: 85.1002, timestamp: new Date().toISOString(), pm25: 88, pm10: 165, no2: 52, so2: 15, co: 1.9, o3: 24, aqi: 168, temperature: 36, humidity: 65, wind_speed: 2.2, wind_direction: 290 },
+  // Chandigarh
+  { station_id: "site_2801", station_name: "Sector 25, Chandigarh", latitude: 30.7388, longitude: 76.7680, timestamp: new Date().toISOString(), pm25: 55, pm10: 105, no2: 38, so2: 9, co: 1.2, o3: 38, aqi: 112, temperature: 35, humidity: 42, wind_speed: 4.2, wind_direction: 300 },
+  // Guwahati
+  { station_id: "site_2601", station_name: "Railway Colony, Guwahati", latitude: 26.1812, longitude: 91.7459, timestamp: new Date().toISOString(), pm25: 42, pm10: 80, no2: 30, so2: 7, co: 1.0, o3: 40, aqi: 85, temperature: 30, humidity: 82, wind_speed: 2.5, wind_direction: 180 },
+  // Thiruvananthapuram
+  { station_id: "site_3101", station_name: "Plammoodu, Thiruvananthapuram", latitude: 8.5074, longitude: 76.9730, timestamp: new Date().toISOString(), pm25: 22, pm10: 42, no2: 18, so2: 4, co: 0.5, o3: 48, aqi: 45, temperature: 29, humidity: 78, wind_speed: 3.8, wind_direction: 210 },
 ];
 
 export function generateMockHeatmapPoints(): HeatmapPoint[] {

@@ -1,0 +1,46 @@
+- generic [active] [ref=f17e1]:
+  - generic [ref=f17e2]:
+    - banner [ref=f17e3]:
+      - generic [ref=f17e4]:
+        - generic [ref=f17e5]:
+          - link "pavan" [ref=f17e6] [cursor=pointer]:
+            - /url: /
+          - navigation [ref=f17e9]:
+            - link "dashboard" [ref=f17e10] [cursor=pointer]:
+              - /url: /
+            - link "simulator" [ref=f17e13] [cursor=pointer]:
+              - /url: /simulate
+            - link "grap" [ref=f17e15] [cursor=pointer]:
+              - /url: /compliance
+            - link "alerts" [ref=f17e17] [cursor=pointer]:
+              - /url: /alerts
+            - link "agents" [ref=f17e19] [cursor=pointer]:
+              - /url: /agents
+        - generic [ref=f17e21]:
+          - generic [ref=f17e22]: ...
+          - generic [ref=f17e23]: delhi
+    - main [ref=f17e24]:
+      - generic [ref=f17e26]:
+        - generic [ref=f17e27]:
+          - paragraph [ref=f17e32]: loading...
+          - generic [ref=f17e33]:
+            - generic [ref=f17e34]:
+              - generic [ref=f17e35]:
+                - generic [ref=f17e36]: forecast
+                - heading "aqi forecast — delhi" [level=3] [ref=f17e37]
+              - generic [ref=f17e38]:
+                - button "24h" [ref=f17e39]
+                - button "48h" [ref=f17e40]
+                - button "72h" [ref=f17e41]
+            - generic [ref=f17e42]: No forecast data
+        - generic [ref=f17e45]:
+          - generic [ref=f17e46]:
+            - generic [ref=f17e47]:
+              - generic [ref=f17e48]: agents
+              - paragraph [ref=f17e49]: multi-agent pipeline
+            - button "run" [ref=f17e50]
+          - generic [ref=f17e52]:
+            - text: 🧠
+            - paragraph [ref=f17e53]: tap run to activate 6 agents
+  - button "Open chat" [ref=f17e54] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f17e62] [cursor=pointer]
