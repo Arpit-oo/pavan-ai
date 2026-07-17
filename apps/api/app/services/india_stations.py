@@ -100,6 +100,126 @@ INDIA_STATIONS = {
     "Thiruvananthapuram": [
         {"id": "site_3101", "name": "Plammoodu, Thiruvananthapuram", "lat": 8.5074, "lng": 76.9730},
     ],
+    "Dehradun": [
+        {"id": "site_3201", "name": "ISBT, Dehradun", "lat": 30.3165, "lng": 78.0322},
+        {"id": "site_3202", "name": "Clock Tower, Dehradun", "lat": 30.3255, "lng": 78.0418},
+    ],
+    "Shimla": [
+        {"id": "site_3301", "name": "IGMC, Shimla", "lat": 31.1048, "lng": 77.1734},
+    ],
+    "Bhubaneswar": [
+        {"id": "site_3401", "name": "Jaydev Vihar, Bhubaneswar", "lat": 20.2961, "lng": 85.8245},
+        {"id": "site_3402", "name": "Talkatora, Bhubaneswar", "lat": 20.2655, "lng": 85.8419},
+    ],
+    "Raipur": [
+        {"id": "site_3501", "name": "HQ Office, Raipur", "lat": 21.2514, "lng": 81.6296},
+        {"id": "site_3502", "name": "Siltara, Raipur", "lat": 21.3200, "lng": 81.6100},
+    ],
+    "Ranchi": [
+        {"id": "site_3601", "name": "Pragati Maidan, Ranchi", "lat": 23.3441, "lng": 85.3096},
+    ],
+    "Imphal": [
+        {"id": "site_3701", "name": "Lamphelpat, Imphal", "lat": 24.8170, "lng": 93.9368},
+    ],
+    "Shillong": [
+        {"id": "site_3801", "name": "Laitumkhrah, Shillong", "lat": 25.5788, "lng": 91.8933},
+    ],
+    "Aizawl": [
+        {"id": "site_3901", "name": "Sikulpuikawn, Aizawl", "lat": 23.7271, "lng": 92.7176},
+    ],
+    "Kohima": [
+        {"id": "site_4101", "name": "Secretariat, Kohima", "lat": 25.6751, "lng": 94.1086},
+    ],
+    "Gangtok": [
+        {"id": "site_4201", "name": "MG Marg, Gangtok", "lat": 27.3314, "lng": 88.6138},
+    ],
+    "Itanagar": [
+        {"id": "site_4301", "name": "Naharlagun, Itanagar", "lat": 27.1040, "lng": 93.6962},
+    ],
+    "Agartala": [
+        {"id": "site_4401", "name": "Secretariat, Agartala", "lat": 23.8315, "lng": 91.2868},
+    ],
+    "Panaji": [
+        {"id": "site_4501", "name": "Altinho, Panaji", "lat": 15.4989, "lng": 73.8278},
+    ],
+    "Srinagar": [
+        {"id": "site_4601", "name": "Rajbagh, Srinagar", "lat": 34.0837, "lng": 74.7973},
+        {"id": "site_4602", "name": "Parimpora, Srinagar", "lat": 34.1154, "lng": 74.7672},
+    ],
+    "Jammu": [
+        {"id": "site_4701", "name": "GCW Gandhi Nagar, Jammu", "lat": 32.7266, "lng": 74.8570},
+    ],
+    "Leh": [
+        {"id": "site_4801", "name": "Leh Town, Ladakh", "lat": 34.1526, "lng": 77.5771},
+    ],
+    "Amritsar": [
+        {"id": "site_4901", "name": "Golden Temple, Amritsar", "lat": 31.6200, "lng": 74.8765},
+    ],
+    "Jodhpur": [
+        {"id": "site_5001", "name": "Collectorate, Jodhpur", "lat": 26.2389, "lng": 73.0243},
+    ],
+    "Indore": [
+        {"id": "site_5101", "name": "Chhoti Gwaltoli, Indore", "lat": 22.7196, "lng": 75.8577},
+        {"id": "site_5102", "name": "Vijay Nagar, Indore", "lat": 22.7533, "lng": 75.8937},
+    ],
+    "Nagpur": [
+        {"id": "site_5201", "name": "Civil Lines, Nagpur", "lat": 21.1458, "lng": 79.0882},
+        {"id": "site_5202", "name": "Sadar, Nagpur", "lat": 21.1538, "lng": 79.0760},
+    ],
+    "Coimbatore": [
+        {"id": "site_5301", "name": "SIDCO, Coimbatore", "lat": 11.0168, "lng": 76.9558},
+    ],
+    "Madurai": [
+        {"id": "site_5401", "name": "Simmakkal, Madurai", "lat": 9.9252, "lng": 78.1198},
+    ],
+    "Kochi": [
+        {"id": "site_5501", "name": "Vyttila, Kochi", "lat": 9.9674, "lng": 76.3209},
+    ],
+    "Mangalore": [
+        {"id": "site_5601", "name": "Kavoor, Mangalore", "lat": 12.8984, "lng": 74.8484},
+    ],
+    "Mysore": [
+        {"id": "site_5701", "name": "CFTRI, Mysore", "lat": 12.3051, "lng": 76.6551},
+    ],
+    "Varanasi_extra": [
+        {"id": "site_5801", "name": "BHU, Varanasi", "lat": 25.2677, "lng": 82.9913},
+    ],
+    "Gorakhpur": [
+        {"id": "site_5901", "name": "Mundera Bazaar, Gorakhpur", "lat": 26.7606, "lng": 83.3732},
+    ],
+    "Prayagraj": [
+        {"id": "site_6101", "name": "Motimahal, Prayagraj", "lat": 25.4358, "lng": 81.8463},
+    ],
+    "Gwalior": [
+        {"id": "site_6201", "name": "City Center, Gwalior", "lat": 26.2183, "lng": 78.1828},
+    ],
+    "Jabalpur": [
+        {"id": "site_6301", "name": "Marhatal, Jabalpur", "lat": 23.1815, "lng": 79.9864},
+    ],
+    "Surat": [
+        {"id": "site_6401", "name": "Pal, Surat", "lat": 21.1702, "lng": 72.8311},
+    ],
+    "Rajkot": [
+        {"id": "site_6501", "name": "Mavdi, Rajkot", "lat": 22.2827, "lng": 70.7651},
+    ],
+    "Vadodara": [
+        {"id": "site_6601", "name": "Refinery, Vadodara", "lat": 22.3072, "lng": 73.1812},
+    ],
+    "Aurangabad": [
+        {"id": "site_6701", "name": "MIT College, Aurangabad", "lat": 19.8762, "lng": 75.3433},
+    ],
+    "Nashik": [
+        {"id": "site_6801", "name": "Satpur, Nashik", "lat": 20.0063, "lng": 73.7628},
+    ],
+    "Tiruchirappalli": [
+        {"id": "site_6901", "name": "Collector Office, Trichy", "lat": 10.8051, "lng": 78.6856},
+    ],
+    "Vijayawada": [
+        {"id": "site_7101", "name": "PWD Grounds, Vijayawada", "lat": 16.5062, "lng": 80.6480},
+    ],
+    "Warangal": [
+        {"id": "site_7201", "name": "Desaipet, Warangal", "lat": 17.9784, "lng": 79.5941},
+    ],
 }
 
 
