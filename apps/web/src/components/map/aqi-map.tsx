@@ -12,10 +12,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
-const DELHI_CENTER = {
-  longitude: 77.1025,
-  latitude: 28.7041,
-  zoom: 10.5,
+const INDIA_CENTER = {
+  longitude: 78.9629,
+  latitude: 22.5,
+  zoom: 4.5,
   pitch: 0,
   bearing: 0,
 };
@@ -49,7 +49,7 @@ export default function AQIMap({
   stations,
   onStationClick,
 }: AQIMapProps) {
-  const [viewState, setViewState] = useState(DELHI_CENTER);
+  const [viewState, setViewState] = useState(INDIA_CENTER);
   const [selectedStation, setSelectedStation] =
     useState<StationReading | null>(null);
 
@@ -87,67 +87,63 @@ export default function AQIMap({
       >
         <NavigationControl position="top-right" />
 
-        {/* AQI influence zones — soft colored circles per station */}
+        {/* AQI layers */}
         <Source id="aqi-zones" type="geojson" data={geojson}>
-          {/* Outer glow — large soft radius */}
+          {/* Subtle heatmap overlay — light, readable */}
+          <Layer
+            id="aqi-heatmap"
+            type="heatmap"
+            paint={{
+              "heatmap-weight": ["interpolate", ["linear"], ["get", "aqi"], 0, 0.1, 200, 0.5, 500, 1],
+              "heatmap-intensity": 0.6,
+              "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 4, 25, 8, 40, 12, 60],
+              "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 4, 0.25, 10, 0.15, 14, 0.05],
+              "heatmap-color": [
+                "interpolate", ["linear"], ["heatmap-density"],
+                0, "rgba(0,0,0,0)",
+                0.1, "rgba(0,228,0,0.3)",
+                0.3, "rgba(255,255,0,0.4)",
+                0.5, "rgba(255,126,0,0.4)",
+                0.7, "rgba(255,0,0,0.4)",
+                0.9, "rgba(143,63,151,0.4)",
+                1, "rgba(126,0,35,0.4)",
+              ],
+            }}
+          />
+          {/* Soft glow per station */}
           <Layer
             id="aqi-glow"
             type="circle"
             paint={{
-              "circle-radius": [
-                "interpolate", ["linear"], ["get", "aqi"],
-                0, 30,
-                100, 40,
-                200, 55,
-                300, 70,
-                500, 90,
+              "circle-radius": ["interpolate", ["linear"], ["zoom"],
+                4, ["interpolate", ["linear"], ["get", "aqi"], 0, 4, 200, 8, 500, 14],
+                10, ["interpolate", ["linear"], ["get", "aqi"], 0, 20, 200, 35, 500, 55],
               ],
               "circle-color": ["get", "color"],
-              "circle-opacity": 0.08,
-              "circle-blur": 1,
+              "circle-opacity": 0.12,
+              "circle-blur": 0.8,
             }}
           />
-          {/* Mid ring — medium radius */}
-          <Layer
-            id="aqi-mid"
-            type="circle"
-            paint={{
-              "circle-radius": [
-                "interpolate", ["linear"], ["get", "aqi"],
-                0, 15,
-                100, 22,
-                200, 30,
-                300, 38,
-                500, 50,
-              ],
-              "circle-color": ["get", "color"],
-              "circle-opacity": 0.15,
-              "circle-blur": 0.6,
-            }}
-          />
-          {/* Core dot — solid small circle */}
+          {/* Core dot */}
           <Layer
             id="aqi-core"
             type="circle"
             paint={{
-              "circle-radius": [
-                "interpolate", ["linear"], ["get", "aqi"],
-                0, 6,
-                100, 8,
-                200, 10,
-                300, 12,
-                500, 15,
+              "circle-radius": ["interpolate", ["linear"], ["zoom"],
+                4, 3,
+                8, 6,
+                12, 10,
               ],
               "circle-color": ["get", "color"],
-              "circle-opacity": 0.6,
-              "circle-stroke-width": 2,
+              "circle-opacity": 0.7,
+              "circle-stroke-width": 1.5,
               "circle-stroke-color": "#ffffff",
-              "circle-stroke-opacity": 0.8,
+              "circle-stroke-opacity": 0.9,
             }}
           />
         </Source>
 
-        {/* Station markers with AQI numbers */}
+        {/* Station markers — scale with zoom */}
         {stations.map((station) => (
           <Marker
             key={station.station_id}
@@ -159,17 +155,26 @@ export default function AQIMap({
               handleStationClick(station);
             }}
           >
-            <div
-              className="cursor-pointer flex items-center justify-center rounded-full shadow-md transition-transform hover:scale-110 border-2 border-white"
-              style={{
-                width: 32,
-                height: 32,
-                backgroundColor: getAQIGradientColor(station.aqi),
-              }}
-            >
-              <span className="text-[9px] font-bold text-white drop-shadow-sm" style={{ fontVariationSettings: "'wght' 700" }}>
-                {station.aqi}
-              </span>
+            <div className="cursor-pointer group flex flex-col items-center">
+              <div
+                className="flex items-center justify-center rounded-full shadow-md transition-transform group-hover:scale-125 border-[1.5px] border-white"
+                style={{
+                  width: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12,
+                  height: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12,
+                  backgroundColor: getAQIGradientColor(station.aqi),
+                }}
+              >
+                {viewState.zoom > 7 && (
+                  <span className="text-[8px] font-bold text-white drop-shadow-sm" style={{ fontVariationSettings: "'wght' 700" }}>
+                    {station.aqi}
+                  </span>
+                )}
+              </div>
+              {viewState.zoom > 9 && (
+                <span className="mt-0.5 text-[8px] text-foreground/60 whitespace-nowrap font-mono uppercase tracking-wider">
+                  {station.station_name.split(",")[0].toLowerCase()}
+                </span>
+              )}
             </div>
           </Marker>
         ))}
@@ -194,7 +199,7 @@ export default function AQIMap({
       {/* Station count badge */}
       <div className="absolute top-4 left-4 bg-card/90 backdrop-blur rounded-full px-3 py-1.5 shadow-sm border border-border">
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-          {stations.length} stations · live
+          {stations.length} stations · {new Set(stations.map(s => (s as StationReading & {city?: string}).city).filter(Boolean)).size || 1} cities · all india
         </span>
       </div>
     </div>

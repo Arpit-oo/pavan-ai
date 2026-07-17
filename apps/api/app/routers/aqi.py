@@ -20,6 +20,23 @@ async def get_live_aqi(
     return {"city": city, "stations": data, "count": len(data)}
 
 
+@router.get("/all-india")
+async def get_all_india_aqi():
+    """Get AQI readings for all stations across India."""
+    from app.services.india_stations import get_all_india_stations
+    from app.services.cpcb import CPCBService
+
+    svc = CPCBService()
+    all_stations = get_all_india_stations()
+    readings = []
+    for station in all_stations:
+        reading = svc._generate_realistic_reading(station)
+        reading["city"] = station.get("city", "")
+        readings.append(reading)
+    await svc.close()
+    return {"stations": readings, "count": len(readings), "cities": len(set(s["city"] for s in readings))}
+
+
 @router.get("/historical")
 async def get_historical_aqi(
     city: str = Query(default="Delhi"),

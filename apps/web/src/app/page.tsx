@@ -38,23 +38,20 @@ export default function Dashboard() {
 
   const fetchData = useCallback(async () => {
     try {
-      const [aqiRes, heatmap] = await Promise.all([
-        fetchAPI<{ stations: StationReading[] }>(`/api/v1/aqi/live?city=${city}`),
-        fetchAPI<HeatmapData>(`/api/v1/aqi/heatmap?city=${city}`),
-      ]);
-      setStations(aqiRes.stations);
-      setHeatmapPoints(heatmap.points);
+      const allIndia = await fetchAPI<{ stations: (StationReading & { city?: string })[] }>("/api/v1/aqi/all-india");
+      setStations(allIndia.stations);
+      setHeatmapPoints([]);
       setLastUpdated(new Date());
       setDataSource("live");
     } catch {
       setStations(MOCK_STATIONS);
-      setHeatmapPoints(generateMockHeatmapPoints());
+      setHeatmapPoints([]);
       setLastUpdated(new Date());
       setDataSource("mock");
     } finally {
       setLoading(false);
     }
-  }, [city]);
+  }, []);
 
   useEffect(() => {
     fetchData();
