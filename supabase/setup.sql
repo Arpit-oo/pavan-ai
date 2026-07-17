@@ -88,9 +88,9 @@ CREATE POLICY "Public read forecasts" ON forecasts FOR SELECT TO anon USING (tru
 CREATE POLICY "Public read alerts" ON alerts FOR SELECT TO anon USING (true);
 CREATE POLICY "Public read anomalies" ON anomalies FOR SELECT TO anon USING (true);
 
--- Service role can insert/update (for backend)
-CREATE POLICY "Service insert stations" ON stations FOR INSERT TO authenticated USING (true);
-CREATE POLICY "Service insert readings" ON readings FOR INSERT TO authenticated USING (true);
-CREATE POLICY "Service insert forecasts" ON forecasts FOR INSERT TO authenticated USING (true);
-CREATE POLICY "Service insert alerts" ON alerts FOR INSERT TO authenticated USING (true);
-CREATE POLICY "Service insert anomalies" ON anomalies FOR INSERT TO authenticated USING (true);
+-- Service role can insert (for backend)
+CREATE POLICY "Service insert stations" ON stations FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Service insert readings" ON readings FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Service insert forecasts" ON forecasts FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Service insert alerts" ON alerts FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Service insert anomalies" ON anomalies FOR INSERT TO authenticated WITH CHECK (true);
