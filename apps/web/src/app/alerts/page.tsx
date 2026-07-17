@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchAPI } from "@/lib/api";
-import Link from "next/link";
+import NavBar from "@/components/nav/navbar";
 
 interface AlertData {
   city: string;
@@ -62,19 +62,7 @@ export default function AlertsPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-5">
-            <Link href="/" className="flex items-baseline gap-0.5 text-lg">
-              <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
-              <span className="inline-block h-[8px] w-[8px] translate-y-[-2px] rounded-full" style={{ background: "var(--entity-alert)" }} />
-            </Link>
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">citizen alerts</span>
-          </div>
-          <Link href="/" className="ru-pill !text-[12px] !px-3 !py-1.5">← dashboard</Link>
-        </div>
-        <div className="pointer-events-none h-[2px] opacity-90" style={{ background: "linear-gradient(90deg, transparent 0%, var(--entity-alert) 30%, var(--entity-alert) 70%, transparent 100%)" }} />
-      </header>
+      <NavBar />
 
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 space-y-6">
