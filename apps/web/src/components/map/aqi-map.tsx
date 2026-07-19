@@ -12,10 +12,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
-const INDIA_CENTER = {
-  longitude: 78.9629,
-  latitude: 22.5,
-  zoom: 4.5,
+const DELHI_DEFAULT = {
+  longitude: 77.15,
+  latitude: 28.65,
+  zoom: 10,
   pitch: 0,
   bearing: 0,
 };
@@ -49,7 +49,7 @@ export default function AQIMap({
   stations,
   onStationClick,
 }: AQIMapProps) {
-  const [viewState, setViewState] = useState(INDIA_CENTER);
+  const [viewState, setViewState] = useState(DELHI_DEFAULT);
   const [selectedStation, setSelectedStation] =
     useState<StationReading | null>(null);
 
