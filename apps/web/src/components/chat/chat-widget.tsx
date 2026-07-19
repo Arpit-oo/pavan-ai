@@ -44,18 +44,31 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await fetchAPI<{ response: string; agents_used: string[]; elapsed: number }>("/api/v1/agents/ask", {
-        method: "POST",
-        body: JSON.stringify({ query: userMsg.content, city: "Delhi" }),
-      });
+      // Try Next.js API route first (works on Vercel), fall back to backend
+      let response = "";
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userMsg.content }),
+        });
+        const data = await res.json();
+        response = data.response;
+      } catch {
+        const res = await fetchAPI<{ response: string }>("/api/v1/agents/ask", {
+          method: "POST",
+          body: JSON.stringify({ query: userMsg.content, city: "Delhi" }),
+        });
+        response = res.response;
+      }
 
-      setMessages((prev) => [...prev, { role: "assistant", content: res.response, timestamp: new Date() }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: response, timestamp: new Date() }]);
     } catch {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "i'm running in demo mode right now — connect the backend (`python run.py` in apps/api) for live agent analysis. in the meantime, check the dashboard for current readings!",
+          content: "check the dashboard for live aqi data across 105 stations in 57 cities. the map shows everything — zoom into any city for detail.",
           timestamp: new Date(),
         },
       ]);

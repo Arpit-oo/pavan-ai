@@ -9,6 +9,8 @@ const NAV_ITEMS = [
   { href: "/compliance", label: "grap", tone: "var(--entity-poor)" },
   { href: "/alerts", label: "alerts", tone: "var(--entity-alert)" },
   { href: "/agents", label: "agents", tone: "var(--entity-wind)" },
+  { href: "/compare", label: "compare", tone: "var(--entity-severe)" },
+  { href: "/architecture", label: "arch", tone: "var(--entity-charcoal)" },
 ];
 
 export default function NavBar() {
