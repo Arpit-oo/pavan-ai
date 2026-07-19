@@ -230,6 +230,45 @@ export default function AlertsPage() {
                   </div>
                 </div>
               )}
+
+              {/* Notification channels */}
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                {/* Telegram Bot */}
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                  <div className="p-7 min-h-[200px] flex flex-col">
+                    <span className="text-3xl mb-3">🤖</span>
+                    <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>telegram bot</p>
+                    <p className="text-[13px] opacity-70 mt-2 leading-relaxed">get real-time aqi alerts, health advisories, and ask ai questions directly on telegram</p>
+                    <div className="mt-auto pt-4">
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">@pavan_aqi_bot</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Email Alerts */}
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-moderate)", "--bento-fg": "#1a1a18" } as React.CSSProperties}>
+                  <div className="p-7 min-h-[200px] flex flex-col">
+                    <span className="text-3xl mb-3">📧</span>
+                    <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>email notifications</p>
+                    <p className="text-[13px] opacity-70 mt-2 leading-relaxed">automated compliance reports and aqi threshold alerts delivered to your inbox</p>
+                    <div className="mt-auto pt-4">
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">grap + threshold alerts</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                  <div className="p-7 min-h-[200px] flex flex-col">
+                    <span className="text-3xl mb-3">💬</span>
+                    <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>whatsapp alerts</p>
+                    <p className="text-[13px] opacity-70 mt-2 leading-relaxed">ward-level health advisories in 4 languages — hindi, english, tamil, bengali</p>
+                    <div className="mt-auto pt-4">
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">4 languages · ivr ready</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </>
           )}
         </div>
