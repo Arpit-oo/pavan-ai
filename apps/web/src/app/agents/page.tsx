@@ -97,11 +97,11 @@ export default function AgentsPage() {
           {result && (
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
               {/* Run log — wider */}
-              <div className="lg:col-span-3 ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
+              <div className="lg:col-span-3 ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
                 <div className="flex flex-col p-8 min-h-[450px]">
                   <div className="flex items-center justify-between mb-5">
-                    <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-70">execution log</div>
-                    <span className="font-mono text-[11px] tabular-nums opacity-50">{result.elapsed_seconds}s total</span>
+                    <div className="font-mono text-[12px] uppercase tracking-[0.18em] opacity-90">execution log</div>
+                    <span className="font-mono text-[12px] tabular-nums opacity-70">{result.elapsed_seconds}s total</span>
                   </div>
                   <ScrollArea className="flex-1">
                     <div className="space-y-3 pr-4">

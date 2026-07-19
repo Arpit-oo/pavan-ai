@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { href: "/alerts", label: "alerts", tone: "var(--entity-alert)" },
   { href: "/agents", label: "agents", tone: "var(--entity-wind)" },
   { href: "/compare", label: "compare", tone: "var(--entity-severe)" },
-  { href: "/architecture", label: "arch", tone: "var(--entity-charcoal)" },
+  { href: "/architecture", label: "architecture", tone: "var(--entity-forecast)" },
 ];
 
 export default function NavBar() {
@@ -20,17 +20,17 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <div className="flex items-center gap-5">
-          <Link href="/" className="flex items-baseline gap-0.5 text-lg">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-baseline gap-0.5 text-2xl">
             <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
             <span
-              className="inline-block h-[8px] w-[8px] translate-y-[-2px] rounded-full transition-colors duration-500"
+              className="inline-block h-[9px] w-[9px] translate-y-[-2px] rounded-full transition-colors duration-500"
               style={{ background: activeItem.tone }}
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-5">
+          <nav className="hidden md:flex items-center gap-6">
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
               return (
@@ -40,7 +40,7 @@ export default function NavBar() {
                   className="relative flex flex-col items-center gap-0.5"
                 >
                   <span
-                    className={`text-[13px] transition-colors ${
+                    className={`text-[15px] transition-colors ${
                       isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                     }`}
                     style={{ fontVariationSettings: isActive ? "'wght' 620" : "'wght' 440" }}
@@ -49,7 +49,7 @@ export default function NavBar() {
                   </span>
                   {isActive && (
                     <span
-                      className="absolute -bottom-[8px] left-1/2 block h-1.5 w-1.5 -translate-x-1/2 rounded-full"
+                      className="absolute -bottom-[10px] left-1/2 block h-2 w-2 -translate-x-1/2 rounded-full"
                       style={{ background: item.tone }}
                     />
                   )}
@@ -60,10 +60,10 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             {new Date().toLocaleTimeString()}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] bg-secondary px-2.5 py-1 rounded-full">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] bg-secondary px-3 py-1.5 rounded-full">
             all india
           </span>
         </div>

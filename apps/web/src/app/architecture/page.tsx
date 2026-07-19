@@ -29,8 +29,8 @@ const LAYERS = [
   },
   {
     name: "data layer",
-    color: "var(--entity-charcoal)",
-    fg: "var(--entity-charcoal-fg)",
+    color: "var(--entity-wind)",
+    fg: "#0a0a08",
     items: ["supabase (postgres + realtime)", "cpcb 105 stations / 57 cities", "openweathermap api", "gpt-4o-mini (chatbot)"],
   },
 ];
@@ -88,16 +88,16 @@ export default function ArchitecturePage() {
                 className="ru-bento"
                 style={{ "--bento-bg": layer.color, "--bento-fg": layer.fg } as React.CSSProperties}
               >
-                <div className="p-6 flex flex-col md:flex-row md:items-center gap-4">
-                  <div className="md:w-56 shrink-0">
+                <div className="p-8 flex flex-col md:flex-row md:items-center gap-5">
+                  <div className="md:w-64 shrink-0">
                     <Sticker tilt={-2}>layer {i + 1}</Sticker>
-                    <p className="mt-2 text-[16px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>
+                    <p className="mt-3 text-[20px] lowercase" style={{ fontVariationSettings: "'wght' 700" }}>
                       {layer.name}
                     </p>
                   </div>
-                  <div className="flex-1 flex flex-wrap gap-2">
+                  <div className="flex-1 flex flex-wrap gap-2.5">
                     {layer.items.map((item) => (
-                      <span key={item} className="font-mono text-[11px] bg-white/15 rounded-full px-3 py-1.5 lowercase">
+                      <span key={item} className="font-mono text-[12px] bg-white/15 rounded-full px-4 py-2 lowercase">
                         {item}
                       </span>
                     ))}
@@ -148,16 +148,16 @@ export default function ArchitecturePage() {
           </div>
 
           {/* Data flow */}
-          <div className="ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
+          <div className="ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
             <div className="p-8">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-50 mb-6">data flow</div>
+              <div className="font-mono text-[12px] uppercase tracking-[0.18em] opacity-80 mb-6">data flow</div>
               <div className="space-y-3">
                 {DATA_FLOW.map((flow, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <span className="font-mono text-[11px] opacity-60 w-40 text-right shrink-0 lowercase">{flow.from}</span>
-                    <span className="text-[12px] opacity-30">→</span>
-                    <span className="font-mono text-[11px] opacity-60 w-40 shrink-0 lowercase">{flow.to}</span>
-                    <span className="font-mono text-[10px] bg-white/10 rounded-full px-2.5 py-0.5 lowercase">{flow.label}</span>
+                  <div key={i} className="flex items-center gap-4">
+                    <span className="font-mono text-[13px] opacity-80 w-44 text-right shrink-0 lowercase">{flow.from}</span>
+                    <span className="text-[14px] opacity-50">→</span>
+                    <span className="font-mono text-[13px] opacity-80 w-44 shrink-0 lowercase">{flow.to}</span>
+                    <span className="font-mono text-[11px] bg-white/15 rounded-full px-3 py-1 lowercase">{flow.label}</span>
                   </div>
                 ))}
               </div>
