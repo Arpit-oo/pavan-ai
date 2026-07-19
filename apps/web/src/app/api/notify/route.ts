@@ -1,26 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
-const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
-const SMTP_PORT = parseInt(process.env.SMTP_PORT || "587");
 const SMTP_USER = process.env.SMTP_USER || "";
 const SMTP_PASS = process.env.SMTP_PASS || "";
-const NOTIFY_FROM = process.env.NOTIFY_FROM || SMTP_USER;
-
-async function sendEmailViaAPI(to: string, subject: string, html: string) {
-  // Using a simple fetch-based email via external service
-  // For Gmail, we use the nodemailer-compatible approach via API
-  const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: process.env.EMAILJS_SERVICE_ID,
-      template_id: process.env.EMAILJS_TEMPLATE_ID,
-      user_id: process.env.EMAILJS_USER_ID,
-      template_params: { to_email: to, subject, message: html },
-    }),
-  });
-  return response.ok;
-}
 
 function generateAlertEmail(data: {
   city: string;
@@ -50,17 +32,17 @@ function generateAlertEmail(data: {
 
       ${data.recommendations.length > 0 ? `
       <div style="background: white; border-radius: 28px; padding: 32px; margin-bottom: 16px;">
-        <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #6b6a64; margin: 0 0 12px 0;">recommendations</p>
-        ${data.recommendations.map(r => `<p style="font-size: 13px; color: #1a1a18; margin: 0 0 8px 0; padding-left: 12px; border-left: 3px solid #fb923c;">→ ${r.toLowerCase()}</p>`).join('')}
+        <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #6b6a64; margin: 0 0 12px 0;">enforcement recommendations</p>
+        ${data.recommendations.map(r => `<p style="font-size: 13px; color: #1a1a18; margin: 0 0 8px 0; padding-left: 12px; border-left: 3px solid #fb923c;">${r.toLowerCase()}</p>`).join('')}
       </div>
       ` : ''}
 
       <div style="text-align: center; padding: 16px;">
-        <a href="https://web-chi-five-95.vercel.app" style="display: inline-block; background: #1a1a18; color: #f5f0e6; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-size: 13px;">open pavan dashboard →</a>
+        <a href="https://web-chi-five-95.vercel.app" style="display: inline-block; background: #1a1a18; color: #f5f0e6; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-size: 13px;">open pavan dashboard</a>
       </div>
 
       <p style="text-align: center; font-size: 10px; color: #6b6a64; margin-top: 16px;">
-        powered by pavan ai · 105 stations · 57 cities · all india
+        powered by pavan ai · 105 stations · 57 cities · et ai hackathon 2026
       </p>
     </div>
   `;
@@ -81,18 +63,41 @@ export async function POST(req: NextRequest) {
         recommendations: recommendations || [],
       });
 
-      // Store as a generated email for demo
+      const subject = `Pavan AQI Alert — ${city || "Delhi"} (AQI ${aqi || 185})`;
+      const recipient = to || SMTP_USER;
+
+      if (SMTP_USER && SMTP_PASS) {
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: { user: SMTP_USER, pass: SMTP_PASS },
+        });
+
+        await transporter.sendMail({
+          from: `"Pavan AI" <${SMTP_USER}>`,
+          to: recipient,
+          subject,
+          html,
+        });
+
+        return NextResponse.json({
+          success: true,
+          sent: true,
+          message: `Alert email sent to ${recipient}`,
+          subject,
+        });
+      }
+
       return NextResponse.json({
         success: true,
-        message: "Alert email generated",
+        sent: false,
+        message: "Email generated but SMTP not configured",
         preview_html: html,
-        to: to || "demo@example.com",
-        subject: `🌤️ Pavan AQI Alert — ${city || "Delhi"} (AQI ${aqi || 185})`,
+        subject,
       });
     }
 
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
-  } catch {
-    return NextResponse.json({ error: "Failed to process" }, { status: 500 });
+  } catch (e) {
+    return NextResponse.json({ error: "Failed: " + String(e) }, { status: 500 });
   }
 }
