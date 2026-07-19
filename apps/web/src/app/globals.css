@@ -234,6 +234,18 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
 }
 .ru-pill:hover { opacity: 0.92; transform: translateY(-1px); }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .ru-bento { border-radius: 20px; }
+  body { font-size: 14px; }
+  h1 { font-size: clamp(1.5rem, 8vw, 2.5rem) !important; }
+}
+
+/* Mobile nav scroll */
+@media (max-width: 768px) {
+  nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
 .fade-edge-bottom {
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);

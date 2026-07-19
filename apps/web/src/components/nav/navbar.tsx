@@ -30,7 +30,7 @@ export default function NavBar() {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="flex items-center gap-4 md:gap-6 overflow-x-auto">
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
               return (

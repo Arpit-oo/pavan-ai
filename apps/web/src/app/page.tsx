@@ -46,7 +46,7 @@ export default function Dashboard() {
       <main className="flex-1 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-8 sm:px-6 h-full flex flex-col gap-4">
           <StatsBar stations={stations} city="All India" />
-          <div className="flex-1 min-h-0 flex gap-4">
+          <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4">
             <div className="flex-1 flex flex-col gap-4">
               <div className="flex-1 min-h-0">
                 {loading ? (
@@ -59,7 +59,7 @@ export default function Dashboard() {
               </div>
               <ForecastChart />
             </div>
-            <div className="w-[340px] shrink-0 hidden lg:block">
+            <div className="w-full lg:w-[340px] shrink-0">
               <AgentPanel />
             </div>
           </div>

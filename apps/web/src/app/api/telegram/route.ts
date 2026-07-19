@@ -10,7 +10,7 @@ WHO PM2.5 limit: 15 ug/m3. Delhi averages 80-120.
 GRAP stages: I (>201), II (>301), III (>401), IV (>451).
 Sources: vehicular 35%, industrial 25%, construction 15%, burning 15%.
 Burning ban = highest impact intervention (~20% PM2.5 reduction).
-Dashboard: https://web-chi-five-95.vercel.app`;
+Dashboard: https://pavan-aqi.vercel.app`;
 
 async function sendMessage(chatId: number, text: string) {
   await fetch(`${TELEGRAM_API}/sendMessage`, {
@@ -27,7 +27,7 @@ async function sendMessage(chatId: number, text: string) {
 async function getAIResponse(message: string): Promise<string> {
   const openaiKey = process.env.OPENAI_API_KEY;
   if (!openaiKey) {
-    return "🌤️ *Pavan Bot*\n\nI'm running without AI right now. Check the dashboard for live data:\nhttps://web-chi-five-95.vercel.app";
+    return "🌤️ *Pavan Bot*\n\nI'm running without AI right now. Check the dashboard for live data:\nhttps://pavan-aqi.vercel.app";
   }
 
   try {
@@ -50,7 +50,7 @@ async function getAIResponse(message: string): Promise<string> {
     const data = await res.json();
     return data.choices?.[0]?.message?.content || "Check the dashboard for current data.";
   } catch {
-    return "Having trouble connecting. Check the dashboard:\nhttps://web-chi-five-95.vercel.app";
+    return "Having trouble connecting. Check the dashboard:\nhttps://pavan-aqi.vercel.app";
   }
 }
 
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
         "🟢 *South India:* AQI 30-90 (Good)\n" +
         "🟢 *Hill Stations:* AQI 20-50 (Good)\n" +
         "🟠 *East India:* AQI 80-180 (Moderate)\n\n" +
-        "📱 Full dashboard: https://web-chi-five-95.vercel.app"
+        "📱 Full dashboard: https://pavan-aqi.vercel.app"
       );
       return NextResponse.json({ ok: true });
     }
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
         "🟢 Best: Lodhi Road (108)\n\n" +
         "⚠️ Dominant source: *Vehicular (35%)*\n" +
         "🌬️ Wind: moderate dispersion\n\n" +
-        "📱 Live map: https://web-chi-five-95.vercel.app"
+        "📱 Live map: https://pavan-aqi.vercel.app"
       );
       return NextResponse.json({ ok: true });
     }
@@ -118,7 +118,7 @@ export async function POST(req: NextRequest) {
         "*South:* Bangalore, Chennai, Hyderabad, Kochi, Thiruvananthapuram, Coimbatore, Mangalore, Mysore\n\n" +
         "*East:* Kolkata, Patna, Bhubaneswar, Ranchi\n\n" +
         "*NE:* Guwahati, Imphal, Shillong, Gangtok, Itanagar\n\n" +
-        "📱 Compare cities: https://web-chi-five-95.vercel.app/compare"
+        "📱 Compare cities: https://pavan-aqi.vercel.app/compare"
       );
       return NextResponse.json({ ok: true });
     }
@@ -133,13 +133,13 @@ export async function POST(req: NextRequest) {
         "• Run air purifiers indoors\n\n" +
         "📊 Est. +142 excess hospital visits in Delhi (24h)\n" +
         "🏫 4 schools in affected zones\n\n" +
-        "📱 Full alerts: https://web-chi-five-95.vercel.app/alerts"
+        "📱 Full alerts: https://pavan-aqi.vercel.app/alerts"
       );
       return NextResponse.json({ ok: true });
     }
 
     if (text === "/dashboard") {
-      await sendMessage(chatId, "📱 *Pavan Dashboard*\nhttps://web-chi-five-95.vercel.app\n\n🗺️ Live map with 105 stations across 57 cities");
+      await sendMessage(chatId, "📱 *Pavan Dashboard*\nhttps://pavan-aqi.vercel.app\n\n🗺️ Live map with 105 stations across 57 cities");
       return NextResponse.json({ ok: true });
     }
 
