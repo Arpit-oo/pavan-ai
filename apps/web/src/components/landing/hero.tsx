@@ -148,15 +148,18 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Giant wordmark bleeding off the bottom */}
-        <motion.div
-          aria-hidden
-          className="pointer-events-none select-none text-center font-display"
-          style={{ fontSize: "min(27vw, 30rem)", lineHeight: 0.78, letterSpacing: "-0.04em", color: CREAM, marginBottom: "-0.16em" }}
-          {...(reduce ? {} : { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.9, delay: 0.42, ease: EASE } })}
-        >
-          pavan
-        </motion.div>
+        {/* Giant wordmark — full-width, sized to sit fully inside the viewport
+            (no edge or baseline clipping) as a masthead at the hero's foot. */}
+        <div className="pointer-events-none relative left-1/2 w-screen -translate-x-1/2 pb-[1.5vh]">
+          <motion.div
+            aria-hidden
+            className="select-none text-center font-display leading-[0.9]"
+            style={{ fontSize: "min(23vw, 16rem)", letterSpacing: "-0.05em", color: CREAM }}
+            {...(reduce ? {} : { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.9, delay: 0.42, ease: EASE } })}
+          >
+            pavan<span style={{ color: ACCENT }}>.</span>
+          </motion.div>
+        </div>
       </motion.div>
     </header>
   );
