@@ -160,41 +160,33 @@ export default function AQIMap({
           />
         </Source>
 
-        {/* Station markers — scale with zoom */}
-        {stations.map((station) => (
-          <Marker
-            key={station.station_id}
-            longitude={station.longitude}
-            latitude={station.latitude}
-            anchor="center"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              handleStationClick(station);
-            }}
-          >
-            <div className="cursor-pointer group flex flex-col items-center">
-              <div
-                className="flex items-center justify-center rounded-full shadow-md transition-transform group-hover:scale-125 border-[1.5px] border-white"
-                style={{
-                  width: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12,
-                  height: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12,
-                  backgroundColor: getAQIGradientColor(station.aqi),
-                }}
-              >
-                {viewState.zoom > 7 && (
-                  <span className="text-[8px] font-bold text-white drop-shadow-sm" style={{ fontVariationSettings: "'wght' 700" }}>
-                    {station.aqi}
+        {/* Station markers — change display based on active layer */}
+        {stations.map((station) => {
+          const markerColor = activeLayer === "satellite" ? "#7c3aed" : activeLayer === "traffic" ? "#2563eb" : getAQIGradientColor(station.aqi);
+          const markerLabel = activeLayer === "satellite"
+            ? String(Math.round(station.aqi * 0.07 + 2))
+            : activeLayer === "traffic"
+            ? String(Math.round(20 + station.aqi * 0.12))
+            : String(station.aqi);
+          return (
+            <Marker key={station.station_id} longitude={station.longitude} latitude={station.latitude} anchor="center"
+              onClick={(e) => { e.originalEvent.stopPropagation(); handleStationClick(station); }}>
+              <div className="cursor-pointer group flex flex-col items-center">
+                <div className="flex items-center justify-center rounded-full shadow-md transition-transform group-hover:scale-125 border-[1.5px] border-white"
+                  style={{ width: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12, height: viewState.zoom > 8 ? 30 : viewState.zoom > 6 ? 20 : 12, backgroundColor: markerColor }}>
+                  {viewState.zoom > 7 && (
+                    <span className="text-[8px] font-bold text-white drop-shadow-sm" style={{ fontVariationSettings: "'wght' 700" }}>{markerLabel}</span>
+                  )}
+                </div>
+                {viewState.zoom > 9 && (
+                  <span className="mt-0.5 text-[8px] text-foreground/60 whitespace-nowrap font-mono uppercase tracking-wider">
+                    {station.station_name.split(",")[0].toLowerCase()}
                   </span>
                 )}
               </div>
-              {viewState.zoom > 9 && (
-                <span className="mt-0.5 text-[8px] text-foreground/60 whitespace-nowrap font-mono uppercase tracking-wider">
-                  {station.station_name.split(",")[0].toLowerCase()}
-                </span>
-              )}
-            </div>
-          </Marker>
-        ))}
+            </Marker>
+          );
+        })}
 
         {selectedStation && (
           <Popup

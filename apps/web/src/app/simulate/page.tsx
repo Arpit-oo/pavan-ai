@@ -87,8 +87,13 @@ export default function SimulatePage() {
       .then((res) => setTypes(res.interventions)).catch(() => {});
   }, []);
 
+  const [simStep, setSimStep] = useState(0);
+
   const runSimulation = async (type: string) => {
-    setSelected(type); setLoading(true);
+    setSelected(type); setLoading(true); setSimStep(0);
+    setSimStep(1); await new Promise(r => setTimeout(r, 500));
+    setSimStep(2); await new Promise(r => setTimeout(r, 400));
+    setSimStep(3); await new Promise(r => setTimeout(r, 300));
     try { setResult(await fetchAPI<SimResult>("/api/v1/simulate/run", { method: "POST", body: JSON.stringify({ intervention_type: type, city: "Delhi" }) })); }
     catch {
       const reductions: Record<string, number> = { truck_ban: 7.9, construction_halt: 3.1, industrial_shutdown: 10.4, odd_even: 5.1, burning_ban: 14.6 };
@@ -104,11 +109,16 @@ export default function SimulatePage() {
         ],
         implementation: { time_to_effect: types.find(t => t.type === type)?.time_to_effect || "4-6 hours", affected_radius_km: 15, precedent: "Based on Delhi pollution studies and GRAP implementation data from 2023-2024." },
       });
-    } finally { setLoading(false); }
+    } finally { setLoading(false); setSimStep(0); }
   };
 
+  const [compStep, setCompStep] = useState(0);
+
   const runComparison = async () => {
-    setCompareLoading(true);
+    setCompareLoading(true); setCompStep(0);
+    setCompStep(1); await new Promise(r => setTimeout(r, 600));
+    setCompStep(2); await new Promise(r => setTimeout(r, 500));
+    setCompStep(3); await new Promise(r => setTimeout(r, 400));
     try { setComparison(await fetchAPI<CompareResult>("/api/v1/simulate/compare?city=Delhi")); }
     catch {
       setComparison({
@@ -121,7 +131,7 @@ export default function SimulatePage() {
         ],
         recommended: "burning_ban",
       });
-    } finally { setCompareLoading(false); }
+    } finally { setCompareLoading(false); setCompStep(0); }
   };
 
   return (
@@ -129,15 +139,20 @@ export default function SimulatePage() {
       <NavBar />
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-8 pb-20 sm:px-6 space-y-8">
-          <header>
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3">counterfactual analysis</div>
-            <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
-              what happens if we...
-            </h1>
-            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
-              select an intervention to model its projected aqi impact across delhi stations
-            </p>
-          </header>
+          <div className="flex items-end justify-between flex-wrap gap-4">
+            <header>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3">counterfactual analysis</div>
+              <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
+                what happens if we...
+              </h1>
+              <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
+                select an intervention or compare all 5 side by side
+              </p>
+            </header>
+            <button onClick={runComparison} disabled={compareLoading} className="ru-pill !text-[16px] !px-8 !py-4 shrink-0">
+              {compareLoading ? "comparing..." : "compare all interventions →"}
+            </button>
+          </div>
 
           {/* 3×2 bento grid — varied heights */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -179,8 +194,28 @@ export default function SimulatePage() {
           </div>
 
           {loading && (
-            <div className="flex items-center justify-center py-16">
-              <div className="w-8 h-8 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin" />
+            <div className="ru-bento" style={{ "--bento-bg": "var(--card)" } as React.CSSProperties}>
+              <div className="p-8">
+                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-5">simulating intervention</div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${simStep >= 1 ? "bg-[var(--entity-good)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${simStep >= 1 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: simStep >= 1 ? "'wght' 560" : "'wght' 440"}}>loading station data + source attribution...</span></div>
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${simStep >= 2 ? "bg-[var(--entity-forecast)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${simStep >= 2 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: simStep >= 2 ? "'wght' 560" : "'wght' 440"}}>applying empirical reduction factors per station...</span></div>
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${simStep >= 3 ? "bg-[var(--entity-moderate)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${simStep >= 3 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: simStep >= 3 ? "'wght' 560" : "'wght' 440"}}>computing before/after aqi impact...</span></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {compareLoading && (
+            <div className="ru-bento" style={{ "--bento-bg": "var(--card)" } as React.CSSProperties}>
+              <div className="p-8">
+                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-5">comparing all interventions</div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${compStep >= 1 ? "bg-[var(--entity-good)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${compStep >= 1 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: compStep >= 1 ? "'wght' 560" : "'wght' 440"}}>running 5 intervention simulations...</span></div>
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${compStep >= 2 ? "bg-[var(--entity-forecast)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${compStep >= 2 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: compStep >= 2 ? "'wght' 560" : "'wght' 440"}}>ranking by aqi reduction impact...</span></div>
+                  <div className="flex items-center gap-3"><div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${compStep >= 3 ? "bg-[var(--entity-moderate)] scale-125" : "bg-muted"}`}/><span className={`text-[14px] ${compStep >= 3 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: compStep >= 3 ? "'wght' 560" : "'wght' 440"}}>generating recommendation...</span></div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -250,12 +285,8 @@ export default function SimulatePage() {
             </div>
           )}
 
-          {/* Compare all */}
-          <div className="pt-4">
-            <button onClick={runComparison} disabled={compareLoading} className="ru-pill !text-[16px] !px-8 !py-4">
-              {compareLoading ? "comparing..." : "compare all interventions →"}
-            </button>
-
+          {/* Compare results */}
+          <div>
             {comparison && (
               <div className="mt-6 ru-bento">
                 <div className="p-8">
