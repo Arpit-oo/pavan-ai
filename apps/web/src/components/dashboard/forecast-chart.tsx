@@ -147,7 +147,7 @@ export default function ForecastChart() {
           <div className="w-5 h-5 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : chartData.length ? (
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={280}>
           <AreaChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="aqiGrad" x1="0" y1="0" x2="0" y2="1">
