@@ -117,7 +117,7 @@ export default function ChatWidget() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[320px]">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto p-5 space-y-4 max-h-[420px]">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div
@@ -126,12 +126,13 @@ export default function ChatWidget() {
                       ? "bg-foreground text-background rounded-br-md"
                       : "bg-secondary text-foreground rounded-bl-md"
                   }`}
+                  style={{ fontSize: "15px", lineHeight: "1.6" }}
                 >
                   {msg.content.split("\n").map((line, j) => (
                     <span key={j}>
                       {line.split("**").map((part, k) =>
                         k % 2 === 1 ? (
-                          <strong key={k} style={{ fontVariationSettings: "'wght' 640" }}>{part}</strong>
+                          <strong key={k} style={{ fontVariationSettings: "'wght' 680" }}>{part}</strong>
                         ) : (
                           <span key={k}>{part}</span>
                         )

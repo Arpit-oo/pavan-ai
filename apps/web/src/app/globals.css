@@ -155,10 +155,10 @@
 }
 
 body {
-  font-size: 15.5px;
-  line-height: 1.55;
-  font-weight: 440;
-  font-variation-settings: "wght" 440, "wdth" 96;
+  font-size: 16.5px;
+  line-height: 1.6;
+  font-weight: 460;
+  font-variation-settings: "wght" 460, "wdth" 96;
   letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   position: relative;
@@ -237,9 +237,12 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
 /* Mobile responsive */
 @media (max-width: 768px) {
   .ru-bento { border-radius: 20px; }
-  body { font-size: 14px; }
+  body { font-size: 15px; }
   h1 { font-size: clamp(1.5rem, 8vw, 2.5rem) !important; }
 }
+
+/* Global readability boost */
+.ru-bento p, .ru-bento span, .ru-bento div { font-variation-settings: "wght" 480, "wdth" 96; }
 
 /* Mobile nav scroll */
 @media (max-width: 768px) {
@@ -348,8 +351,8 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
   bottom: 90px;
   right: 24px;
   z-index: 50;
-  width: 380px;
-  max-height: 500px;
+  width: 440px;
+  max-height: 600px;
   border-radius: 28px;
   background: var(--card);
   color: var(--card-foreground);
