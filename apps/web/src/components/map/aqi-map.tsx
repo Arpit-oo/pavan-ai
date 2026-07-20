@@ -90,18 +90,36 @@ export default function AQIMap({
       >
         <NavigationControl position="top-right" />
 
-        {/* AQI layers */}
+        {/* Layer-dependent visualization */}
         <Source id="aqi-zones" type="geojson" data={geojson}>
-          {/* Subtle heatmap overlay — light, readable */}
+          {/* Heatmap — changes color based on active layer */}
           <Layer
             id="aqi-heatmap"
             type="heatmap"
             paint={{
               "heatmap-weight": ["interpolate", ["linear"], ["get", "aqi"], 0, 0.1, 200, 0.5, 500, 1],
-              "heatmap-intensity": 0.6,
+              "heatmap-intensity": activeLayer === "aqi" ? 0.6 : activeLayer === "satellite" ? 0.8 : 0.5,
               "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 4, 25, 8, 40, 12, 60],
-              "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 4, 0.25, 10, 0.15, 14, 0.05],
-              "heatmap-color": [
+              "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 4, 0.3, 10, 0.2, 14, 0.08],
+              "heatmap-color": activeLayer === "satellite" ? [
+                "interpolate", ["linear"], ["heatmap-density"],
+                0, "rgba(0,0,0,0)",
+                0.15, "rgba(255,255,200,0.3)",
+                0.3, "rgba(255,200,50,0.4)",
+                0.5, "rgba(200,100,0,0.5)",
+                0.7, "rgba(180,0,0,0.5)",
+                0.9, "rgba(120,0,80,0.5)",
+                1, "rgba(80,0,60,0.6)",
+              ] : activeLayer === "traffic" ? [
+                "interpolate", ["linear"], ["heatmap-density"],
+                0, "rgba(0,0,0,0)",
+                0.15, "rgba(100,200,255,0.2)",
+                0.3, "rgba(50,150,255,0.3)",
+                0.5, "rgba(30,100,220,0.4)",
+                0.7, "rgba(20,60,180,0.5)",
+                0.9, "rgba(100,0,150,0.5)",
+                1, "rgba(60,0,100,0.6)",
+              ] : [
                 "interpolate", ["linear"], ["heatmap-density"],
                 0, "rgba(0,0,0,0)",
                 0.1, "rgba(0,228,0,0.3)",
@@ -113,7 +131,7 @@ export default function AQIMap({
               ],
             }}
           />
-          {/* Soft glow per station */}
+          {/* Glow per station — color changes with layer */}
           <Layer
             id="aqi-glow"
             type="circle"
@@ -122,8 +140,8 @@ export default function AQIMap({
                 4, ["interpolate", ["linear"], ["get", "aqi"], 0, 4, 200, 8, 500, 14],
                 10, ["interpolate", ["linear"], ["get", "aqi"], 0, 20, 200, 35, 500, 55],
               ],
-              "circle-color": ["get", "color"],
-              "circle-opacity": 0.12,
+              "circle-color": activeLayer === "satellite" ? "#8b5cf6" : activeLayer === "traffic" ? "#2563eb" : ["get", "color"],
+              "circle-opacity": activeLayer === "aqi" ? 0.12 : 0.18,
               "circle-blur": 0.8,
             }}
           />
@@ -132,12 +150,8 @@ export default function AQIMap({
             id="aqi-core"
             type="circle"
             paint={{
-              "circle-radius": ["interpolate", ["linear"], ["zoom"],
-                4, 3,
-                8, 6,
-                12, 10,
-              ],
-              "circle-color": ["get", "color"],
+              "circle-radius": ["interpolate", ["linear"], ["zoom"], 4, 3, 8, 6, 12, 10],
+              "circle-color": activeLayer === "satellite" ? "#7c3aed" : activeLayer === "traffic" ? "#2563eb" : ["get", "color"],
               "circle-opacity": 0.7,
               "circle-stroke-width": 1.5,
               "circle-stroke-color": "#ffffff",

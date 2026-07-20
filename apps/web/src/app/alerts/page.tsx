@@ -244,24 +244,24 @@ export default function AlertsPage() {
                   </div>
                 </div>
 
-                <div className="ru-bento" style={{ "--bento-bg": "var(--card)", "--bento-fg": "var(--fg)" } as React.CSSProperties}>
-                  <div className="p-7 min-h-[200px] flex flex-col" style={{ borderLeft: "4px solid var(--entity-moderate)" }}>
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-moderate)", "--bento-fg": "#1a1a18" } as React.CSSProperties}>
+                  <div className="p-7 min-h-[200px] flex flex-col">
                     <span className="text-3xl mb-3">📧</span>
                     <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>email notifications</p>
-                    <p className="text-[14px] text-muted-foreground mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 480" }}>automated compliance reports and aqi threshold alerts delivered to your inbox via gmail</p>
+                    <p className="text-[14px] opacity-75 mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 500" }}>automated grap compliance reports and aqi threshold alerts delivered to your inbox via gmail smtp with branded html design</p>
                     <div className="mt-auto pt-4">
-                      <span className="font-mono text-[10px] uppercase tracking-wider bg-secondary rounded-full px-3 py-1.5">grap + threshold alerts</span>
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">grap + threshold alerts</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="ru-bento" style={{ "--bento-bg": "var(--card)", "--bento-fg": "var(--fg)" } as React.CSSProperties}>
-                  <div className="p-7 min-h-[200px] flex flex-col" style={{ borderLeft: "4px solid var(--entity-good)" }}>
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#f0fdf4" } as React.CSSProperties}>
+                  <div className="p-7 min-h-[200px] flex flex-col">
                     <span className="text-3xl mb-3">💬</span>
                     <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>whatsapp alerts</p>
-                    <p className="text-[14px] text-muted-foreground mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 480" }}>ward-level health advisories in 4 languages — hindi, english, tamil, bengali</p>
+                    <p className="text-[14px] opacity-80 mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 500" }}>pre-formatted ward-level health advisories ready for whatsapp broadcast. 4 languages — hindi, english, tamil, bengali. includes aqi, station data, and actionable health recommendations</p>
                     <div className="mt-auto pt-4">
-                      <span className="font-mono text-[10px] uppercase tracking-wider bg-secondary rounded-full px-3 py-1.5">4 languages · ivr ready</span>
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">4 languages · broadcast ready</span>
                     </div>
                   </div>
                 </div>

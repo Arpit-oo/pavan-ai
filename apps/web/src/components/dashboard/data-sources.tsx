@@ -11,11 +11,11 @@ const SOURCES = [
 export default function DataSources() {
   return (
     <div className="ru-bento">
-      <div className="p-5">
+      <div className="p-5 max-h-[240px] overflow-y-auto">
         <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-3">
           data sources · 5 active
         </div>
-        <div className="space-y-2">
+        <div className="space-y-3">
           {SOURCES.map((s) => (
             <div key={s.name} className="flex items-center gap-3">
               <span className="text-lg shrink-0">{s.icon}</span>
