@@ -69,7 +69,7 @@ export default function NavBar() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-[52px] z-40 bg-background/95 backdrop-blur-xl">
+        <div className="md:hidden fixed inset-0 top-[52px] z-40 bg-background backdrop-blur-none" style={{background: "var(--background)"}}>
           <nav className="flex flex-col p-6 gap-1">
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
