@@ -240,17 +240,21 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
   body { font-size: 14.5px; }
   h1 { font-size: clamp(1.4rem, 7vw, 2.2rem) !important; }
   h2 { font-size: clamp(1.2rem, 5vw, 1.6rem) !important; }
-  .font-display { font-size: clamp(36px, 10vw, 56px) !important; }
-  .ru-pill { padding: 8px 16px !important; font-size: 13px !important; }
-  .chat-panel { width: calc(100vw - 32px) !important; right: 16px !important; bottom: 80px !important; max-height: 70vh !important; }
-  .chat-fab { width: 48px !important; height: 48px !important; bottom: 16px !important; right: 16px !important; }
-  nav { white-space: nowrap; padding-bottom: 4px; }
+  .font-display { font-size: clamp(32px, 9vw, 48px) !important; }
+  .big { font-size: clamp(32px, 9vw, 48px) !important; }
+  .ru-pill { padding: 8px 14px !important; font-size: 12px !important; min-height: 36px !important; min-width: 36px !important; }
+  .chat-panel { width: calc(100vw - 24px) !important; right: 12px !important; bottom: 72px !important; max-height: 75vh !important; }
+  .chat-fab { width: 44px !important; height: 44px !important; bottom: 12px !important; right: 12px !important; }
+  .grid { grid-template-columns: 1fr !important; }
+  .g2, .g3, .g4, .g6 { grid-template-columns: 1fr !important; }
+  .tile, .t { padding: 20px !important; }
   nav a { flex-shrink: 0; }
 }
 
 @media (max-width: 480px) {
-  .ru-bento { border-radius: 14px; }
+  .ru-bento { border-radius: 12px; }
   body { font-size: 14px; }
+  .tile, .t { padding: 16px !important; }
 }
 
 /* Global readability boost */

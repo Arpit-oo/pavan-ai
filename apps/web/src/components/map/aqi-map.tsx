@@ -206,7 +206,7 @@ export default function AQIMap({
       <AQILegend />
 
       {/* Layer toggle + station count */}
-      <div className="absolute top-4 left-4 flex flex-col gap-2">
+      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-col gap-1.5 sm:gap-2 z-10">
         <div className="bg-card/90 backdrop-blur rounded-2xl px-3 py-2 shadow-sm border border-border">
           <div className="flex gap-1.5">
             {([["aqi", "📡 AQI"], ["satellite", "🛰️ NO2"], ["traffic", "🚗 Traffic"]] as [MapLayer, string][]).map(([key, label]) => (

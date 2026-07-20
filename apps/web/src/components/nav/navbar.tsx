@@ -21,17 +21,22 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-baseline gap-0.5 text-2xl">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 py-3 sm:py-5">
+        <div className="flex items-center justify-between mb-2 sm:mb-0">
+          <Link href="/" className="flex items-baseline gap-0.5 text-xl sm:text-2xl shrink-0">
             <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
             <span
-              className="inline-block h-[9px] w-[9px] translate-y-[-2px] rounded-full transition-colors duration-500"
+              className="inline-block h-[7px] w-[7px] sm:h-[9px] sm:w-[9px] translate-y-[-2px] rounded-full transition-colors duration-500"
               style={{ background: activeItem.tone }}
             />
           </Link>
-
-          <nav className="flex items-center gap-3 md:gap-6 overflow-x-auto" style={{scrollbarWidth:"none"}}>
+          <div className="flex items-center gap-2 sm:hidden">
+            <button onClick={() => document.documentElement.classList.toggle("dark")} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[12px]" aria-label="Toggle theme">🌓</button>
+            <span className="font-mono text-[9px] uppercase tracking-wider bg-secondary px-2 py-1 rounded-full">india</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <nav className="flex items-center gap-2 sm:gap-5 overflow-x-auto pb-1" style={{scrollbarWidth:"none"}}>
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
               return (
@@ -41,7 +46,7 @@ export default function NavBar() {
                   className="relative flex flex-col items-center gap-0.5"
                 >
                   <span
-                    className={`text-[15px] transition-colors ${
+                    className={`text-[12px] sm:text-[15px] transition-colors whitespace-nowrap ${
                       isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                     }`}
                     style={{ fontVariationSettings: isActive ? "'wght' 620" : "'wght' 440" }}
@@ -58,36 +63,12 @@ export default function NavBar() {
               );
             })}
           </nav>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => document.documentElement.classList.toggle("dark")}
-            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[14px] hover:bg-accent transition-colors"
-            aria-label="Toggle theme"
-            title="Toggle dark/light mode"
-          >
-            🌓
-          </button>
-          <button
-            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.min(130, cur + 5) + "%"; }}
-            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[11px] hover:bg-accent transition-colors font-mono"
-            aria-label="Increase text size"
-            title="Increase text size"
-          >
-            A+
-          </button>
-          <button
-            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.max(85, cur - 5) + "%"; }}
-            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[11px] hover:bg-accent transition-colors font-mono"
-            aria-label="Decrease text size"
-            title="Decrease text size"
-          >
-            A-
-          </button>
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] bg-secondary px-3 py-1.5 rounded-full">
-            all india
-          </span>
+          <div className="hidden sm:flex items-center gap-2 shrink-0 ml-4">
+            <button onClick={() => document.documentElement.classList.toggle("dark")} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors" aria-label="Toggle theme">🌓</button>
+            <button onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.min(130, cur + 5) + "%"; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[10px] hover:bg-accent transition-colors font-mono" aria-label="Increase text">A+</button>
+            <button onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.max(85, cur - 5) + "%"; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[10px] hover:bg-accent transition-colors font-mono" aria-label="Decrease text">A-</button>
+            <span className="font-mono text-[10px] uppercase tracking-wider bg-secondary px-2.5 py-1 rounded-full">india</span>
+          </div>
         </div>
       </div>
       <div
