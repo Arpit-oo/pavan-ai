@@ -22,7 +22,7 @@ export default function NavBar() {
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6">
         <div className="flex items-center gap-6">
-          <Link href="/dashboard" className="flex items-baseline gap-0.5 text-2xl">
+          <Link href="/" className="flex items-baseline gap-0.5 text-2xl">
             <span style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan</span>
             <span
               className="inline-block h-[9px] w-[9px] translate-y-[-2px] rounded-full transition-colors duration-500"
