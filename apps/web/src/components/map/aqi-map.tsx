@@ -45,6 +45,8 @@ function stationToGeoJSON(stations: StationReading[]) {
   };
 }
 
+type MapLayer = "aqi" | "satellite" | "traffic";
+
 export default function AQIMap({
   stations,
   onStationClick,
@@ -52,6 +54,7 @@ export default function AQIMap({
   const [viewState, setViewState] = useState(DELHI_DEFAULT);
   const [selectedStation, setSelectedStation] =
     useState<StationReading | null>(null);
+  const [activeLayer, setActiveLayer] = useState<MapLayer>("aqi");
 
   const handleStationClick = useCallback(
     (station: StationReading) => {
@@ -196,11 +199,28 @@ export default function AQIMap({
 
       <AQILegend />
 
-      {/* Station count badge */}
-      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur rounded-full px-3 py-1.5 shadow-sm border border-border">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-          {stations.length} stations · {new Set(stations.map(s => (s as StationReading & {city?: string}).city).filter(Boolean)).size || 1} cities · all india
-        </span>
+      {/* Layer toggle + station count */}
+      <div className="absolute top-4 left-4 flex flex-col gap-2">
+        <div className="bg-card/90 backdrop-blur rounded-2xl px-3 py-2 shadow-sm border border-border">
+          <div className="flex gap-1.5">
+            {([["aqi", "📡 AQI"], ["satellite", "🛰️ NO2"], ["traffic", "🚗 Traffic"]] as [MapLayer, string][]).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setActiveLayer(key)}
+                className={`px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider transition-all ${
+                  activeLayer === key ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="bg-card/90 backdrop-blur rounded-full px-3 py-1.5 shadow-sm border border-border">
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            {stations.length} stations · 5 data sources · all india
+          </span>
+        </div>
       </div>
     </div>
   );

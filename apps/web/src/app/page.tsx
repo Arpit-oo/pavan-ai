@@ -6,7 +6,7 @@ import Image from "next/image";
 const FEATURES = [
   {
     icon: "🗺️", title: "real-time aqi dashboard", color: "var(--entity-moderate)",
-    desc: "live air quality data from 105 cpcb monitoring stations across 57 indian cities. interactive map with station-level readings, pm2.5, pm10, and 6 pollutant parameters updated every 15 minutes.",
+    desc: "live air quality data from 105 cpcb stations across 57 cities, fused with sentinel-5p satellite no2/so2 data, modis fire detection, and traffic congestion feeds. 5 data sources, one unified view.",
   },
   {
     icon: "🧪", title: "intervention simulator", color: "var(--entity-forecast)",

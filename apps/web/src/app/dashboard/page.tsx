@@ -7,6 +7,7 @@ import { MOCK_STATIONS } from "@/lib/mock-data";
 import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";
 import ForecastChart from "@/components/dashboard/forecast-chart";
+import DataSources from "@/components/dashboard/data-sources";
 import NavBar from "@/components/nav/navbar";
 
 const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
@@ -59,8 +60,9 @@ export default function Dashboard() {
               </div>
               <ForecastChart />
             </div>
-            <div className="w-full lg:w-[340px] shrink-0">
+            <div className="w-full lg:w-[340px] shrink-0 flex flex-col gap-4">
               <AgentPanel />
+              <DataSources />
             </div>
           </div>
         </div>

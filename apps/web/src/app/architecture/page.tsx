@@ -31,7 +31,7 @@ const LAYERS = [
     name: "data layer",
     color: "var(--entity-wind)",
     fg: "#0a0a08",
-    items: ["supabase (postgres + realtime)", "cpcb 105 stations / 57 cities", "openweathermap api", "gpt-4o-mini (chatbot)"],
+    items: ["supabase (postgres + realtime)", "cpcb 105 stations / 57 cities", "openweathermap api", "sentinel-5p (no2/so2)", "modis-viirs (fire detection)", "traffic mobility (congestion)", "gpt-4o-mini (chatbot)"],
   },
 ];
 
@@ -45,14 +45,17 @@ const AGENTS = [
 ];
 
 const DATA_FLOW = [
-  { from: "cpcb api", to: "sensor agent", label: "105 stations" },
-  { from: "openweathermap", to: "weather agent", label: "wind, temp, humidity" },
-  { from: "sensor + weather", to: "anomaly agent", label: "readings + wind" },
-  { from: "sensor + weather", to: "attribution agent", label: "readings + wind direction" },
+  { from: "cpcb api", to: "sensor agent", label: "105 stations, 6 pollutants" },
+  { from: "openweathermap", to: "weather agent", label: "wind, temp, humidity, forecast" },
+  { from: "sentinel-5p", to: "orchestrator", label: "no2/so2 column density, 1600 grid points" },
+  { from: "modis-viirs", to: "orchestrator", label: "20 active fire detections" },
+  { from: "traffic api", to: "orchestrator", label: "congestion index, truck routes" },
+  { from: "sensor + weather", to: "anomaly agent", label: "readings + wind patterns" },
+  { from: "sensor + weather", to: "attribution agent", label: "readings + wind + traffic" },
   { from: "anomaly + attribution", to: "enforcement agent", label: "anomalies + sources" },
-  { from: "all agents", to: "orchestrator", label: "merged analysis" },
+  { from: "all agents", to: "orchestrator", label: "merged 5-source analysis" },
   { from: "orchestrator", to: "gpt-4o-mini", label: "natural language response" },
-  { from: "xgboost", to: "forecast api", label: "24-72hr predictions" },
+  { from: "xgboost", to: "forecast api", label: "24-72hr predictions (rmse 11.74)" },
   { from: "attribution", to: "simulator", label: "source weights for counterfactuals" },
 ];
 
@@ -170,7 +173,9 @@ export default function ArchitecturePage() {
               { label: "stations", value: "105", sub: "across india" },
               { label: "cities", value: "57", sub: "all state capitals" },
               { label: "agents", value: "6", sub: "coordinated" },
-              { label: "endpoints", value: "25+", sub: "rest api" },
+              { label: "endpoints", value: "27", sub: "rest api" },
+              { label: "data sources", value: "5", sub: "fused" },
+              { label: "rmse", value: "11.7", sub: "86% vs baseline" },
             ].map((stat) => (
               <div key={stat.label} className="ru-bento">
                 <div className="p-6 text-center">
