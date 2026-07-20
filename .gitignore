@@ -11,3 +11,6 @@ data/cache/
 dist/
 build/
 .vercel/
+
+# Playwright MCP artifacts
+.playwright-mcp/
