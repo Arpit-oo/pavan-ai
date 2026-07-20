@@ -99,7 +99,7 @@ export default function LandingPage() {
         <h1 className="lowercase leading-[0.92] mb-6" style={{ fontSize: "clamp(48px, 7vw, 80px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.04em" }}>
           air quality intelligence<br />for every indian city
         </h1>
-        <p className="text-[18px] text-muted-foreground max-w-[60ch] leading-relaxed mb-10" style={{ fontVariationSettings: "'wght' 440" }}>
+        <p className="text-[19px] text-foreground/70 max-w-[60ch] leading-relaxed mb-10" style={{ fontVariationSettings: "'wght' 480" }}>
           pavan fuses data from 105 cpcb monitoring stations across 57 cities through a 6-agent ai pipeline — turning raw air quality numbers into actionable intelligence for city administrators, health authorities, and citizens.
         </p>
         <div className="flex gap-3 flex-wrap">
@@ -121,10 +121,10 @@ export default function LandingPage() {
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {STATS.map((s) => (
-            <div key={s.label} className="ru-bento text-center" style={{ "--bento-bg": s.color, "--bento-fg": "white" } as React.CSSProperties}>
+            <div key={s.label} className="ru-bento text-center" style={{ "--bento-bg": "var(--card)", "--bento-fg": "var(--fg)" } as React.CSSProperties}>
               <div className="p-6">
-                <span className="font-display text-[40px] tracking-tight">{s.value}</span>
-                <p className="font-mono text-[10px] uppercase tracking-wider opacity-70 mt-2">{s.label}</p>
+                <span className="font-display text-[40px] tracking-tight" style={{ color: s.color }}>{s.value}</span>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mt-2">{s.label}</p>
               </div>
             </div>
           ))}
@@ -143,7 +143,7 @@ export default function LandingPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {FEATURES.map((f) => (
-            <div key={f.title} className="ru-bento">
+            <div key={f.title} className="ru-bento" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.06)" }}>
               <div className="p-8">
                 <div className="flex items-start gap-4">
                   <span className="text-3xl shrink-0">{f.icon}</span>
@@ -164,7 +164,7 @@ export default function LandingPage() {
 
       {/* Data Trust */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="ru-bento relative overflow-visible" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "white" } as React.CSSProperties}>
+        <div className="ru-bento relative overflow-visible" style={{ "--bento-bg": "#1a1a18", "--bento-fg": "#f5f0e6" } as React.CSSProperties}>
           {/* Claudy - pray/meditating pose — shifted down to be fully visible */}
           <div className="absolute -bottom-14 -right-6 pointer-events-none hidden md:block">
             <Image src="/claudy/pray.png" alt="Claudy meditating" width={110} height={110} className="object-contain" />
