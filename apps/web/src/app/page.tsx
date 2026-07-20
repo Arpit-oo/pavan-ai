@@ -123,8 +123,14 @@ export default function LandingPage() {
           </button>
         </div>
         {landingMenu && (
-          <div className="sm:hidden fixed inset-0 top-[56px] z-40" style={{backgroundColor:"#f5f0e6"}}>
-            <nav className="flex flex-col p-6 gap-2">
+          <div className="sm:hidden fixed inset-x-0 top-0 bottom-0 z-[100]" style={{backgroundColor:"#f5f0e6"}}>
+            <div className="flex items-center justify-between px-4 py-4">
+              <span className="text-xl" style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan<span style={{ color: "var(--entity-moderate)" }}>.</span></span>
+              <button className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center" onClick={() => setLandingMenu(false)}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <nav className="flex flex-col px-6 gap-2">
               <Link href="/dashboard" onClick={() => setLandingMenu(false)} className="flex items-center gap-3 px-4 py-4 rounded-2xl" style={{background:"var(--secondary)"}}>
                 <span className="w-3 h-3 rounded-full" style={{background:"var(--entity-moderate)"}} />
                 <span className="text-[18px]" style={{fontVariationSettings:"'wght' 600"}}>dashboard</span>
