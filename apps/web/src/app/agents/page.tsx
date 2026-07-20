@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchAPI } from "@/lib/api";
 import NavBar from "@/components/nav/navbar";
+import CitySelector from "@/components/dashboard/city-selector";
 
 interface AgentLog { timestamp: string; agent: string; message: string; }
 interface AgentData { agent: string; data: Record<string, unknown>; reasoning: string; confidence: number; }
@@ -34,6 +35,7 @@ export default function AgentsPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
+  const [agentCity, setAgentCity] = useState("Delhi");
   const [phase, setPhase] = useState(0);
 
   const runAnalysis = async () => {
@@ -60,9 +62,10 @@ export default function AgentsPage() {
               <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
                 multi-agent pipeline
               </h1>
-              <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
-                6 specialized agents coordinate in 3 phases to analyze air quality across india
+              <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground mb-4">
+                6 specialized agents coordinate in 3 phases to analyze air quality
               </p>
+              <CitySelector selected={agentCity} onChange={setAgentCity} label="analyze city" />
             </header>
             <button onClick={runAnalysis} disabled={loading} className="ru-pill shrink-0 !text-[14px] !px-5 !py-3">
               {loading ? "agents working..." : "run full analysis →"}

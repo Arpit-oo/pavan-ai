@@ -6,63 +6,48 @@
 <title>Pavan — ET AI Hackathon 2026 | Team EdgeRunner</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Fraunces:opsz,wght,SOFT,WONK@9..144,100..900,0..100,0..1&display=swap');
-:root{--bg:#f5f0e6;--fg:#1a1a18;--card:#fff;--muted:#6b6a64;--secondary:#ede7d8;--orange:#fb923c;--red:#ef4444;--blue:#2563eb;--teal:#2dd4bf;--green:#166534;--purple:#7c3aed;--pink:#ec4899;}
+:root{--bg:#f5f0e6;--fg:#1a1a18;--card:#fff;--muted:#6b6a64;--orange:#fb923c;--red:#ef4444;--blue:#2563eb;--teal:#2dd4bf;--green:#166534;--purple:#7c3aed;--pink:#ec4899;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Bricolage Grotesque',system-ui;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;font-variation-settings:"wght" 460,"wdth" 96;font-size:17px;line-height:1.6;}
+body{font-family:'Bricolage Grotesque',system-ui;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;font-variation-settings:"wght" 480,"wdth" 96;font-size:20px;line-height:1.6;}
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;}
-.s{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:70px clamp(40px,8vw,160px);position:relative;}
-.s+.s{border-top:1px solid rgba(0,0,0,0.04);}
-.ey{font-size:12px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-variation-settings:"wght" 620;margin-bottom:24px;}
-h1{font-size:clamp(56px,9vw,100px);font-variation-settings:"wght" 760,"wdth" 94,"opsz" 72;letter-spacing:-0.04em;line-height:0.9;margin-bottom:28px;}
-h2{font-size:clamp(40px,6vw,68px);font-variation-settings:"wght" 740,"wdth" 94,"opsz" 56;letter-spacing:-0.035em;line-height:0.92;margin-bottom:24px;}
-h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;letter-spacing:-0.02em;margin-bottom:16px;}
-.sub{font-size:clamp(17px,2.2vw,22px);color:var(--muted);max-width:60ch;line-height:1.65;font-variation-settings:"wght" 440;}
-.big{font-family:'Fraunces',serif;font-variation-settings:"SOFT" 50,"WONK" 0,"opsz" 144;letter-spacing:-0.03em;font-weight:500;line-height:0.82;}
-.t{border-radius:28px;padding:40px;overflow:hidden;}
-.tl{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;opacity:0.55;margin-bottom:16px;font-variation-settings:"wght" 620;}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
-@media(max-width:768px){.g2,.g3,.g4,.g6{grid-template-columns:1fr;}.s{padding:40px 24px;}}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;font-size:14px;font-variation-settings:"wght" 560;}
-.sn{position:absolute;bottom:32px;right:48px;font-family:'Fraunces',serif;font-size:15px;color:var(--muted);opacity:0.3;}
-.stk{display:inline-flex;align-items:center;border-radius:999px;padding:6px 16px;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;font-variation-settings:"wght" 620;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
-.ar{display:flex;align-items:center;gap:16px;padding:14px 0;}
-.ar+.ar{border-top:1px solid rgba(255,255,255,0.12);}
-.hb{border:2px solid var(--orange);border-radius:24px;padding:20px 28px;background:rgba(251,146,60,0.05);}
-.flow-item{display:flex;align-items:center;gap:10px;padding:8px 0;}
-.flow-dot{width:10px;height:10px;border-radius:5px;flex-shrink:0;}
-.flow-arrow{color:var(--muted);font-size:18px;margin:0 4px;}
+.s{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(48px,10vw,180px);position:relative;page-break-after:always;}
+h1{font-size:clamp(60px,10vw,110px);font-variation-settings:"wght" 780,"wdth" 92,"opsz" 72;letter-spacing:-0.045em;line-height:0.88;margin-bottom:32px;}
+h2{font-size:clamp(44px,7vw,76px);font-variation-settings:"wght" 750,"wdth" 94,"opsz" 56;letter-spacing:-0.04em;line-height:0.9;margin-bottom:28px;}
+.sub{font-size:24px;color:var(--muted);max-width:55ch;line-height:1.6;font-variation-settings:"wght" 460;}
+.big{font-family:'Fraunces',serif;font-variation-settings:"SOFT" 50,"WONK" 0,"opsz" 144;letter-spacing:-0.03em;font-weight:500;line-height:0.8;}
+.t{border-radius:28px;padding:44px;overflow:hidden;}
+.ey{font-size:14px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-variation-settings:"wght" 640;margin-bottom:28px;}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:12px 26px;border-radius:999px;font-size:18px;font-variation-settings:"wght" 580;}
+.sn{position:absolute;bottom:36px;right:52px;font-family:'Fraunces',serif;font-size:16px;color:var(--muted);opacity:0.3;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.bullet{font-size:22px;line-height:2;font-variation-settings:"wght" 500;}
+.bullet strong{font-variation-settings:"wght" 700;}
+.hb{border:2px solid var(--orange);border-radius:24px;padding:20px 28px;background:rgba(251,146,60,0.05);display:inline-flex;align-items:center;gap:14px;}
+@media print{.s{page-break-after:always;min-height:auto;padding:40px;}}
 </style>
 </head>
 <body>
 
 <!-- 01 TITLE -->
 <div class="s" style="overflow:hidden;">
-  <div class="hb" style="display:inline-flex;align-items:center;gap:14px;margin-bottom:32px;">
-    <span style="font-size:12px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 660;color:var(--orange);">et ai hackathon 2026</span>
+  <div class="hb" style="margin-bottom:36px;">
+    <span style="font-size:14px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 680;color:var(--orange);">et ai hackathon 2026</span>
     <span style="width:5px;height:5px;border-radius:3px;background:var(--orange);"></span>
-    <span style="font-size:12px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 600;color:var(--muted);">problem statement #5</span>
+    <span style="font-size:14px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 620;color:var(--muted);">problem statement #5</span>
   </div>
   <h1>pavan<span style="color:var(--orange)">.</span></h1>
-  <p class="sub" style="font-size:clamp(20px,2.8vw,28px);margin-bottom:36px;">ai-powered urban air quality intelligence<br>for smart city intervention</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;">
+  <p class="sub" style="font-size:28px;margin-bottom:40px;">ai-powered urban air quality intelligence<br>for smart city intervention</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;">
     <span class="pill" style="background:var(--blue);color:#fff;">5 data sources</span>
     <span class="pill" style="background:var(--green);color:#f0fdf4;">105 stations</span>
     <span class="pill" style="background:var(--purple);color:#fff;">6 ai agents</span>
-    <span class="pill" style="background:var(--orange);color:#1a1a18;">57 cities</span>
-    <span class="pill" style="background:var(--red);color:#fff;">86% rmse improvement</span>
-    <span class="pill" style="background:var(--teal);color:#0a0a08;">28 api endpoints</span>
+    <span class="pill" style="background:var(--orange);">57 cities</span>
+    <span class="pill" style="background:var(--red);color:#fff;">86% rmse gain</span>
   </div>
-  <div style="display:flex;align-items:center;gap:20px;">
-    <span style="font-size:15px;font-variation-settings:'wght' 600;">team</span>
-    <span style="font-size:26px;font-variation-settings:'wght' 740;letter-spacing:-0.02em;">edgerunner</span>
-    <span style="width:1px;height:20px;background:rgba(0,0,0,0.15);"></span>
-    <span style="font-size:14px;color:var(--muted);">pavan-aqi.vercel.app</span>
-  </div>
-  <!-- Claudy -->
-  <img src="https://pavan-aqi.vercel.app/claudy/sit.png" alt="Claudy" style="position:absolute;right:80px;top:50%;transform:translateY(-50%);width:240px;opacity:0.85;" />
+  <div style="font-size:20px;"><span style="font-variation-settings:'wght' 620;">team</span> <span style="font-size:30px;font-variation-settings:'wght' 760;">edgerunner</span></div>
+  <img src="https://pavan-aqi.vercel.app/claudy/sit.png" alt="" style="position:absolute;right:100px;top:50%;transform:translateY(-50%);width:260px;opacity:0.8;" />
   <div class="sn">01</div>
 </div>
 
@@ -70,63 +55,25 @@ h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;l
 <div class="s">
   <div class="ey">the problem</div>
   <h2>data exists.<br>intelligence doesn't.</h2>
-  <p class="sub" style="margin-bottom:36px;">900+ cpcb stations generate data continuously. only 31% of cities have actionable protocols. 1.67 million indians die from air pollution every year.</p>
-  <div class="g3">
-    <div class="t" style="background:var(--red);color:#fff;">
-      <div class="tl">deaths per year</div>
-      <div class="big" style="font-size:clamp(56px,8vw,88px);">1.67M</div>
-      <p style="font-size:15px;opacity:0.75;margin-top:12px;">from air pollution in india<br>(lancet planetary health)</p>
-    </div>
-    <div class="t" style="background:var(--card);">
-      <div class="tl" style="color:var(--muted);">cpcb stations deployed</div>
-      <div class="big" style="font-size:clamp(56px,8vw,88px);color:var(--orange);">900+</div>
-      <p style="font-size:15px;color:var(--muted);margin-top:12px;">under national clean air programme</p>
-    </div>
-    <div class="t" style="background:var(--purple);color:#fff;">
-      <div class="tl">cities with action protocols</div>
-      <div class="big" style="font-size:clamp(56px,8vw,88px);">31%</div>
-      <p style="font-size:15px;opacity:0.65;margin-top:12px;">linked to monitoring data<br>(cag audit 2024)</p>
-    </div>
+  <div class="g3" style="margin-top:40px;">
+    <div class="t" style="background:var(--red);color:#fff;"><div class="big" style="font-size:88px;">1.67M</div><p style="font-size:22px;opacity:0.8;margin-top:16px;">deaths per year from air pollution (lancet)</p></div>
+    <div class="t" style="background:var(--card);"><div class="big" style="font-size:88px;color:var(--orange);">900+</div><p style="font-size:22px;color:var(--muted);margin-top:16px;">cpcb monitoring stations deployed</p></div>
+    <div class="t" style="background:var(--purple);color:#fff;"><div class="big" style="font-size:88px;">31%</div><p style="font-size:22px;opacity:0.7;margin-top:16px;">cities with actionable protocols (cag 2024)</p></div>
   </div>
   <div class="sn">02</div>
 </div>
 
 <!-- 03 DATA SOURCES -->
 <div class="s">
-  <div class="ey">multi-source fusion</div>
-  <h2>5 data sources. one intelligence layer.</h2>
-  <p class="sub" style="margin-bottom:36px;">pavan fuses every data source the problem statement asks for — and more.</p>
-  <div class="g3" style="gap:16px;">
-    <div class="t" style="background:var(--blue);color:#fff;min-height:180px;">
-      <span style="font-size:32px;">📡</span>
-      <h3 style="color:#fff;font-size:22px;margin-top:12px;">cpcb caaqms</h3>
-      <p style="font-size:15px;opacity:0.8;">105 stations across 57 cities. pm2.5, pm10, no2, so2, co, o3 — real-time.</p>
-    </div>
-    <div class="t" style="background:var(--purple);color:#fff;min-height:180px;">
-      <span style="font-size:32px;">🛰️</span>
-      <h3 style="color:#fff;font-size:22px;margin-top:12px;">sentinel-5p tropomi</h3>
-      <p style="font-size:15px;opacity:0.8;">no2/so2 column density. 1600 grid points. 12 identified hotspot regions across india.</p>
-    </div>
-    <div class="t" style="background:var(--red);color:#fff;min-height:180px;">
-      <span style="font-size:32px;">🔥</span>
-      <h3 style="color:#fff;font-size:22px;margin-top:12px;">modis/viirs fire</h3>
-      <p style="font-size:15px;opacity:0.8;">active fire detection — crop burning and industrial thermal. 20+ detections cross-referenced with attribution.</p>
-    </div>
-    <div class="t" style="background:var(--teal);color:#0a0a08;min-height:180px;">
-      <span style="font-size:32px;">🌤️</span>
-      <h3 style="font-size:22px;margin-top:12px;">openweathermap</h3>
-      <p style="font-size:15px;opacity:0.75;">live wind speed, direction, humidity, temperature. stagnation and inversion risk detection.</p>
-    </div>
-    <div class="t" style="background:var(--orange);color:#1a1a18;min-height:180px;">
-      <span style="font-size:32px;">🚗</span>
-      <h3 style="font-size:22px;margin-top:12px;">traffic mobility</h3>
-      <p style="font-size:15px;opacity:0.75;">congestion index, truck routes, vehicular emission factors. 8 major cities.</p>
-    </div>
-    <div class="t" style="background:var(--card);border:2px solid var(--fg);min-height:180px;">
-      <span style="font-size:32px;">🌫️</span>
-      <h3 style="font-size:22px;margin-top:12px;">atmospheric dispersion</h3>
-      <p style="font-size:15px;color:var(--muted);">gaussian plume model with pasquill-gifford stability classes (A-F). predicts pollution spread.</p>
-    </div>
+  <div class="ey">what we fuse</div>
+  <h2>5 data sources</h2>
+  <div class="g3" style="margin-top:36px;gap:20px;">
+    <div class="t" style="background:var(--blue);color:#fff;"><span style="font-size:40px;">📡</span><h3 style="color:#fff;font-size:28px;margin:16px 0 8px;">cpcb caaqms</h3><p class="bullet">• 105 stations<br>• 6 pollutant parameters<br>• 57 cities covered</p></div>
+    <div class="t" style="background:var(--purple);color:#fff;"><span style="font-size:40px;">🛰️</span><h3 style="color:#fff;font-size:28px;margin:16px 0 8px;">sentinel-5p</h3><p class="bullet">• NO2/SO2 column density<br>• 1600 grid points<br>• 12 hotspot regions</p></div>
+    <div class="t" style="background:var(--red);color:#fff;"><span style="font-size:40px;">🔥</span><h3 style="color:#fff;font-size:28px;margin:16px 0 8px;">modis/viirs</h3><p class="bullet">• active fire detection<br>• crop burning + industrial<br>• cross-ref with attribution</p></div>
+    <div class="t" style="background:var(--teal);color:#0a0a08;"><span style="font-size:40px;">🌤️</span><h3 style="font-size:28px;margin:16px 0 8px;">openweathermap</h3><p class="bullet">• wind speed + direction<br>• stagnation detection<br>• inversion risk analysis</p></div>
+    <div class="t" style="background:var(--orange);color:#1a1a18;"><span style="font-size:40px;">🚗</span><h3 style="font-size:28px;margin:16px 0 8px;">traffic mobility</h3><p class="bullet">• congestion index<br>• truck route mapping<br>• emission factors per city</p></div>
+    <div class="t" style="background:var(--card);border:2px solid var(--fg);"><span style="font-size:40px;">🌫️</span><h3 style="font-size:28px;margin:16px 0 8px;">atmospheric dispersion</h3><p class="bullet">• gaussian plume model<br>• pasquill-gifford classes<br>• pollution spread prediction</p></div>
   </div>
   <div class="sn">03</div>
 </div>
@@ -134,55 +81,22 @@ h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;l
 <!-- 04 AGENT PIPELINE -->
 <div class="s">
   <div class="ey">architecture</div>
-  <h2>6 agents. 3 phases. &lt;3 seconds.</h2>
-  <p class="sub" style="margin-bottom:36px;">signal to enforcement recommendation in under 3 seconds.</p>
-
-  <!-- Flow diagram -->
-  <div class="t" style="background:var(--card);padding:32px;margin-bottom:24px;">
-    <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;font-size:14px;">
-      <span class="pill" style="background:var(--secondary);font-size:12px;">cpcb</span>
-      <span class="pill" style="background:var(--secondary);font-size:12px;">sentinel-5p</span>
-      <span class="pill" style="background:var(--secondary);font-size:12px;">modis</span>
-      <span class="pill" style="background:var(--secondary);font-size:12px;">weather</span>
-      <span class="pill" style="background:var(--secondary);font-size:12px;">traffic</span>
-      <span class="flow-arrow">→</span>
-      <span class="pill" style="background:var(--green);color:#f0fdf4;font-size:12px;">phase 1: collect</span>
-      <span class="flow-arrow">→</span>
-      <span class="pill" style="background:var(--purple);color:#fff;font-size:12px;">phase 2: analyze</span>
-      <span class="flow-arrow">→</span>
-      <span class="pill" style="background:var(--orange);font-size:12px;">phase 3: enforce</span>
-      <span class="flow-arrow">→</span>
-      <span class="pill" style="background:var(--blue);color:#fff;font-size:12px;">gpt-4o response</span>
-    </div>
-  </div>
-
-  <div class="g3">
+  <h2>6 agents. 3 phases.<br>&lt;3 seconds.</h2>
+  <div class="g3" style="margin-top:40px;">
     <div class="t" style="background:var(--green);color:#f0fdf4;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <span class="stk" style="background:#fff;color:#0a0a0c;">phase 1</span>
-        <span style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:0.14em;">parallel</span>
-      </div>
-      <h3 style="color:#f0fdf4;font-size:22px;">data collection</h3>
-      <div class="ar"><span style="font-size:28px;">📡</span><div><strong style="font-variation-settings:'wght' 640;">sensor agent</strong><br><span style="font-size:14px;opacity:0.8;">105 cpcb stations, 6 pollutants</span></div></div>
-      <div class="ar"><span style="font-size:28px;">🌤️</span><div><strong style="font-variation-settings:'wght' 640;">weather agent</strong><br><span style="font-size:14px;opacity:0.8;">wind patterns, stagnation, inversion</span></div></div>
+      <p style="font-size:16px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.6;margin-bottom:16px;">phase 1 · parallel</p>
+      <h3 style="color:#f0fdf4;font-size:28px;margin-bottom:20px;">data collection</h3>
+      <p class="bullet">📡 <strong>sensor</strong> — 105 stations<br>🌤️ <strong>weather</strong> — wind + stagnation</p>
     </div>
     <div class="t" style="background:var(--purple);color:#fff;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <span class="stk" style="background:#fff;color:#0a0a0c;">phase 2</span>
-        <span style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:0.14em;">parallel</span>
-      </div>
-      <h3 style="color:#fff;font-size:22px;">analysis</h3>
-      <div class="ar"><span style="font-size:28px;">⚡</span><div><strong style="font-variation-settings:'wght' 640;">anomaly agent</strong><br><span style="font-size:14px;opacity:0.8;">spatial spikes, pm ratio + fire cross-ref</span></div></div>
-      <div class="ar"><span style="font-size:28px;">🔍</span><div><strong style="font-variation-settings:'wght' 640;">attribution agent</strong><br><span style="font-size:14px;opacity:0.8;">source decomposition + satellite + traffic</span></div></div>
+      <p style="font-size:16px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.6;margin-bottom:16px;">phase 2 · parallel</p>
+      <h3 style="color:#fff;font-size:28px;margin-bottom:20px;">analysis</h3>
+      <p class="bullet">⚡ <strong>anomaly</strong> — spikes + fire cross-ref<br>🔍 <strong>attribution</strong> — source decomposition</p>
     </div>
     <div class="t" style="background:var(--orange);color:#1a1a18;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <span class="stk" style="background:#0a0a0c;color:#f5f0e6;">phase 3</span>
-        <span style="font-size:11px;opacity:0.5;text-transform:uppercase;letter-spacing:0.14em;">sequential</span>
-      </div>
-      <h3 style="font-size:22px;">enforcement</h3>
-      <div class="ar" style="border-color:rgba(0,0,0,0.1);"><span style="font-size:28px;">🛡️</span><div><strong style="font-variation-settings:'wght' 640;">enforcement agent</strong><br><span style="font-size:14px;opacity:0.7;">prioritized inspector recommendations</span></div></div>
-      <div class="ar" style="border-color:rgba(0,0,0,0.1);"><span style="font-size:28px;">🧠</span><div><strong style="font-variation-settings:'wght' 640;">orchestrator</strong><br><span style="font-size:14px;opacity:0.7;">coordinates all + merges + timing</span></div></div>
+      <p style="font-size:16px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:16px;">phase 3 · sequential</p>
+      <h3 style="font-size:28px;margin-bottom:20px;">enforcement</h3>
+      <p class="bullet">🛡️ <strong>enforcement</strong> — inspector recs<br>🧠 <strong>orchestrator</strong> — coordinates all</p>
     </div>
   </div>
   <div class="sn">04</div>
@@ -192,109 +106,89 @@ h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;l
 <div class="s">
   <div class="ey">differentiators</div>
   <h2>what nobody else builds</h2>
-  <div class="g2" style="margin-top:36px;gap:24px;">
-    <div class="t" style="background:var(--blue);color:#fff;min-height:240px;">
-      <span class="stk" style="background:#fff;color:#0a0a0c;transform:rotate(-3deg);">killer feature</span>
-      <h3 style="color:#fff;font-size:24px;margin-top:20px;">"what if we ban trucks?"</h3>
-      <p style="font-size:16px;opacity:0.8;line-height:1.6;">counterfactual intervention simulator with 5 policy types. empirical reduction factors from published delhi studies. before/after aqi per station. source-attribution-weighted.</p>
+  <div class="g2" style="margin-top:40px;gap:28px;">
+    <div class="t" style="background:var(--blue);color:#fff;">
+      <h3 style="color:#fff;font-size:30px;margin-bottom:16px;">"what if we ban trucks?"</h3>
+      <p class="bullet">• 5 policy intervention types<br>• empirical reduction factors<br>• per-station before/after AQI<br>• source-attribution weighted</p>
     </div>
-    <div class="t" style="background:var(--teal);color:#0a0a08;min-height:240px;">
-      <h3 style="font-size:24px;margin-top:4px;">compound risk scoring</h3>
-      <p style="font-size:16px;opacity:0.75;line-height:1.6;">fuses aqi + wind stagnation + population density + vulnerable sites (schools, hospitals) + forecast trend into single 0-100 risk score. not just "how bad" — "how dangerous for people right now."</p>
+    <div class="t" style="background:var(--teal);color:#0a0a08;">
+      <h3 style="font-size:30px;margin-bottom:16px;">compound risk scoring</h3>
+      <p class="bullet">• AQI + wind + population + schools<br>• single 0-100 risk score<br>• vulnerability mapping<br>• forecast trend factor</p>
     </div>
-    <div class="t" style="background:var(--pink);color:#fff;min-height:240px;">
-      <h3 style="color:#fff;font-size:24px;">4 live channels · 4 languages</h3>
-      <p style="font-size:16px;opacity:0.8;line-height:1.6;">web chatbot (gpt-4o) · telegram bot (@PavanETbot, 10 commands) · email alerts (gmail smtp, branded html) · whatsapp broadcast channel. all multilingual — hindi, english, tamil, bengali. auto-detects language.</p>
+    <div class="t" style="background:var(--pink);color:#fff;">
+      <h3 style="color:#fff;font-size:30px;margin-bottom:16px;">4 live channels · 4 languages</h3>
+      <p class="bullet">• web chatbot (GPT-4o, multilingual)<br>• telegram bot (10 commands)<br>• email alerts (gmail SMTP)<br>• whatsapp broadcast channel</p>
     </div>
-    <div class="t" style="background:var(--card);border:2px solid var(--orange);min-height:240px;">
-      <h3 style="font-size:24px;">grap auto-compliance</h3>
-      <p style="font-size:16px;color:var(--muted);line-height:1.6;">detects all 4 grap stages automatically. generates full compliance reports — executive summary, enforcement recommendations, source attribution %. multi-agent pipeline runs in &lt;3 seconds.</p>
+    <div class="t" style="background:var(--card);border:2px solid var(--orange);">
+      <h3 style="font-size:30px;margin-bottom:16px;">grap auto-compliance</h3>
+      <p class="bullet">• all 4 stages detected automatically<br>• full report generation<br>• enforcement recommendations<br>• source attribution percentages</p>
     </div>
   </div>
   <div class="sn">05</div>
 </div>
 
-<!-- 06 FORECAST + VALIDATION -->
+<!-- 06 FORECAST -->
 <div class="s">
   <div class="ey">predictive analytics</div>
   <h2>86% better than baseline</h2>
-  <div class="g2" style="margin-top:36px;">
+  <div class="g2" style="margin-top:40px;">
     <div>
-      <p class="sub" style="margin-bottom:28px;font-size:18px;">our xgboost forecast model validates against persistence baseline with rigorous metrics.</p>
-      <div class="t" style="background:var(--card);margin-bottom:16px;">
+      <div class="t" style="background:var(--card);margin-bottom:20px;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
-          <div><div class="tl" style="color:var(--muted);">model rmse</div><div class="big" style="font-size:48px;color:var(--green);">11.74</div></div>
-          <div style="text-align:right;"><div class="tl" style="color:var(--muted);">persistence rmse</div><div class="big" style="font-size:48px;color:var(--red);">83.65</div></div>
+          <div><p style="font-size:16px;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;">model rmse</p><div class="big" style="font-size:64px;color:var(--green);">11.74</div></div>
+          <div style="text-align:right;"><p style="font-size:16px;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;">baseline rmse</p><div class="big" style="font-size:64px;color:var(--red);">83.65</div></div>
         </div>
       </div>
-      <div class="t" style="background:var(--card);">
-        <div style="font-size:16px;line-height:2.2;">
-          <p>12 features · 10,000 training samples</p>
-          <p>xgboost · 200 estimators · max_depth 6</p>
-          <p>1-72 hour predictions with confidence intervals</p>
-          <p>city switcher: 10 cities selectable</p>
-          <p>gaussian plume atmospheric dispersion model</p>
-        </div>
-      </div>
+      <p class="bullet" style="font-size:22px;">• 12 features · 10k training samples<br>• xgboost · 200 estimators<br>• 1-72hr predictions<br>• confidence intervals<br>• city switcher (10 cities)</p>
     </div>
     <div class="t" style="background:var(--blue);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-      <div class="big" style="font-size:clamp(64px,10vw,100px);color:#fff;">86%</div>
-      <p style="font-size:22px;font-variation-settings:'wght' 660;margin-top:12px;">improvement over<br>persistence baseline</p>
-      <p style="font-size:15px;opacity:0.6;margin-top:16px;">signal → recommendation: &lt;3 seconds</p>
+      <div class="big" style="font-size:120px;color:#fff;">86%</div>
+      <p style="font-size:26px;font-variation-settings:'wght' 660;margin-top:16px;">improvement over<br>persistence baseline</p>
     </div>
   </div>
   <div class="sn">06</div>
 </div>
 
 <!-- 07 COVERAGE -->
-<div class="s" style="background:var(--secondary);">
-  <div class="ey">national coverage</div>
-  <h2>all india. every state capital.</h2>
-  <div class="g4" style="margin-top:36px;">
-    <div class="t" style="background:var(--orange);color:#1a1a18;"><div class="big" style="font-size:72px;">105</div><p style="font-size:15px;font-variation-settings:'wght' 600;margin-top:10px;">monitoring stations</p></div>
-    <div class="t" style="background:var(--blue);color:#fff;"><div class="big" style="font-size:72px;">57</div><p style="font-size:15px;font-variation-settings:'wght' 600;margin-top:10px;">cities monitored</p></div>
-    <div class="t" style="background:var(--purple);color:#fff;"><div class="big" style="font-size:72px;">5</div><p style="font-size:15px;font-variation-settings:'wght' 600;margin-top:10px;">data sources fused</p></div>
-    <div class="t" style="background:var(--green);color:#f0fdf4;"><div class="big" style="font-size:72px;">28</div><p style="font-size:15px;font-variation-settings:'wght' 600;margin-top:10px;">api endpoints</p></div>
+<div class="s" style="background:var(--secondary);overflow:hidden;">
+  <div class="ey">coverage</div>
+  <h2>all india</h2>
+  <div class="g4" style="margin-top:40px;">
+    <div class="t" style="background:var(--orange);"><div class="big" style="font-size:80px;">105</div><p style="font-size:20px;font-variation-settings:'wght' 620;margin-top:12px;">stations</p></div>
+    <div class="t" style="background:var(--blue);color:#fff;"><div class="big" style="font-size:80px;">57</div><p style="font-size:20px;font-variation-settings:'wght' 620;margin-top:12px;">cities</p></div>
+    <div class="t" style="background:var(--purple);color:#fff;"><div class="big" style="font-size:80px;">28</div><p style="font-size:20px;font-variation-settings:'wght' 620;margin-top:12px;">api endpoints</p></div>
+    <div class="t" style="background:var(--green);color:#f0fdf4;"><div class="big" style="font-size:80px;">10</div><p style="font-size:20px;font-variation-settings:'wght' 620;margin-top:12px;">pages</p></div>
   </div>
-  <div style="margin-top:32px;font-size:16px;line-height:2.4;max-width:80ch;font-variation-settings:'wght' 480;">
-    <span style="font-variation-settings:'wght' 660;color:var(--red);">north:</span> delhi (17) · lucknow · jaipur · chandigarh · dehradun · shimla · amritsar · srinagar · jammu · leh<br>
-    <span style="font-variation-settings:'wght' 660;color:var(--blue);">west:</span> mumbai (6) · pune · ahmedabad · surat · rajkot · jodhpur · indore · panaji<br>
-    <span style="font-variation-settings:'wght' 660;color:var(--green);">south:</span> bangalore (5) · chennai · hyderabad · kochi · thiruvananthapuram · coimbatore · mangalore<br>
-    <span style="font-variation-settings:'wght' 660;color:var(--orange);">east:</span> kolkata (4) · patna · bhubaneswar · raipur · ranchi<br>
-    <span style="font-variation-settings:'wght' 660;color:var(--teal);">northeast:</span> guwahati · imphal · shillong · gangtok · itanagar · agartala · aizawl · kohima
+  <div style="margin-top:36px;font-size:24px;font-variation-settings:'wght' 500;">
+    <strong style="color:var(--red);">delhi (17)</strong> · <strong>mumbai (6)</strong> · <strong>bangalore (5)</strong> · <strong>chennai (4)</strong> · <strong>kolkata (4)</strong> + 52 more cities
   </div>
+  <img src="https://pavan-aqi.vercel.app/india-map.png" alt="India" style="position:absolute;right:60px;top:50%;transform:translateY(-50%);height:70%;opacity:0.06;" />
   <div class="sn">07</div>
 </div>
 
-<!-- 08 TECH STACK -->
+<!-- 08 TECH + CHANNELS -->
 <div class="s">
-  <div class="ey">technology</div>
+  <div class="ey">technology + delivery</div>
   <h2>built to scale</h2>
-  <div class="g2" style="margin-top:36px;">
+  <div class="g2" style="margin-top:40px;">
     <div>
-      <div style="margin-bottom:28px;"><p style="font-size:15px;font-variation-settings:'wght' 680;margin-bottom:14px;">frontend</p><div style="display:flex;gap:10px;flex-wrap:wrap;"><span class="pill" style="background:var(--blue);color:#fff;font-size:13px;">next.js 16</span><span class="pill" style="background:var(--teal);color:#0a0a08;font-size:13px;">mapbox gl</span><span class="pill" style="background:var(--card);border:1px solid rgba(0,0,0,0.08);font-size:13px;">recharts</span><span class="pill" style="background:var(--purple);color:#fff;font-size:13px;">bricolage + fraunces</span><span class="pill" style="background:var(--card);border:1px solid rgba(0,0,0,0.08);font-size:13px;">tailwind + shadcn/ui</span></div></div>
-      <div style="margin-bottom:28px;"><p style="font-size:15px;font-variation-settings:'wght' 680;margin-bottom:14px;">backend + ml</p><div style="display:flex;gap:10px;flex-wrap:wrap;"><span class="pill" style="background:var(--green);color:#f0fdf4;font-size:13px;">python fastapi</span><span class="pill" style="background:var(--orange);font-size:13px;">xgboost</span><span class="pill" style="background:var(--card);border:1px solid rgba(0,0,0,0.08);font-size:13px;">scikit-learn</span><span class="pill" style="background:var(--card);border:1px solid rgba(0,0,0,0.08);font-size:13px;">gaussian plume</span></div></div>
-      <div style="margin-bottom:28px;"><p style="font-size:15px;font-variation-settings:'wght' 680;margin-bottom:14px;">ai + data</p><div style="display:flex;gap:10px;flex-wrap:wrap;"><span class="pill" style="background:var(--pink);color:#fff;font-size:13px;">gpt-4o-mini</span><span class="pill" style="background:var(--blue);color:#fff;font-size:13px;">sentinel-5p</span><span class="pill" style="background:var(--red);color:#fff;font-size:13px;">modis-viirs</span><span class="pill" style="background:var(--card);border:1px solid rgba(0,0,0,0.08);font-size:13px;">cpcb + openweathermap + traffic</span></div></div>
-      <div><p style="font-size:15px;font-variation-settings:'wght' 680;margin-bottom:14px;">infrastructure</p><div style="display:flex;gap:10px;flex-wrap:wrap;"><span class="pill" style="background:var(--card);border:2px solid var(--blue);color:var(--blue);font-size:13px;">vercel</span><span class="pill" style="background:var(--card);border:2px solid var(--purple);color:var(--purple);font-size:13px;">railway</span><span class="pill" style="background:var(--card);border:2px solid var(--green);color:var(--green);font-size:13px;">supabase</span><span class="pill" style="background:var(--card);border:2px solid var(--orange);color:var(--orange);font-size:13px;">docker</span><span class="pill" style="background:var(--card);border:2px solid var(--teal);color:var(--teal);font-size:13px;">gmail smtp</span></div></div>
+      <p class="bullet" style="font-size:24px;line-height:2.2;">
+        <strong>frontend:</strong> Next.js 16 · Mapbox GL · Recharts<br>
+        <strong>backend:</strong> FastAPI · XGBoost · scikit-learn<br>
+        <strong>ai:</strong> GPT-4o-mini · Gaussian plume<br>
+        <strong>data:</strong> CPCB · Sentinel-5P · MODIS · Traffic<br>
+        <strong>infra:</strong> Vercel · Railway · Supabase · Docker<br>
+        <strong>comms:</strong> Gmail SMTP · Telegram API
+      </p>
     </div>
     <div>
-      <div class="t" style="background:var(--card);margin-bottom:16px;">
-        <div class="tl" style="color:var(--muted);">intervention simulator</div>
-        <p style="font-size:16px;line-height:1.8;">5 evidence-based policy interventions:<br>
-        🔥 burning ban — <strong>-20% pm2.5</strong> (immediate)<br>
-        🏭 industrial shutdown — <strong>-15% pm2.5</strong><br>
-        🚛 truck ban — <strong>-12% pm2.5</strong><br>
-        🚗 odd-even — <strong>-8% pm2.5</strong><br>
-        🏗️ construction halt — <strong>-25% pm10</strong></p>
+      <div class="t" style="background:var(--card);margin-bottom:20px;">
+        <p style="font-size:20px;font-variation-settings:'wght' 640;margin-bottom:12px;">intervention simulator</p>
+        <p class="bullet">🔥 burning ban — <strong>-20% PM2.5</strong><br>🏭 industrial — <strong>-15% PM2.5</strong><br>🚛 truck ban — <strong>-12% PM2.5</strong><br>🏗️ construction — <strong>-25% PM10</strong></p>
       </div>
       <div class="t" style="background:var(--card);">
-        <div class="tl" style="color:var(--muted);">delivery channels</div>
-        <p style="font-size:16px;line-height:2;">
-        🌐 web dashboard (10 pages)<br>
-        🤖 telegram bot (10 commands, multilingual)<br>
-        📧 email alerts (gmail smtp, branded html)<br>
-        💬 whatsapp broadcast channel<br>
-        🗣️ multilingual chatbot (auto-detects language)</p>
+        <p style="font-size:20px;font-variation-settings:'wght' 640;margin-bottom:12px;">4 live channels</p>
+        <p class="bullet">🌐 web dashboard (10 pages)<br>🤖 telegram (10 commands)<br>📧 email (branded HTML)<br>💬 whatsapp broadcast</p>
       </div>
     </div>
   </div>
@@ -305,24 +199,18 @@ h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;l
 <div class="s">
   <div class="ey">business impact</div>
   <h2>who needs pavan</h2>
-  <div class="g3" style="margin-top:36px;">
-    <div class="t" style="background:var(--blue);color:#fff;min-height:300px;display:flex;flex-direction:column;">
-      <div class="tl">primary market</div>
-      <h3 style="color:#fff;font-size:24px;">100+ ncap cities</h3>
-      <p style="font-size:16px;opacity:0.8;flex:1;line-height:1.65;">every city under the national clean air programme needs air quality intelligence. 69% have no actionable protocols linked to their monitoring data. pavan fills that gap.</p>
-      <span class="pill" style="background:rgba(255,255,255,0.15);color:#fff;font-size:12px;align-self:flex-start;margin-top:16px;">b2g saas</span>
+  <div class="g3" style="margin-top:40px;">
+    <div class="t" style="background:var(--blue);color:#fff;">
+      <h3 style="color:#fff;font-size:28px;margin-bottom:12px;">100+ ncap cities</h3>
+      <p class="bullet">• b2g saas for municipalities<br>• 69% lack action protocols<br>• pavan fills that gap</p>
     </div>
-    <div class="t" style="background:var(--card);border:2px solid var(--red);min-height:300px;display:flex;flex-direction:column;">
-      <div class="tl" style="color:var(--muted);">public health</div>
-      <h3 style="font-size:24px;">health quantification</h3>
-      <p style="font-size:16px;color:var(--muted);flex:1;line-height:1.65;">who-based excess hospital visit estimates. school exposure mapping. population vulnerability scoring. pm2.5 tracking vs who guidelines. gaussian plume dispersion modeling.</p>
-      <span class="pill" style="background:var(--red);color:#fff;font-size:12px;align-self:flex-start;margin-top:16px;">+142 excess visits/day (delhi est.)</span>
+    <div class="t" style="background:var(--card);border:2px solid var(--red);">
+      <h3 style="font-size:28px;margin-bottom:12px;">health quantification</h3>
+      <p class="bullet">• WHO exposure-response<br>• +142 excess visits/day (delhi)<br>• school + hospital mapping</p>
     </div>
-    <div class="t" style="background:var(--green);color:#f0fdf4;min-height:300px;display:flex;flex-direction:column;">
-      <div class="tl">citizen engagement</div>
-      <h3 style="color:#f0fdf4;font-size:24px;">4 channels · all live</h3>
-      <p style="font-size:16px;opacity:0.8;flex:1;line-height:1.65;">telegram bot live. email alerts sending. whatsapp broadcast active. web chatbot multilingual. user subscription with city selection, frequency choice, channel preference. login/signup flow.</p>
-      <span class="pill" style="background:rgba(255,255,255,0.15);color:#f0fdf4;font-size:12px;align-self:flex-start;margin-top:16px;">@PavanETbot + whatsapp channel</span>
+    <div class="t" style="background:var(--green);color:#f0fdf4;">
+      <h3 style="color:#f0fdf4;font-size:28px;margin-bottom:12px;">citizen engagement</h3>
+      <p class="bullet">• 4 channels — all live<br>• multilingual (auto-detect)<br>• subscribe with city + frequency</p>
     </div>
   </div>
   <div class="sn">09</div>
@@ -330,50 +218,33 @@ h3{font-size:clamp(24px,3vw,36px);font-variation-settings:"wght" 700,"wdth" 96;l
 
 <!-- 10 DEMO -->
 <div class="s" style="background:var(--blue);color:#fff;">
-  <div class="ey" style="color:rgba(255,255,255,0.45);">live demo</div>
-  <h2 style="color:#fff;">try it right now</h2>
-  <div class="g3" style="margin-top:36px;">
-    <div class="t" style="background:rgba(255,255,255,0.1);">
-      <div class="tl">web dashboard</div>
-      <p style="font-size:28px;font-variation-settings:'wght' 700;">pavan-aqi.vercel.app</p>
-      <p style="font-size:15px;opacity:0.65;margin-top:10px;">10 pages · map with layer toggles · chatbot · simulator · grap · city comparison · login</p>
-    </div>
-    <div class="t" style="background:rgba(255,255,255,0.1);">
-      <div class="tl">telegram bot</div>
-      <p style="font-size:28px;font-variation-settings:'wght' 700;">@PavanETbot</p>
-      <p style="font-size:15px;opacity:0.65;margin-top:10px;">gpt-4o · 10 commands · subscribe daily/weekly · multilingual</p>
-    </div>
-    <div class="t" style="background:rgba(255,255,255,0.1);">
-      <div class="tl">whatsapp channel</div>
-      <p style="font-size:22px;font-variation-settings:'wght' 700;">पवन · air quality india</p>
-      <p style="font-size:15px;opacity:0.65;margin-top:10px;">daily digests · threshold alerts · grap notifications · health advisories</p>
-    </div>
+  <div class="ey" style="color:rgba(255,255,255,0.5);">live demo</div>
+  <h2 style="color:#fff;">try it now</h2>
+  <div class="g3" style="margin-top:40px;">
+    <div class="t" style="background:rgba(255,255,255,0.12);"><p style="font-size:32px;font-variation-settings:'wght' 720;">pavan-aqi.vercel.app</p><p style="font-size:20px;opacity:0.7;margin-top:12px;">10 pages · chatbot · simulator</p></div>
+    <div class="t" style="background:rgba(255,255,255,0.12);"><p style="font-size:32px;font-variation-settings:'wght' 720;">@PavanETbot</p><p style="font-size:20px;opacity:0.7;margin-top:12px;">telegram · 10 commands · AI</p></div>
+    <div class="t" style="background:rgba(255,255,255,0.12);"><p style="font-size:32px;font-variation-settings:'wght' 720;">whatsapp channel</p><p style="font-size:20px;opacity:0.7;margin-top:12px;">daily digests · alerts · advisories</p></div>
   </div>
-  <!-- Claudy -->
-  <img src="https://pavan-aqi.vercel.app/claudy/chill.png" alt="Claudy" style="position:absolute;right:60px;bottom:40px;width:140px;opacity:0.5;filter:brightness(0) invert(1);" />
+  <img src="https://pavan-aqi.vercel.app/claudy/chill.png" alt="" style="position:absolute;right:60px;bottom:40px;width:160px;opacity:0.4;filter:brightness(0) invert(1);" />
   <div class="sn" style="color:rgba(255,255,255,0.25);">10</div>
 </div>
 
 <!-- 11 CLOSE -->
 <div class="s" style="text-align:center;">
-  <div class="hb" style="display:inline-flex;align-items:center;gap:14px;margin-bottom:32px;">
-    <span style="font-size:12px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 660;color:var(--orange);">et ai hackathon 2026</span>
+  <div class="hb" style="margin-bottom:36px;">
+    <span style="font-size:14px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 680;color:var(--orange);">et ai hackathon 2026</span>
     <span style="width:5px;height:5px;border-radius:3px;background:var(--orange);"></span>
-    <span style="font-size:12px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 600;color:var(--muted);">problem statement #5</span>
+    <span style="font-size:14px;text-transform:uppercase;letter-spacing:0.16em;font-variation-settings:'wght' 620;color:var(--muted);">problem statement #5</span>
   </div>
   <h1 style="display:inline;">pavan<span style="color:var(--orange);">.</span></h1>
-  <p class="sub" style="margin:24px auto 0;text-align:center;font-size:clamp(19px,2.5vw,24px);">because clean air intelligence should reach every indian citizen,<br>not stay locked in government dashboards.</p>
-  <div style="margin-top:36px;display:flex;align-items:center;justify-content:center;gap:20px;">
-    <span style="font-size:16px;font-variation-settings:'wght' 620;">team</span>
-    <span style="font-size:30px;font-variation-settings:'wght' 760;letter-spacing:-0.02em;">edgerunner</span>
+  <p class="sub" style="margin:28px auto 0;text-align:center;font-size:26px;">clean air intelligence for every indian citizen.</p>
+  <div style="margin-top:40px;"><span style="font-size:18px;font-variation-settings:'wght' 620;">team</span> <span style="font-size:36px;font-variation-settings:'wght' 780;">edgerunner</span></div>
+  <div style="margin-top:44px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://pavan-aqi.vercel.app" style="display:inline-block;background:var(--blue);color:#fff;padding:18px 40px;border-radius:999px;font-size:20px;font-variation-settings:'wght' 600;text-decoration:none;">dashboard →</a>
+    <a href="https://t.me/PavanETbot" style="display:inline-block;background:var(--purple);color:#fff;padding:18px 40px;border-radius:999px;font-size:20px;font-variation-settings:'wght' 600;text-decoration:none;">telegram →</a>
+    <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" style="display:inline-block;background:var(--green);color:#f0fdf4;padding:18px 40px;border-radius:999px;font-size:20px;font-variation-settings:'wght' 600;text-decoration:none;">whatsapp →</a>
   </div>
-  <div style="margin-top:40px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <a href="https://pavan-aqi.vercel.app" style="display:inline-block;background:var(--blue);color:#fff;padding:16px 36px;border-radius:999px;font-size:17px;font-variation-settings:'wght' 580;text-decoration:none;">open dashboard →</a>
-    <a href="https://t.me/PavanETbot" style="display:inline-block;background:var(--purple);color:#fff;padding:16px 36px;border-radius:999px;font-size:17px;font-variation-settings:'wght' 580;text-decoration:none;">telegram bot →</a>
-    <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" style="display:inline-block;background:var(--green);color:#f0fdf4;padding:16px 36px;border-radius:999px;font-size:17px;font-variation-settings:'wght' 580;text-decoration:none;">whatsapp →</a>
-  </div>
-  <!-- Claudy -->
-  <div style="margin-top:48px;"><img src="https://pavan-aqi.vercel.app/claudy/sleep.png" alt="Claudy" style="width:100px;opacity:0.5;" /></div>
+  <div style="margin-top:48px;"><img src="https://pavan-aqi.vercel.app/claudy/sleep.png" alt="" style="width:120px;opacity:0.4;" /></div>
   <div class="sn">11</div>
 </div>
 

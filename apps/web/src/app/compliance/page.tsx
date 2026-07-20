@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { fetchAPI } from "@/lib/api";
 import NavBar from "@/components/nav/navbar";
+import CitySelector from "@/components/dashboard/city-selector";
 
 interface GRAPStage { name: string; trigger_aqi: number; color: string; actions: string[]; }
 interface GRAPStatus {
@@ -36,6 +37,7 @@ function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactN
 }
 
 export default function CompliancePage() {
+  const [grapCity, setGrapCity] = useState("Delhi");
   const [grap, setGrap] = useState<GRAPStatus | null>(null);
   const [report, setReport] = useState<ComplianceReport | null>(null);
   const [loading, setLoading] = useState(true);
@@ -103,9 +105,10 @@ export default function CompliancePage() {
             <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
               grap compliance
             </h1>
-            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
-              graded response action plan monitoring for delhi ncr
+            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground mb-4">
+              graded response action plan monitoring
             </p>
+            <CitySelector selected={grapCity} onChange={setGrapCity} label="select city" />
           </header>
 
           {loading ? (

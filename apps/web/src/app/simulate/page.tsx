@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { fetchAPI, getAQIGradientColor } from "@/lib/api";
 import NavBar from "@/components/nav/navbar";
+import CitySelector from "@/components/dashboard/city-selector";
 
 interface InterventionType {
   type: string;
@@ -75,6 +76,7 @@ function Sticker({ children, tilt = -3 }: { children: React.ReactNode; tilt?: nu
 }
 
 export default function SimulatePage() {
+  const [simCity, setSimCity] = useState("Delhi");
   const [types, setTypes] = useState<InterventionType[]>(MOCK_TYPES);
   const [selected, setSelected] = useState<string | null>(null);
   const [result, setResult] = useState<SimResult | null>(null);
@@ -144,9 +146,10 @@ export default function SimulatePage() {
             <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
               what happens if we...
             </h1>
-            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
-              select an intervention to model its projected aqi impact
+            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground mb-4">
+              select a city and intervention to model projected aqi impact
             </p>
+            <CitySelector selected={simCity} onChange={setSimCity} label="select city" />
           </header>
 
           {/* 3×2 bento grid — varied heights */}

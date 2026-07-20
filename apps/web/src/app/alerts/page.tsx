@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchAPI } from "@/lib/api";
 import NavBar from "@/components/nav/navbar";
+import CitySelector from "@/components/dashboard/city-selector";
 
 interface AlertData {
   city: string;
@@ -48,6 +49,7 @@ function Sticker({ children, tilt = -3, dark = false }: { children: React.ReactN
 export default function AlertsPage() {
   const [data, setData] = useState<AlertData | null>(null);
   const [health, setHealth] = useState<HealthImpact | null>(null);
+  const [alertCity, setAlertCity] = useState("Delhi");
   const [loading, setLoading] = useState(true);
   const [lang, setLang] = useState("en");
 
@@ -99,6 +101,9 @@ export default function AlertsPage() {
             <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(36px, 5.6vw, 56px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
               citizen alerts
             </h1>
+            <div className="mt-4">
+              <CitySelector selected={alertCity} onChange={setAlertCity} label="select city" />
+            </div>
           </header>
 
           {loading ? (
