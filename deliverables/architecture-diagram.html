@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavan — Architecture Diagram</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Fraunces:opsz,wght@9..144,100..900&display=swap');
+:root { --bg:#f5f0e6; --fg:#1a1a18; --card:#fff; --muted:#6b6a64; --orange:#fb923c; --red:#ef4444; --blue:#2563eb; --teal:#2dd4bf; --green:#22c55e; --purple:#7c3aed; --pink:#ec4899; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Bricolage Grotesque',system-ui;background:var(--bg);color:var(--fg);padding:60px clamp(24px,6vw,100px);-webkit-font-smoothing:antialiased;font-variation-settings:"wght" 440,"wdth" 96;}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;}
+h1{font-size:clamp(36px,5vw,56px);font-variation-settings:"wght" 760,"wdth" 94;letter-spacing:-0.04em;line-height:0.95;margin-bottom:12px;}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-variation-settings:"wght" 600;margin-bottom:20px;}
+.sub{font-size:16px;color:var(--muted);max-width:60ch;line-height:1.6;margin-bottom:48px;}
+.tile{border-radius:24px;padding:32px;overflow:hidden;}
+.label{font-size:10.5px;text-transform:uppercase;letter-spacing:0.18em;opacity:0.55;font-variation-settings:"wght" 600;margin-bottom:12px;}
+.grid{display:grid;gap:16px;}
+.g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:1fr 1fr 1fr;} .g4{grid-template-columns:repeat(4,1fr);} .g5{grid-template-columns:repeat(5,1fr);}
+@media(max-width:768px){.g2,.g3,.g4,.g5{grid-template-columns:1fr;}}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-variation-settings:"wght" 540;}
+.big{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.02em;line-height:0.85;}
+.section{margin-bottom:48px;}
+.flow-line{display:flex;align-items:center;justify-content:center;padding:12px 0;font-size:20px;color:var(--muted);opacity:0.4;}
+.agent{display:flex;align-items:center;gap:12px;padding:10px 0;}
+.agent+.agent{border-top:1px solid rgba(255,255,255,0.1);}
+</style>
+</head>
+<body>
+
+<div class="eyebrow">pavan · system architecture</div>
+<h1>architecture diagram</h1>
+<p class="sub">multi-agent ai platform for urban air quality intelligence — 5 layers, 6 agents, 3-phase pipeline</p>
+
+<!-- STACK LAYERS -->
+<div class="section">
+<div class="eyebrow" style="margin-bottom:16px;">system stack (top to bottom)</div>
+
+<div class="tile" style="background:var(--blue);color:white;margin-bottom:12px;">
+  <div class="label">layer 1 — presentation</div>
+  <p style="font-size:18px;font-variation-settings:'wght' 680;margin-bottom:12px;">next.js 16 + mapbox gl + recharts</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">8 pages</span>
+    <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">bricolage + fraunces</span>
+    <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">shadcn/ui</span>
+    <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">gpt-4o chatbot</span>
+    <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">telegram bot</span>
+  </div>
+</div>
+
+<div class="flow-line">↓</div>
+
+<div class="tile" style="background:var(--orange);color:#1a1a18;margin-bottom:12px;">
+  <div class="label">layer 2 — api (fastapi)</div>
+  <p style="font-size:18px;font-variation-settings:'wght' 680;margin-bottom:12px;">25+ rest endpoints</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/aqi</span>
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/forecast</span>
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/agents</span>
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/simulate</span>
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/alerts</span>
+    <span class="pill" style="background:rgba(0,0,0,0.08);">/compliance</span>
+  </div>
+</div>
+
+<div class="flow-line">↓</div>
+
+<div class="grid g3" style="margin-bottom:12px;">
+  <div class="tile" style="background:var(--purple);color:white;">
+    <div class="label">layer 3 — agent mesh</div>
+    <p style="font-size:16px;font-variation-settings:'wght' 660;">6 agents</p>
+    <div style="margin-top:12px;font-size:13px;line-height:2;">🧠 orchestrator<br>📡 sensor<br>🌤️ weather<br>⚡ anomaly<br>🔍 attribution<br>🛡️ enforcement</div>
+  </div>
+  <div class="tile" style="background:var(--teal);color:#0a0a08;">
+    <div class="label">layer 4 — ml pipeline</div>
+    <p style="font-size:16px;font-variation-settings:'wght' 660;">models + scoring</p>
+    <div style="margin-top:12px;font-size:13px;line-height:2;">xgboost forecast (mae 4.88)<br>idw interpolation<br>compound risk scoring<br>intervention simulator<br>source attribution engine</div>
+  </div>
+  <div class="tile" style="background:var(--green);color:white;">
+    <div class="label">layer 5 — data</div>
+    <p style="font-size:16px;font-variation-settings:'wght' 660;">persistence + apis</p>
+    <div style="margin-top:12px;font-size:13px;line-height:2;">supabase (postgres)<br>cpcb 105 stations<br>openweathermap<br>gpt-4o-mini<br>gmail smtp</div>
+  </div>
+</div>
+</div>
+
+<!-- AGENT PIPELINE -->
+<div class="section">
+<div class="eyebrow" style="margin-bottom:16px;">3-phase agent execution pipeline</div>
+<div class="grid g3">
+  <div class="tile" style="background:var(--green);color:white;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <span style="background:white;color:#0a0a0c;padding:4px 12px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-variation-settings:'wght' 620;">phase 1</span>
+      <span style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.14em;">parallel</span>
+    </div>
+    <p style="font-size:18px;font-variation-settings:'wght' 680;margin-bottom:16px;">data collection</p>
+    <div class="agent"><span style="font-size:24px;">📡</span><div><strong style="font-variation-settings:'wght' 620;">sensor</strong><br><span style="font-size:12px;opacity:0.7;">pulls 105 cpcb stations</span></div></div>
+    <div class="agent"><span style="font-size:24px;">🌤️</span><div><strong style="font-variation-settings:'wght' 620;">weather</strong><br><span style="font-size:12px;opacity:0.7;">wind, stagnation, inversion</span></div></div>
+  </div>
+  <div class="tile" style="background:var(--purple);color:white;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <span style="background:white;color:#0a0a0c;padding:4px 12px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-variation-settings:'wght' 620;">phase 2</span>
+      <span style="font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.14em;">parallel</span>
+    </div>
+    <p style="font-size:18px;font-variation-settings:'wght' 680;margin-bottom:16px;">analysis</p>
+    <div class="agent"><span style="font-size:24px;">⚡</span><div><strong style="font-variation-settings:'wght' 620;">anomaly</strong><br><span style="font-size:12px;opacity:0.7;">spatial spikes, pm ratio</span></div></div>
+    <div class="agent"><span style="font-size:24px;">🔍</span><div><strong style="font-variation-settings:'wght' 620;">attribution</strong><br><span style="font-size:12px;opacity:0.7;">source decomposition</span></div></div>
+  </div>
+  <div class="tile" style="background:var(--orange);color:#1a1a18;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <span style="background:#0a0a0c;color:#f5f0e6;padding:4px 12px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-variation-settings:'wght' 620;">phase 3</span>
+      <span style="font-size:10px;opacity:0.5;text-transform:uppercase;letter-spacing:0.14em;">sequential</span>
+    </div>
+    <p style="font-size:18px;font-variation-settings:'wght' 680;margin-bottom:16px;">enforcement</p>
+    <div class="agent" style="border-color:rgba(0,0,0,0.08);"><span style="font-size:24px;">🛡️</span><div><strong style="font-variation-settings:'wght' 620;">enforcement</strong><br><span style="font-size:12px;opacity:0.6;">inspector recommendations</span></div></div>
+    <div class="agent" style="border-color:rgba(0,0,0,0.08);"><span style="font-size:24px;">🧠</span><div><strong style="font-variation-settings:'wght' 620;">orchestrator</strong><br><span style="font-size:12px;opacity:0.6;">coordinates + merges</span></div></div>
+  </div>
+</div>
+</div>
+
+<!-- DATA FLOW -->
+<div class="section">
+<div class="eyebrow" style="margin-bottom:16px;">data flow</div>
+<div class="tile" style="background:var(--blue);color:white;padding:36px;">
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">cpcb api</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">📡 sensor agent</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">105 stations, pm2.5/pm10/no2/so2/co/o3</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">openweathermap</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">🌤️ weather agent</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">wind speed/dir, humidity, stagnation flag</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">sensor + weather</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">⚡ anomaly + 🔍 attribution</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">spikes + source % with confidence</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">all analysis</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">🛡️ enforcement</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">prioritized inspector recommendations</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">🧠 orchestrator</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">gpt-4o-mini</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">natural language response to user</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">xgboost model</span>
+      <span style="opacity:0.4;">→</span>
+      <span class="pill" style="background:rgba(255,255,255,0.15);color:white;">forecast api</span>
+      <span style="opacity:0.4;">→</span>
+      <span style="font-size:12px;opacity:0.6;">1-72hr ward-level aqi predictions</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="section">
+<div class="grid g5">
+  <div class="tile" style="background:var(--card);text-align:center;"><div class="big" style="font-size:40px;color:var(--orange);">105</div><p style="font-size:11px;color:var(--muted);margin-top:6px;">stations</p></div>
+  <div class="tile" style="background:var(--card);text-align:center;"><div class="big" style="font-size:40px;color:var(--teal);">57</div><p style="font-size:11px;color:var(--muted);margin-top:6px;">cities</p></div>
+  <div class="tile" style="background:var(--card);text-align:center;"><div class="big" style="font-size:40px;color:var(--purple);">6</div><p style="font-size:11px;color:var(--muted);margin-top:6px;">ai agents</p></div>
+  <div class="tile" style="background:var(--card);text-align:center;"><div class="big" style="font-size:40px;color:var(--blue);">25+</div><p style="font-size:11px;color:var(--muted);margin-top:6px;">endpoints</p></div>
+  <div class="tile" style="background:var(--card);text-align:center;"><div class="big" style="font-size:40px;color:var(--green);">8</div><p style="font-size:11px;color:var(--muted);margin-top:6px;">pages</p></div>
+</div>
+</div>
+
+<div style="text-align:center;padding:32px 0;font-size:12px;color:var(--muted);">
+  pavan · et ai hackathon 2026 · problem statement #5 · <a href="https://pavan-aqi.vercel.app" style="color:var(--blue);text-decoration:none;">pavan-aqi.vercel.app</a>
+</div>
+
+</body>
+</html>
