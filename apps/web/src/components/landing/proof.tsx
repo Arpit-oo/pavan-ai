@@ -4,7 +4,7 @@ import { Reveal, Eyebrow, StatNumber, ACCENT } from "./ui";
 
 /**
  * Proof & trust: the credibility band. Real coverage / validation numbers plus
- * the named, verifiable data sources — the "this is real, and defensible"
+ * the named, verifiable data sources , the "this is real, and defensible"
  * section for judges.
  */
 

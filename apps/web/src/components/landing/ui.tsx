@@ -8,13 +8,13 @@ import { cn } from "@/lib/utils";
 /**
  * Shared atoms for the pavan landing page. Ported from the Stryde reference
  * and re-tuned to pavan's warm-cream / AQI-orange system. The landing runs
- * two moods — dark cinematic sections and warm editorial sections — so most
+ * two moods , dark cinematic sections and warm editorial sections , so most
  * atoms take a `light` flag that flips their palette for dark backgrounds.
  */
 
 export const INK = "#12110f"; // warm near-black used for dark sections
 export const CREAM = "#f5f0e6";
-export const ACCENT = "#fb923c"; // AQI orange — the brand "."
+export const ACCENT = "#fb923c"; // AQI orange , the brand "."
 
 const EASE = [0.21, 0.6, 0.35, 1] as const;
 
@@ -72,7 +72,7 @@ export function Eyebrow({
 }
 
 /**
- * A real photo inlined inside a display heading — zooms a photo into a
+ * A real photo inlined inside a display heading , zooms a photo into a
  * rounded pill so a headline word carries an image. Decorative only.
  */
 export function HeadingChip({
@@ -120,7 +120,7 @@ export function GlassCard({
 
 /**
  * Giant Fraunces display number that counts up and "focuses in" from blur
- * when scrolled into view — the sharpening echoes the page's clarity theme.
+ * when scrolled into view , the sharpening echoes the page's clarity theme.
  * Parses a leading/trailing non-numeric part so mixed values ("1.6M", "13 / 20",
  * "<3s", "86%") animate their numeric core while keeping their affixes.
  */
@@ -196,7 +196,7 @@ export function AnimatedBar({
   );
 }
 
-/** Pill CTA — dark by default, `accent` for the orange primary action. */
+/** Pill CTA , dark by default, `accent` for the orange primary action. */
 export function Pill({
   href,
   children,

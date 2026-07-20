@@ -119,7 +119,7 @@ export default function AgentPanel() {
               <div className="rounded-xl bg-white/10 p-2.5">
                 <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">grap</span>
                 <p className="text-[12px] truncate" style={{ fontVariationSettings: "'wght' 580" }}>
-                  {analysis.summary.grap_stage?.toLowerCase() || "—"}
+                  {analysis.summary.grap_stage?.toLowerCase() || ", "}
                 </p>
               </div>
               <div className="rounded-xl bg-white/10 p-2.5">

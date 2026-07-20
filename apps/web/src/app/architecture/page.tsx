@@ -10,16 +10,16 @@ const LAYERS = [
     items: ["next.js 16", "deck.gl + mapbox", "recharts", "bricolage + fraunces fonts", "shadcn/ui"],
   },
   {
-    name: "api layer — fastapi",
+    name: "api layer, fastapi",
     color: "var(--entity-moderate)",
     fg: "#1a1a18",
     items: ["/aqi (live, historical, heatmap, risk, zones)", "/forecast (city, station, model)", "/agents (ask, analyze, quick)", "/simulate (run, compare, types)", "/alerts (active, whatsapp, health-impact)", "/compliance (grap, report)"],
   },
   {
-    name: "agent mesh — 6 agents",
+    name: "agent mesh, 6 agents",
     color: "var(--entity-severe)",
     fg: "#fff",
-    items: ["orchestrator — coordinates all agents", "sensor — cpcb station data", "weather — wind analysis, stagnation", "anomaly — spike detection", "attribution — source decomposition", "enforcement — inspector recommendations"],
+    items: ["orchestrator, coordinates all agents", "sensor, cpcb station data", "weather, wind analysis, stagnation", "anomaly, spike detection", "attribution, source decomposition", "enforcement, inspector recommendations"],
   },
   {
     name: "ml pipeline",

@@ -69,7 +69,7 @@ export default function AgentsPage() {
             </button>
           </div>
 
-          {/* Agent cards — bento grid with varied sizes */}
+          {/* Agent cards, bento grid with varied sizes */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {AGENTS.map((a) => {
               const agentData = result?.agents?.[a.key];
@@ -100,7 +100,7 @@ export default function AgentsPage() {
           {/* Results */}
           {result && (
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-              {/* Run log — wider */}
+              {/* Run log, wider */}
               <div className="lg:col-span-3 ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
                 <div className="flex flex-col p-8 min-h-[450px]">
                   <div className="flex items-center justify-between mb-5">
@@ -162,7 +162,7 @@ export default function AgentsPage() {
                           ["status", result.summary.status.toLowerCase()],
                           ["avg aqi", String(result.summary.avg_aqi)],
                           ["source", result.summary.dominant_source],
-                          ["grap", result.summary.grap_stage?.toLowerCase() || "—"],
+                          ["grap", result.summary.grap_stage?.toLowerCase() || ", "],
                           ["anomalies", String(result.summary.anomaly_count)],
                           ["enforcement", `${result.summary.enforcement_recs} recs`],
                           ["hotspots", String(result.summary.hotspot_count)],
@@ -187,9 +187,9 @@ export default function AgentsPage() {
               <div className="p-8">
                 <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-6">pipeline execution</div>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 1 ? "bg-[var(--entity-good)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 1 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 1 ? "'wght' 600" : "'wght' 440"}}>phase 1 — data collection</p><p className="text-[12px] text-muted-foreground">📡 sensor agent + 🌤️ weather agent (parallel)</p></div></div>
-                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 2 ? "bg-[var(--entity-forecast)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 2 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 2 ? "'wght' 600" : "'wght' 440"}}>phase 2 — analysis</p><p className="text-[12px] text-muted-foreground">⚡ anomaly agent + 🔍 attribution agent (parallel)</p></div></div>
-                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 3 ? "bg-[var(--entity-moderate)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 3 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 3 ? "'wght' 600" : "'wght' 440"}}>phase 3 — enforcement</p><p className="text-[12px] text-muted-foreground">🛡️ enforcement agent → 🧠 orchestrator merges</p></div></div>
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 1 ? "bg-[var(--entity-good)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 1 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 1 ? "'wght' 600" : "'wght' 440"}}>phase 1, data collection</p><p className="text-[12px] text-muted-foreground">📡 sensor agent + 🌤️ weather agent (parallel)</p></div></div>
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 2 ? "bg-[var(--entity-forecast)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 2 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 2 ? "'wght' 600" : "'wght' 440"}}>phase 2, analysis</p><p className="text-[12px] text-muted-foreground">⚡ anomaly agent + 🔍 attribution agent (parallel)</p></div></div>
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 3 ? "bg-[var(--entity-moderate)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 3 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 3 ? "'wght' 600" : "'wght' 440"}}>phase 3, enforcement</p><p className="text-[12px] text-muted-foreground">🛡️ enforcement agent → 🧠 orchestrator merges</p></div></div>
                 </div>
               </div>
             </div>

@@ -47,7 +47,7 @@ export function Cta() {
                 pavan<span style={{ color: ACCENT }}>.</span>
               </Link>
               <p className="mt-3 max-w-[36ch] text-[14px]" style={{ color: "rgba(245,240,230,0.6)" }}>
-                urban air quality intelligence for india — monitoring to enforcement in under three seconds.
+                urban air quality intelligence for india. monitoring to enforcement in under three seconds.
               </p>
             </div>
             <div className="flex flex-wrap gap-x-8 gap-y-3">
@@ -65,7 +65,7 @@ export function Cta() {
           </div>
         </div>
 
-        {/* Giant wordmark bookend — horizontal bleed, fully visible vertically */}
+        {/* Giant wordmark bookend: horizontal bleed, fully visible vertically */}
         <div aria-hidden className="mt-8 overflow-hidden px-2 sm:mt-12">
           <motion.div
             className="pointer-events-none select-none text-center font-display leading-[0.82]"

@@ -139,7 +139,7 @@ export default function SimulatePage() {
             </p>
           </header>
 
-          {/* 3×2 bento grid — varied heights */}
+          {/* 3×2 bento grid, varied heights */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {CARDS.map((card) => {
               const t = types.find((x) => x.type === card.type) || MOCK_TYPES.find((x) => x.type === card.type)!;
@@ -186,7 +186,7 @@ export default function SimulatePage() {
 
           {result && !loading && (
             <div className="space-y-6">
-              {/* Impact stats — 4 big tiles with tinted backgrounds */}
+              {/* Impact stats, 4 big tiles with tinted backgrounds */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                 <div className="ru-bento md:col-span-2" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#f0fdf4" } as React.CSSProperties}>
                   <div className="p-8">

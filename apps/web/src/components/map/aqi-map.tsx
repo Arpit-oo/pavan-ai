@@ -92,7 +92,7 @@ export default function AQIMap({
 
         {/* AQI layers */}
         <Source id="aqi-zones" type="geojson" data={geojson}>
-          {/* Subtle heatmap overlay — light, readable */}
+          {/* Subtle heatmap overlay, light, readable */}
           <Layer
             id="aqi-heatmap"
             type="heatmap"
@@ -146,7 +146,7 @@ export default function AQIMap({
           />
         </Source>
 
-        {/* Station markers — scale with zoom */}
+        {/* Station markers, scale with zoom */}
         {stations.map((station) => (
           <Marker
             key={station.station_id}
@@ -256,7 +256,7 @@ function StationPopup({ station }: { station: StationReading }) {
           <div key={item.label}>
             <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground">{item.label}</span>
             <p className="text-[12px] tabular-nums" style={{ fontVariationSettings: "'wght' 540" }}>
-              {item.value != null ? `${item.value}${item.unit || ""}` : "—"}
+              {item.value != null ? `${item.value}${item.unit || ""}` : ", "}
             </p>
           </div>
         ))}
@@ -267,12 +267,12 @@ function StationPopup({ station }: { station: StationReading }) {
 
 function AQILegend() {
   const levels = [
-    { label: "good", color: "#00e400", range: "0–50" },
-    { label: "satisfactory", color: "#ffff00", range: "51–100" },
-    { label: "moderate", color: "#ff7e00", range: "101–200" },
-    { label: "poor", color: "#ff0000", range: "201–300" },
-    { label: "very poor", color: "#8f3f97", range: "301–400" },
-    { label: "severe", color: "#7e0023", range: "401–500" },
+    { label: "good", color: "#00e400", range: "0-50" },
+    { label: "satisfactory", color: "#ffff00", range: "51-100" },
+    { label: "moderate", color: "#ff7e00", range: "101-200" },
+    { label: "poor", color: "#ff0000", range: "201-300" },
+    { label: "very poor", color: "#8f3f97", range: "301-400" },
+    { label: "severe", color: "#7e0023", range: "401-500" },
   ];
 
   return (

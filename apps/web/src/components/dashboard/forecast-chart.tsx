@@ -134,7 +134,7 @@ export default function ForecastChart() {
         <div>
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-1">forecast</div>
           <h3 className="text-[15px]" style={{ fontVariationSettings: "'wght' 620" }}>
-            aqi forecast — {city.toLowerCase()}
+            aqi forecast, {city.toLowerCase()}
           </h3>
           {data?.model_info?.metrics && (
             <p className="font-mono text-[10px] text-muted-foreground mt-0.5 uppercase tracking-wider">

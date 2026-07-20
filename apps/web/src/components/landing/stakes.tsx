@@ -13,7 +13,7 @@ const STATS = [
   { value: "1.6M", label: "lives lost every year in india to air pollution", source: "State of Global Air" },
   { value: "13 / 20", label: "of the world's most polluted cities are indian", source: "IQAir 2024" },
   { value: "10×", label: "india's average pm2.5 over the WHO safe limit", source: "IQAir 2024 · WHO" },
-  { value: "6 yrs", label: "delhi — the world's most polluted capital, running", source: "IQAir 2024" },
+  { value: "6 yrs", label: "delhi, the world's most polluted capital, running", source: "IQAir 2024" },
 ];
 
 export function Stakes() {
@@ -31,8 +31,8 @@ export function Stakes() {
               india breathes the most dangerous air on earth.
             </h2>
             <p className="mt-6 max-w-[48ch] text-[17px] leading-relaxed" style={{ color: "rgba(245,240,230,0.72)" }}>
-              this isn&apos;t a dashboard problem — it&apos;s a public-health emergency measured in millions of
-              lives. and for most cities, the response is still reactive, manual, and days too late.
+              this isn&apos;t a dashboard problem. it&apos;s a public-health emergency measured in millions of
+              lives, and for most cities the response is still reactive, manual, and days too late.
             </p>
           </Reveal>
 

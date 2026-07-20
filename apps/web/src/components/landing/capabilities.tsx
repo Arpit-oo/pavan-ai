@@ -4,9 +4,10 @@ import { motion, useReducedMotion } from "motion/react";
 import { Reveal, Eyebrow, AnimatedBar, ACCENT } from "./ui";
 
 /**
- * "What pavan does": five capabilities, each shown with a real data-style
- * mini-visual (attribution bars, a forecast sparkline with confidence band, a
- * before/after simulation, a GRAP stage tracker, alert channels) — no emoji.
+ * "What pavan works out": the analysis layer between the raw inputs and the
+ * actions. Each capability is shown with a real data-style mini-visual
+ * (attribution bars, a forecast sparkline with confidence band, a before/after
+ * simulation, a compound risk meter). No emoji.
  */
 
 const ATTR = [
@@ -16,22 +17,24 @@ const ATTR = [
   { label: "construction dust", pct: 18, color: "#6b6a64" },
 ];
 
+const RISK_FACTORS = ["aqi", "weather", "population", "vulnerability", "trend"];
+
 export function Capabilities() {
   return (
     <section id="does" className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 sm:py-24">
       <Reveal>
-        <Eyebrow>what pavan does</Eyebrow>
+        <Eyebrow>the analysis</Eyebrow>
         <h2
           className="mt-5 max-w-[20ch] lowercase"
-          style={{ fontSize: "clamp(30px, 4vw, 52px)", lineHeight: 1.03, letterSpacing: "-0.035em", fontVariationSettings: "'wght' 660, 'wdth' 94" }}
+          style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.03, letterSpacing: "-0.035em", fontVariationSettings: "'wght' 660, 'wdth' 94" }}
         >
-          from a reading to a decision — automatically.
+          raw readings, turned into answers you can trust.
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-6">
+      <div className="mt-12 grid grid-cols-1 gap-5 sm:mt-14 md:grid-cols-2">
         {/* Source attribution */}
-        <Reveal className="md:col-span-3" delay={0}>
+        <Reveal delay={0}>
           <Card title="source attribution" desc="decomposes every station's pollution by source using wind, satellite no₂, fire, and traffic signals.">
             <div className="flex flex-col gap-3">
               {ATTR.map((a, i) => (
@@ -48,7 +51,7 @@ export function Capabilities() {
         </Reveal>
 
         {/* Forecast */}
-        <Reveal className="md:col-span-3" delay={0.06}>
+        <Reveal delay={0.06}>
           <Card title="72-hour forecast" desc="an XGBoost model predicts ward-level aqi up to three days out, with confidence bands that widen over time.">
             <Sparkline />
             <div className="mt-4 flex items-center gap-6">
@@ -59,9 +62,9 @@ export function Capabilities() {
         </Reveal>
 
         {/* Simulator */}
-        <Reveal className="md:col-span-2" delay={0.1}>
+        <Reveal delay={0.1}>
           <Card title="intervention simulator" desc="model a policy before you order it, weighted by each station's real source mix.">
-            <div className="rounded-[14px] bg-black/4 p-4">
+            <div className="rounded-[14px] bg-black/[0.04] p-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">what if we ban trucks?</p>
               <div className="mt-3 flex items-center justify-between">
                 <div>
@@ -71,42 +74,26 @@ export function Capabilities() {
                 <span className="text-[22px] text-muted-foreground">→</span>
                 <div className="text-right">
                   <span className="font-display text-[34px] leading-none" style={{ color: "#166534" }}>274</span>
-                  <p className="text-[11px]" style={{ color: "#166534" }}>−12% pm2.5</p>
+                  <p className="text-[11px]" style={{ color: "#166534" }}>12% less pm2.5</p>
                 </div>
               </div>
             </div>
           </Card>
         </Reveal>
 
-        {/* GRAP */}
-        <Reveal className="md:col-span-2" delay={0.14}>
-          <Card title="grap auto-compliance" desc="detects the active graded-response stage and generates the government action checklist.">
-            <div className="flex items-center gap-2">
-              {["I", "II", "III", "IV"].map((s, i) => (
-                <div
-                  key={s}
-                  className="flex h-[38px] flex-1 items-center justify-center rounded-[10px] text-[13px] font-medium"
-                  style={i === 2 ? { background: ACCENT, color: "#12110f" } : { background: "rgba(0,0,0,0.05)", color: "var(--muted-foreground)" }}
-                >
-                  {s}
-                </div>
-              ))}
+        {/* Compound risk score */}
+        <Reveal delay={0.14}>
+          <Card title="compound risk score" desc="fuses aqi, weather, population, vulnerability, and forecast trend into one 0-100 number that ranks every ward by urgency.">
+            <div className="flex items-end gap-3">
+              <span className="font-display text-[52px] leading-none" style={{ color: "#ef4444" }}>78</span>
+              <span className="mb-2 text-[13px] text-muted-foreground">/ 100 · high</span>
             </div>
-            <p className="mt-3 text-[13px]"><span style={{ fontVariationSettings: "'wght' 620" }}>stage III active</span> — construction halt, truck-entry ban, mechanised sweeping.</p>
-          </Card>
-        </Reveal>
-
-        {/* Alerts */}
-        <Reveal className="md:col-span-2" delay={0.18}>
-          <Card title="citizen alerts" desc="health advisories pushed the moment air turns unsafe — on the channels people already use.">
-            <div className="flex flex-wrap gap-2">
-              {["telegram", "email", "whatsapp"].map((c) => (
-                <span key={c} className="rounded-full bg-black/5 px-3 py-1.5 text-[12px]">{c}</span>
-              ))}
+            <div className="mt-4">
+              <AnimatedBar pct={78} color="linear-gradient(90deg,#fb923c,#ef4444)" delay={0.1} />
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {["english", "हिन्दी", "தமிழ்", "বাংলা"].map((l) => (
-                <span key={l} className="rounded-full px-3 py-1.5 text-[12px]" style={{ background: "rgba(251,146,60,0.14)", color: "#9a4a10" }}>{l}</span>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {RISK_FACTORS.map((f) => (
+                <span key={f} className="rounded-full bg-black/5 px-3 py-1 text-[12px] text-muted-foreground">{f}</span>
               ))}
             </div>
           </Card>
@@ -118,7 +105,7 @@ export function Capabilities() {
 
 function Card({ title, desc, children }: { title: string; desc: string; children: React.ReactNode }) {
   return (
-    <div className="flex h-full flex-col rounded-[24px] border border-black/8 bg-card p-7 transition-shadow hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+    <div className="flex h-full flex-col rounded-[24px] border border-black/8 bg-card p-6 transition-shadow hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:p-7">
       <h3 className="text-[19px] lowercase" style={{ fontVariationSettings: "'wght' 660" }}>{title}</h3>
       <p className="mt-2 mb-6 text-[14px] leading-relaxed text-muted-foreground">{desc}</p>
       <div className="mt-auto">{children}</div>

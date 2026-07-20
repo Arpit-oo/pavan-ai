@@ -14,7 +14,7 @@ import { ACCENT } from "./ui";
 const NAV = [
   { label: "the problem", href: "#stakes" },
   { label: "what it does", href: "#does" },
-  { label: "how it works", href: "#pipeline" },
+  { label: "how it acts", href: "#acts" },
   { label: "proof", href: "#proof" },
 ];
 

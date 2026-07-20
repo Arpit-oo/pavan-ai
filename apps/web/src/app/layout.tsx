@@ -19,7 +19,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Pavan — Air Quality Intelligence",
+  title: "Pavan, Air Quality Intelligence",
   description:
     "AI-powered urban air quality intelligence platform for smart city intervention",
 };

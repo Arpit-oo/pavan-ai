@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
         recommendations: recommendations || [],
       });
 
-      const subject = `Pavan AQI Alert — ${city || "Delhi"} (AQI ${aqi || 185})`;
+      const subject = `Pavan AQI Alert, ${city || "Delhi"} (AQI ${aqi || 185})`;
       const recipient = to || SMTP_USER;
 
       if (SMTP_USER && SMTP_PASS) {

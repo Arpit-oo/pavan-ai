@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
-const AQI_KNOWLEDGE = `You are Pavan Bot — an air quality intelligence assistant for India.
+const AQI_KNOWLEDGE = `You are Pavan Bot, an air quality intelligence assistant for India.
 You know about 105 CPCB stations across 57 cities. You speak concisely, warmly, with data.
 Key facts: Delhi AQI typically 150-300. South India 30-90. Hill stations 20-50.
 WHO PM2.5 limit: 15 ug/m3. Delhi averages 80-120.
@@ -71,11 +71,11 @@ export async function POST(req: NextRequest) {
         "🌤️ *Welcome to Pavan Bot!*\n\n" +
         "I'm your AI air quality assistant for India.\n\n" +
         "*Commands:*\n" +
-        "/aqi — current air quality overview\n" +
-        "/delhi — delhi aqi status\n" +
-        "/cities — all monitored cities\n" +
-        "/health — health advisory\n" +
-        "/dashboard — open web dashboard\n\n" +
+        "/aqi, current air quality overview\n" +
+        "/delhi, delhi aqi status\n" +
+        "/cities, all monitored cities\n" +
+        "/health, health advisory\n" +
+        "/dashboard, open web dashboard\n\n" +
         "Or just ask me anything about air quality! 💬"
       );
       return NextResponse.json({ ok: true });

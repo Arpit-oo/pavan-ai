@@ -49,7 +49,7 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
 
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-      {/* City AQI — saturated entity tile */}
+      {/* City AQI, saturated entity tile */}
       <div
         className="ru-bento md:col-span-1"
         style={{ "--bento-bg": aqiEntityColor, "--bento-fg": aqiFgColor } as React.CSSProperties}
@@ -73,7 +73,7 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
         </div>
       </div>
 
-      {/* PM2.5 — cream tile with colored number */}
+      {/* PM2.5, cream tile with colored number */}
       <div className="ru-bento">
         <div className="flex h-full flex-col p-6">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-50 mb-4">
@@ -93,7 +93,7 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
         </div>
       </div>
 
-      {/* Worst station — charcoal tile */}
+      {/* Worst station, charcoal tile */}
       <div
         className="ru-bento"
         style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}
@@ -116,7 +116,7 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
         </div>
       </div>
 
-      {/* Best station — teal entity tile */}
+      {/* Best station, teal entity tile */}
       <div
         className="ru-bento"
         style={{ "--bento-bg": "var(--entity-wind)", "--bento-fg": "var(--entity-wind-fg)" } as React.CSSProperties}

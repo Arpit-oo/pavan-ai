@@ -127,13 +127,13 @@ export const MOCK_AGENT_LOG = [
   { timestamp: new Date().toISOString(), agent: "orchestrator", message: "Starting parallel data collection" },
   { timestamp: new Date().toISOString(), agent: "sensor", message: "Starting sensor" },
   { timestamp: new Date().toISOString(), agent: "weather", message: "Starting weather" },
-  { timestamp: new Date().toISOString(), agent: "weather", message: "Completed weather in 0.45s — Wind 4.4m/s from WNW. Dispersion: moderate." },
-  { timestamp: new Date().toISOString(), agent: "sensor", message: "Completed sensor in 2.1s — Pulled 105 stations across 57 cities. Avg AQI: 112." },
+  { timestamp: new Date().toISOString(), agent: "weather", message: "Completed weather in 0.45s, Wind 4.4m/s from WNW. Dispersion: moderate." },
+  { timestamp: new Date().toISOString(), agent: "sensor", message: "Completed sensor in 2.1s, Pulled 105 stations across 57 cities. Avg AQI: 112." },
   { timestamp: new Date().toISOString(), agent: "orchestrator", message: "Running analysis agents" },
-  { timestamp: new Date().toISOString(), agent: "anomaly", message: "Completed anomaly in 0.01s — 5 anomalies detected. 2 critical." },
-  { timestamp: new Date().toISOString(), agent: "attribution", message: "Completed attribution in 0.02s — Dominant source: vehicular (35%). Wind from WNW." },
+  { timestamp: new Date().toISOString(), agent: "anomaly", message: "Completed anomaly in 0.01s, 5 anomalies detected. 2 critical." },
+  { timestamp: new Date().toISOString(), agent: "attribution", message: "Completed attribution in 0.02s, Dominant source: vehicular (35%). Wind from WNW." },
   { timestamp: new Date().toISOString(), agent: "orchestrator", message: "Running enforcement agent" },
-  { timestamp: new Date().toISOString(), agent: "enforcement", message: "Completed enforcement in 0.01s — 6 recs. 2 immediate priority." },
+  { timestamp: new Date().toISOString(), agent: "enforcement", message: "Completed enforcement in 0.01s, 6 recs. 2 immediate priority." },
 ];
 
 export const MOCK_ANALYSIS_SUMMARY = {
@@ -146,10 +146,10 @@ export const MOCK_ANALYSIS_SUMMARY = {
   anomaly_count: 5,
   critical_anomalies: 2,
   dominant_source: "vehicular",
-  pollution_outlook: "moderate — regional variation significant across north and south",
+  pollution_outlook: "moderate, regional variation significant across north and south",
   wind_speed: 3.8,
   stagnation: false,
   grap_stage: null,
-  headline: "MODERATE air quality nationally. North India hotspots active — Delhi NCR and UP cities above 200. South India generally satisfactory.",
+  headline: "MODERATE air quality nationally. North India hotspots active, Delhi NCR and UP cities above 200. South India generally satisfactory.",
   enforcement_recs: 6,
 };

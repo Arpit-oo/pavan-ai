@@ -73,8 +73,8 @@ export default function AlertsPage() {
               { station: "Mundka, Delhi", aqi: 232, level: "poor", message_en: "Elevated PM2.5 detected.", message_hi: "PM2.5 बढ़ा हुआ है।" },
             ],
             whatsapp_message: {
-              en: "⚠️ *Pavan Air Quality Alert — Delhi*\n\nAQI: *185* (MODERATE)\n\nAir quality is moderate. Sensitive groups should limit prolonged outdoor exertion.\n\n- Anand Vihar: AQI 267\n- Wazirpur: AQI 275\n- Mundka: AQI 232\n\n_Powered by Pavan AI_",
-              hi: "⚠️ *पवन वायु गुणवत्ता अलर्ट — Delhi*\n\nAQI: *185*\n\nहवा की गुणवत्ता मध्यम है। संवेदनशील लोग बाहर रहने से बचें।\n\n_पवन AI द्वारा संचालित_",
+              en: "⚠️ *Pavan Air Quality Alert, Delhi*\n\nAQI: *185* (MODERATE)\n\nAir quality is moderate. Sensitive groups should limit prolonged outdoor exertion.\n\n- Anand Vihar: AQI 267\n- Wazirpur: AQI 275\n- Mundka: AQI 232\n\n_Powered by Pavan AI_",
+              hi: "⚠️ *पवन वायु गुणवत्ता अलर्ट, Delhi*\n\nAQI: *185*\n\nहवा की गुणवत्ता मध्यम है। संवेदनशील लोग बाहर रहने से बचें।\n\n_पवन AI द्वारा संचालित_",
             },
             languages: ["en", "hi", "ta", "bn"],
           },
@@ -108,7 +108,7 @@ export default function AlertsPage() {
           ) : (
             <>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                {/* Alert level tile — entity colored */}
+                {/* Alert level tile, entity colored */}
                 <div
                   className="ru-bento"
                   style={{ "--bento-bg": "var(--entity-alert)", "--bento-fg": "var(--entity-alert-fg)" } as React.CSSProperties}
@@ -116,7 +116,7 @@ export default function AlertsPage() {
                   <div className="flex flex-col p-6">
                     <div className="flex items-start justify-between">
                       <Sticker tilt={-3}>level</Sticker>
-                      <Sticker tilt={2} dark>{data?.alerts.level || "—"}</Sticker>
+                      <Sticker tilt={2} dark>{data?.alerts.level || ", "}</Sticker>
                     </div>
                     <div className="flex-1 flex items-end mt-4">
                       <span className="text-5xl">{levelEmoji[data?.alerts.level || "moderate"]}</span>
@@ -127,7 +127,7 @@ export default function AlertsPage() {
                   </div>
                 </div>
 
-                {/* PM2.5 exposure — cream tile */}
+                {/* PM2.5 exposure, cream tile */}
                 {health && (
                   <div className="ru-bento">
                     <div className="flex flex-col p-6">
@@ -142,7 +142,7 @@ export default function AlertsPage() {
                   </div>
                 )}
 
-                {/* Hospital visits — charcoal tile */}
+                {/* Hospital visits, charcoal tile */}
                 {health && (
                   <div className="ru-bento" style={{ "--bento-bg": "var(--entity-charcoal)", "--bento-fg": "var(--entity-charcoal-fg)" } as React.CSSProperties}>
                     <div className="flex flex-col p-6">
@@ -231,7 +231,7 @@ export default function AlertsPage() {
                 </div>
               )}
 
-              {/* Notification channels — dark text on light colors for contrast */}
+              {/* Notification channels, dark text on light colors for contrast */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
                   <div className="p-7 min-h-[200px] flex flex-col">
@@ -259,7 +259,7 @@ export default function AlertsPage() {
                   <div className="p-7 min-h-[200px] flex flex-col" style={{ borderLeft: "4px solid var(--entity-good)" }}>
                     <span className="text-3xl mb-3">💬</span>
                     <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>whatsapp alerts</p>
-                    <p className="text-[14px] text-muted-foreground mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 480" }}>ward-level health advisories in 4 languages — hindi, english, tamil, bengali</p>
+                    <p className="text-[14px] text-muted-foreground mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 480" }}>ward-level health advisories in 4 languages, hindi, english, tamil, bengali</p>
                     <div className="mt-auto pt-4">
                       <span className="font-mono text-[10px] uppercase tracking-wider bg-secondary rounded-full px-3 py-1.5">4 languages · ivr ready</span>
                     </div>

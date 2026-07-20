@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     if (!OPENAI_KEY) {
       return NextResponse.json({
-        response: "i'm running without an api key right now. check the dashboard for current aqi data across 105 stations in 57 cities — the map shows everything in real-time.",
+        response: "i'm running without an api key right now. check the dashboard for current aqi data across 105 stations in 57 cities, the map shows everything in real-time.",
       });
     }
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     if (data.error) {
       return NextResponse.json({
-        response: "having trouble connecting to the ai service right now. try checking the dashboard — it shows live aqi data for all 57 cities.",
+        response: "having trouble connecting to the ai service right now. try checking the dashboard, it shows live aqi data for all 57 cities.",
       });
     }
 

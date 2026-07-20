@@ -50,10 +50,10 @@ export default function CompliancePage() {
           stations_exceeding_poor: 8, stations_exceeding_severe: 2,
           grap_stage: "I", grap_details: null,
           all_stages: {
-            I: { name: "Stage I — Poor", trigger_aqi: 201, color: "orange", actions: ["Intensify mechanized/vacuum sweeping of roads", "Water sprinkling on high dust roads", "Enforce C&D waste management", "Ensure PUC compliance — impound polluting vehicles", "Ban burning of waste in the open", "Enforce ban on coal/firewood in tandoors", "Dust mitigation at construction sites"] },
-            II: { name: "Stage II — Very Poor", trigger_aqi: 301, color: "red", actions: ["All Stage I actions continue", "Enhance parking fees 3-4x to discourage private vehicles", "Augment CNG/electric bus and metro services", "Restrict diesel generator sets (except emergency)", "Intensify industrial pollution control inspections", "Daily review by Task Force"] },
-            III: { name: "Stage III — Severe", trigger_aqi: 401, color: "purple", actions: ["All Stage I and II actions continue", "Ban construction and demolition activities", "Shut brick kilns, hot mix plants, stone crushers", "Ban entry of truck traffic into Delhi (except essential)", "Advisory for work from home where possible", "State governments to decide on school closure"] },
-            IV: { name: "Stage IV — Emergency", trigger_aqi: 451, color: "maroon", actions: ["All previous stage actions continue", "Stop ALL truck traffic except electric and essential", "Ban diesel medium and heavy goods vehicles", "State governments may allow 50% office staff", "Consider odd-even scheme", "Close schools, shift to online", "Suspend all construction including highways"] },
+            I: { name: "Stage I, Poor", trigger_aqi: 201, color: "orange", actions: ["Intensify mechanized/vacuum sweeping of roads", "Water sprinkling on high dust roads", "Enforce C&D waste management", "Ensure PUC compliance, impound polluting vehicles", "Ban burning of waste in the open", "Enforce ban on coal/firewood in tandoors", "Dust mitigation at construction sites"] },
+            II: { name: "Stage II, Very Poor", trigger_aqi: 301, color: "red", actions: ["All Stage I actions continue", "Enhance parking fees 3-4x to discourage private vehicles", "Augment CNG/electric bus and metro services", "Restrict diesel generator sets (except emergency)", "Intensify industrial pollution control inspections", "Daily review by Task Force"] },
+            III: { name: "Stage III, Severe", trigger_aqi: 401, color: "purple", actions: ["All Stage I and II actions continue", "Ban construction and demolition activities", "Shut brick kilns, hot mix plants, stone crushers", "Ban entry of truck traffic into Delhi (except essential)", "Advisory for work from home where possible", "State governments to decide on school closure"] },
+            IV: { name: "Stage IV, Emergency", trigger_aqi: 451, color: "maroon", actions: ["All previous stage actions continue", "Stop ALL truck traffic except electric and essential", "Ban diesel medium and heavy goods vehicles", "State governments may allow 50% office staff", "Consider odd-even scheme", "Close schools, shift to online", "Suspend all construction including highways"] },
           },
         });
       })
@@ -73,17 +73,17 @@ export default function CompliancePage() {
     try { setReport(await fetchAPI<ComplianceReport>("/api/v1/compliance/report?city=Delhi")); }
     catch {
       setReport({
-        title: "Air Quality Compliance Report — Delhi",
+        title: "Air Quality Compliance Report, Delhi",
         period: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
         executive_summary: {
           overall_status: "Moderate", avg_aqi: 185, max_aqi: 275, stations_monitored: 30,
           hotspots_detected: 5, anomalies_flagged: 3, dominant_pollution_source: "vehicular",
-          weather_outlook: "moderate — watch for stagnation conditions",
+          weather_outlook: "moderate, watch for stagnation conditions",
           headline: "Air quality moderate across Delhi NCR. Vehicular emissions dominant at 35%. Wazirpur and Anand Vihar reporting elevated levels. Wind dispersion moderate.",
         },
-        grap_compliance: { current_stage: "I — Poor", required_actions: ["Intensify road sweeping", "Water sprinkling on dusty roads", "Enforce PUC compliance"] },
+        grap_compliance: { current_stage: "I, Poor", required_actions: ["Intensify road sweeping", "Water sprinkling on dusty roads", "Enforce PUC compliance"] },
         enforcement_recommendations: [
-          { priority: 1, action: "Deploy inspectors to Wazirpur industrial zone — 30% industrial attribution", urgency: "today" },
+          { priority: 1, action: "Deploy inspectors to Wazirpur industrial zone, 30% industrial attribution", urgency: "today" },
           { priority: 2, action: "Check dust suppression at Mundka construction sites", urgency: "today" },
           { priority: 3, action: "Patrol for open burning near Narela", urgency: "immediate" },
         ],
@@ -155,7 +155,7 @@ export default function CompliancePage() {
                 </div>
               </div>
 
-              {/* GRAP stages — big readable cards */}
+              {/* GRAP stages, big readable cards */}
               <div>
                 <div className="flex items-center gap-2.5 mb-5">
                   <span className="inline-block h-2.5 w-2.5 rounded-[3px]" style={{ background: "var(--entity-poor)" }} />
@@ -184,7 +184,7 @@ export default function CompliancePage() {
                               </span>
                           </div>
                           <p className="text-[16px] lowercase mb-1" style={{ fontVariationSettings: "'wght' 580" }}>
-                            {style.label} — trigger aqi &gt; {stage.trigger_aqi}
+                            {style.label}, trigger aqi &gt; {stage.trigger_aqi}
                           </p>
                           <div className="mt-4 space-y-2">
                             {stage.actions.slice(0, isActive ? undefined : 4).map((action, i) => (
@@ -252,7 +252,7 @@ export default function CompliancePage() {
                           { label: "hotspots", value: String(report.executive_summary.hotspots_detected), color: "var(--entity-poor)" },
                           { label: "anomalies", value: String(report.executive_summary.anomalies_flagged), color: "var(--entity-severe)" },
                           { label: "dominant source", value: report.executive_summary.dominant_pollution_source },
-                          { label: "weather outlook", value: report.executive_summary.weather_outlook.split("—")[0] },
+                          { label: "weather outlook", value: report.executive_summary.weather_outlook.split(", ")[0] },
                         ].map((item) => (
                           <div key={item.label} className="bg-secondary/50 rounded-xl p-4">
                             <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">{item.label}</span>

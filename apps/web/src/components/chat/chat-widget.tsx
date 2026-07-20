@@ -21,7 +21,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "hey! i'm pavan — your air quality intelligence assistant. ask me anything about delhi's air quality, pollution sources, or what interventions could help.",
+      content: "hey! i'm pavan, your air quality intelligence assistant. ask me anything about delhi's air quality, pollution sources, or what interventions could help.",
       timestamp: new Date(),
     },
   ]);
@@ -68,7 +68,7 @@ export default function ChatWidget() {
         ...prev,
         {
           role: "assistant",
-          content: "check the dashboard for live aqi data across 105 stations in 57 cities. the map shows everything — zoom into any city for detail.",
+          content: "check the dashboard for live aqi data across 105 stations in 57 cities. the map shows everything, zoom into any city for detail.",
           timestamp: new Date(),
         },
       ]);
@@ -154,7 +154,7 @@ export default function ChatWidget() {
               </div>
             )}
 
-            {/* Suggestions — only show at start */}
+            {/* Suggestions, only show at start */}
             {messages.length <= 1 && (
               <div className="flex flex-wrap gap-1.5 pt-2">
                 {SUGGESTIONS.map((s) => (

@@ -30,7 +30,7 @@ export function Fusion() {
             className="max-w-[24ch] lowercase"
             style={{ fontSize: "clamp(28px, 3.8vw, 50px)", lineHeight: 1.08, letterSpacing: "-0.03em", fontVariationSettings: "'wght' 600, 'wdth' 94" }}
           >
-            dashboards tell you the air is bad. <span style={{ color: ACCENT }}>pavan tells you why</span> — and
+            dashboards tell you the air is bad. <span style={{ color: ACCENT }}>pavan tells you why</span>, and
             what to do about it.
           </p>
         </Reveal>
