@@ -58,6 +58,9 @@ export function Hero() {
             style={{ objectPosition: "50% 42%" }}
           />
         </motion.div>
+        {/* Flat black tint over the whole image */}
+        <div aria-hidden className="absolute inset-0" style={{ background: "rgba(0,0,0,0.38)" }} />
+        {/* Legibility + blend-to-black at the bottom for the wordmark */}
         <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,7,6,0.58) 0%, rgba(8,7,6,0.14) 28%, rgba(8,7,6,0.35) 60%, rgba(8,7,6,0.94) 100%)" }} />
       </motion.div>
 
