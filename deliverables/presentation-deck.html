@@ -101,6 +101,7 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
     </div>
     <div style="font-size: 18px;"><span style="font-weight: 500;">team</span> <span style="font-size: 28px; font-weight: 800;">edgerunner</span> <span style="opacity: 0.5; margin-left: 16px;">pavan-aqi.vercel.app</span></div>
   </div>
+  <img src="https://pavan-aqi.vercel.app/claudy/sit.png" alt="" style="position:absolute;right:48px;bottom:36px;width:120px;opacity:0.25;filter:brightness(0) invert(1);" />
   <div class="sn" style="color: rgba(255,255,255,0.3);">01</div>
 </div>
 
@@ -246,8 +247,9 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="brand">pavan.</div><div class="sn">06</div>
 </div>
 
-<!-- SLIDE 7: COVERAGE -->
-<div class="slide">
+<!-- SLIDE 7: COVERAGE with India map -->
+<div class="slide" style="overflow: hidden;">
+  <img src="https://pavan-aqi.vercel.app/india-map.png" alt="" style="position:absolute;right:40px;top:50%;transform:translateY(-50%);height:85%;opacity:0.06;" />
   <div class="eyebrow">national coverage</div>
   <h2>all india. every state capital.</h2>
   <div class="grid g4" style="margin-top: 24px;">
@@ -256,13 +258,12 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
     <div class="tile" style="background: var(--purple); color: white; text-align: center;"><div class="stat">5</div><div class="stat-label" style="opacity: 0.8;">data sources</div></div>
     <div class="tile" style="background: var(--forest); color: #f0fdf4; text-align: center;"><div class="stat">28</div><div class="stat-label" style="opacity: 0.8;">endpoints</div></div>
   </div>
-  <p style="margin-top: 24px; font-size: 20px; font-weight: 500; line-height: 1.8;">
-    <strong style="color: var(--coral);">delhi (17)</strong> ·
-    <strong>mumbai (6)</strong> ·
-    <strong>bangalore (5)</strong> ·
-    <strong>chennai (4)</strong> ·
-    <strong>kolkata (4)</strong>
-    <span style="color: var(--muted);">+ 52 more cities across all states</span>
+  <p style="margin-top: 20px; font-size: 18px; font-weight: 500; line-height: 1.8;">
+    <span style="color: var(--coral); font-weight: 700;">north:</span> delhi (17) · lucknow · jaipur · chandigarh · srinagar · leh &nbsp;
+    <span style="color: var(--cobalt); font-weight: 700;">west:</span> mumbai (6) · pune · ahmedabad · surat<br>
+    <span style="color: var(--forest); font-weight: 700;">south:</span> bangalore (5) · chennai · hyderabad · kochi &nbsp;
+    <span style="color: var(--amber); font-weight: 700;">east:</span> kolkata (4) · patna &nbsp;
+    <span style="color: var(--teal); font-weight: 700;">NE:</span> guwahati · imphal · gangtok
   </p>
   <div class="brand">pavan.</div><div class="sn">07</div>
 </div>
@@ -273,13 +274,12 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="grid g2" style="height: 100%; align-items: center;">
     <div>
       <h2 style="font-size: 36px;">built to scale</h2>
-      <p class="bullet" style="font-size: 17px; margin-top: 16px;">
-        <strong>frontend:</strong> Next.js 16 · Mapbox GL · Recharts<br>
-        <strong>backend:</strong> FastAPI · XGBoost · scikit-learn<br>
-        <strong>ai:</strong> GPT-4o · Gaussian plume model<br>
-        <strong>data:</strong> CPCB · Sentinel-5P · MODIS · Traffic<br>
-        <strong>infra:</strong> Vercel · Railway · Supabase · Docker
-      </p>
+      <div style="margin-top: 16px;">
+        <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">frontend</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--cobalt); color: white; font-size: 13px; padding: 5px 14px;">Next.js 16</span><span class="pill" style="background: var(--teal); color: #0a0a08; font-size: 13px; padding: 5px 14px;">Mapbox GL</span><span class="pill" style="background: var(--card); border: 1.5px solid #ddd; font-size: 13px; padding: 5px 14px;">Recharts</span><span class="pill" style="background: var(--purple); color: white; font-size: 13px; padding: 5px 14px;">Framer Motion</span></div></div>
+        <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">backend + ml</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--forest); color: #f0fdf4; font-size: 13px; padding: 5px 14px;">FastAPI</span><span class="pill" style="background: var(--amber); font-size: 13px; padding: 5px 14px;">XGBoost</span><span class="pill" style="background: var(--card); border: 1.5px solid #ddd; font-size: 13px; padding: 5px 14px;">Gaussian Plume</span></div></div>
+        <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">ai + data</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--pink); color: white; font-size: 13px; padding: 5px 14px;">GPT-4o</span><span class="pill" style="background: var(--cobalt); color: white; font-size: 13px; padding: 5px 14px;">Sentinel-5P</span><span class="pill" style="background: var(--coral); color: white; font-size: 13px; padding: 5px 14px;">MODIS</span></div></div>
+        <div><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">infra</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--card); border: 2px solid var(--cobalt); color: var(--cobalt); font-size: 13px; padding: 5px 14px;">Vercel</span><span class="pill" style="background: var(--card); border: 2px solid var(--purple); color: var(--purple); font-size: 13px; padding: 5px 14px;">Railway</span><span class="pill" style="background: var(--card); border: 2px solid var(--forest); color: var(--forest); font-size: 13px; padding: 5px 14px;">Supabase</span><span class="pill" style="background: var(--card); border: 2px solid var(--amber); color: var(--amber); font-size: 13px; padding: 5px 14px;">Docker</span></div></div>
+      </div>
     </div>
     <div>
       <div class="tile" style="background: var(--card); margin-bottom: 12px;">
@@ -334,6 +334,7 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
       <p style="font-size: 15px; opacity: 0.6; margin-top: 8px;">daily digests · alerts · health advisories</p>
     </div>
   </div>
+  <img src="https://pavan-aqi.vercel.app/claudy/chill.png" alt="" style="position:absolute;right:40px;bottom:28px;width:100px;opacity:0.2;filter:brightness(0) invert(1);" />
   <div class="sn" style="color: rgba(245,240,230,0.3);">10</div>
   <div class="brand" style="color: rgba(245,240,230,0.3);">pavan.</div>
 </div>
@@ -344,6 +345,11 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <h1 style="font-size: 88px;">pavan.</h1>
   <p class="sub" style="text-align: center; margin: 0 auto; font-size: 22px;">clean air intelligence for every indian citizen.</p>
   <div style="margin-top: 28px; font-size: 20px;"><span style="font-weight: 500;">team</span> <span style="font-size: 32px; font-weight: 800;">edgerunner</span></div>
-  <div style="margin-top: 28px; font-size: 14px; color: var(--muted);">pavan-aqi.vercel.app · @PavanETbot · whatsapp channel</div>
+  <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+    <span class="pill" style="background: var(--cobalt); color: white; font-size: 13px;">pavan-aqi.vercel.app</span>
+    <span class="pill" style="background: var(--purple); color: white; font-size: 13px;">@PavanETbot</span>
+    <span class="pill" style="background: var(--forest); color: #f0fdf4; font-size: 13px;">whatsapp channel</span>
+  </div>
+  <img src="https://pavan-aqi.vercel.app/claudy/sleep.png" alt="" style="position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); width: 80px; opacity: 0.3;" />
   <div class="sn">11</div>
 </div>
