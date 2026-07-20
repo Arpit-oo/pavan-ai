@@ -111,9 +111,9 @@ export default function LandingPage() {
           </a>
         </div>
 
-        {/* Claudy mascot */}
-        <div className="absolute right-8 bottom-8 opacity-15 pointer-events-none hidden lg:block">
-          <Image src="/claudy.png" alt="Claudy mascot" width={280} height={340} className="object-contain" style={{ filter: "grayscale(0.3)" }} />
+        {/* Claudy - chill pose in hero */}
+        <div className="absolute right-12 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">
+          <Image src="/claudy/chill.png" alt="Claudy chilling" width={220} height={220} className="object-contain" />
         </div>
       </section>
 
@@ -132,7 +132,11 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-6 pb-20 relative">
+        {/* Claudy - sit/reading pose next to features header */}
+        <div className="absolute -right-4 -top-8 pointer-events-none hidden lg:block opacity-80">
+          <Image src="/claudy/sit.png" alt="Claudy reading" width={120} height={120} className="object-contain" />
+        </div>
         <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-4">capabilities</div>
         <h2 className="lowercase mb-10" style={{ fontSize: "clamp(32px, 4vw, 48px)", fontVariationSettings: "'wght' 720, 'wdth' 94", letterSpacing: "-0.035em" }}>
           what pavan does
@@ -160,7 +164,11 @@ export default function LandingPage() {
 
       {/* Data Trust */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "white" } as React.CSSProperties}>
+        <div className="ru-bento relative overflow-visible" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "white" } as React.CSSProperties}>
+          {/* Claudy - pray/meditating pose */}
+          <div className="absolute -top-10 -right-6 pointer-events-none hidden md:block">
+            <Image src="/claudy/pray.png" alt="Claudy meditating" width={100} height={100} className="object-contain" />
+          </div>
           <div className="p-10 text-center">
             <span className="text-4xl mb-4 block">✅</span>
             <h3 className="text-[24px] lowercase mb-4" style={{ fontVariationSettings: "'wght' 720" }}>verified data. transparent methodology.</h3>
@@ -172,7 +180,11 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-6 pb-20 relative">
+        {/* Claudy - pond/digging pose next to FAQ */}
+        <div className="absolute -left-4 top-0 pointer-events-none hidden lg:block opacity-70">
+          <Image src="/claudy/pond.png" alt="Claudy investigating" width={110} height={110} className="object-contain" />
+        </div>
         <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-4">frequently asked</div>
         <h2 className="lowercase mb-10" style={{ fontSize: "clamp(32px, 4vw, 48px)", fontVariationSettings: "'wght' 720, 'wdth' 94", letterSpacing: "-0.035em" }}>
           questions
@@ -195,7 +207,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 text-center">
+      <section className="mx-auto max-w-6xl px-6 pb-20 text-center relative">
         <h2 className="lowercase mb-6" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontVariationSettings: "'wght' 760, 'wdth' 94", letterSpacing: "-0.035em" }}>
           try pavan now
         </h2>
@@ -210,6 +222,10 @@ export default function LandingPage() {
         <p className="mt-8 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
           et ai hackathon 2026 · team edgerunner · pavan-aqi.vercel.app
         </p>
+        {/* Claudy - sleep pose */}
+        <div className="flex justify-center mt-8 opacity-60">
+          <Image src="/claudy/sleep.png" alt="Claudy sleeping" width={100} height={80} className="object-contain" />
+        </div>
       </section>
 
       {/* Footer */}
