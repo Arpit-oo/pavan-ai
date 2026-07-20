@@ -255,16 +255,17 @@ export default function AlertsPage() {
                   </div>
                 </div>
 
-                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#f0fdf4" } as React.CSSProperties}>
+                <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" target="_blank" rel="noopener noreferrer" className="ru-bento block" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#f0fdf4" } as React.CSSProperties}>
                   <div className="p-7 min-h-[200px] flex flex-col">
                     <span className="text-3xl mb-3">💬</span>
-                    <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>whatsapp alerts</p>
-                    <p className="text-[14px] opacity-80 mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 500" }}>pre-formatted ward-level health advisories ready for whatsapp broadcast. 4 languages — hindi, english, tamil, bengali. includes aqi, station data, and actionable health recommendations</p>
-                    <div className="mt-auto pt-4">
-                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">4 languages · broadcast ready</span>
+                    <p className="text-[18px] lowercase" style={{ fontVariationSettings: "'wght' 680" }}>whatsapp channel</p>
+                    <p className="text-[14px] opacity-80 mt-2 leading-relaxed" style={{ fontVariationSettings: "'wght' 500" }}>join our broadcast channel for daily aqi digests, threshold alerts, grap notifications, and health advisories in hindi + english</p>
+                    <div className="mt-auto pt-4 flex gap-2">
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">join channel →</span>
+                      <span className="font-mono text-[10px] uppercase tracking-wider bg-white/20 rounded-full px-3 py-1.5">live</span>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </>
           )}

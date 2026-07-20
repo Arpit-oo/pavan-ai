@@ -243,6 +243,9 @@ export default function LandingPage() {
           <a href="https://t.me/PavanETbot" target="_blank" rel="noopener noreferrer" className="ru-pill !text-[16px] !px-8 !py-4" style={{ background: "var(--entity-forecast)", color: "white" }}>
             telegram bot →
           </a>
+          <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" target="_blank" rel="noopener noreferrer" className="ru-pill !text-[16px] !px-8 !py-4" style={{ background: "var(--entity-good)", color: "#f0fdf4" }}>
+            whatsapp channel →
+          </a>
         </div>
         <p className="mt-8 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
           et ai hackathon 2026 · team edgerunner · pavan-aqi.vercel.app
