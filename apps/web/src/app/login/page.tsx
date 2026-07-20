@@ -106,6 +106,11 @@ export default function LoginPage() {
               <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="w-full bg-card border border-border rounded-2xl px-4 py-3 text-[15px] outline-none focus:border-[var(--entity-forecast)] transition-colors" style={{ fontVariationSettings: "'wght' 460" }} />
             </div>
 
+            <div>
+              <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">password</label>
+              <input type="password" required placeholder="••••••••" minLength={6} className="w-full bg-card border border-border rounded-2xl px-4 py-3 text-[15px] outline-none focus:border-[var(--entity-forecast)] transition-colors" style={{ fontVariationSettings: "'wght' 460" }} />
+            </div>
+
             {mode === "signup" && (
               <div>
                 <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">monitor cities (select multiple)</label>
@@ -162,12 +167,6 @@ export default function LoginPage() {
               </div>
             )}
 
-            {mode === "login" && (
-              <div>
-                <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">password</label>
-                <input type="password" placeholder="••••••••" className="w-full bg-card border border-border rounded-2xl px-4 py-3 text-[15px] outline-none focus:border-[var(--entity-forecast)] transition-colors" />
-              </div>
-            )}
 
             <button type="submit" disabled={loading} className="w-full ru-pill !text-[15px] !py-3.5 justify-center">
               {loading ? "setting up..." : mode === "signup" ? "subscribe to alerts →" : "sign in →"}
