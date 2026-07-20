@@ -31,7 +31,7 @@ export default function NavBar() {
             />
           </Link>
 
-          <nav className="flex items-center gap-4 md:gap-6 overflow-x-auto">
+          <nav className="flex items-center gap-3 md:gap-6 overflow-x-auto" style={{scrollbarWidth:"none"}}>
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
               return (

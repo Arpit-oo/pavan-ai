@@ -1,7 +1,0 @@
-[     223ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
-[     736ms] [LOG] [Fast Refresh] done in 628ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
-[    1002ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
-[    1081ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
-[    1549ms] [ERROR] Access to fetch at 'http://localhost:8000/api/v1/aqi/heatmap?city=Delhi' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:3000/:0
-[    1549ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/aqi/heatmap?city=Delhi:0
-[    3087ms] [WARNING] luma.gl: Binding weightsTexture not set: Not found in shader layout. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
