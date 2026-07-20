@@ -61,8 +61,9 @@ a{color:var(--blue);text-decoration:none;}
     <span class="pill" style="background:var(--blue);color:white;">105 stations</span>
     <span class="pill" style="background:var(--green);color:white;">57 cities</span>
     <span class="pill" style="background:var(--purple);color:white;">6 ai agents</span>
-    <span class="pill" style="background:var(--teal);color:#0a0a08;">all india</span>
-    <span class="pill" style="background:var(--orange);color:#1a1a18;">gpt-4o chatbot</span>
+    <span class="pill" style="background:var(--red);color:white;">5 data sources</span>
+    <span class="pill" style="background:var(--teal);color:#0a0a08;">27 api endpoints</span>
+    <span class="pill" style="background:var(--orange);color:#1a1a18;">86% rmse improvement</span>
   </div>
 
   <div style="display:flex;align-items:center;gap:16px;">
@@ -142,6 +143,9 @@ a{color:var(--blue);text-decoration:none;}
     <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:13px;">
       <span class="pill" style="background:var(--secondary);font-size:11px;">cpcb api</span>
       <span class="pill" style="background:var(--secondary);font-size:11px;">openweathermap</span>
+      <span class="pill" style="background:var(--secondary);font-size:11px;">sentinel-5p</span>
+      <span class="pill" style="background:var(--secondary);font-size:11px;">modis-viirs</span>
+      <span class="pill" style="background:var(--secondary);font-size:11px;">traffic</span>
       <span style="color:var(--muted);font-size:16px;">→</span>
       <span class="pill" style="background:var(--green);color:white;font-size:11px;">📡 sensor + 🌤️ weather</span>
       <span style="color:var(--muted);font-size:16px;">→</span>
@@ -242,12 +246,12 @@ a{color:var(--blue);text-decoration:none;}
       <p style="font-size:14px;font-variation-settings:'wght' 580;margin-top:8px;">cities monitored</p>
     </div>
     <div class="tile" style="background:var(--purple);color:white;">
-      <div class="big" style="font-size:64px;">25+</div>
-      <p style="font-size:14px;font-variation-settings:'wght' 580;margin-top:8px;">api endpoints</p>
+      <div class="big" style="font-size:64px;">5</div>
+      <p style="font-size:14px;font-variation-settings:'wght' 580;margin-top:8px;">data sources fused</p>
     </div>
     <div class="tile" style="background:var(--green);color:white;">
-      <div class="big" style="font-size:64px;">8</div>
-      <p style="font-size:14px;font-variation-settings:'wght' 580;margin-top:8px;">web pages</p>
+      <div class="big" style="font-size:64px;">27</div>
+      <p style="font-size:14px;font-variation-settings:'wght' 580;margin-top:8px;">api endpoints</p>
     </div>
   </div>
 
@@ -308,14 +312,14 @@ a{color:var(--blue);text-decoration:none;}
     </div>
     <div class="tile" style="background:var(--teal);color:#0a0a08;">
       <div class="tile-label">forecast model</div>
-      <div class="big" style="font-size:64px;">4.88</div>
-      <p style="font-size:17px;font-variation-settings:'wght' 640;margin-top:6px;">mae (mean absolute error)</p>
+      <div class="big" style="font-size:56px;">86%</div>
+      <p style="font-size:17px;font-variation-settings:'wght' 640;margin-top:6px;">better than persistence baseline</p>
       <div style="margin-top:24px;font-size:14px;line-height:2.2;">
-        <p>12 features · 10,000 training samples</p>
-        <p>xgboost · 200 estimators · max_depth 6</p>
-        <p>1-72 hour prediction horizon</p>
-        <p>confidence intervals per prediction</p>
-        <p>seasonal + diurnal pattern validated</p>
+        <p>rmse: 11.74 vs baseline 83.65</p>
+        <p>mae: 4.88 · 12 features · 10k samples</p>
+        <p>xgboost · 200 estimators</p>
+        <p>1-72hr predictions with confidence intervals</p>
+        <p>signal → recommendation: &lt;3 seconds</p>
       </div>
     </div>
   </div>
