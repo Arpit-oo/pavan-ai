@@ -102,9 +102,7 @@ export default function ChatWidget() {
           {/* Header */}
           <div className="p-4 border-b border-border">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[var(--entity-forecast)] flex items-center justify-center">
-                <span className="text-white text-sm">🌤️</span>
-              </div>
+              <img src="/claudy.png" alt="Claudy" className="w-9 h-9 rounded-full object-cover" style={{ objectPosition: "25% 75%" }} />
               <div>
                 <p className="text-[13px]" style={{ fontVariationSettings: "'wght' 620" }}>pavan assistant</p>
                 <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">air quality intelligence</p>
