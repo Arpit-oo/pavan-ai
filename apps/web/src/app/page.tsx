@@ -111,9 +111,9 @@ export default function LandingPage() {
           </a>
         </div>
 
-        {/* Claudy - chill pose in hero */}
-        <div className="absolute right-12 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">
-          <Image src="/claudy/chill.png" alt="Claudy chilling" width={220} height={220} className="object-contain" />
+        {/* Claudy - big chill pose in hero, right side next to heading */}
+        <div className="absolute right-16 top-16 pointer-events-none hidden lg:block">
+          <Image src="/claudy/chill.png" alt="Claudy chilling" width={300} height={300} className="object-contain" />
         </div>
       </section>
 
@@ -165,9 +165,9 @@ export default function LandingPage() {
       {/* Data Trust */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="ru-bento relative overflow-visible" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "white" } as React.CSSProperties}>
-          {/* Claudy - pray/meditating pose */}
-          <div className="absolute -top-10 -right-6 pointer-events-none hidden md:block">
-            <Image src="/claudy/pray.png" alt="Claudy meditating" width={100} height={100} className="object-contain" />
+          {/* Claudy - pray/meditating pose — shifted down to be fully visible */}
+          <div className="absolute -bottom-14 -right-6 pointer-events-none hidden md:block">
+            <Image src="/claudy/pray.png" alt="Claudy meditating" width={110} height={110} className="object-contain" />
           </div>
           <div className="p-10 text-center">
             <span className="text-4xl mb-4 block">✅</span>
@@ -181,9 +181,9 @@ export default function LandingPage() {
 
       {/* FAQ */}
       <section className="mx-auto max-w-6xl px-6 pb-20 relative">
-        {/* Claudy - pond/digging pose next to FAQ */}
-        <div className="absolute -left-4 top-0 pointer-events-none hidden lg:block opacity-70">
-          <Image src="/claudy/pond.png" alt="Claudy investigating" width={110} height={110} className="object-contain" />
+        {/* Claudy - pond/digging pose — shifted right so it doesn't overlap "questions" */}
+        <div className="absolute right-8 -top-6 pointer-events-none hidden lg:block opacity-70">
+          <Image src="/claudy/pond.png" alt="Claudy investigating" width={100} height={100} className="object-contain" />
         </div>
         <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-4">frequently asked</div>
         <h2 className="lowercase mb-10" style={{ fontSize: "clamp(32px, 4vw, 48px)", fontVariationSettings: "'wght' 720, 'wdth' 94", letterSpacing: "-0.035em" }}>
