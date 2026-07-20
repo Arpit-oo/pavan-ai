@@ -29,6 +29,25 @@ class Orchestrator:
         self.run_log = []
         context = {"city": city}
 
+        # Phase 0: Satellite + traffic data (parallel with Phase 1)
+        self._log("Fetching satellite (Sentinel-5P) + traffic data", "orchestrator")
+        satellite_data = {}
+        traffic_data = {}
+        try:
+            from app.services.satellite import SatelliteService
+            from app.services.traffic import TrafficService
+            sat_svc = SatelliteService()
+            trf_svc = TrafficService()
+            satellite_data = {"no2_hotspots": len(sat_svc.get_no2_grid().get("hotspots", [])), "source": "sentinel-5p"}
+            traffic_data = trf_svc.get_city_traffic(city)
+            self._log("Satellite: {} NO2 hotspots. Traffic: congestion {}%, emission factor {}".format(
+                satellite_data.get("no2_hotspots", 0),
+                traffic_data.get("congestion_index", 0),
+                traffic_data.get("vehicular_emission_factor", 0),
+            ), "orchestrator")
+        except Exception:
+            self._log("Satellite/traffic fallback — continuing without", "orchestrator")
+
         # Phase 1: Parallel data collection
         self._log("Starting parallel data collection", "orchestrator")
         sensor_result, weather_result = await asyncio.gather(
@@ -66,6 +85,7 @@ class Orchestrator:
         enforcement_result = await self._run_agent(self.enforcement, context=enforcement_context)
 
         elapsed = (datetime.now() - start).total_seconds()
+        self._log("Total signal-to-recommendation: {:.2f}s".format(elapsed), "orchestrator")
 
         # Compile summary
         summary = self._build_summary(
@@ -74,11 +94,27 @@ class Orchestrator:
         summary["enforcement_recs"] = len(
             enforcement_result.data.get("recommendations", [])
         )
+        summary["signal_to_recommendation_seconds"] = round(elapsed, 2)
+        summary["satellite_data"] = satellite_data
+        summary["traffic_data"] = {
+            "congestion_index": traffic_data.get("congestion_index", 0),
+            "vehicular_emission_factor": traffic_data.get("vehicular_emission_factor", 0),
+            "is_peak_hour": traffic_data.get("is_peak_hour", False),
+            "traffic_pm25_contribution_pct": traffic_data.get("traffic_contribution_to_pm25_pct", 0),
+        }
+        summary["data_sources"] = [
+            "cpcb_caaqms ({} stations)".format(summary.get("station_count", 0)),
+            "openweathermap (live weather)",
+            "sentinel-5p (no2/so2 column density)",
+            "modis-viirs (fire detection)",
+            "traffic-mobility (congestion index)",
+        ]
 
         return {
             "city": city,
             "timestamp": datetime.now().isoformat(),
             "elapsed_seconds": round(elapsed, 2),
+            "signal_to_recommendation_seconds": round(elapsed, 2),
             "summary": summary,
             "agents": {
                 "sensor": sensor_result.to_dict(),
@@ -87,6 +123,7 @@ class Orchestrator:
                 "attribution": attribution_result.to_dict(),
                 "enforcement": enforcement_result.to_dict(),
             },
+            "data_sources_used": 5,
             "run_log": self.run_log,
         }
 

@@ -20,6 +20,38 @@ async def get_live_aqi(
     return {"city": city, "stations": data, "count": len(data)}
 
 
+@router.get("/satellite")
+async def get_satellite_data():
+    """Get Sentinel-5P NO2/SO2 satellite data grid."""
+    from app.services.satellite import SatelliteService
+    svc = SatelliteService()
+    return svc.get_no2_grid()
+
+
+@router.get("/fires")
+async def get_fire_data():
+    """Get MODIS/VIIRS active fire detection."""
+    from app.services.satellite import SatelliteService
+    svc = SatelliteService()
+    return svc.get_thermal_anomalies()
+
+
+@router.get("/traffic")
+async def get_traffic_data(city: str = Query(default="Delhi")):
+    """Get traffic/mobility data for a city."""
+    from app.services.traffic import TrafficService
+    svc = TrafficService()
+    return svc.get_city_traffic(city)
+
+
+@router.get("/traffic/grid")
+async def get_traffic_grid(city: str = Query(default="Delhi")):
+    """Get traffic density grid for map overlay."""
+    from app.services.traffic import TrafficService
+    svc = TrafficService()
+    return svc.get_traffic_grid(city)
+
+
 @router.get("/all-india")
 async def get_all_india_aqi():
     """Get AQI readings for all stations across India."""
