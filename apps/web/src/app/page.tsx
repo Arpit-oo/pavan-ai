@@ -92,7 +92,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 pb-20">
+      <section className="mx-auto max-w-6xl px-6 pt-16 pb-20 relative">
         <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-6">
           et ai hackathon 2026 · problem statement #5 · team edgerunner
         </div>
@@ -111,9 +111,9 @@ export default function LandingPage() {
           </a>
         </div>
 
-        {/* Claudy - big chill pose in hero, right side next to heading */}
-        <div className="absolute right-16 top-16 pointer-events-none hidden lg:block">
-          <Image src="/claudy/chill.png" alt="Claudy chilling" width={300} height={300} className="object-contain" />
+        {/* Claudy - sit/reading pose in hero */}
+        <div className="absolute right-16 top-20 pointer-events-none hidden lg:block">
+          <Image src="/claudy/sit.png" alt="Claudy reading" width={260} height={260} className="object-contain" />
         </div>
       </section>
 
@@ -133,9 +133,9 @@ export default function LandingPage() {
 
       {/* Features */}
       <section className="mx-auto max-w-6xl px-6 pb-20 relative">
-        {/* Claudy - sit/reading pose next to features header */}
-        <div className="absolute -right-4 -top-8 pointer-events-none hidden lg:block opacity-80">
-          <Image src="/claudy/sit.png" alt="Claudy reading" width={120} height={120} className="object-contain" />
+        {/* Claudy - chill/hammock pose next to features header (smaller since quality lower) */}
+        <div className="absolute right-4 -top-4 pointer-events-none hidden lg:block opacity-70">
+          <Image src="/claudy/chill.png" alt="Claudy chilling" width={100} height={100} className="object-contain" />
         </div>
         <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-4">capabilities</div>
         <h2 className="lowercase mb-10" style={{ fontSize: "clamp(32px, 4vw, 48px)", fontVariationSettings: "'wght' 720, 'wdth' 94", letterSpacing: "-0.035em" }}>
