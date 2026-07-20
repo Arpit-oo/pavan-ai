@@ -244,6 +244,15 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
 /* Global readability boost */
 .ru-bento p, .ru-bento span, .ru-bento div { font-variation-settings: "wght" 480, "wdth" 96; }
 
+/* Accessibility */
+:focus-visible { outline: 2px solid var(--entity-forecast); outline-offset: 2px; border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+a, button { min-height: 44px; min-width: 44px; }
+.ru-bento:focus-within { outline: 2px solid var(--entity-forecast); outline-offset: 2px; }
+
 /* Mobile nav scroll */
 @media (max-width: 768px) {
   nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }

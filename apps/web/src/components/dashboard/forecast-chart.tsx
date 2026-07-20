@@ -37,16 +37,24 @@ interface ForecastResponse {
   model_info: { status: string; metrics?: { mae: number; rmse: number } };
 }
 
+const CITIES = ["Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune", "Lucknow", "Jaipur", "Ahmedabad"];
+
+const CITY_MOCK_BASE: Record<string, number> = {
+  Delhi: 185, Mumbai: 95, Bangalore: 55, Chennai: 60, Kolkata: 140,
+  Hyderabad: 80, Pune: 90, Lucknow: 175, Jaipur: 70, Ahmedabad: 100,
+};
+
 export default function ForecastChart() {
   const [data, setData] = useState<ForecastResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [hours, setHours] = useState(24);
+  const [city, setCity] = useState("Delhi");
 
   const loadForecast = async () => {
     setLoading(true);
     try {
       const res = await fetchAPI<ForecastResponse>(
-        `/api/v1/forecast/city?city=Delhi&hours=${hours}`
+        `/api/v1/forecast/city?city=${city}&hours=${hours}`
       );
       setData(res);
       setUseMock(false);
@@ -61,12 +69,21 @@ export default function ForecastChart() {
 
   useEffect(() => {
     loadForecast();
-  }, [hours]);
+  }, [hours, city]);
 
   const getChartData = () => {
     if (useMock) {
-      const { MOCK_FORECAST } = require("@/lib/mock-data");
-      return MOCK_FORECAST.slice(0, hours);
+      const base = CITY_MOCK_BASE[city] || 120;
+      return Array.from({ length: Math.min(hours, 24) }, (_, i) => {
+        const val = base + Math.sin((i / 24) * Math.PI * 2 - 1) * (base * 0.2) + (Math.random() - 0.5) * 15;
+        return {
+          time: `+${i + 1}h`,
+          hour: `+${i + 1}h`,
+          aqi: Math.round(val),
+          lower: Math.round(val - 15 - i * 1.5),
+          upper: Math.round(val + 15 + i * 1.5),
+        };
+      });
     }
     if (!data) return [];
 
@@ -117,7 +134,7 @@ export default function ForecastChart() {
         <div>
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-1">forecast</div>
           <h3 className="text-[15px]" style={{ fontVariationSettings: "'wght' 620" }}>
-            aqi forecast — delhi
+            aqi forecast — {city.toLowerCase()}
           </h3>
           {data?.model_info?.metrics && (
             <p className="font-mono text-[10px] text-muted-foreground mt-0.5 uppercase tracking-wider">
@@ -197,6 +214,24 @@ export default function ForecastChart() {
           No forecast data
         </div>
       )}
+
+      {/* City selector */}
+      <div className="mt-4 flex gap-2 flex-wrap">
+        {CITIES.map((c) => (
+          <button
+            key={c}
+            onClick={() => setCity(c)}
+            className={`px-3 py-1.5 rounded-full text-[12px] transition-all ${
+              city === c
+                ? "bg-foreground text-background shadow-sm"
+                : "bg-secondary text-muted-foreground hover:text-foreground"
+            }`}
+            style={{ fontVariationSettings: city === c ? "'wght' 620" : "'wght' 440" }}
+          >
+            {c.toLowerCase()}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
