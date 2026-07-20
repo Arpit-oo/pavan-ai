@@ -186,9 +186,9 @@ export default function SimulatePage() {
 
           {result && !loading && (
             <div className="space-y-6">
-              {/* Impact stats — 4 big tiles */}
+              {/* Impact stats — 4 big tiles with tinted backgrounds */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-                <div className="ru-bento md:col-span-2" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                <div className="ru-bento md:col-span-2" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#f0fdf4" } as React.CSSProperties}>
                   <div className="p-8">
                     <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-70 mb-3">aqi reduction</div>
                     <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "clamp(72px, 10vw, 100px)" }}>
@@ -197,7 +197,7 @@ export default function SimulatePage() {
                     <p className="mt-3 text-[16px] opacity-80">{result.city_impact.aqi_reduction_pct.toFixed(1)}% improvement across {result.city_impact.stations_improved} stations</p>
                   </div>
                 </div>
-                <div className="ru-bento">
+                <div className="ru-bento" style={{ "--bento-bg": `${getAQIGradientColor(result.city_impact.avg_aqi_before)}12`, "--bento-fg": "var(--fg)" } as React.CSSProperties}>
                   <div className="p-8">
                     <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-3">before</div>
                     <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "72px", color: getAQIGradientColor(result.city_impact.avg_aqi_before) }}>
@@ -205,7 +205,7 @@ export default function SimulatePage() {
                     </span>
                   </div>
                 </div>
-                <div className="ru-bento">
+                <div className="ru-bento" style={{ "--bento-bg": `${getAQIGradientColor(result.city_impact.avg_aqi_after)}12`, "--bento-fg": "var(--fg)" } as React.CSSProperties}>
                   <div className="p-8">
                     <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-3">after</div>
                     <span className="font-display leading-[0.82] tracking-[-0.04em]" style={{ fontSize: "72px", color: getAQIGradientColor(result.city_impact.avg_aqi_after) }}>

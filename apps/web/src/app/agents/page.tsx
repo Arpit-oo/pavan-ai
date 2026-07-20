@@ -34,9 +34,13 @@ export default function AgentsPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
+  const [phase, setPhase] = useState(0);
 
   const runAnalysis = async () => {
-    setLoading(true); setResult(null);
+    setLoading(true); setResult(null); setPhase(0);
+    setPhase(1); await new Promise(r => setTimeout(r, 700));
+    setPhase(2); await new Promise(r => setTimeout(r, 600));
+    setPhase(3); await new Promise(r => setTimeout(r, 500));
     try {
       setResult(await fetchAPI<AnalysisResult>("/api/v1/agents/analyze?city=Delhi"));
     } catch {
@@ -173,6 +177,19 @@ export default function AgentsPage() {
                       <p className="mt-auto pt-5 font-mono text-[10px] text-muted-foreground opacity-40">click an agent card to inspect its output</p>
                     </>
                   )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {loading && (
+            <div className="ru-bento" style={{ "--bento-bg": "var(--card)" } as React.CSSProperties}>
+              <div className="p-8">
+                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-6">pipeline execution</div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 1 ? "bg-[var(--entity-good)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 1 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 1 ? "'wght' 600" : "'wght' 440"}}>phase 1 — data collection</p><p className="text-[12px] text-muted-foreground">📡 sensor agent + 🌤️ weather agent (parallel)</p></div></div>
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 2 ? "bg-[var(--entity-forecast)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 2 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 2 ? "'wght' 600" : "'wght' 440"}}>phase 2 — analysis</p><p className="text-[12px] text-muted-foreground">⚡ anomaly agent + 🔍 attribution agent (parallel)</p></div></div>
+                  <div className="flex items-center gap-4"><div className={`w-3 h-3 rounded-full transition-all duration-300 ${phase >= 3 ? "bg-[var(--entity-moderate)] scale-125" : "bg-muted"}`}/><div><p className={`text-[15px] ${phase >= 3 ? "" : "text-muted-foreground"}`} style={{fontVariationSettings: phase >= 3 ? "'wght' 600" : "'wght' 440"}}>phase 3 — enforcement</p><p className="text-[12px] text-muted-foreground">🛡️ enforcement agent → 🧠 orchestrator merges</p></div></div>
                 </div>
               </div>
             </div>

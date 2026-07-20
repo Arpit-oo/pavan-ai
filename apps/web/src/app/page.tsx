@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 const FEATURES = [
   {
@@ -74,9 +75,30 @@ const STATS = [
   { value: "4.88", label: "forecast mae", color: "var(--entity-good)" },
 ];
 
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const sections = el.querySelectorAll("[data-reveal]");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fade-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
 export default function LandingPage() {
+  const scrollRef = useScrollReveal();
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" ref={scrollRef}>
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-5">
@@ -118,7 +140,7 @@ export default function LandingPage() {
       </section>
 
       {/* Stats */}
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-6 pb-20" data-reveal style={{opacity:0}}>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {STATS.map((s) => (
             <div key={s.label} className="ru-bento text-center" style={{ "--bento-bg": "var(--card)", "--bento-fg": "var(--fg)" } as React.CSSProperties}>
@@ -132,7 +154,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 relative">
+      <section className="mx-auto max-w-6xl px-6 pb-20 relative" data-reveal style={{opacity:0}}>
         {/* Claudy - chill/hammock pose next to features header (smaller since quality lower) */}
         <div className="absolute right-4 -top-4 pointer-events-none hidden lg:block opacity-70">
           <Image src="/claudy/chill.png" alt="Claudy chilling" width={100} height={100} className="object-contain" />
@@ -163,7 +185,7 @@ export default function LandingPage() {
       </section>
 
       {/* Data Trust */}
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-6 pb-20" data-reveal style={{opacity:0}}>
         <div className="ru-bento relative overflow-visible" style={{ "--bento-bg": "#1a1a18", "--bento-fg": "#f5f0e6" } as React.CSSProperties}>
           {/* Claudy - pray/meditating pose — shifted down to be fully visible */}
           <div className="absolute -bottom-14 -right-6 pointer-events-none hidden md:block">
@@ -180,7 +202,7 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 relative">
+      <section className="mx-auto max-w-6xl px-6 pb-20 relative" data-reveal style={{opacity:0}}>
         {/* Claudy - pond/digging pose — shifted right so it doesn't overlap "questions" */}
         <div className="absolute right-8 -top-6 pointer-events-none hidden lg:block opacity-70">
           <Image src="/claudy/pond.png" alt="Claudy investigating" width={100} height={100} className="object-contain" />

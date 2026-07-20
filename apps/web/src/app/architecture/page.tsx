@@ -100,7 +100,7 @@ export default function ArchitecturePage() {
                   </div>
                   <div className="flex-1 flex flex-wrap gap-2.5">
                     {layer.items.map((item) => (
-                      <span key={item} className="font-mono text-[12px] bg-white/15 rounded-full px-4 py-2 lowercase">
+                      <span key={item} className="font-mono text-[12px] bg-white/30 rounded-full px-4 py-2 lowercase" style={{fontVariationSettings:"'wght' 560"}}>
                         {item}
                       </span>
                     ))}
@@ -152,8 +152,8 @@ export default function ArchitecturePage() {
 
           {/* Data flow */}
           <div className="ru-bento" style={{ "--bento-bg": "var(--entity-forecast)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
-            <div className="p-8">
-              <div className="font-mono text-[12px] uppercase tracking-[0.18em] opacity-80 mb-6">data flow</div>
+            <div className="p-10">
+              <div className="font-mono text-[12px] uppercase tracking-[0.18em] opacity-80 mb-8">data flow</div>
               <div className="space-y-3">
                 {DATA_FLOW.map((flow, i) => (
                   <div key={i} className="flex items-center gap-4">
@@ -175,7 +175,7 @@ export default function ArchitecturePage() {
               { label: "agents", value: "6", sub: "coordinated" },
               { label: "endpoints", value: "27", sub: "rest api" },
               { label: "data sources", value: "5", sub: "fused" },
-              { label: "rmse", value: "11.7", sub: "86% vs baseline" },
+              { label: "rmse improvement", value: "86%", sub: "vs persistence" },
             ].map((stat) => (
               <div key={stat.label} className="ru-bento">
                 <div className="p-6 text-center">
