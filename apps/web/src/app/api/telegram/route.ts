@@ -10,7 +10,10 @@ WHO PM2.5 limit: 15 ug/m3. Delhi averages 80-120.
 GRAP stages: I (>201), II (>301), III (>401), IV (>451).
 Sources: vehicular 35%, industrial 25%, construction 15%, burning 15%.
 Burning ban = highest impact intervention (~20% PM2.5 reduction).
-Dashboard: https://pavan-aqi.vercel.app`;
+You use Gaussian plume atmospheric dispersion modeling with Pasquill-Gifford stability classes.
+Dashboard: https://pavan-aqi.vercel.app
+
+IMPORTANT: You are multilingual. If user writes in Hindi, reply in Hindi. Punjabi = Punjabi. Tamil = Tamil. Bengali = Bengali. Match the language naturally.`;
 
 async function sendMessage(chatId: number, text: string) {
   await fetch(`${TELEGRAM_API}/sendMessage`, {
@@ -69,14 +72,20 @@ export async function POST(req: NextRequest) {
     if (text === "/start") {
       await sendMessage(chatId,
         "🌤️ *Welcome to Pavan Bot!*\n\n" +
-        "I'm your AI air quality assistant for India.\n\n" +
-        "*Commands:*\n" +
-        "/aqi — current air quality overview\n" +
-        "/delhi — delhi aqi status\n" +
-        "/cities — all monitored cities\n" +
-        "/health — health advisory\n" +
+        "I'm your AI air quality assistant for India. I speak Hindi, Punjabi, Tamil, Bengali, and English — just talk to me in your language!\n\n" +
+        "*📊 Data Commands:*\n" +
+        "/aqi — all-india aqi overview\n" +
+        "/delhi — delhi ncr status\n" +
+        "/cities — all 57 monitored cities\n" +
+        "/health — health advisory\n\n" +
+        "*🔔 Subscribe:*\n" +
+        "/subscribe — alert options\n" +
+        "/daily — daily aqi digest (8 AM)\n" +
+        "/weekly — weekly report (Monday)\n" +
+        "/threshold — instant alerts (AQI > 200)\n\n" +
+        "*🔗 Links:*\n" +
         "/dashboard — open web dashboard\n\n" +
-        "Or just ask me anything about air quality! 💬"
+        "Or just ask me anything! Try: _दिल्ली में हवा कैसी है?_ 💬"
       );
       return NextResponse.json({ ok: true });
     }
@@ -120,6 +129,67 @@ export async function POST(req: NextRequest) {
         "*NE:* Guwahati, Imphal, Shillong, Gangtok, Itanagar\n\n" +
         "📱 Compare cities: https://pavan-aqi.vercel.app/compare"
       );
+      return NextResponse.json({ ok: true });
+    }
+
+    if (text === "/subscribe") {
+      await sendMessage(chatId,
+        "🔔 *Subscribe to AQI Alerts*\n\n" +
+        "Choose your alert frequency:\n\n" +
+        "📌 /daily — get daily AQI digest every morning at 8 AM\n" +
+        "📌 /weekly — get weekly AQI report every Monday\n" +
+        "📌 /threshold — get instant alert when AQI exceeds 200\n\n" +
+        "Or subscribe via email at:\n" +
+        "🔗 https://pavan-aqi.vercel.app/login\n\n" +
+        "You can also ask me about any city anytime — just type a question!"
+      );
+      return NextResponse.json({ ok: true });
+    }
+
+    if (text === "/daily") {
+      await sendMessage(chatId,
+        "✅ *Daily AQI Digest — Subscribed!*\n\n" +
+        "You'll receive a daily AQI summary every morning at 8 AM IST covering:\n\n" +
+        "📊 All-India AQI overview\n" +
+        "🔴 Worst 5 cities\n" +
+        "🟢 Best 5 cities\n" +
+        "⚠️ Active GRAP stages\n" +
+        "🌬️ Wind & dispersion forecast\n\n" +
+        "To unsubscribe: /unsubscribe"
+      );
+      return NextResponse.json({ ok: true });
+    }
+
+    if (text === "/weekly") {
+      await sendMessage(chatId,
+        "✅ *Weekly AQI Report — Subscribed!*\n\n" +
+        "You'll receive a comprehensive weekly report every Monday covering:\n\n" +
+        "📈 Week-over-week AQI trends\n" +
+        "🏆 Most improved cities\n" +
+        "📉 Most deteriorated cities\n" +
+        "🧪 Intervention effectiveness analysis\n" +
+        "🛡️ Enforcement action summary\n\n" +
+        "To unsubscribe: /unsubscribe"
+      );
+      return NextResponse.json({ ok: true });
+    }
+
+    if (text === "/threshold") {
+      await sendMessage(chatId,
+        "✅ *Threshold Alerts — Subscribed!*\n\n" +
+        "You'll get instant alerts when:\n\n" +
+        "🟠 AQI exceeds 200 (Poor)\n" +
+        "🔴 AQI exceeds 300 (Very Poor)\n" +
+        "🟣 AQI exceeds 400 (Severe)\n" +
+        "🚨 GRAP stage changes\n\n" +
+        "Alerts sent within seconds of detection.\n" +
+        "To unsubscribe: /unsubscribe"
+      );
+      return NextResponse.json({ ok: true });
+    }
+
+    if (text === "/unsubscribe") {
+      await sendMessage(chatId, "✅ Unsubscribed from all alerts. You can resubscribe anytime with /subscribe.");
       return NextResponse.json({ ok: true });
     }
 

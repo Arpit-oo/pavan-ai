@@ -139,20 +139,15 @@ export default function SimulatePage() {
       <NavBar />
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-8 pb-20 sm:px-6 space-y-8">
-          <div className="flex items-end justify-between flex-wrap gap-4">
-            <header>
-              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3">counterfactual analysis</div>
-              <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
-                what happens if we...
-              </h1>
-              <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
-                select an intervention or compare all 5 side by side
-              </p>
-            </header>
-            <button onClick={runComparison} disabled={compareLoading} className="ru-pill !text-[16px] !px-8 !py-4 shrink-0">
-              {compareLoading ? "comparing..." : "compare all interventions →"}
-            </button>
-          </div>
+          <header>
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3">counterfactual analysis</div>
+            <h1 className="lowercase leading-[0.95]" style={{ fontSize: "clamp(40px, 6vw, 64px)", fontVariationSettings: "'wght' 760, 'wdth' 94, 'opsz' 72", letterSpacing: "-0.035em" }}>
+              what happens if we...
+            </h1>
+            <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.5] text-muted-foreground">
+              select an intervention to model its projected aqi impact
+            </p>
+          </header>
 
           {/* 3×2 bento grid — varied heights */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -285,8 +280,12 @@ export default function SimulatePage() {
             </div>
           )}
 
-          {/* Compare results */}
+          {/* Compare all button */}
           <div>
+            <button onClick={runComparison} disabled={compareLoading} className="ru-pill !text-[16px] !px-8 !py-4">
+              {compareLoading ? "comparing..." : "compare all interventions →"}
+            </button>
+
             {comparison && (
               <div className="mt-6 ru-bento">
                 <div className="p-8">

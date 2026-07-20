@@ -143,6 +143,25 @@ export default function LoginPage() {
               </div>
             )}
 
+            {mode === "signup" && (
+              <div>
+                <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">alert frequency</label>
+                <div className="flex gap-2">
+                  {[
+                    { value: "threshold", label: "when threshold exceeded", desc: "instant" },
+                    { value: "daily", label: "daily digest", desc: "every morning" },
+                    { value: "weekly", label: "weekly report", desc: "every monday" },
+                  ].map((opt) => (
+                    <label key={opt.value} className="flex-1 flex flex-col items-center gap-1 p-3 bg-card border border-border rounded-xl cursor-pointer hover:border-[var(--entity-forecast)] transition-colors text-center">
+                      <input type="radio" name="frequency" defaultChecked={opt.value === "threshold"} className="w-3.5 h-3.5" />
+                      <span className="text-[12px]" style={{ fontVariationSettings: "'wght' 560" }}>{opt.label}</span>
+                      <span className="text-[10px] text-muted-foreground">{opt.desc}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {mode === "login" && (
               <div>
                 <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">password</label>

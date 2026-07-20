@@ -70,12 +70,20 @@ export default function NavBar() {
             🌓
           </button>
           <button
-            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = cur >= 120 ? "100%" : (cur + 10) + "%"; }}
-            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors font-mono"
+            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.min(130, cur + 5) + "%"; }}
+            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[11px] hover:bg-accent transition-colors font-mono"
             aria-label="Increase text size"
-            title="Increase text size (accessibility)"
+            title="Increase text size"
           >
             A+
+          </button>
+          <button
+            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = Math.max(85, cur - 5) + "%"; }}
+            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[11px] hover:bg-accent transition-colors font-mono"
+            aria-label="Decrease text size"
+            title="Decrease text size"
+          >
+            A-
           </button>
           <span className="font-mono text-[11px] uppercase tracking-[0.16em] bg-secondary px-3 py-1.5 rounded-full">
             all india
