@@ -37,13 +37,20 @@ body {
   padding: 56px 72px;
   box-shadow: 0 2px 20px rgba(0,0,0,0.08);
   page-break-after: always;
+  page-break-inside: avoid;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
 }
 
+@page {
+  margin: 0;
+  padding: 0;
+  size: 960px 540px landscape;
+}
+
 @media print {
-  body { background: white; }
-  .slide { margin: 0; border-radius: 0; box-shadow: none; width: 100vw; height: 100vh; }
+  body { background: none !important; margin: 0; padding: 0; }
+  .slide { margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 100% !important; height: 100vh !important; padding: 48px 64px; }
 }
 
 .eyebrow {
