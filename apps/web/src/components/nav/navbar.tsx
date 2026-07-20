@@ -69,13 +69,13 @@ export default function NavBar() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-[52px] z-40 bg-background backdrop-blur-none" style={{background: "var(--background)"}}>
+        <div className="md:hidden fixed inset-0 top-[52px] z-40" style={{backgroundColor: "#f5f0e6"}}>
           <nav className="flex flex-col p-6 gap-1">
             {NAV_ITEMS.map((item, i) => {
               const isActive = i === (activeIdx >= 0 ? activeIdx : 0);
               return (
                 <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)}
-                  className={`flex items-center gap-4 px-4 py-4 rounded-2xl transition-all ${isActive ? "bg-secondary" : "hover:bg-secondary/50"}`}>
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl transition-all" style={{background: isActive ? "var(--secondary)" : "transparent"}}>
                   <span className="w-3 h-3 rounded-full shrink-0" style={{ background: item.tone }} />
                   <span className={`text-[18px] ${isActive ? "text-foreground" : "text-muted-foreground"}`} style={{ fontVariationSettings: isActive ? "'wght' 640" : "'wght' 460" }}>
                     {item.label}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FEATURES = [
   {
@@ -97,23 +97,53 @@ function useScrollReveal() {
 
 export default function LandingPage() {
   const scrollRef = useScrollReveal();
+  const [landingMenu, setLandingMenu] = useState(false);
   return (
     <div className="min-h-screen bg-background text-foreground" ref={scrollRef}>
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-5">
-          <span className="text-2xl" style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>
+        <div className="mx-auto max-w-6xl flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5">
+          <span className="text-xl sm:text-2xl" style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>
             pavan<span style={{ color: "var(--entity-moderate)" }}>.</span>
           </span>
-          <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-4">
             <Link href="/dashboard" className="ru-pill !text-[14px] !px-5 !py-2.5">
-              open dashboard →
+              dashboard →
             </Link>
             <Link href="/login" className="ru-pill !text-[14px] !px-5 !py-2.5" style={{ background: "var(--entity-forecast)", color: "white" }}>
-              subscribe to alerts →
+              subscribe →
             </Link>
           </div>
+          <button className="sm:hidden w-10 h-10 rounded-xl bg-secondary flex items-center justify-center" onClick={() => setLandingMenu(!landingMenu)} aria-label="Menu">
+            {landingMenu ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+            )}
+          </button>
         </div>
+        {landingMenu && (
+          <div className="sm:hidden fixed inset-0 top-[56px] z-40" style={{backgroundColor:"#f5f0e6"}}>
+            <nav className="flex flex-col p-6 gap-2">
+              <Link href="/dashboard" onClick={() => setLandingMenu(false)} className="flex items-center gap-3 px-4 py-4 rounded-2xl" style={{background:"var(--secondary)"}}>
+                <span className="w-3 h-3 rounded-full" style={{background:"var(--entity-moderate)"}} />
+                <span className="text-[18px]" style={{fontVariationSettings:"'wght' 600"}}>dashboard</span>
+              </Link>
+              <Link href="/login" onClick={() => setLandingMenu(false)} className="flex items-center gap-3 px-4 py-4 rounded-2xl" style={{background:"var(--secondary)"}}>
+                <span className="w-3 h-3 rounded-full" style={{background:"var(--entity-forecast)"}} />
+                <span className="text-[18px]" style={{fontVariationSettings:"'wght' 600"}}>subscribe to alerts</span>
+              </Link>
+              <a href="https://t.me/PavanETbot" target="_blank" rel="noopener noreferrer" onClick={() => setLandingMenu(false)} className="flex items-center gap-3 px-4 py-4 rounded-2xl" style={{background:"var(--secondary)"}}>
+                <span className="w-3 h-3 rounded-full" style={{background:"var(--entity-wind)"}} />
+                <span className="text-[18px]" style={{fontVariationSettings:"'wght' 600"}}>telegram bot</span>
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" target="_blank" rel="noopener noreferrer" onClick={() => setLandingMenu(false)} className="flex items-center gap-3 px-4 py-4 rounded-2xl" style={{background:"var(--secondary)"}}>
+                <span className="w-3 h-3 rounded-full" style={{background:"var(--entity-good)"}} />
+                <span className="text-[18px]" style={{fontVariationSettings:"'wght' 600"}}>whatsapp channel</span>
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
