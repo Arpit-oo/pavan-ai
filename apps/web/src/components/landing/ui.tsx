@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useInView, animate } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -117,7 +118,12 @@ export function GlassCard({
   );
 }
 
-/** Giant Fraunces display number used across stat/proof sections. */
+/**
+ * Giant Fraunces display number that counts up and "focuses in" from blur
+ * when scrolled into view — the sharpening echoes the page's clarity theme.
+ * Parses a leading/trailing non-numeric part so mixed values ("1.6M", "13 / 20",
+ * "<3s", "86%") animate their numeric core while keeping their affixes.
+ */
 export function StatNumber({
   value,
   className,
@@ -127,13 +133,66 @@ export function StatNumber({
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const reduce = useReducedMotion();
+  const m = value.match(/^(\D*)([\d.,]+)(.*)$/);
+  const [display, setDisplay] = useState(reduce || !m ? value : `${m[1]}0${m[3]}`);
+
+  useEffect(() => {
+    if (reduce || !m) {
+      setDisplay(value);
+      return;
+    }
+    if (!inView) return;
+    const target = parseFloat(m[2].replace(/,/g, ""));
+    const decimals = (m[2].split(".")[1] || "").length;
+    const controls = animate(0, target, {
+      duration: 1.1,
+      ease: [0.21, 0.6, 0.35, 1],
+      onUpdate: (v) => setDisplay(`${m[1]}${v.toFixed(decimals)}${m[3]}`),
+    });
+    return () => controls.stop();
+  }, [inView, value, reduce]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <span
+    <motion.span
+      ref={ref}
       className={cn("font-display block leading-[0.9] tracking-[-0.02em]", className)}
       style={style}
+      initial={reduce ? false : { opacity: 0, filter: "blur(14px)" }}
+      animate={inView ? { opacity: 1, filter: "blur(0px)" } : undefined}
+      transition={{ duration: 0.7, ease: [0.21, 0.6, 0.35, 1] }}
     >
-      {value}
-    </span>
+      {display}
+    </motion.span>
+  );
+}
+
+/** Track bar that fills from 0 to its width when scrolled into view. */
+export function AnimatedBar({
+  pct,
+  color,
+  delay = 0,
+  track = "rgba(0,0,0,0.06)",
+}: {
+  pct: number;
+  color: string;
+  delay?: number;
+  track?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <div className="h-[8px] w-full overflow-hidden rounded-full" style={{ background: track }}>
+      <motion.span
+        className="block h-full rounded-full"
+        style={{ background: color }}
+        initial={reduce ? false : { width: 0 }}
+        whileInView={{ width: `${pct}%` }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.9, delay, ease: [0.21, 0.6, 0.35, 1] }}
+      />
+    </div>
   );
 }
 

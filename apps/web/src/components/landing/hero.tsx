@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { CREAM, ACCENT } from "./ui";
 
 /**
@@ -22,6 +22,9 @@ const EASE = [0.21, 0.6, 0.35, 1] as const;
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const { scrollY } = useScroll();
+  const imgY = useTransform(scrollY, [0, 900], [0, 160]);
+  const contentY = useTransform(scrollY, [0, 900], [0, -60]);
   const enter = (delay: number) =>
     reduce
       ? {}
@@ -33,34 +36,40 @@ export function Hero() {
 
   return (
     <header className="relative flex h-[92vh] min-h-[640px] flex-col overflow-hidden" style={{ background: "#0d0c0b" }}>
-      {/* Background photo */}
+      {/* Background photo (entrance + scroll parallax) */}
       <motion.div
-        className="absolute inset-0"
-        {...(reduce
-          ? {}
-          : {
-              initial: { scale: 1.08, opacity: 0.5 },
-              animate: { scale: 1, opacity: 1 },
-              transition: { duration: 1.2, ease: EASE },
-            })}
+        className="absolute inset-0 will-change-transform"
+        style={reduce ? undefined : { y: imgY }}
       >
-        <Image
-          src="/landing/hero-smog.jpg"
-          alt="Delhi skyline under heavy smog at dusk"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: "50% 42%" }}
-        />
+        <motion.div
+          className="absolute inset-0"
+          style={{ top: -80, bottom: -80 }}
+          {...(reduce
+            ? {}
+            : {
+                initial: { scale: 1.08, opacity: 0.5 },
+                animate: { scale: 1, opacity: 1 },
+                transition: { duration: 1.2, ease: EASE },
+              })}
+        >
+          <Image
+            src="/landing/hero-smog.jpg"
+            alt="Delhi skyline under heavy smog at dusk"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 42%" }}
+          />
+        </motion.div>
         {/* Legibility + blend-to-black at the bottom for the wordmark */}
-        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,7,6,0.55) 0%, rgba(8,7,6,0.15) 30%, rgba(8,7,6,0.35) 62%, rgba(8,7,6,0.92) 100%)" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,7,6,0.58) 0%, rgba(8,7,6,0.14) 28%, rgba(8,7,6,0.35) 60%, rgba(8,7,6,0.94) 100%)" }} />
       </motion.div>
 
       {/* Foreground */}
-      <div className="relative mx-auto flex h-full w-full max-w-[1240px] flex-col px-5 sm:px-8" style={{ color: CREAM }}>
+      <motion.div className="relative mx-auto flex h-full w-full max-w-[1240px] flex-col px-5 pt-3 sm:px-8 sm:pt-5" style={reduce ? { color: CREAM } : { color: CREAM, y: contentY }}>
         {/* Nav */}
-        <motion.nav className="flex h-[76px] items-center justify-between" {...enter(0.05)}>
+        <motion.nav className="flex h-[64px] items-center justify-between" {...enter(0.05)}>
           <Link href="/" className="flex items-baseline gap-[1px] text-[24px]" style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>
             pavan<span style={{ color: ACCENT }}>.</span>
           </Link>
@@ -83,7 +92,7 @@ export function Hero() {
         <div className="h-px w-full" style={{ background: "rgba(245,240,230,0.16)" }} />
 
         {/* Sub row */}
-        <motion.div className="flex h-[46px] items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em]" style={{ color: "rgba(245,240,230,0.68)" }} {...enter(0.12)}>
+        <motion.div className="flex h-[52px] items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em]" style={{ color: "rgba(245,240,230,0.68)" }} {...enter(0.12)}>
           <span>urban air intelligence</span>
           <span className="hidden sm:block">57 cities · 105 stations · india</span>
         </motion.div>
@@ -148,7 +157,7 @@ export function Hero() {
         >
           pavan
         </motion.div>
-      </div>
+      </motion.div>
     </header>
   );
 }

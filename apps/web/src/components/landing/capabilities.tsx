@@ -1,6 +1,7 @@
 "use client";
 
-import { Reveal, Eyebrow, ACCENT } from "./ui";
+import { motion, useReducedMotion } from "motion/react";
+import { Reveal, Eyebrow, AnimatedBar, ACCENT } from "./ui";
 
 /**
  * "What pavan does": five capabilities, each shown with a real data-style
@@ -33,15 +34,13 @@ export function Capabilities() {
         <Reveal className="md:col-span-3" delay={0}>
           <Card title="source attribution" desc="decomposes every station's pollution by source using wind, satellite no₂, fire, and traffic signals.">
             <div className="flex flex-col gap-3">
-              {ATTR.map((a) => (
+              {ATTR.map((a, i) => (
                 <div key={a.label}>
                   <div className="mb-1 flex items-center justify-between text-[13px]">
                     <span className="text-muted-foreground">{a.label}</span>
                     <span style={{ fontVariationSettings: "'wght' 620" }}>{a.pct}%</span>
                   </div>
-                  <div className="h-[8px] w-full overflow-hidden rounded-full bg-black/6">
-                    <span className="block h-full rounded-full" style={{ width: `${a.pct}%`, background: a.color }} />
-                  </div>
+                  <AnimatedBar pct={a.pct} color={a.color} delay={i * 0.1} />
                 </div>
               ))}
             </div>
@@ -145,10 +144,33 @@ function Sparkline() {
   const line = pts.map((v, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   const bandTop = pts.map((v, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v + (i + 1) * 1.3).toFixed(1)}`).join(" ");
   const bandBot = pts.map((v, i) => `L${x(pts.length - 1 - i).toFixed(1)},${y(pts[pts.length - 1 - i] - (pts.length - i) * 1.3).toFixed(1)}`).join(" ");
+  return <SparklineSvg w={w} h={h} line={line} band={`${bandTop} ${bandBot} Z`} />;
+}
+
+function SparklineSvg({ w, h, line, band }: { w: number; h: number; line: string; band: string }) {
+  const reduce = useReducedMotion();
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full" style={{ height: 84 }} preserveAspectRatio="none">
-      <path d={`${bandTop} ${bandBot} Z`} fill={ACCENT} opacity="0.14" />
-      <path d={line} fill="none" stroke={ACCENT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <motion.path
+        d={band}
+        fill={ACCENT}
+        initial={reduce ? false : { opacity: 0 }}
+        whileInView={{ opacity: 0.14 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      />
+      <motion.path
+        d={line}
+        fill="none"
+        stroke={ACCENT}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={reduce ? false : { pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 1.1, ease: [0.21, 0.6, 0.35, 1] }}
+      />
     </svg>
   );
 }
