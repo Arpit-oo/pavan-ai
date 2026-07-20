@@ -7,9 +7,17 @@ import Image from "next/image";
 export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "signup">("signup");
   const [email, setEmail] = useState("");
-  const [city, setCity] = useState("Delhi");
+  const [cities, setCities] = useState<string[]>(["Delhi"]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const toggleCity = (c: string) => {
+    if (cities.includes(c)) {
+      if (cities.length > 1) setCities(cities.filter(x => x !== c));
+    } else {
+      setCities([...cities, c]);
+    }
+  };
 
   const CITIES = ["Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune", "Lucknow", "Jaipur", "Ahmedabad"];
 
@@ -25,11 +33,11 @@ export default function LoginPage() {
         body: JSON.stringify({
           action: "send_alert",
           to: email,
-          city,
+          city: cities.join(", "),
           aqi: 185,
           level: "Moderate",
-          headline: `Welcome to Pavan! You're now subscribed to air quality alerts for ${city}. We'll notify you when AQI exceeds threshold levels.`,
-          recommendations: [`Monitor ${city} AQI daily via pavan-aqi.vercel.app`, "Use @PavanETbot on Telegram for instant updates"],
+          headline: `Welcome to Pavan! You're now subscribed to air quality alerts for ${cities.join(", ")}. We'll notify you when AQI exceeds threshold levels.`,
+          recommendations: [`Monitor ${cities.join(", ")} AQI daily via pavan-aqi.vercel.app`, "Use @PavanETbot on Telegram for instant updates"],
         }),
       });
     } catch {}
@@ -45,7 +53,7 @@ export default function LoginPage() {
           <Image src="/claudy/pray.png" alt="Claudy" width={120} height={120} className="mx-auto" />
           <h1 className="text-[28px] lowercase" style={{ fontVariationSettings: "'wght' 720" }}>you&apos;re in!</h1>
           <p className="text-[16px] text-muted-foreground leading-relaxed">
-            we&apos;ve sent a welcome alert to <strong style={{ fontVariationSettings: "'wght' 620" }}>{email}</strong>. you&apos;ll receive aqi alerts for <strong style={{ fontVariationSettings: "'wght' 620" }}>{city.toLowerCase()}</strong> when thresholds are exceeded.
+            we&apos;ve sent a welcome alert to <strong style={{ fontVariationSettings: "'wght' 620" }}>{email}</strong>. you&apos;ll receive aqi alerts for <strong style={{ fontVariationSettings: "'wght' 620" }}>{cities.map(c => c.toLowerCase()).join(", ")}</strong> when thresholds are exceeded.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <Link href="/dashboard" className="ru-pill !text-[14px] !px-6 !py-3">open dashboard →</Link>
@@ -100,14 +108,15 @@ export default function LoginPage() {
 
             {mode === "signup" && (
               <div>
-                <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">monitor city</label>
+                <label className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2 block">monitor cities (select multiple)</label>
                 <div className="flex flex-wrap gap-2">
                   {CITIES.map((c) => (
-                    <button key={c} type="button" onClick={() => setCity(c)} className={`px-3 py-1.5 rounded-full text-[12px] transition-all ${city === c ? "bg-foreground text-background" : "bg-secondary text-muted-foreground hover:text-foreground"}`} style={{ fontVariationSettings: city === c ? "'wght' 620" : "'wght' 440" }}>
-                      {c.toLowerCase()}
+                    <button key={c} type="button" onClick={() => toggleCity(c)} className={`px-3 py-1.5 rounded-full text-[12px] transition-all ${cities.includes(c) ? "bg-foreground text-background" : "bg-secondary text-muted-foreground hover:text-foreground"}`} style={{ fontVariationSettings: cities.includes(c) ? "'wght' 620" : "'wght' 440" }}>
+                      {c.toLowerCase()} {cities.includes(c) ? "✓" : ""}
                     </button>
                   ))}
                 </div>
+                <p className="text-[11px] text-muted-foreground mt-1">{cities.length} {cities.length === 1 ? "city" : "cities"} selected</p>
               </div>
             )}
 

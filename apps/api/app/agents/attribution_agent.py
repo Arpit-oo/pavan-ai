@@ -67,12 +67,25 @@ class AttributionAgent(BaseAgent):
         pm25 = reading.get("pm25", 50) or 50
         pm10 = reading.get("pm10", 80) or 80
 
-        # Base attribution from land use
+        # Base attribution from land use + satellite fire data
         vehicular = land_use["transport"] * 0.6 + land_use["commercial"] * 0.2
         industrial = land_use["industrial"] * 0.8
         construction = 0.10
         burning = 0.05
         background = 0.10
+
+        # Cross-reference with MODIS/VIIRS fire detection
+        try:
+            from app.services.satellite import SatelliteService
+            fires = SatelliteService().get_thermal_anomalies()
+            for fire in fires.get("fires", []):
+                fire_dist = ((lat - fire["lat"]) ** 2 + (lng - fire["lng"]) ** 2) ** 0.5
+                if fire_dist < 0.5:
+                    burning *= 2.5 if fire["type"] == "crop_burning" else 1.5
+                    if fire["confidence"] > 80:
+                        burning *= 1.3
+        except Exception:
+            pass
 
         # Time-of-day adjustments
         if 7 <= hour <= 10 or 17 <= hour <= 21:

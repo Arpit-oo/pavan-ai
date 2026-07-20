@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { href: "/agents", label: "agents", tone: "var(--entity-wind)" },
   { href: "/compare", label: "compare", tone: "var(--entity-severe)" },
   { href: "/architecture", label: "architecture", tone: "var(--entity-forecast)" },
+  { href: "/login", label: "subscribe", tone: "var(--entity-alert)" },
 ];
 
 export default function NavBar() {
@@ -60,9 +61,22 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-            {new Date().toLocaleTimeString()}
-          </span>
+          <button
+            onClick={() => document.documentElement.classList.toggle("dark")}
+            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[14px] hover:bg-accent transition-colors"
+            aria-label="Toggle theme"
+            title="Toggle dark/light mode"
+          >
+            🌓
+          </button>
+          <button
+            onClick={() => { const s = document.documentElement.style; const cur = parseFloat(s.fontSize || "100") || 100; s.fontSize = cur >= 120 ? "100%" : (cur + 10) + "%"; }}
+            className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors font-mono"
+            aria-label="Increase text size"
+            title="Increase text size (accessibility)"
+          >
+            A+
+          </button>
           <span className="font-mono text-[11px] uppercase tracking-[0.16em] bg-secondary px-3 py-1.5 rounded-full">
             all india
           </span>
