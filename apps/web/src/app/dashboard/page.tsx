@@ -49,7 +49,7 @@ export default function Dashboard() {
           <StatsBar stations={stations} city="All India" />
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4" style={{minHeight: "65vh"}}>
             <div className="flex-1 flex flex-col gap-4">
-              <div className="flex-[2] min-h-[300px] sm:min-h-[400px]" style={{height: "50vh"}}>
+              <div style={{height: "60vh", minHeight: "320px"}}>
                 {loading ? (
                   <div className="w-full h-full flex items-center justify-center bg-card rounded-[28px]">
                     <div className="w-8 h-8 border-2 border-[var(--entity-moderate)] border-t-transparent rounded-full animate-spin" />

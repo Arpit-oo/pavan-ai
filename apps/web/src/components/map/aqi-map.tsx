@@ -80,7 +80,7 @@ export default function AQIMap({
   const geojson = stationToGeoJSON(stations);
 
   return (
-    <div className="w-full h-full relative rounded-[28px] overflow-hidden shadow-[0_1px_0_var(--hairline-soft)]">
+    <div className="w-full relative rounded-[20px] sm:rounded-[28px] overflow-hidden shadow-[0_1px_0_var(--hairline-soft)]" style={{height:"100%", minHeight:"300px"}}>
       <Map
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
