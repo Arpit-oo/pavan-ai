@@ -41,9 +41,9 @@ export default function Dashboard() {
   }, [fetchData]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-8 sm:px-6 h-full flex flex-col gap-4">
           <StatsBar stations={stations} city="All India" />
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4" style={{minHeight: "65vh"}}>

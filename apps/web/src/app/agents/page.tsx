@@ -77,7 +77,7 @@ export default function AgentsPage() {
                   style={{ "--bento-bg": a.color, "--bento-fg": a.fg } as React.CSSProperties}
                   onClick={() => isDone && setActiveAgent(activeAgent === a.key ? null : a.key)}
                 >
-                  <div className="flex flex-col p-7 min-h-[140px]">
+                  <div className="flex flex-col p-7 min-h-[140px] justify-center">
                     <div className="flex items-start justify-between">
                       <span className="text-3xl">{a.icon}</span>
                       {isDone && <Sticker tilt={2}>{(agentData!.confidence * 100).toFixed(0)}%</Sticker>}
@@ -111,8 +111,8 @@ export default function AgentsPage() {
                           <div key={i} className="flex items-start gap-3">
                             <span className="shrink-0 text-lg mt-0.5">{agent?.icon || "•"}</span>
                             <div>
-                              <span className="font-mono text-[10px] uppercase tracking-wider opacity-50">{log.agent}</span>
-                              <p className="text-[13px] opacity-75 leading-snug lowercase">{log.message.toLowerCase()}</p>
+                              <span className="font-mono text-[12px] uppercase tracking-wider opacity-60" style={{fontVariationSettings:"'wght' 600"}}>{log.agent}</span>
+                              <p className="text-[15px] opacity-85 leading-relaxed lowercase" style={{fontVariationSettings:"'wght' 500"}}>{log.message.toLowerCase()}</p>
                             </div>
                           </div>
                         );
