@@ -37,15 +37,21 @@ export function Hero() {
     <header className="relative flex min-h-[100svh] flex-col overflow-hidden" style={{ background: "#0d0c0b" }}>
       {/* Background photo (entrance + scroll parallax) */}
       <motion.div className="absolute inset-0 will-change-transform" style={reduce ? undefined : { y: imgY }}>
+        {/* The air "clears": image starts hazy + monochrome, then resolves to
+            full colour as pavan brings clarity (blooms in with the wordmark). */}
         <motion.div
-          className="absolute inset-0"
+          className="absolute inset-0 will-change-[filter,transform]"
           style={{ top: -80, bottom: -80 }}
           {...(reduce
             ? {}
             : {
-                initial: { scale: 1.08, opacity: 0.5 },
-                animate: { scale: 1, opacity: 1 },
-                transition: { duration: 1.2, ease: EASE },
+                initial: { scale: 1.12, opacity: 0.45, filter: "grayscale(1) saturate(0.35) blur(9px) brightness(0.82)" },
+                animate: { scale: 1, opacity: 1, filter: "grayscale(0) saturate(1) blur(0px) brightness(1)" },
+                transition: {
+                  scale: { duration: 2.6, ease: EASE },
+                  opacity: { duration: 1.1, ease: EASE },
+                  filter: { duration: 12, delay: 0, ease: [0.3, 0.7, 0.2, 1] },
+                },
               })}
         >
           <Image
@@ -58,8 +64,18 @@ export function Hero() {
             style={{ objectPosition: "50% 42%" }}
           />
         </motion.div>
-        {/* Flat black tint over the whole image */}
-        <div aria-hidden className="absolute inset-0" style={{ background: "rgba(0,0,0,0.38)" }} />
+        {/* Flat black tint over the whole image, lifts slightly as it clears */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0"
+          {...(reduce
+            ? { style: { background: "rgba(0,0,0,0.38)" } }
+            : {
+                initial: { backgroundColor: "rgba(0,0,0,0.62)" },
+                animate: { backgroundColor: "rgba(0,0,0,0.38)" },
+                transition: { duration: 2.8, delay: 0.5, ease: [0.3, 0.7, 0.2, 1] },
+              })}
+        />
         {/* Legibility + blend-to-black at the bottom for the wordmark */}
         <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,7,6,0.58) 0%, rgba(8,7,6,0.14) 28%, rgba(8,7,6,0.35) 60%, rgba(8,7,6,0.94) 100%)" }} />
       </motion.div>
