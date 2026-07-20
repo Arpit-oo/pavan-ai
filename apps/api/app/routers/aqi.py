@@ -52,6 +52,29 @@ async def get_traffic_grid(city: str = Query(default="Delhi")):
     return svc.get_traffic_grid(city)
 
 
+@router.get("/dispersion")
+async def get_dispersion(city: str = Query(default="Delhi")):
+    """Run Gaussian plume atmospheric dispersion model."""
+    from app.services.cpcb import CPCBService
+    from app.services.weather import WeatherService
+    from app.services.dispersion import DispersionService
+
+    cpcb = CPCBService()
+    weather_svc = WeatherService()
+    try:
+        readings = await cpcb.get_city_readings(city)
+        wind = await weather_svc.get_wind_analysis(city)
+        disp = DispersionService()
+        return disp.predict_city_dispersion(
+            city, readings,
+            wind.get("current_wind_speed", 3),
+            wind.get("current_wind_direction", 220),
+        )
+    finally:
+        await cpcb.close()
+        await weather_svc.close()
+
+
 @router.get("/all-india")
 async def get_all_india_aqi():
     """Get AQI readings for all stations across India."""

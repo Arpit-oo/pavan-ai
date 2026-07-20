@@ -109,6 +109,9 @@ export default function LandingPage() {
             <Link href="/dashboard" className="ru-pill !text-[14px] !px-5 !py-2.5">
               open dashboard →
             </Link>
+            <Link href="/login" className="ru-pill !text-[14px] !px-5 !py-2.5" style={{ background: "var(--entity-forecast)", color: "white" }}>
+              subscribe to alerts →
+            </Link>
           </div>
         </div>
       </header>
