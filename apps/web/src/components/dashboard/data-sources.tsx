@@ -11,7 +11,7 @@ const SOURCES = [
 export default function DataSources() {
   return (
     <div className="ru-bento">
-      <div className="p-5 max-h-[240px] overflow-y-auto">
+      <div className="p-5 max-h-[320px] overflow-y-auto">
         <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-3">
           data sources · 5 active
         </div>
