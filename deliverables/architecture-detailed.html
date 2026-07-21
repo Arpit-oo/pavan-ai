@@ -66,39 +66,33 @@ h3{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;}
   <div class="brand">pavan.</div><div class="sn">02</div>
 </div>
 
-<!-- 03 AGENT PIPELINE DETAIL -->
+<!-- 03 AGENT PIPELINE DETAIL — reduced tile height -->
 <div class="slide">
   <div class="ey">multi-agent orchestration</div>
   <h2 style="font-size:34px;">3-phase execution pipeline</h2>
-  <div class="grid g3" style="margin-top:16px;">
-    <div class="tile" style="background:var(--forest);color:#f0fdf4;">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:10px;">phase 1 · parallel</div>
-      <h3 style="color:#f0fdf4;font-size:18px;">data collection</h3>
-      <div style="margin-top:12px;font-size:14px;line-height:2;">
-        📡 <strong>sensor agent</strong><br>
-        <span style="opacity:0.7;">pulls 105 CPCB stations<br>6 pollutants: PM2.5, PM10, NO2, SO2, CO, O3<br>+ temperature, humidity, wind</span><br><br>
-        🌤️ <strong>weather agent</strong><br>
-        <span style="opacity:0.7;">OpenWeatherMap live data<br>wind analysis, stagnation detection<br>inversion risk scoring</span>
+  <div class="grid g3" style="margin-top:12px;">
+    <div class="tile" style="background:var(--forest);color:#f0fdf4;padding:16px;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:6px;">phase 1 · parallel</div>
+      <h3 style="color:#f0fdf4;font-size:16px;">data collection</h3>
+      <div style="margin-top:8px;font-size:13px;line-height:1.7;">
+        📡 <strong>sensor</strong> — 105 stations, 6 pollutants<br>
+        🌤️ <strong>weather</strong> — wind, stagnation, inversion
       </div>
     </div>
-    <div class="tile" style="background:var(--purple);color:white;">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:10px;">phase 2 · parallel</div>
-      <h3 style="color:white;font-size:18px;">analysis</h3>
-      <div style="margin-top:12px;font-size:14px;line-height:2;">
-        ⚡ <strong>anomaly agent</strong><br>
-        <span style="opacity:0.7;">z-score spatial spike detection<br>PM2.5/PM10 ratio analysis<br>MODIS fire cross-reference</span><br><br>
-        🔍 <strong>attribution agent</strong><br>
-        <span style="opacity:0.7;">wind-weighted land use<br>traffic emission factor<br>confidence scores per source</span>
+    <div class="tile" style="background:var(--purple);color:white;padding:16px;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:6px;">phase 2 · parallel</div>
+      <h3 style="color:white;font-size:16px;">analysis</h3>
+      <div style="margin-top:8px;font-size:13px;line-height:1.7;">
+        ⚡ <strong>anomaly</strong> — z-score spikes, PM ratio, fire cross-ref<br>
+        🔍 <strong>attribution</strong> — wind + land use + traffic + confidence
       </div>
     </div>
-    <div class="tile" style="background:var(--amber);">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.45;margin-bottom:10px;">phase 3 · sequential</div>
-      <h3 style="font-size:18px;">enforcement</h3>
-      <div style="margin-top:12px;font-size:14px;line-height:2;">
-        🛡️ <strong>enforcement agent</strong><br>
-        <span style="opacity:0.65;">priority-ranked recommendations<br>GPS coordinates + evidence<br>estimated impact per action</span><br><br>
-        🧠 <strong>orchestrator</strong><br>
-        <span style="opacity:0.65;">coordinates all phases<br>merges results<br>logs timing metrics</span>
+    <div class="tile" style="background:var(--amber);padding:16px;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.45;margin-bottom:6px;">phase 3 · sequential</div>
+      <h3 style="font-size:16px;">enforcement</h3>
+      <div style="margin-top:8px;font-size:13px;line-height:1.7;">
+        🛡️ <strong>enforcement</strong> — priority recs, GPS, evidence<br>
+        🧠 <strong>orchestrator</strong> — coordinates + merges + timing
       </div>
     </div>
   </div>
@@ -110,72 +104,72 @@ h3{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;}
   <div class="ey" style="color:rgba(255,255,255,0.45);">data flow</div>
   <h2 style="color:white;font-size:34px;">from source to recommendation</h2>
   <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">CPCB API</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">📡 sensor agent</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">105 stations, 6 pollutants, real-time</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">OpenWeatherMap</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🌤️ weather agent</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">wind, temp, humidity, stagnation flag</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">Sentinel-5P</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🧠 orchestrator</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">NO2/SO2 column density, 1600 grid points</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">MODIS/VIIRS</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">⚡ anomaly + 🔍 attribution</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">fire cross-reference</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">traffic API</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🔍 attribution</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">congestion index, emission factor</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">all analysis</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🛡️ enforcement</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">prioritized inspector recommendations</span></div>
-    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🧠 orchestrator</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">GPT-4o</span><span style="opacity:0.3;font-size:13px;margin-left:8px;">natural language response to user</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">CPCB API</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">📡 sensor agent</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">105 stations, 6 pollutants, real-time</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">OpenWeatherMap</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🌤️ weather agent</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">wind, temp, humidity, stagnation flag</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">Sentinel-5P</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🧠 orchestrator</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">NO2/SO2 column density, 1600 grid points</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">MODIS/VIIRS</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">⚡ anomaly + 🔍 attribution</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">fire cross-reference</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">traffic API</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🔍 attribution</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">congestion index, emission factor</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">all analysis</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🛡️ enforcement</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">prioritized inspector recommendations</span></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">🧠 orchestrator</span><span style="opacity:0.4;font-size:18px;">→</span><span class="flow-pill" style="background:rgba(255,255,255,0.12);color:white;font-size:14px;padding:6px 16px;">GPT-4o</span><span style="opacity:0.6;font-size:13px;font-weight:500;margin-left:8px;">natural language response to user</span></div>
   </div>
   <div style="position:absolute;bottom:20px;right:28px;font-size:14px;color:rgba(255,255,255,0.3);font-weight:700;">04</div>
   <div style="position:absolute;bottom:20px;left:28px;font-size:14px;color:rgba(255,255,255,0.3);font-weight:800;">pavan.</div>
 </div>
 
-<!-- 05 ML MODELS -->
-<div class="slide">
+<!-- 05 ML MODELS — reduced padding to fit -->
+<div class="slide" style="padding:40px 56px;">
   <div class="ey">ml pipeline detail</div>
-  <h2 style="font-size:34px;">models + validation</h2>
-  <div class="grid g2" style="margin-top:16px;">
+  <h2 style="font-size:30px;">models + validation</h2>
+  <div class="grid g2" style="margin-top:12px;gap:10px;">
     <div>
-      <div class="tile" style="background:var(--cobalt);color:white;margin-bottom:10px;">
-        <h3 style="color:white;font-size:17px;">XGBoost AQI forecast</h3>
-        <p style="font-size:13px;opacity:0.85;line-height:1.7;">200 estimators · max_depth 6 · lr 0.1<br>12 features: hour, day, month, temp, humidity, wind speed, wind dir (sin/cos), prev AQI (1h/6h/24h), weekend<br>RMSE: <strong>11.74</strong> vs baseline <strong>83.65</strong> (86% gain)</p>
+      <div class="tile" style="background:var(--cobalt);color:white;margin-bottom:8px;padding:14px 18px;">
+        <h3 style="color:white;font-size:15px;">XGBoost AQI forecast</h3>
+        <p style="font-size:12px;opacity:0.85;line-height:1.6;">200 estimators · max_depth 6 · 12 features<br>RMSE: <strong>11.74</strong> vs baseline <strong>83.65</strong> (86% gain)</p>
       </div>
-      <div class="tile" style="background:var(--purple);color:white;margin-bottom:10px;">
-        <h3 style="color:white;font-size:17px;">gaussian plume dispersion</h3>
-        <p style="font-size:13px;opacity:0.85;line-height:1.7;">pasquill-gifford stability classes A-F<br>based on wind speed, solar radiation, cloud cover<br>predicts concentration grid from worst sources</p>
+      <div class="tile" style="background:var(--purple);color:white;margin-bottom:8px;padding:14px 18px;">
+        <h3 style="color:white;font-size:15px;">gaussian plume dispersion</h3>
+        <p style="font-size:12px;opacity:0.85;line-height:1.6;">pasquill-gifford A-F stability classes<br>predicts concentration grid from worst sources</p>
       </div>
-      <div class="tile" style="background:var(--teal);color:#0a0a08;">
-        <h3 style="font-size:17px;">IDW interpolation</h3>
-        <p style="font-size:13px;opacity:0.75;line-height:1.7;">inverse distance weighting from sparse stations<br>generates continuous AQI surface for heatmap</p>
+      <div class="tile" style="background:var(--teal);color:#0a0a08;padding:14px 18px;">
+        <h3 style="font-size:15px;">IDW interpolation</h3>
+        <p style="font-size:12px;opacity:0.75;line-height:1.6;">inverse distance weighting → continuous AQI surface</p>
       </div>
     </div>
     <div>
-      <div class="tile" style="background:var(--coral);color:white;margin-bottom:10px;">
-        <h3 style="color:white;font-size:17px;">compound risk scoring</h3>
-        <p style="font-size:13px;opacity:0.85;line-height:1.7;">5 factors weighted:<br>AQI (35%) + weather/stagnation (20%) + population density (15%) + vulnerable sites (15%) + forecast trend (15%)<br>output: single 0-100 risk score per zone</p>
+      <div class="tile" style="background:var(--coral);color:white;margin-bottom:8px;padding:14px 18px;">
+        <h3 style="color:white;font-size:15px;">compound risk scoring</h3>
+        <p style="font-size:12px;opacity:0.85;line-height:1.6;">AQI 35% + weather 20% + population 15%<br>+ vulnerable sites 15% + trend 15% → 0-100 score</p>
       </div>
-      <div class="tile" style="background:var(--amber);margin-bottom:10px;">
-        <h3 style="font-size:17px;">source attribution</h3>
-        <p style="font-size:13px;opacity:0.75;line-height:1.7;">wind direction → upwind source identification<br>land use profile per zone<br>time-of-day patterns + PM ratio<br>MODIS fire boost (2.5x crop, 1.5x industrial)</p>
+      <div class="tile" style="background:var(--amber);margin-bottom:8px;padding:14px 18px;">
+        <h3 style="font-size:15px;">source attribution</h3>
+        <p style="font-size:12px;opacity:0.75;line-height:1.6;">wind + land use + time-of-day + PM ratio<br>MODIS fire boost (2.5x crop, 1.5x industrial)</p>
       </div>
-      <div class="tile" style="background:var(--forest);color:#f0fdf4;">
-        <h3 style="color:#f0fdf4;font-size:17px;">intervention simulator</h3>
-        <p style="font-size:13px;opacity:0.85;line-height:1.7;">source-attribution-weighted reduction factors<br>empirical from NGT 2023, GRAP 2024, SAFAR<br>per-station before/after AQI computation</p>
+      <div class="tile" style="background:var(--forest);color:#f0fdf4;padding:14px 18px;">
+        <h3 style="color:#f0fdf4;font-size:15px;">intervention simulator</h3>
+        <p style="font-size:12px;opacity:0.85;line-height:1.6;">source-weighted empirical reduction factors<br>NGT 2023, GRAP 2024, SAFAR studies</p>
       </div>
     </div>
   </div>
   <div class="brand">pavan.</div><div class="sn">05</div>
 </div>
 
-<!-- 06 INFRASTRUCTURE -->
-<div class="slide">
+<!-- 06 INFRASTRUCTURE — padding reduced, spacing fixed -->
+<div class="slide" style="padding:44px 56px;">
   <div class="ey">infrastructure + deployment</div>
-  <h2 style="font-size:34px;">deployment architecture</h2>
-  <div class="grid g2" style="margin-top:20px;">
+  <h2 style="font-size:30px;">deployment architecture</h2>
+  <div class="grid g2" style="margin-top:14px;gap:10px;">
     <div>
-      <div class="tile" style="background:var(--cobalt);color:white;margin-bottom:10px;">
-        <h3 style="color:white;font-size:17px;">🌐 vercel (frontend)</h3>
-        <p style="font-size:14px;opacity:0.85;line-height:1.7;">Next.js 16 · 10 pages · 5 serverless API routes<br>chatbot (/api/chat) · telegram webhook<br>whatsapp API · email notifications</p>
+      <div class="tile" style="background:var(--cobalt);color:white;margin-bottom:8px;padding:14px 18px;">
+        <h3 style="color:white;font-size:15px;">🌐 vercel (frontend)</h3>
+        <p style="font-size:13px;opacity:0.85;line-height:1.6;">Next.js 16 · 10 pages · 5 serverless API routes · chatbot · telegram · email</p>
       </div>
-      <div class="tile" style="background:var(--purple);color:white;margin-bottom:10px;">
-        <h3 style="color:white;font-size:17px;">🚂 railway (backend)</h3>
-        <p style="font-size:14px;opacity:0.85;line-height:1.7;">FastAPI · Docker container<br>28 REST endpoints<br>6 agent orchestration · ML inference</p>
+      <div class="tile" style="background:var(--purple);color:white;margin-bottom:8px;padding:14px 18px;">
+        <h3 style="color:white;font-size:15px;">🚂 railway (backend)</h3>
+        <p style="font-size:13px;opacity:0.85;line-height:1.6;">FastAPI · Docker · 28 endpoints · 6 agents · ML inference</p>
       </div>
-      <div class="tile" style="background:var(--forest);color:#f0fdf4;">
-        <h3 style="color:#f0fdf4;font-size:17px;">🗄️ supabase (database)</h3>
-        <p style="font-size:14px;opacity:0.85;line-height:1.7;">Postgres + Realtime subscriptions<br>5 tables: stations, readings, forecasts, alerts, anomalies<br>RLS enabled · 61 stations seeded · 1464 readings</p>
+      <div class="tile" style="background:var(--forest);color:#f0fdf4;padding:14px 18px;">
+        <h3 style="color:#f0fdf4;font-size:15px;">🗄️ supabase (database)</h3>
+        <p style="font-size:13px;opacity:0.85;line-height:1.6;">Postgres + Realtime · 5 tables · RLS · 61 stations · 1464 readings</p>
       </div>
     </div>
     <div>
