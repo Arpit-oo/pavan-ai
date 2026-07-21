@@ -68,7 +68,7 @@ export default function StatsBar({ stations, city }: StatsBarProps) {
             </span>
           </div>
           <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] opacity-70">
-            {stations.length} stations · all india
+            {stations.length} stations · {city.toLowerCase()}
           </p>
         </div>
       </div>

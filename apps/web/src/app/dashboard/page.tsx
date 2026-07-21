@@ -60,9 +60,7 @@ export default function Dashboard() {
       <NavBar />
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-8 sm:px-6 h-full flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-            <StatsBar stations={filteredStations} city={dashCity} />
-          </div>
+          <StatsBar stations={filteredStations} city={dashCity} />
           <CitySelector
             selected={dashCity}
             onChange={setDashCity}
