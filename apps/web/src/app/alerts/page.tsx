@@ -176,32 +176,34 @@ export default function AlertsPage() {
                 </div>
               )}
 
-              {/* WhatsApp previews — all 4 languages */}
+              {/* WhatsApp preview — switches with language tab */}
               {data && (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2.5">
-                    <span className="inline-block h-2 w-2 rounded-[2px]" style={{ background: "var(--entity-good)" }} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em]">whatsapp broadcast preview</span>
-                    <span className="ml-auto font-mono text-[10px] tabular-nums text-muted-foreground">
-                      {data.alerts.languages.length.toString().padStart(2, "0")} languages
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {data.alerts.languages.map((l) => (
-                      <div key={l} className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
-                        <div className="p-5">
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="text-lg">💬</span>
-                            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-80">{langNames[l] || l}</span>
-                          </div>
-                          <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
-                            <pre className="text-[12px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
-                              {data.alerts.whatsapp_message[l] || data.alerts.whatsapp_message.en}
-                            </pre>
-                          </div>
+                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                  <div className="p-6">
+                    <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-4">whatsapp broadcast preview · {langNames[lang] || lang}</div>
+                    <div className="space-y-4">
+                      <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm">🚨</span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">threshold alert</span>
                         </div>
+                        <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
+{data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}
+                        </pre>
                       </div>
-                    ))}
+                      <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm">📊</span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">daily digest</span>
+                        </div>
+                        <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
+{lang === "hi" ? `📊 *पवन दैनिक वायु रिपोर्ट — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("hi-IN")}\n\nऔसत AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*स्टेशन रिपोर्ट:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n*24h पूर्वानुमान:* स्थिर — कोई सुधार नहीं\n\n📊 pavan-aqi.vercel.app\n_पवन AI · दैनिक रिपोर्ट_`
+: lang === "ta" ? `📊 *பவன் தினசரி அறிக்கை — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("ta-IN")}\n\nசராசரி AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*நிலைய அறிக்கை:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_பவன் AI · தினசரி அறிக்கை_`
+: lang === "bn" ? `📊 *পবন দৈনিক প্রতিবেদন — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("bn-IN")}\n\nগড় AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*স্টেশন প্রতিবেদন:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_পবন AI · দৈনিক প্রতিবেদন_`
+: `📊 *Pavan Daily AQI Report — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("en-IN")}\n\nAvg AQI: *${data.alerts.avg_aqi}* (${data.alerts.level.toUpperCase()})\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*Station Report:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n*24h Forecast:* Stable — no improvement expected\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n_Pavan AI · Daily Digest_`}
+                        </pre>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
