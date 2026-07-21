@@ -280,9 +280,9 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
 .step-indicator .step-dot.active { background: var(--entity-forecast); transform: scale(1.3); }
 .step-indicator .step-dot.done { background: var(--entity-good); }
 
-/* Custom cursor */
+/* Custom cursor — only hides default cursor when custom is loaded */
 @media (pointer: fine) {
-  * { cursor: none !important; }
+  .cursor-ready * { cursor: none !important; }
   .custom-cursor {
     position: fixed;
     width: 12px;
