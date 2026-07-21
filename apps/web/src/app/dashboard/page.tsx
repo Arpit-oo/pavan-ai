@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { fetchAPI, type StationReading, type HeatmapData } from "@/lib/api";
+import { fetchAPI, type StationReading } from "@/lib/api";
 import { MOCK_STATIONS } from "@/lib/mock-data";
 import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";

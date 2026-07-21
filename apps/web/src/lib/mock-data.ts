@@ -1,4 +1,4 @@
-import type { StationReading, HeatmapPoint } from "./api";
+import type { StationReading } from "./api";
 
 export const MOCK_STATIONS: StationReading[] = [
 { station_id: "site_1544", station_name: "Anand Vihar, Delhi", latitude: 28.6468, longitude: 77.316, timestamp: new Date().toISOString(), pm25: 66.4, pm10: 134.1, no2: 29.7, so2: 6.1, co: 0.56, o3: 44.6, aqi: 148, temperature: 32.9, humidity: 58.4, wind_speed: 0.7, wind_direction: 34.0 },
@@ -108,20 +108,6 @@ export const MOCK_STATIONS: StationReading[] = [
   { station_id: "site_7201", station_name: "Desaipet, Warangal", latitude: 17.9784, longitude: 79.5941, timestamp: new Date().toISOString(), pm25: 33.5, pm10: 64.5, no2: 18.9, so2: 9.1, co: 1.88, o3: 36.9, aqi: 70, temperature: 28.5, humidity: 84.7, wind_speed: 4.5, wind_direction: 163.0 },
 ];
 
-export function generateMockHeatmapPoints(): HeatmapPoint[] {
-  return [];
-}
-
-export const MOCK_FORECAST = Array.from({ length: 24 }, (_, i) => {
-  const base = 155 + Math.sin((i / 24) * Math.PI * 2 - 1) * 40 + (Math.random() - 0.5) * 20;
-  return {
-    time: `+${i + 1}h`,
-    hour: `+${i + 1}h`,
-    aqi: Math.round(base),
-    lower: Math.round(base - 15 - i * 2),
-    upper: Math.round(base + 15 + i * 2),
-  };
-});
 
 export const MOCK_AGENT_LOG = [
   { timestamp: new Date().toISOString(), agent: "orchestrator", message: "Starting parallel data collection" },

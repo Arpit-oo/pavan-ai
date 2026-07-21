@@ -250,7 +250,7 @@ export default function CompliancePage() {
                             {Object.entries(report.attribution_summary).map(([src, pct]) => (
                               <div key={src} className="bg-secondary rounded-xl px-4 py-3 text-center">
                                 <span className="font-display text-[24px]" style={{ color: "var(--entity-moderate)" }}>
-                                  {(Number(pct) * 100).toFixed(0)}%
+                                  {Number(pct) < 1 ? (Number(pct) * 100).toFixed(0) : Number(pct).toFixed(0)}%
                                 </span>
                                 <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground mt-1">{src}</p>
                               </div>

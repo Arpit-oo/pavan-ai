@@ -35,6 +35,28 @@ export default function ChatWidget() {
     }
   }, [messages]);
 
+  const sendDirect = async (text: string) => {
+    if (!text.trim() || loading) return;
+    const userMsg: Message = { role: "user", content: text.trim(), timestamp: new Date() };
+    setMessages((prev) => [...prev, userMsg]);
+    setInput("");
+    setLoading(true);
+    try {
+      let response = "";
+      try {
+        const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: userMsg.content }) });
+        const data = await res.json();
+        response = data.response;
+      } catch {
+        const res = await fetchAPI<{ response: string }>("/api/v1/agents/ask", { method: "POST", body: JSON.stringify({ query: userMsg.content, city: "Delhi" }) });
+        response = res.response;
+      }
+      setMessages((prev) => [...prev, { role: "assistant", content: response, timestamp: new Date() }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: "check the dashboard for live aqi data across 105 stations in 57 cities.", timestamp: new Date() }]);
+    } finally { setLoading(false); }
+  };
+
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
 
@@ -160,7 +182,7 @@ export default function ChatWidget() {
                 {SUGGESTIONS.map((s) => (
                   <button
                     key={s}
-                    onClick={() => { setInput(s); }}
+                    onClick={() => sendDirect(s)}
                     className="text-[11px] bg-secondary hover:bg-accent text-foreground px-2.5 py-1.5 rounded-full transition-colors lowercase"
                     style={{ fontVariationSettings: "'wght' 480" }}
                   >

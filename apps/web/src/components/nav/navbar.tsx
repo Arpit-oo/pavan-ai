@@ -72,7 +72,7 @@ export default function NavBar() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-0 bottom-0 z-[100]" style={{backgroundColor: "#f5f0e6"}}>
+        <div className="md:hidden fixed inset-x-0 top-0 bottom-0 z-[100]" style={{backgroundColor: "var(--background)"}}>
           <div className="flex items-center justify-between px-4 py-3">
             <Link href="/" className="text-xl" style={{ fontVariationSettings: "'wght' 720, 'wdth' 94" }}>pavan<span style={{ color: activeItem.tone }}>.</span></Link>
             <button className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center" onClick={() => setMenuOpen(false)}>

@@ -47,7 +47,16 @@ export default function AgentsPage() {
     try {
       setResult(await fetchAPI<AnalysisResult>(`/api/v1/agents/analyze?city=${agentCity}`));
     } catch {
-      setResult({ city: agentCity, elapsed_seconds: 2.3, summary: getCityAgentSummary(agentCity), agents: {}, run_log: getCityAgentLog(agentCity) } as unknown as AnalysisResult);
+      const summary = getCityAgentSummary(agentCity);
+      const mockAgents: Record<string, AgentData> = {
+        orchestrator: { agent: "orchestrator", confidence: 0.95, reasoning: `coordinated 3-phase pipeline for ${agentCity}. parallel data collection in phase 1, parallel analysis in phase 2, sequential enforcement in phase 3. total elapsed: 2.3s.`, data: { phases_completed: 3, agents_coordinated: 6 } },
+        sensor: { agent: "sensor", confidence: 0.92, reasoning: `pulled ${summary.station_count} stations for ${agentCity}. avg aqi: ${summary.avg_aqi}. ${summary.hotspot_count} hotspots detected above threshold.`, data: { stations: summary.station_count, avg_aqi: summary.avg_aqi } },
+        weather: { agent: "weather", confidence: 0.88, reasoning: `wind speed ${summary.wind_speed} m/s. ${summary.stagnation ? "stagnation conditions detected — poor dispersion expected." : "moderate dispersion conditions."}`, data: { wind_speed: summary.wind_speed, stagnation: summary.stagnation } },
+        anomaly: { agent: "anomaly", confidence: 0.85, reasoning: `${summary.anomaly_count} anomalies detected, ${summary.critical_anomalies} critical. z-score analysis on pm2.5/pm10 ratios flagged unusual patterns.`, data: { anomalies: summary.anomaly_count, critical: summary.critical_anomalies } },
+        attribution: { agent: "attribution", confidence: 0.82, reasoning: `dominant source: ${summary.dominant_source}. cross-referenced with satellite data and wind patterns for confidence scoring.`, data: { dominant: summary.dominant_source } },
+        enforcement: { agent: "enforcement", confidence: 0.90, reasoning: `generated ${summary.enforcement_recs} enforcement recommendations. grap stage: ${summary.grap_stage || "none"}. prioritized by urgency and impact.`, data: { recommendations: summary.enforcement_recs, grap: summary.grap_stage } },
+      };
+      setResult({ city: agentCity, elapsed_seconds: 2.3, summary, agents: mockAgents, run_log: getCityAgentLog(agentCity) } as unknown as AnalysisResult);
     } finally { setLoading(false); }
   };
 

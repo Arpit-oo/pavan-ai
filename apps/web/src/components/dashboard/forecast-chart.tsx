@@ -11,10 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { fetchAPI, getAQIGradientColor } from "@/lib/api";
+import { fetchAPI } from "@/lib/api";
 
 interface ForecastPoint {
   timestamp: string;
@@ -80,7 +77,7 @@ export default function ForecastChart({ selectedCity }: { selectedCity?: string 
   const getChartData = () => {
     if (useMock) {
       const base = CITY_MOCK_BASE[city] || 120;
-      return Array.from({ length: Math.min(hours, 24) }, (_, i) => {
+      return Array.from({ length: hours }, (_, i) => {
         const val = base + Math.sin((i / 24) * Math.PI * 2 - 1) * (base * 0.2) + (Math.random() - 0.5) * 15;
         return {
           time: `+${i + 1}h`,

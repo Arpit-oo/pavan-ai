@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { phone, city, language } = await req.json();
+    const { phone, city, language, aqi: reqAqi } = await req.json();
 
     const advisories: Record<string, Record<string, string>> = {
       en: {
@@ -24,7 +24,8 @@ export async function POST(req: NextRequest) {
     };
 
     const lang = language || "en";
-    const level = "moderate";
+    const aqi = reqAqi || 185;
+    const level = aqi > 300 ? "poor" : aqi > 200 ? "poor" : "moderate";
     const template = advisories[lang]?.[level] || advisories.en[level];
     const message = template.replace(/\{city\}/g, city || "Delhi");
 
