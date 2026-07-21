@@ -181,7 +181,36 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="brand">pavan.</div><div class="sn">04</div>
 </div>
 
-<!-- 05 DIFFERENTIATORS -->
+<!-- 05 SYSTEM ARCHITECTURE (5-layer stack) -->
+<div class="slide">
+  <div class="eyebrow">system architecture</div>
+  <h2 style="font-size: 38px;">5 layers. 28 endpoints.</h2>
+  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
+    <div class="tile" style="background: var(--cobalt); color: white; padding: 16px 24px; display: flex; align-items: center; gap: 20px;">
+      <div style="width: 140px; shrink: 0;"><span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5;">layer 1</span><h3 style="color: white; font-size: 17px; margin: 4px 0 0;">presentation</h3></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">Next.js 16</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">Mapbox GL</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">10 pages</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">GPT-4o chatbot</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">Telegram bot</span></div>
+    </div>
+    <div class="tile" style="background: var(--amber); padding: 16px 24px; display: flex; align-items: center; gap: 20px;">
+      <div style="width: 140px;"><span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5;">layer 2</span><h3 style="font-size: 17px; margin: 4px 0 0;">api (fastapi)</h3></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/aqi</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/forecast</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/agents</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/simulate</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/alerts</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/satellite</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/traffic</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">/dispersion</span></div>
+    </div>
+    <div class="tile" style="background: var(--purple); color: white; padding: 16px 24px; display: flex; align-items: center; gap: 20px;">
+      <div style="width: 140px;"><span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5;">layer 3</span><h3 style="color: white; font-size: 17px; margin: 4px 0 0;">agent mesh</h3></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">🧠 orchestrator</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">📡 sensor</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">🌤️ weather</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">⚡ anomaly</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">🔍 attribution</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: white; font-size: 12px; padding: 4px 12px;">🛡️ enforcement</span></div>
+    </div>
+    <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 16px 24px; display: flex; align-items: center; gap: 20px;">
+      <div style="width: 140px;"><span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5;">layer 4</span><h3 style="font-size: 17px; margin: 4px 0 0;">ml pipeline</h3></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">XGBoost forecast</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">Gaussian plume</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">risk scoring</span><span class="flow-pill" style="background: rgba(0,0,0,0.08); font-size: 12px; padding: 4px 12px;">simulator</span></div>
+    </div>
+    <div class="tile" style="background: var(--forest); color: #f0fdf4; padding: 16px 24px; display: flex; align-items: center; gap: 20px;">
+      <div style="width: 140px;"><span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5;">layer 5</span><h3 style="color: #f0fdf4; font-size: 17px; margin: 4px 0 0;">data layer</h3></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">Supabase</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">CPCB</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">Sentinel-5P</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">MODIS</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">Weather</span><span class="flow-pill" style="background: rgba(255,255,255,0.15); color: #f0fdf4; font-size: 12px; padding: 4px 12px;">Traffic</span></div>
+    </div>
+  </div>
+  <div class="brand">pavan.</div><div class="sn">05</div>
+</div>
+
+<!-- 06 DIFFERENTIATORS -->
 <div class="slide">
   <div class="eyebrow">what nobody else builds</div>
   <h2>key differentiators</h2>
