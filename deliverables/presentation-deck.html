@@ -41,50 +41,48 @@ body {
   -webkit-print-color-adjust: exact;
 }
 
+/* Noise grain on all slides */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  z-index: 1;
+}
+.slide > * { position: relative; z-index: 2; }
+
 @media print {
   body { background: white; }
   .slide { margin: 0; border-radius: 0; box-shadow: none; width: 100vw; height: 100vh; }
 }
 
-.eyebrow {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); font-weight: 600; margin-bottom: 16px; }
 h1 { font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 20px; }
 h2 { font-size: 44px; font-weight: 800; letter-spacing: -0.035em; line-height: 0.92; margin-bottom: 16px; }
 h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
-
 .sub { font-size: 20px; color: var(--muted); line-height: 1.5; max-width: 52ch; }
-
 .pill { display: inline-flex; align-items: center; padding: 8px 20px; border-radius: 999px; font-size: 15px; font-weight: 600; }
-
 .tile { border-radius: 20px; padding: 28px; }
-
 .grid { display: grid; gap: 16px; }
 .g2 { grid-template-columns: 1fr 1fr; }
 .g3 { grid-template-columns: 1fr 1fr 1fr; }
 .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-
+.g5 { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
 .stat { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
 .stat-label { font-size: 14px; font-weight: 600; margin-top: 6px; }
-
 .bullet { font-size: 18px; line-height: 2; font-weight: 500; }
 .bullet strong { font-weight: 700; }
-
-.sn { position: absolute; bottom: 20px; right: 32px; font-size: 13px; color: var(--muted); opacity: 0.4; font-weight: 600; }
-.brand { position: absolute; bottom: 20px; left: 32px; font-size: 13px; color: var(--muted); opacity: 0.4; font-weight: 700; }
-
-.flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.flow-pill { padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
-.flow-arrow { color: var(--muted); font-size: 16px; }
+.sn { position: absolute; bottom: 20px; right: 32px; font-size: 15px; color: var(--muted); opacity: 0.5; font-weight: 700; }
+.brand { position: absolute; bottom: 20px; left: 32px; font-size: 15px; color: var(--muted); opacity: 0.5; font-weight: 800; }
+.flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.flow-pill { padding: 8px 20px; border-radius: 999px; font-size: 16px; font-weight: 700; }
+.flow-arrow { color: var(--muted); font-size: 20px; }
 </style>
 
-<!-- SLIDE 1: TITLE -->
+<!-- 01 TITLE -->
 <div class="slide" style="background: var(--cobalt); color: white; justify-content: space-between; padding-bottom: 40px;">
   <div>
     <div class="eyebrow" style="color: rgba(255,255,255,0.5);">et ai hackathon 2026 · problem statement #5</div>
@@ -101,15 +99,17 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
     </div>
     <div style="font-size: 18px;"><span style="font-weight: 500;">team</span> <span style="font-size: 28px; font-weight: 800;">edgerunner</span> <span style="opacity: 0.5; margin-left: 16px;">pavan-aqi.vercel.app</span></div>
   </div>
-  <img src="https://pavan-aqi.vercel.app/claudy/sit.png" alt="" style="position:absolute;right:48px;bottom:36px;width:120px;opacity:0.25;filter:brightness(0) invert(1);" />
+  <!-- Claudy moved to center-right -->
+  <img src="https://pavan-aqi.vercel.app/claudy/sit.png" alt="" style="position:absolute;right:60px;top:50%;transform:translateY(-50%);width:140px;opacity:0.2;filter:brightness(0) invert(1);" />
   <div class="sn" style="color: rgba(255,255,255,0.3);">01</div>
 </div>
 
-<!-- SLIDE 2: PROBLEM -->
+<!-- 02 PROBLEM -->
 <div class="slide">
   <div class="eyebrow">the problem</div>
-  <h2>data exists. intelligence doesn't.</h2>
-  <div class="grid g3" style="margin-top: 24px;">
+  <h2><span style="color: var(--coral);">data exists.</span> intelligence doesn't.</h2>
+  <p class="sub" style="margin-bottom: 20px;">900+ stations generate data. only 31% of cities act on it. 1.67 million indians die every year.</p>
+  <div class="grid g3" style="margin-top: 8px;">
     <div class="tile" style="background: var(--coral); color: white;">
       <div class="stat">1.67M</div>
       <div class="stat-label" style="opacity: 0.8;">deaths/year from air pollution</div>
@@ -129,44 +129,26 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="brand">pavan.</div><div class="sn">02</div>
 </div>
 
-<!-- SLIDE 3: 5 DATA SOURCES -->
+<!-- 03 DATA SOURCES -->
 <div class="slide">
   <div class="eyebrow">multi-source fusion</div>
   <h2>5 data sources. one intelligence layer.</h2>
   <div class="grid g3" style="margin-top: 20px; gap: 12px;">
-    <div class="tile" style="background: var(--cobalt); color: white; padding: 20px;">
-      <h3 style="color: white; font-size: 18px;">📡 CPCB CAAQMS</h3>
-      <p style="font-size: 15px; opacity: 0.8;">105 stations · 6 pollutants · 57 cities</p>
-    </div>
-    <div class="tile" style="background: var(--purple); color: white; padding: 20px;">
-      <h3 style="color: white; font-size: 18px;">🛰️ Sentinel-5P</h3>
-      <p style="font-size: 15px; opacity: 0.8;">NO2/SO2 · 1600 grid points · 12 hotspots</p>
-    </div>
-    <div class="tile" style="background: var(--coral); color: white; padding: 20px;">
-      <h3 style="color: white; font-size: 18px;">🔥 MODIS/VIIRS</h3>
-      <p style="font-size: 15px; opacity: 0.8;">fire detection · crop burning · cross-ref</p>
-    </div>
-    <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 20px;">
-      <h3 style="font-size: 18px;">🌤️ OpenWeatherMap</h3>
-      <p style="font-size: 15px; opacity: 0.75;">wind · stagnation · inversion risk</p>
-    </div>
-    <div class="tile" style="background: var(--amber); color: #1a1a18; padding: 20px;">
-      <h3 style="font-size: 18px;">🚗 Traffic Mobility</h3>
-      <p style="font-size: 15px; opacity: 0.75;">congestion · truck routes · emission factor</p>
-    </div>
-    <div class="tile" style="background: var(--card); border: 2px solid var(--fg); padding: 20px;">
-      <h3 style="font-size: 18px;">🌫️ Atmospheric Dispersion</h3>
-      <p style="font-size: 15px; color: var(--muted);">gaussian plume · pasquill-gifford</p>
-    </div>
+    <div class="tile" style="background: var(--cobalt); color: white; padding: 20px;"><h3 style="color: white; font-size: 18px;">📡 CPCB CAAQMS</h3><p style="font-size: 15px; opacity: 0.8;">105 stations · 6 pollutants · 57 cities</p></div>
+    <div class="tile" style="background: var(--purple); color: white; padding: 20px;"><h3 style="color: white; font-size: 18px;">🛰️ Sentinel-5P</h3><p style="font-size: 15px; opacity: 0.8;">NO2/SO2 · 1600 grid points · 12 hotspots</p></div>
+    <div class="tile" style="background: var(--coral); color: white; padding: 20px;"><h3 style="color: white; font-size: 18px;">🔥 MODIS/VIIRS</h3><p style="font-size: 15px; opacity: 0.8;">fire detection · crop burning · cross-ref</p></div>
+    <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 20px;"><h3 style="font-size: 18px;">🌤️ OpenWeatherMap</h3><p style="font-size: 15px; opacity: 0.75;">wind · stagnation · inversion risk</p></div>
+    <div class="tile" style="background: var(--amber); color: #1a1a18; padding: 20px;"><h3 style="font-size: 18px;">🚗 Traffic Mobility</h3><p style="font-size: 15px; opacity: 0.75;">congestion · truck routes · emission factor</p></div>
+    <div class="tile" style="background: var(--card); border: 2px solid var(--fg); padding: 20px;"><h3 style="font-size: 18px;">🌫️ Atmospheric Dispersion</h3><p style="font-size: 15px; color: var(--muted);">gaussian plume · pasquill-gifford</p></div>
   </div>
   <div class="brand">pavan.</div><div class="sn">03</div>
 </div>
 
-<!-- SLIDE 4: AGENT PIPELINE -->
+<!-- 04 AGENT PIPELINE — fixed < 3 spacing + bigger flow -->
 <div class="slide">
   <div class="eyebrow">architecture</div>
-  <h2>6 agents. 3 phases. &lt;3 seconds.</h2>
-  <div class="grid g3" style="margin-top: 20px;">
+  <h2>6 agents. 3 phases. &lt; 3 seconds.</h2>
+  <div class="grid g3" style="margin-top: 16px;">
     <div class="tile" style="background: var(--forest); color: #f0fdf4;">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.6; margin-bottom: 12px;">phase 1 · parallel</div>
       <h3 style="color: #f0fdf4; font-size: 20px;">data collection</h3>
@@ -183,7 +165,7 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
       <p class="bullet" style="font-size: 16px; line-height: 1.8;">🛡️ <strong>enforcement</strong> — inspector recs<br>🧠 <strong>orchestrator</strong> — coordinates all</p>
     </div>
   </div>
-  <div class="tile" style="background: var(--card); margin-top: 16px; padding: 16px 24px;">
+  <div class="tile" style="background: var(--card); margin-top: 14px; padding: 16px 28px;">
     <div class="flow" style="justify-content: center;">
       <span class="flow-pill" style="background: #e8e3d9;">5 sources</span>
       <span class="flow-arrow">→</span>
@@ -193,13 +175,13 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
       <span class="flow-arrow">→</span>
       <span class="flow-pill" style="background: var(--amber);">enforce</span>
       <span class="flow-arrow">→</span>
-      <span class="flow-pill" style="background: var(--cobalt); color: white;">GPT-4o</span>
+      <span class="flow-pill" style="background: var(--cobalt); color: white;">AI response</span>
     </div>
   </div>
   <div class="brand">pavan.</div><div class="sn">04</div>
 </div>
 
-<!-- SLIDE 5: DIFFERENTIATORS -->
+<!-- 05 DIFFERENTIATORS -->
 <div class="slide">
   <div class="eyebrow">what nobody else builds</div>
   <h2>key differentiators</h2>
@@ -224,7 +206,7 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="brand">pavan.</div><div class="sn">05</div>
 </div>
 
-<!-- SLIDE 6: FORECAST VALIDATION -->
+<!-- 06 FORECAST — fixed < 3 spacing, added detail -->
 <div class="slide">
   <div class="eyebrow">predictive analytics</div>
   <div class="grid g2" style="height: 100%; align-items: center;">
@@ -235,47 +217,48 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
           <div><div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);">model rmse</div><div class="stat" style="font-size: 48px; color: var(--forest);">11.74</div></div>
           <div><div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);">baseline rmse</div><div class="stat" style="font-size: 48px; color: var(--coral);">83.65</div></div>
         </div>
-        <p class="bullet" style="font-size: 16px;">• 12 features · 10k samples · XGBoost<br>• 1-72hr predictions · confidence intervals<br>• city switcher (10 cities)</p>
+        <p class="bullet" style="font-size: 16px;">• XGBoost · 12 features · 10k samples<br>• 1-72hr predictions · confidence intervals<br>• city switcher — 10 cities selectable<br>• validated seasonal + diurnal patterns</p>
       </div>
     </div>
     <div class="tile" style="background: var(--cobalt); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 320px;">
       <div class="stat" style="font-size: 96px; color: white;">86%</div>
       <div style="font-size: 22px; font-weight: 700; margin-top: 8px;">improvement</div>
-      <div style="font-size: 15px; opacity: 0.6; margin-top: 4px;">signal → recommendation: &lt;3s</div>
+      <div style="font-size: 16px; opacity: 0.6; margin-top: 8px;">signal → recommendation: &lt; 3s</div>
     </div>
   </div>
   <div class="brand">pavan.</div><div class="sn">06</div>
 </div>
 
-<!-- SLIDE 7: COVERAGE with India map -->
+<!-- 07 COVERAGE — cities in columns -->
 <div class="slide" style="overflow: hidden;">
-  <img src="https://pavan-aqi.vercel.app/india-map.png" alt="" style="position:absolute;right:40px;top:50%;transform:translateY(-50%);height:85%;opacity:0.06;" />
+  <img src="https://pavan-aqi.vercel.app/india-map.png" alt="" style="position:absolute;right:40px;top:50%;transform:translateY(-50%);height:85%;opacity:0.06;z-index:0;" />
   <div class="eyebrow">national coverage</div>
   <h2>all india. every state capital.</h2>
-  <div class="grid g4" style="margin-top: 24px;">
+  <div class="grid g4" style="margin-top: 20px;">
     <div class="tile" style="background: var(--amber); text-align: center;"><div class="stat">105</div><div class="stat-label">stations</div></div>
     <div class="tile" style="background: var(--cobalt); color: white; text-align: center;"><div class="stat">57</div><div class="stat-label" style="opacity: 0.8;">cities</div></div>
     <div class="tile" style="background: var(--purple); color: white; text-align: center;"><div class="stat">5</div><div class="stat-label" style="opacity: 0.8;">data sources</div></div>
     <div class="tile" style="background: var(--forest); color: #f0fdf4; text-align: center;"><div class="stat">28</div><div class="stat-label" style="opacity: 0.8;">endpoints</div></div>
   </div>
-  <p style="margin-top: 20px; font-size: 18px; font-weight: 500; line-height: 1.8;">
-    <span style="color: var(--coral); font-weight: 700;">north:</span> delhi (17) · lucknow · jaipur · chandigarh · srinagar · leh &nbsp;
-    <span style="color: var(--cobalt); font-weight: 700;">west:</span> mumbai (6) · pune · ahmedabad · surat<br>
-    <span style="color: var(--forest); font-weight: 700;">south:</span> bangalore (5) · chennai · hyderabad · kochi &nbsp;
-    <span style="color: var(--amber); font-weight: 700;">east:</span> kolkata (4) · patna &nbsp;
-    <span style="color: var(--teal); font-weight: 700;">NE:</span> guwahati · imphal · gangtok
-  </p>
+  <!-- Cities in columns -->
+  <div class="grid g5" style="margin-top: 16px; gap: 8px; font-size: 13px; line-height: 1.7;">
+    <div><div style="font-weight: 800; color: var(--coral); margin-bottom: 4px;">NORTH</div>delhi (17)<br>lucknow<br>jaipur<br>chandigarh<br>srinagar · leh</div>
+    <div><div style="font-weight: 800; color: var(--cobalt); margin-bottom: 4px;">WEST</div>mumbai (6)<br>pune<br>ahmedabad<br>surat · rajkot<br>jodhpur · indore</div>
+    <div><div style="font-weight: 800; color: var(--forest); margin-bottom: 4px;">SOUTH</div>bangalore (5)<br>chennai<br>hyderabad<br>kochi<br>mangalore</div>
+    <div><div style="font-weight: 800; color: var(--amber); margin-bottom: 4px;">EAST</div>kolkata (4)<br>patna<br>bhubaneswar<br>raipur<br>ranchi</div>
+    <div><div style="font-weight: 800; color: var(--teal); margin-bottom: 4px;">NE</div>guwahati<br>imphal<br>shillong<br>gangtok<br>itanagar</div>
+  </div>
   <div class="brand">pavan.</div><div class="sn">07</div>
 </div>
 
-<!-- SLIDE 8: TECH + DELIVERY -->
+<!-- 08 TECH — colorful pills -->
 <div class="slide">
   <div class="eyebrow">technology + delivery</div>
   <div class="grid g2" style="height: 100%; align-items: center;">
     <div>
       <h2 style="font-size: 36px;">built to scale</h2>
       <div style="margin-top: 16px;">
-        <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">frontend</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--cobalt); color: white; font-size: 13px; padding: 5px 14px;">Next.js 16</span><span class="pill" style="background: var(--teal); color: #0a0a08; font-size: 13px; padding: 5px 14px;">Mapbox GL</span><span class="pill" style="background: var(--card); border: 1.5px solid #ddd; font-size: 13px; padding: 5px 14px;">Recharts</span><span class="pill" style="background: var(--purple); color: white; font-size: 13px; padding: 5px 14px;">Framer Motion</span></div></div>
+        <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">frontend</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--cobalt); color: white; font-size: 13px; padding: 5px 14px;">Next.js 16</span><span class="pill" style="background: var(--teal); color: #0a0a08; font-size: 13px; padding: 5px 14px;">Mapbox GL</span><span class="pill" style="background: var(--purple); color: white; font-size: 13px; padding: 5px 14px;">Framer Motion</span><span class="pill" style="background: var(--card); border: 1.5px solid #ddd; font-size: 13px; padding: 5px 14px;">Recharts</span></div></div>
         <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">backend + ml</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--forest); color: #f0fdf4; font-size: 13px; padding: 5px 14px;">FastAPI</span><span class="pill" style="background: var(--amber); font-size: 13px; padding: 5px 14px;">XGBoost</span><span class="pill" style="background: var(--card); border: 1.5px solid #ddd; font-size: 13px; padding: 5px 14px;">Gaussian Plume</span></div></div>
         <div style="margin-bottom: 14px;"><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">ai + data</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--pink); color: white; font-size: 13px; padding: 5px 14px;">GPT-4o</span><span class="pill" style="background: var(--cobalt); color: white; font-size: 13px; padding: 5px 14px;">Sentinel-5P</span><span class="pill" style="background: var(--coral); color: white; font-size: 13px; padding: 5px 14px;">MODIS</span></div></div>
         <div><span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">infra</span><div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"><span class="pill" style="background: var(--card); border: 2px solid var(--cobalt); color: var(--cobalt); font-size: 13px; padding: 5px 14px;">Vercel</span><span class="pill" style="background: var(--card); border: 2px solid var(--purple); color: var(--purple); font-size: 13px; padding: 5px 14px;">Railway</span><span class="pill" style="background: var(--card); border: 2px solid var(--forest); color: var(--forest); font-size: 13px; padding: 5px 14px;">Supabase</span><span class="pill" style="background: var(--card); border: 2px solid var(--amber); color: var(--amber); font-size: 13px; padding: 5px 14px;">Docker</span></div></div>
@@ -295,7 +278,7 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
   <div class="brand">pavan.</div><div class="sn">08</div>
 </div>
 
-<!-- SLIDE 9: BUSINESS IMPACT -->
+<!-- 09 BUSINESS IMPACT -->
 <div class="slide">
   <div class="eyebrow">business impact</div>
   <h2>who needs pavan</h2>
@@ -313,14 +296,15 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
       <p class="bullet" style="font-size: 15px; opacity: 0.85; line-height: 1.6;">4 channels — all live.<br>Multilingual (auto-detect).<br>Subscribe with city + frequency.</p>
     </div>
   </div>
+  <img src="https://pavan-aqi.vercel.app/claudy/pond.png" alt="" style="position:absolute;right:32px;bottom:20px;width:60px;opacity:0.12;" />
   <div class="brand">pavan.</div><div class="sn">09</div>
 </div>
 
-<!-- SLIDE 10: NOTIFICATION CHANNELS -->
+<!-- 10 CHANNELS — language pills highlighted -->
 <div class="slide">
   <div class="eyebrow">multi-channel delivery</div>
-  <h2>4 channels. all live. 4 languages.</h2>
-  <div class="grid g4" style="margin-top: 24px;">
+  <h2>4 channels. all live.</h2>
+  <div class="grid g4" style="margin-top: 20px;">
     <div class="tile" style="background: var(--cobalt); color: white;">
       <div style="font-size: 28px; margin-bottom: 8px;">🌐</div>
       <h3 style="color: white; font-size: 20px;">web dashboard</h3>
@@ -329,12 +313,12 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
     <div class="tile" style="background: var(--purple); color: white;">
       <div style="font-size: 28px; margin-bottom: 8px;">🤖</div>
       <h3 style="color: white; font-size: 20px;">telegram bot</h3>
-      <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">@PavanETbot<br>10 commands<br>/daily /weekly /threshold<br>multilingual AI responses</p>
+      <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">@PavanETbot<br>10 commands<br>/daily /weekly /threshold<br>multilingual AI</p>
     </div>
     <div class="tile" style="background: var(--amber);">
       <div style="font-size: 28px; margin-bottom: 8px;">📧</div>
       <h3 style="font-size: 20px;">email alerts</h3>
-      <p style="font-size: 14px; opacity: 0.75; line-height: 1.6;">Gmail SMTP<br>branded HTML design<br>threshold + daily + weekly<br>city-specific alerts</p>
+      <p style="font-size: 14px; opacity: 0.75; line-height: 1.6;">Gmail SMTP<br>branded HTML<br>threshold + daily + weekly<br>city-specific</p>
     </div>
     <div class="tile" style="background: var(--forest); color: #f0fdf4;">
       <div style="font-size: 28px; margin-bottom: 8px;">💬</div>
@@ -342,177 +326,167 @@ h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 
       <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">broadcast channel<br>daily AQI digests<br>GRAP notifications<br>health advisories</p>
     </div>
   </div>
-  <p style="margin-top: 16px; font-size: 16px; color: var(--muted);">auto-detects language: hindi · english · tamil · bengali · punjabi</p>
+  <!-- Language pills highlighted -->
+  <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+    <span class="pill" style="background: var(--card); border: 2px solid var(--cobalt); color: var(--cobalt); font-size: 14px; padding: 6px 16px;">hindi</span>
+    <span class="pill" style="background: var(--card); border: 2px solid var(--purple); color: var(--purple); font-size: 14px; padding: 6px 16px;">english</span>
+    <span class="pill" style="background: var(--card); border: 2px solid var(--forest); color: var(--forest); font-size: 14px; padding: 6px 16px;">tamil</span>
+    <span class="pill" style="background: var(--card); border: 2px solid var(--amber); color: var(--amber); font-size: 14px; padding: 6px 16px;">bengali</span>
+    <span class="pill" style="background: var(--card); border: 2px solid var(--pink); color: var(--pink); font-size: 14px; padding: 6px 16px;">punjabi</span>
+    <span style="font-size: 14px; color: var(--muted); margin-left: 8px; align-self: center;">· auto-detected by chatbot</span>
+  </div>
   <div class="brand">pavan.</div><div class="sn">10</div>
 </div>
 
-<!-- SLIDE 11: INTERVENTION SIMULATOR DETAIL -->
-<div class="slide">
+<!-- 11 SIMULATOR — with spacing fix + highlighted bullets -->
+<div class="slide" style="padding-top: 64px;">
   <div class="eyebrow">counterfactual analysis</div>
-  <h2>"what if we ban trucks?"</h2>
-  <div class="grid g2" style="margin-top: 20px;">
+  <h2 style="font-size: 38px;">"what if we ban trucks?"</h2>
+  <div class="grid g2" style="margin-top: 16px;">
     <div>
-      <p class="bullet" style="font-size: 17px; line-height: 1.8;">
-        • select any city from 16 available<br>
-        • choose from 5 evidence-based interventions<br>
-        • see per-station before/after AQI impact<br>
-        • source-attribution-weighted reduction factors<br>
-        • compare all interventions side by side<br>
-        • based on published Delhi pollution studies
-      </p>
+      <div class="tile" style="background: var(--cobalt); color: white; padding: 20px; margin-bottom: 10px;">
+        <p style="font-size: 15px; opacity: 0.9; line-height: 1.7;">🏙️ <strong>select any city</strong> from 16 available</p>
+      </div>
+      <div class="tile" style="background: var(--purple); color: white; padding: 20px; margin-bottom: 10px;">
+        <p style="font-size: 15px; opacity: 0.9; line-height: 1.7;">🧪 <strong>5 evidence-based</strong> intervention types</p>
+      </div>
+      <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 20px; margin-bottom: 10px;">
+        <p style="font-size: 15px; line-height: 1.7;">📊 <strong>per-station before/after</strong> AQI impact</p>
+      </div>
+      <div class="tile" style="background: var(--amber); padding: 20px; margin-bottom: 10px;">
+        <p style="font-size: 15px; line-height: 1.7;">⚖️ <strong>source-attribution weighted</strong> reduction</p>
+      </div>
+      <div class="tile" style="background: var(--card); border: 2px solid var(--forest); padding: 20px;">
+        <p style="font-size: 15px; color: var(--muted); line-height: 1.7;">📈 <strong>compare all</strong> interventions side by side</p>
+      </div>
     </div>
     <div>
-      <div class="tile" style="background: var(--card); margin-bottom: 10px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span style="font-size: 14px; font-weight: 700;">🔥 burning ban</span>
-          <span style="font-size: 20px; font-weight: 800; color: var(--forest);">-20%</span>
-        </div>
-        <div style="height: 8px; background: #eee; border-radius: 4px; margin-top: 6px;"><div style="height: 100%; width: 100%; background: var(--coral); border-radius: 4px;"></div></div>
+      <div class="tile" style="background: var(--card); margin-bottom: 8px; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">🔥 burning ban</span><span style="font-size: 22px; font-weight: 800; color: var(--forest);">-20%</span></div>
+        <div style="height: 10px; background: #eee; border-radius: 5px; margin-top: 6px;"><div style="height: 100%; width: 100%; background: var(--coral); border-radius: 5px;"></div></div>
       </div>
-      <div class="tile" style="background: var(--card); margin-bottom: 10px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span style="font-size: 14px; font-weight: 700;">🏭 industrial shutdown</span>
-          <span style="font-size: 20px; font-weight: 800; color: var(--forest);">-15%</span>
-        </div>
-        <div style="height: 8px; background: #eee; border-radius: 4px; margin-top: 6px;"><div style="height: 100%; width: 75%; background: var(--purple); border-radius: 4px;"></div></div>
+      <div class="tile" style="background: var(--card); margin-bottom: 8px; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">🏭 industrial</span><span style="font-size: 22px; font-weight: 800; color: var(--forest);">-15%</span></div>
+        <div style="height: 10px; background: #eee; border-radius: 5px; margin-top: 6px;"><div style="height: 100%; width: 75%; background: var(--purple); border-radius: 5px;"></div></div>
       </div>
-      <div class="tile" style="background: var(--card); margin-bottom: 10px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span style="font-size: 14px; font-weight: 700;">🚛 truck ban</span>
-          <span style="font-size: 20px; font-weight: 800; color: var(--forest);">-12%</span>
-        </div>
-        <div style="height: 8px; background: #eee; border-radius: 4px; margin-top: 6px;"><div style="height: 100%; width: 60%; background: var(--cobalt); border-radius: 4px;"></div></div>
+      <div class="tile" style="background: var(--card); margin-bottom: 8px; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">🚛 truck ban</span><span style="font-size: 22px; font-weight: 800; color: var(--forest);">-12%</span></div>
+        <div style="height: 10px; background: #eee; border-radius: 5px; margin-top: 6px;"><div style="height: 100%; width: 60%; background: var(--cobalt); border-radius: 5px;"></div></div>
       </div>
-      <div class="tile" style="background: var(--card);">
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span style="font-size: 14px; font-weight: 700;">🏗️ construction halt</span>
-          <span style="font-size: 20px; font-weight: 800; color: var(--forest);">-25% PM10</span>
-        </div>
-        <div style="height: 8px; background: #eee; border-radius: 4px; margin-top: 6px;"><div style="height: 100%; width: 85%; background: var(--amber); border-radius: 4px;"></div></div>
+      <div class="tile" style="background: var(--card); padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">🏗️ construction</span><span style="font-size: 22px; font-weight: 800; color: var(--forest);">-25% PM10</span></div>
+        <div style="height: 10px; background: #eee; border-radius: 5px; margin-top: 6px;"><div style="height: 100%; width: 85%; background: var(--amber); border-radius: 5px;"></div></div>
       </div>
     </div>
   </div>
   <div class="brand">pavan.</div><div class="sn">11</div>
 </div>
 
-<!-- SLIDE 12: USER FEATURES -->
-<div class="slide">
+<!-- 12 USER FEATURES — 6 cards (2x3), not 9 -->
+<div class="slide" style="padding-top: 60px;">
   <div class="eyebrow">user experience</div>
-  <h2>what users can do</h2>
-  <div class="grid g3" style="margin-top: 20px; gap: 14px;">
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--cobalt);">
-      <h3 style="font-size: 18px;">🗺️ explore map</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">toggle AQI / NO2 satellite / traffic layers · 105 stations · zoom to any city</p>
+  <h2 style="font-size: 38px;">what users can do</h2>
+  <div class="grid g3" style="margin-top: 16px; gap: 12px;">
+    <div class="tile" style="background: var(--cobalt); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">🗺️ explore map</h3>
+      <p style="font-size: 14px; opacity: 0.85;">toggle AQI / NO2 / traffic layers · 105 stations across 57 cities</p>
     </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--purple);">
-      <h3 style="font-size: 18px;">📊 forecast AQI</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">24-72hr predictions · switch between 10 cities · confidence intervals</p>
+    <div class="tile" style="background: var(--purple); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">📊 forecast + compare</h3>
+      <p style="font-size: 14px; opacity: 0.85;">24-72hr predictions · 10 city switcher · 57 cities ranked side-by-side</p>
     </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--coral);">
-      <h3 style="font-size: 18px;">🧪 simulate policy</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">5 intervention types · select city · before/after comparison · evidence-based</p>
+    <div class="tile" style="background: var(--coral); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">🧪 simulate + GRAP</h3>
+      <p style="font-size: 14px; opacity: 0.85;">5 interventions · city selector · auto-detect 4 GRAP stages · generate reports</p>
     </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--amber);">
-      <h3 style="font-size: 18px;">📋 GRAP compliance</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">4 stages auto-detected · generate reports · enforcement recommendations</p>
+    <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 20px;">
+      <h3 style="font-size: 17px;">🧠 run agents</h3>
+      <p style="font-size: 14px; opacity: 0.8;">watch 6 agents coordinate live · 3-phase animation · select any city</p>
     </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--forest);">
-      <h3 style="font-size: 18px;">🧠 run agents</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">watch 6 agents coordinate live · 3-phase animation · select city</p>
+    <div class="tile" style="background: var(--amber); padding: 20px;">
+      <h3 style="font-size: 17px;">💬 multilingual AI chat</h3>
+      <p style="font-size: 14px; opacity: 0.8;">GPT-4o chatbot · type in Hindi/Tamil/Bengali · responds in your language</p>
     </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--pink);">
-      <h3 style="font-size: 18px;">🔔 subscribe</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">login/signup · multi-city · daily/weekly/threshold · email + telegram + whatsapp</p>
-    </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--teal);">
-      <h3 style="font-size: 18px;">💬 ask AI</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">GPT-4o chatbot · type in any language · responds in your language</p>
-    </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--purple);">
-      <h3 style="font-size: 18px;">📈 compare cities</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">57 cities ranked · select up to 6 · side-by-side AQI comparison</p>
-    </div>
-    <div class="tile" style="background: var(--card); border-left: 4px solid var(--cobalt);">
-      <h3 style="font-size: 18px;">♿ accessibility</h3>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">A+/A- text scaling · dark mode toggle · focus outlines · reduced motion</p>
+    <div class="tile" style="background: var(--forest); color: #f0fdf4; padding: 20px;">
+      <h3 style="color: #f0fdf4; font-size: 17px;">🔔 subscribe + accessibility</h3>
+      <p style="font-size: 14px; opacity: 0.85;">login · multi-city · frequency choice · A+/A- text · dark mode · focus outlines</p>
     </div>
   </div>
   <div class="brand">pavan.</div><div class="sn">12</div>
 </div>
 
-<!-- SLIDE 13: METHODOLOGY + VALIDATION -->
-<div class="slide">
+<!-- 13 METHODOLOGY — colored cards, spacing -->
+<div class="slide" style="padding-top: 60px;">
   <div class="eyebrow">methodology</div>
-  <h2>verified. transparent. cited.</h2>
-  <div class="grid g2" style="margin-top: 20px;">
-    <div>
-      <div class="tile" style="background: var(--card); margin-bottom: 12px;">
-        <h3 style="font-size: 18px;">source attribution</h3>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">wind-weighted land use + traffic + satellite fire cross-reference. validated against SAFAR Delhi source apportionment studies.</p>
-      </div>
-      <div class="tile" style="background: var(--card); margin-bottom: 12px;">
-        <h3 style="font-size: 18px;">forecast model</h3>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">XGBoost, 12 features, 10k samples. RMSE 11.74 vs persistence 83.65. validated seasonal + diurnal patterns.</p>
-      </div>
-      <div class="tile" style="background: var(--card);">
-        <h3 style="font-size: 18px;">health impact</h3>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">WHO PM2.5 exposure-response function. 0.5% respiratory admission increase per 10 ug/m3.</p>
-      </div>
+  <h2 style="font-size: 38px;">verified. transparent. cited.</h2>
+  <div class="grid g3" style="margin-top: 16px; gap: 12px;">
+    <div class="tile" style="background: var(--cobalt); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">source attribution</h3>
+      <p style="font-size: 13px; opacity: 0.85; line-height: 1.6;">wind-weighted land use + traffic + MODIS fire cross-ref. validated against SAFAR Delhi studies.</p>
     </div>
-    <div>
-      <div class="tile" style="background: var(--card); margin-bottom: 12px;">
-        <h3 style="font-size: 18px;">atmospheric dispersion</h3>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">gaussian plume model. pasquill-gifford stability classes A-F. predicts concentration grid from worst sources.</p>
-      </div>
-      <div class="tile" style="background: var(--card); margin-bottom: 12px;">
-        <h3 style="font-size: 18px;">intervention factors</h3>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">empirical from: NGT orders 2023, GRAP 2024 data, SAFAR stubble studies, Delhi odd-even 2016/2019.</p>
-      </div>
-      <div class="tile" style="background: var(--cobalt); color: white;">
-        <h3 style="color: white; font-size: 18px;">signal → recommendation</h3>
-        <p style="font-size: 28px; font-weight: 800; margin-top: 4px;">&lt;3 seconds</p>
-        <p style="font-size: 13px; opacity: 0.7;">5 sources → 6 agents → enforcement</p>
-      </div>
+    <div class="tile" style="background: var(--purple); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">forecast model</h3>
+      <p style="font-size: 13px; opacity: 0.85; line-height: 1.6;">XGBoost, 12 features, 10k samples. RMSE 11.74 vs persistence 83.65. 86% improvement.</p>
+    </div>
+    <div class="tile" style="background: var(--coral); color: white; padding: 20px;">
+      <h3 style="color: white; font-size: 17px;">health impact</h3>
+      <p style="font-size: 13px; opacity: 0.85; line-height: 1.6;">WHO PM2.5 exposure-response. +142 excess hospital visits/day (Delhi estimate).</p>
+    </div>
+    <div class="tile" style="background: var(--teal); color: #0a0a08; padding: 20px;">
+      <h3 style="font-size: 17px;">atmospheric dispersion</h3>
+      <p style="font-size: 13px; opacity: 0.8; line-height: 1.6;">gaussian plume model. pasquill-gifford stability classes A-F. concentration grid prediction.</p>
+    </div>
+    <div class="tile" style="background: var(--amber); padding: 20px;">
+      <h3 style="font-size: 17px;">intervention factors</h3>
+      <p style="font-size: 13px; opacity: 0.8; line-height: 1.6;">empirical from: NGT 2023, GRAP 2024, SAFAR stubble studies, Delhi odd-even 2016/2019.</p>
+    </div>
+    <div class="tile" style="background: var(--forest); color: #f0fdf4; padding: 20px;">
+      <h3 style="color: #f0fdf4; font-size: 17px;">signal → recommendation</h3>
+      <p style="font-size: 28px; font-weight: 800; margin-top: 4px;">&lt; 3 seconds</p>
+      <p style="font-size: 12px; opacity: 0.7;">5 sources → 6 agents → enforcement</p>
     </div>
   </div>
-  <img src="https://pavan-aqi.vercel.app/claudy/pray.png" alt="" style="position:absolute;right:32px;bottom:24px;width:70px;opacity:0.15;" />
+  <img src="https://pavan-aqi.vercel.app/claudy/pray.png" alt="" style="position:absolute;right:28px;bottom:18px;width:55px;opacity:0.12;" />
   <div class="brand">pavan.</div><div class="sn">13</div>
 </div>
 
-<!-- SLIDE 14: DEMO -->
+<!-- 14 DEMO — cobalt with more detail -->
 <div class="slide" style="background: var(--cobalt); color: white;">
-  <div class="eyebrow" style="color: rgba(255,255,255,0.45);">live demo</div>
-  <h2 style="color: white;">try it now</h2>
+  <div class="eyebrow" style="color: rgba(255,255,255,0.45);">live demo — try it now</div>
+  <h2 style="color: white; font-size: 48px;">everything is live.</h2>
   <div class="grid g3" style="margin-top: 24px;">
-    <div class="tile" style="background: rgba(255,255,255,0.08);">
-      <h3 style="color: var(--bg); font-size: 24px;">pavan-aqi.vercel.app</h3>
-      <p style="font-size: 15px; opacity: 0.6; margin-top: 8px;">10 pages · chatbot · simulator · map layers</p>
+    <div class="tile" style="background: rgba(255,255,255,0.1);">
+      <h3 style="color: white; font-size: 22px;">🌐 web dashboard</h3>
+      <p style="font-size: 16px; opacity: 0.7; margin-top: 8px;">pavan-aqi.vercel.app</p>
+      <p style="font-size: 13px; opacity: 0.5; margin-top: 4px;">10 pages · chatbot · simulator · map layers</p>
     </div>
-    <div class="tile" style="background: rgba(255,255,255,0.08);">
-      <h3 style="color: var(--bg); font-size: 24px;">@PavanETbot</h3>
-      <p style="font-size: 15px; opacity: 0.6; margin-top: 8px;">telegram · 10 commands · multilingual AI</p>
+    <div class="tile" style="background: rgba(255,255,255,0.1);">
+      <h3 style="color: white; font-size: 22px;">🤖 telegram bot</h3>
+      <p style="font-size: 16px; opacity: 0.7; margin-top: 8px;">@PavanETbot</p>
+      <p style="font-size: 13px; opacity: 0.5; margin-top: 4px;">10 commands · subscribe · multilingual AI</p>
     </div>
-    <div class="tile" style="background: rgba(255,255,255,0.08);">
-      <h3 style="color: var(--bg); font-size: 24px;">whatsapp channel</h3>
-      <p style="font-size: 15px; opacity: 0.6; margin-top: 8px;">daily digests · alerts · health advisories</p>
+    <div class="tile" style="background: rgba(255,255,255,0.1);">
+      <h3 style="color: white; font-size: 22px;">💬 whatsapp</h3>
+      <p style="font-size: 16px; opacity: 0.7; margin-top: 8px;">broadcast channel</p>
+      <p style="font-size: 13px; opacity: 0.5; margin-top: 4px;">daily digests · alerts · health advisories</p>
     </div>
   </div>
-  <img src="https://pavan-aqi.vercel.app/claudy/chill.png" alt="" style="position:absolute;right:40px;bottom:28px;width:100px;opacity:0.2;filter:brightness(0) invert(1);" />
+  <img src="https://pavan-aqi.vercel.app/claudy/chill.png" alt="" style="position:absolute;right:40px;bottom:28px;width:100px;opacity:0.15;filter:brightness(0) invert(1);" />
   <div class="sn" style="color: rgba(255,255,255,0.3);">14</div>
   <div class="brand" style="color: rgba(255,255,255,0.3);">pavan.</div>
 </div>
 
-<!-- SLIDE 15: CLOSE -->
-<div class="slide" style="text-align: center; justify-content: center; align-items: center;">
+<!-- 15 CLOSE — landing page inspired -->
+<div class="slide" style="text-align: center; justify-content: center; align-items: center; background: linear-gradient(180deg, var(--bg) 0%, #ede7d8 100%);">
   <div class="eyebrow">et ai hackathon 2026 · problem statement #5</div>
-  <h1 style="font-size: 88px;">pavan.</h1>
-  <p class="sub" style="text-align: center; margin: 0 auto; font-size: 22px;">clean air intelligence for every indian citizen.</p>
-  <div style="margin-top: 28px; font-size: 20px;"><span style="font-weight: 500;">team</span> <span style="font-size: 32px; font-weight: 800;">edgerunner</span></div>
-  <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-    <span class="pill" style="background: var(--cobalt); color: white; font-size: 13px;">pavan-aqi.vercel.app</span>
-    <span class="pill" style="background: var(--purple); color: white; font-size: 13px;">@PavanETbot</span>
-    <span class="pill" style="background: var(--forest); color: #f0fdf4; font-size: 13px;">whatsapp channel</span>
+  <h1 style="font-size: 96px;">pavan<span style="color: var(--cobalt);">.</span></h1>
+  <p class="sub" style="text-align: center; margin: 0 auto; font-size: 24px; color: var(--fg);">clean air intelligence for every indian citizen.</p>
+  <div style="margin-top: 32px; font-size: 22px;"><span style="font-weight: 500;">team</span> <span style="font-size: 36px; font-weight: 800;">edgerunner</span></div>
+  <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span class="pill" style="background: var(--cobalt); color: white; font-size: 15px;">pavan-aqi.vercel.app</span>
+    <span class="pill" style="background: var(--purple); color: white; font-size: 15px;">@PavanETbot</span>
+    <span class="pill" style="background: var(--forest); color: #f0fdf4; font-size: 15px;">whatsapp channel</span>
   </div>
-  <img src="https://pavan-aqi.vercel.app/claudy/sleep.png" alt="" style="position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); width: 80px; opacity: 0.3;" />
+  <img src="https://pavan-aqi.vercel.app/claudy/sleep.png" alt="" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80px; opacity: 0.25;" />
   <div class="sn">15</div>
 </div>
