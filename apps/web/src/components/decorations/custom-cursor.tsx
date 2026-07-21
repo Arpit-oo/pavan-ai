@@ -40,19 +40,19 @@ export default function CustomCursor() {
     };
 
     const onOver = (e: Event) => {
-      dot.style.width = "20px";
-      dot.style.height = "20px";
-      ring.style.width = "50px";
-      ring.style.height = "50px";
-      ring.style.opacity = "0.5";
-    };
-
-    const onOut = (e: Event) => {
       dot.style.width = "12px";
       dot.style.height = "12px";
       ring.style.width = "36px";
       ring.style.height = "36px";
-      ring.style.opacity = "0.3";
+      ring.style.opacity = "0.25";
+    };
+
+    const onOut = (e: Event) => {
+      dot.style.width = "8px";
+      dot.style.height = "8px";
+      ring.style.width = "28px";
+      ring.style.height = "28px";
+      ring.style.opacity = "0.15";
     };
 
     document.addEventListener("mousemove", onMove);

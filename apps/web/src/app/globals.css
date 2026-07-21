@@ -285,28 +285,27 @@ h3 { font-size: 1.25rem; line-height: 1.2; font-variation-settings: "wght" 620, 
   .cursor-ready * { cursor: none !important; }
   .custom-cursor {
     position: fixed;
-    width: 12px;
-    height: 12px;
-    background: var(--fg);
+    width: 8px;
+    height: 8px;
+    background: #1a1a18;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 99999;
-    transition: transform 0.15s ease-out, width 0.2s, height 0.2s, opacity 0.2s;
-    mix-blend-mode: difference;
+    z-index: 9;
+    transition: width 0.2s, height 0.2s;
     transform: translate(-50%, -50%);
+    mix-blend-mode: exclusion;
   }
   .custom-cursor-ring {
     position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid var(--fg);
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid #1a1a18;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 99998;
-    transition: transform 0.08s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
-    opacity: 0.3;
+    z-index: 8;
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.15;
     transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
   }
 }
 @media (pointer: coarse) {
