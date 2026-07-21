@@ -75,8 +75,10 @@ export default function AlertsPage() {
               { station: "Mundka, Delhi", aqi: 232, level: "poor", message_en: "Elevated PM2.5 detected.", message_hi: "PM2.5 बढ़ा हुआ है।" },
             ],
             whatsapp_message: {
-              en: "⚠️ *Pavan Air Quality Alert — Delhi*\n\nAQI: *185* (MODERATE)\n\nAir quality is moderate. Sensitive groups should limit prolonged outdoor exertion.\n\n- Anand Vihar: AQI 267\n- Wazirpur: AQI 275\n- Mundka: AQI 232\n\n_Powered by Pavan AI_",
-              hi: "⚠️ *पवन वायु गुणवत्ता अलर्ट — Delhi*\n\nAQI: *185*\n\nहवा की गुणवत्ता मध्यम है। संवेदनशील लोग बाहर रहने से बचें।\n\n_पवन AI द्वारा संचालित_",
+              en: "⚠️ *Pavan AQI Alert — Delhi*\n\nAQI: *185* (MODERATE)\nPM2.5: 95 µg/m³ (6.3x WHO limit)\n\n*Hotspots:*\n🔴 Wazirpur — AQI 275\n🔴 Anand Vihar — AQI 267\n🟠 Mundka — AQI 232\n\n*Health Advisory:*\n• Sensitive groups limit outdoor activity\n• Use N95 masks in high-AQI areas\n• Keep windows closed 6-10am, 5-9pm\n\n*Source:* Vehicular 35% · Industrial 22%\n*Wind:* 3.8 m/s WNW — moderate dispersion\n*GRAP:* Stage I — Poor\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n\n_Pavan AI · 105 stations · 57 cities_",
+              hi: "⚠️ *पवन वायु गुणवत्ता अलर्ट — दिल्ली*\n\nAQI: *185* (मध्यम)\nPM2.5: 95 µg/m³ (WHO सीमा से 6.3x अधिक)\n\n*खतरनाक क्षेत्र:*\n🔴 वज़ीरपुर — AQI 275\n🔴 आनंद विहार — AQI 267\n🟠 मुंडका — AQI 232\n\n*स्वास्थ्य सलाह:*\n• बाहर व्यायाम से बचें\n• N95 मास्क पहनें\n• खिड़कियाँ बंद रखें (सुबह 6-10, शाम 5-9)\n\n*स्रोत:* वाहन 35% · उद्योग 22%\n*GRAP:* चरण I — खराब\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n\n_पवन AI · 105 स्टेशन · 57 शहर_",
+              ta: "⚠️ *பவன் காற்றுத்தர எச்சரிக்கை — டெல்லி*\n\nAQI: *185* (மிதமான)\nPM2.5: 95 µg/m³\n\n*அபாய பகுதிகள்:*\n🔴 வாசிர்புர் — AQI 275\n🔴 ஆனந்த் விகார் — AQI 267\n\n*சுகாதார ஆலோசனை:*\n• வெளிப்புற செயல்களை குறைக்கவும்\n• N95 மாஸ்க் அணியவும்\n\n📊 pavan-aqi.vercel.app · @PavanETbot\n\n_பவன் AI · 105 நிலையங்கள் · 57 நகரங்கள்_",
+              bn: "⚠️ *পবন বায়ু মান সতর্কতা — দিল্লি*\n\nAQI: *185* (মাঝারি)\nPM2.5: 95 µg/m³\n\n*বিপদজনক এলাকা:*\n🔴 ওয়াজিরপুর — AQI 275\n🔴 আনন্দ বিহার — AQI 267\n\n*স্বাস্থ্য পরামর্শ:*\n• বাইরে ব্যায়াম করবেন না\n• N95 মাস্ক পরুন\n• জানালা বন্ধ রাখুন\n\n📊 pavan-aqi.vercel.app · @PavanETbot\n\n_পবন AI · 105 স্টেশন · 57 শহর_",
             },
             languages: ["en", "hi", "ta", "bn"],
           },
