@@ -120,8 +120,9 @@ export default function LoginPage() {
                       {c.toLowerCase()} {cities.includes(c) ? "✓" : ""}
                     </button>
                   ))}
+                  <button type="button" className="w-8 h-8 rounded-full bg-secondary text-muted-foreground hover:text-foreground hover:bg-accent transition-all flex items-center justify-center text-[16px] font-mono" title="Add from 57 available cities">+</button>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-1">{cities.length} {cities.length === 1 ? "city" : "cities"} selected</p>
+                <p className="text-[11px] text-muted-foreground mt-1">{cities.length} {cities.length === 1 ? "city" : "cities"} selected · 57 available</p>
               </div>
             )}
 

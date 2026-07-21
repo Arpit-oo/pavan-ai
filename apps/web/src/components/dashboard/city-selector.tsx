@@ -31,6 +31,8 @@ export default function CitySelector({ selected, onChange, label }: CitySelector
             {c.toLowerCase()}
           </button>
         ))}
+        <button className="w-8 h-8 rounded-full bg-secondary text-muted-foreground hover:text-foreground hover:bg-accent transition-all flex items-center justify-center text-[16px] font-mono" title="Add more cities from 57 available">+</button>
+        <span className="text-[10px] text-muted-foreground self-center font-mono">+41 more</span>
       </div>
     </div>
   );
