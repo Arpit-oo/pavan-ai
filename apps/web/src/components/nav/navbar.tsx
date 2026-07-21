@@ -47,10 +47,13 @@ export default function NavBar() {
           </nav>
 
           {/* Desktop controls */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1.5">
             <button onClick={() => document.documentElement.classList.toggle("dark")} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors" aria-label="Toggle theme">🌓</button>
             <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.min(130, (parseFloat(s.fontSize || "100") || 100) + 5) + "%"; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[10px] hover:bg-accent transition-colors font-mono" aria-label="Increase text">A+</button>
             <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.max(85, (parseFloat(s.fontSize || "100") || 100) - 5) + "%"; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[10px] hover:bg-accent transition-colors font-mono" aria-label="Decrease text">A-</button>
+            <div className="w-px h-4 bg-border mx-1" />
+            <button onClick={() => { const b = document.body; const cur = parseFloat(b.style.filter?.replace(/brightness\(|\)/g, "") || "1"); b.style.filter = `brightness(${Math.min(1.3, cur + 0.1).toFixed(1)})`; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors" aria-label="Increase brightness" title="Increase brightness">☀️</button>
+            <button onClick={() => { const b = document.body; const cur = parseFloat(b.style.filter?.replace(/brightness\(|\)/g, "") || "1"); b.style.filter = `brightness(${Math.max(0.7, cur - 0.1).toFixed(1)})`; }} className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-[12px] hover:bg-accent transition-colors" aria-label="Decrease brightness" title="Decrease brightness">🌑</button>
           </div>
 
           {/* Mobile hamburger */}
@@ -92,11 +95,15 @@ export default function NavBar() {
             })}
 
             {/* Mobile controls */}
-            <div className="flex items-center gap-3 mt-6 px-4">
-              <button onClick={() => document.documentElement.classList.toggle("dark")} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[16px]" aria-label="Theme">🌓</button>
-              <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.min(130, (parseFloat(s.fontSize || "100") || 100) + 5) + "%"; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[14px] font-mono" aria-label="Bigger">A+</button>
-              <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.max(85, (parseFloat(s.fontSize || "100") || 100) - 5) + "%"; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[14px] font-mono" aria-label="Smaller">A-</button>
-              <span className="ml-auto font-mono text-[10px] uppercase tracking-wider text-muted-foreground bg-secondary px-3 py-2 rounded-full">all india</span>
+            <div className="mt-6 px-4 space-y-3">
+              <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">accessibility</div>
+              <div className="flex items-center gap-3">
+                <button onClick={() => document.documentElement.classList.toggle("dark")} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[16px]" aria-label="Theme">🌓</button>
+                <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.min(130, (parseFloat(s.fontSize || "100") || 100) + 5) + "%"; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[14px] font-mono" aria-label="Bigger">A+</button>
+                <button onClick={() => { const s = document.documentElement.style; s.fontSize = Math.max(85, (parseFloat(s.fontSize || "100") || 100) - 5) + "%"; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[14px] font-mono" aria-label="Smaller">A-</button>
+                <button onClick={() => { const b = document.body; const cur = parseFloat(b.style.filter?.replace(/brightness\(|\)/g, "") || "1"); b.style.filter = `brightness(${Math.min(1.3, cur + 0.1).toFixed(1)})`; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[16px]" aria-label="Brighter">☀️</button>
+                <button onClick={() => { const b = document.body; const cur = parseFloat(b.style.filter?.replace(/brightness\(|\)/g, "") || "1"); b.style.filter = `brightness(${Math.max(0.7, cur - 0.1).toFixed(1)})`; }} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-[16px]" aria-label="Dimmer">🌑</button>
+              </div>
             </div>
           </nav>
         </div>
