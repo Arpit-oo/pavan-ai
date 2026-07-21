@@ -8,6 +8,7 @@ import StatsBar from "@/components/dashboard/stats-bar";
 import AgentPanel from "@/components/dashboard/agent-panel";
 import ForecastChart from "@/components/dashboard/forecast-chart";
 import DataSources from "@/components/dashboard/data-sources";
+import CitySelector from "@/components/dashboard/city-selector";
 import NavBar from "@/components/nav/navbar";
 
 const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
@@ -21,7 +22,9 @@ const AQIMap = dynamic(() => import("@/components/map/aqi-map"), {
 
 export default function Dashboard() {
   const [stations, setStations] = useState<StationReading[]>([]);
+  const [filteredStations, setFilteredStations] = useState<StationReading[]>([]);
   const [selectedStation, setSelectedStation] = useState<StationReading | null>(null);
+  const [dashCity, setDashCity] = useState("All India");
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
@@ -41,12 +44,31 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, [fetchData]);
 
+  useEffect(() => {
+    if (dashCity === "All India") {
+      setFilteredStations(stations);
+    } else {
+      const filtered = stations.filter(s =>
+        s.station_name.toLowerCase().includes(dashCity.toLowerCase())
+      );
+      setFilteredStations(filtered.length > 0 ? filtered : stations);
+    }
+  }, [dashCity, stations]);
+
   return (
     <div className="flex flex-col min-h-screen">
       <NavBar />
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-8 sm:px-6 h-full flex flex-col gap-4">
-          <StatsBar stations={stations} city="All India" />
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <StatsBar stations={filteredStations} city={dashCity} />
+          </div>
+          <CitySelector
+            selected={dashCity}
+            onChange={setDashCity}
+            label="filter by city"
+            showAll
+          />
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4" style={{minHeight: "65vh"}}>
             <div className="flex-1 flex flex-col gap-4">
               <div style={{height: "60vh", minHeight: "320px"}}>
@@ -55,10 +77,10 @@ export default function Dashboard() {
                     <div className="w-8 h-8 border-2 border-[var(--entity-moderate)] border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : (
-                  <AQIMap stations={stations} onStationClick={setSelectedStation} />
+                  <AQIMap stations={filteredStations} onStationClick={setSelectedStation} />
                 )}
               </div>
-              <ForecastChart />
+              <ForecastChart selectedCity={dashCity} />
             </div>
             <div className="w-full lg:w-[340px] shrink-0 flex flex-col gap-4">
               <AgentPanel />

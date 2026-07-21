@@ -24,9 +24,10 @@ interface CitySelectorProps {
   selected: string;
   onChange: (city: string) => void;
   label?: string;
+  showAll?: boolean;
 }
 
-export default function CitySelector({ selected, onChange, label }: CitySelectorProps) {
+export default function CitySelector({ selected, onChange, label, showAll }: CitySelectorProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -38,6 +39,19 @@ export default function CitySelector({ selected, onChange, label }: CitySelector
     <div>
       {label && <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2">{label}</p>}
       <div className="flex gap-2 flex-wrap">
+        {showAll && (
+          <button
+            onClick={() => { onChange("All India"); setSearchOpen(false); }}
+            className={`px-3 py-1.5 rounded-full text-[12px] transition-all ${
+              selected === "All India"
+                ? "bg-foreground text-background shadow-sm"
+                : "bg-secondary text-muted-foreground hover:text-foreground"
+            }`}
+            style={{ fontVariationSettings: selected === "All India" ? "'wght' 620" : "'wght' 440" }}
+          >
+            all india
+          </button>
+        )}
         {SHOWN_CITIES.map((c) => (
           <button
             key={c}

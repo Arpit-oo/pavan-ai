@@ -44,11 +44,17 @@ const CITY_MOCK_BASE: Record<string, number> = {
   Hyderabad: 80, Pune: 90, Lucknow: 175, Jaipur: 70, Ahmedabad: 100,
 };
 
-export default function ForecastChart() {
+export default function ForecastChart({ selectedCity }: { selectedCity?: string }) {
   const [data, setData] = useState<ForecastResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [hours, setHours] = useState(24);
   const [city, setCity] = useState("Delhi");
+
+  useEffect(() => {
+    if (selectedCity && selectedCity !== "All India" && CITIES.includes(selectedCity)) {
+      setCity(selectedCity);
+    }
+  }, [selectedCity]);
 
   const loadForecast = async () => {
     setLoading(true);
