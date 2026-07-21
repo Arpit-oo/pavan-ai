@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fetchAPI } from "@/lib/api";
+import { getCityAgentLog, getCityAgentSummary } from "@/lib/city-mock-data";
 
 interface AgentLog {
   timestamp: string;
@@ -39,20 +40,19 @@ const agentIcons: Record<string, string> = {
   enforcement: "🛡️",
 };
 
-export default function AgentPanel() {
+export default function AgentPanel({ city = "Delhi" }: { city?: string }) {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const runAnalysis = async () => {
     setLoading(true);
     try {
-      const res = await fetchAPI<AnalysisResult>("/api/v1/agents/analyze?city=Delhi");
+      const res = await fetchAPI<AnalysisResult>(`/api/v1/agents/analyze?city=${city}`);
       setAnalysis(res);
     } catch {
-      const { MOCK_AGENT_LOG, MOCK_ANALYSIS_SUMMARY } = await import("@/lib/mock-data");
       setAnalysis({
-        summary: MOCK_ANALYSIS_SUMMARY,
-        run_log: MOCK_AGENT_LOG,
+        summary: getCityAgentSummary(city),
+        run_log: getCityAgentLog(city),
         elapsed_seconds: 2.3,
       } as AnalysisResult);
     } finally {

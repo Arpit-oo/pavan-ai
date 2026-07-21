@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchAPI, getAQIGradientColor } from "@/lib/api";
+import { getCitySimStations } from "@/lib/city-mock-data";
 import NavBar from "@/components/nav/navbar";
 import CitySelector from "@/components/dashboard/city-selector";
 
@@ -89,6 +90,8 @@ export default function SimulatePage() {
       .then((res) => setTypes(res.interventions)).catch(() => {});
   }, []);
 
+  useEffect(() => { setResult(null); setComparison(null); setSelected(null); }, [simCity]);
+
   const [simStep, setSimStep] = useState(0);
 
   const runSimulation = async (type: string) => {
@@ -96,20 +99,17 @@ export default function SimulatePage() {
     setSimStep(1); await new Promise(r => setTimeout(r, 500));
     setSimStep(2); await new Promise(r => setTimeout(r, 400));
     setSimStep(3); await new Promise(r => setTimeout(r, 300));
-    try { setResult(await fetchAPI<SimResult>("/api/v1/simulate/run", { method: "POST", body: JSON.stringify({ intervention_type: type, city: "Delhi" }) })); }
+    try { setResult(await fetchAPI<SimResult>("/api/v1/simulate/run", { method: "POST", body: JSON.stringify({ intervention_type: type, city: simCity }) })); }
     catch {
       const reductions: Record<string, number> = { truck_ban: 7.9, construction_halt: 3.1, industrial_shutdown: 10.4, odd_even: 5.1, burning_ban: 14.6 };
       const r = reductions[type] || 8;
+      const cityBase: Record<string, number> = { Delhi: 185, Mumbai: 105, Bangalore: 60, Chennai: 55, Kolkata: 130 };
+      const base = cityBase[simCity] || 120;
       setResult({
         intervention: type, description: types.find(t => t.type === type)?.description || "",
-        city_impact: { avg_aqi_before: 185, avg_aqi_after: Math.round(185 - r), aqi_reduction: r, aqi_reduction_pct: Math.round(r / 185 * 100 * 10) / 10, stations_improved: 22 },
-        station_impacts: [
-          { station_name: "Anand Vihar, Delhi", before: { aqi: 267, pm25: 142 }, after: { aqi: Math.round(267 - r * 1.5), pm25: 130 }, reduction: { aqi_points: Math.round(r * 1.5), aqi_pct: 5.6, pm25_pct: 8.4 } },
-          { station_name: "Wazirpur, Delhi", before: { aqi: 275, pm25: 145 }, after: { aqi: Math.round(275 - r * 1.3), pm25: 135 }, reduction: { aqi_points: Math.round(r * 1.3), aqi_pct: 4.7, pm25_pct: 6.9 } },
-          { station_name: "Mundka, Delhi", before: { aqi: 232, pm25: 118 }, after: { aqi: Math.round(232 - r * 1.2), pm25: 108 }, reduction: { aqi_points: Math.round(r * 1.2), aqi_pct: 5.2, pm25_pct: 8.5 } },
-          { station_name: "Narela, Delhi", before: { aqi: 248, pm25: 135 }, after: { aqi: Math.round(248 - r * 1.1), pm25: 122 }, reduction: { aqi_points: Math.round(r * 1.1), aqi_pct: 4.4, pm25_pct: 9.6 } },
-        ],
-        implementation: { time_to_effect: types.find(t => t.type === type)?.time_to_effect || "4-6 hours", affected_radius_km: 15, precedent: "Based on Delhi pollution studies and GRAP implementation data from 2023-2024." },
+        city_impact: { avg_aqi_before: base, avg_aqi_after: Math.round(base - r), aqi_reduction: r, aqi_reduction_pct: Math.round(r / base * 100 * 10) / 10, stations_improved: 22 },
+        station_impacts: getCitySimStations(simCity).map(s => ({ ...s, after: { aqi: Math.round(s.before.aqi - r * 1.2), pm25: Math.round(s.before.pm25 * (1 - r/100)) }, reduction: { aqi_points: Math.round(r * 1.2), aqi_pct: Math.round(r / s.before.aqi * 100 * 10) / 10, pm25_pct: Math.round(r * 0.8 * 10) / 10 } })),
+        implementation: { time_to_effect: types.find(t => t.type === type)?.time_to_effect || "4-6 hours", affected_radius_km: 15, precedent: "Based on pollution studies and GRAP implementation data." },
       });
     } finally { setLoading(false); setSimStep(0); }
   };
@@ -121,7 +121,7 @@ export default function SimulatePage() {
     setCompStep(1); await new Promise(r => setTimeout(r, 600));
     setCompStep(2); await new Promise(r => setTimeout(r, 500));
     setCompStep(3); await new Promise(r => setTimeout(r, 400));
-    try { setComparison(await fetchAPI<CompareResult>("/api/v1/simulate/compare?city=Delhi")); }
+    try { setComparison(await fetchAPI<CompareResult>(`/api/v1/simulate/compare?city=${simCity}`)); }
     catch {
       setComparison({
         comparisons: [

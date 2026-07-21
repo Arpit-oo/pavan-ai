@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchAPI } from "@/lib/api";
+import { getCityAgentLog, getCityAgentSummary } from "@/lib/city-mock-data";
 import NavBar from "@/components/nav/navbar";
 import CitySelector from "@/components/dashboard/city-selector";
 
@@ -44,10 +45,9 @@ export default function AgentsPage() {
     setPhase(2); await new Promise(r => setTimeout(r, 600));
     setPhase(3); await new Promise(r => setTimeout(r, 500));
     try {
-      setResult(await fetchAPI<AnalysisResult>("/api/v1/agents/analyze?city=Delhi"));
+      setResult(await fetchAPI<AnalysisResult>(`/api/v1/agents/analyze?city=${agentCity}`));
     } catch {
-      const { MOCK_AGENT_LOG, MOCK_ANALYSIS_SUMMARY } = await import("@/lib/mock-data");
-      setResult({ city: "Delhi", elapsed_seconds: 2.3, summary: MOCK_ANALYSIS_SUMMARY, agents: {}, run_log: MOCK_AGENT_LOG } as unknown as AnalysisResult);
+      setResult({ city: agentCity, elapsed_seconds: 2.3, summary: getCityAgentSummary(agentCity), agents: {}, run_log: getCityAgentLog(agentCity) } as unknown as AnalysisResult);
     } finally { setLoading(false); }
   };
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchAPI } from "@/lib/api";
+import { getCityAlertData, getCityHealthData } from "@/lib/city-mock-data";
 import NavBar from "@/components/nav/navbar";
 import CitySelector from "@/components/dashboard/city-selector";
 
@@ -54,43 +55,17 @@ export default function AlertsPage() {
   const [lang, setLang] = useState("en");
 
   useEffect(() => {
+    setLoading(true);
     Promise.all([
-      fetchAPI<AlertData>("/api/v1/alerts/active?city=Delhi"),
-      fetchAPI<HealthImpact>("/api/v1/alerts/health-impact?city=Delhi"),
+      fetchAPI<AlertData>(`/api/v1/alerts/active?city=${alertCity}`),
+      fetchAPI<HealthImpact>(`/api/v1/alerts/health-impact?city=${alertCity}`),
     ]).then(([alerts, impact]) => { setData(alerts); setHealth(impact); })
       .catch(() => {
-        setData({
-          city: "Delhi",
-          alerts: {
-            avg_aqi: 185, level: "moderate", alert_count: 3,
-            city_advisory: {
-              en: "Air quality is moderate. Sensitive groups should limit prolonged outdoor exertion. Use N95 masks if you have respiratory conditions.",
-              hi: "हवा की गुणवत्ता मध्यम है। संवेदनशील लोग लंबे समय तक बाहर रहने से बचें। श्वसन समस्या हो तो N95 मास्क पहनें।",
-              ta: "காற்றுத் தரம் மிதமாக உள்ளது. நெடுநேர வெளிப்புற செயல்களை குறைக்கவும்.",
-              bn: "বাতাসের মান মাঝারি। সংবেদনশীল ব্যক্তিরা দীর্ঘ সময় বাইরে থাকা এড়িয়ে চলুন।",
-            },
-            zone_alerts: [
-              { station: "Anand Vihar, Delhi", aqi: 267, level: "poor", message_en: "Air quality is POOR. Avoid outdoor exercise.", message_hi: "हवा खराब है।" },
-              { station: "Wazirpur, Delhi", aqi: 275, level: "poor", message_en: "Air quality is POOR near industrial zone.", message_hi: "औद्योगिक क्षेत्र में हवा खराब।" },
-              { station: "Mundka, Delhi", aqi: 232, level: "poor", message_en: "Elevated PM2.5 detected.", message_hi: "PM2.5 बढ़ा हुआ है।" },
-            ],
-            whatsapp_message: {
-              en: "⚠️ *Pavan AQI Alert — Delhi*\n\nAQI: *185* (MODERATE)\nPM2.5: 95 µg/m³ (6.3x WHO limit)\n\n*Hotspots:*\n🔴 Wazirpur — AQI 275\n🔴 Anand Vihar — AQI 267\n🟠 Mundka — AQI 232\n\n*Health Advisory:*\n• Sensitive groups limit outdoor activity\n• Use N95 masks in high-AQI areas\n• Keep windows closed 6-10am, 5-9pm\n\n*Source:* Vehicular 35% · Industrial 22%\n*Wind:* 3.8 m/s WNW — moderate dispersion\n*GRAP:* Stage I — Poor\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n\n_Pavan AI · 105 stations · 57 cities_",
-              hi: "⚠️ *पवन वायु गुणवत्ता अलर्ट — दिल्ली*\n\nAQI: *185* (मध्यम)\nPM2.5: 95 µg/m³ (WHO सीमा से 6.3x अधिक)\n\n*खतरनाक क्षेत्र:*\n🔴 वज़ीरपुर — AQI 275\n🔴 आनंद विहार — AQI 267\n🟠 मुंडका — AQI 232\n\n*स्वास्थ्य सलाह:*\n• बाहर व्यायाम से बचें\n• N95 मास्क पहनें\n• खिड़कियाँ बंद रखें (सुबह 6-10, शाम 5-9)\n\n*स्रोत:* वाहन 35% · उद्योग 22%\n*GRAP:* चरण I — खराब\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n\n_पवन AI · 105 स्टेशन · 57 शहर_",
-              ta: "⚠️ *பவன் காற்றுத்தர எச்சரிக்கை — டெல்லி*\n\nAQI: *185* (மிதமான)\nPM2.5: 95 µg/m³\n\n*அபாய பகுதிகள்:*\n🔴 வாசிர்புர் — AQI 275\n🔴 ஆனந்த் விகார் — AQI 267\n\n*சுகாதார ஆலோசனை:*\n• வெளிப்புற செயல்களை குறைக்கவும்\n• N95 மாஸ்க் அணியவும்\n\n📊 pavan-aqi.vercel.app · @PavanETbot\n\n_பவன் AI · 105 நிலையங்கள் · 57 நகரங்கள்_",
-              bn: "⚠️ *পবন বায়ু মান সতর্কতা — দিল্লি*\n\nAQI: *185* (মাঝারি)\nPM2.5: 95 µg/m³\n\n*বিপদজনক এলাকা:*\n🔴 ওয়াজিরপুর — AQI 275\n🔴 আনন্দ বিহার — AQI 267\n\n*স্বাস্থ্য পরামর্শ:*\n• বাইরে ব্যায়াম করবেন না\n• N95 মাস্ক পরুন\n• জানালা বন্ধ রাখুন\n\n📊 pavan-aqi.vercel.app · @PavanETbot\n\n_পবন AI · 105 স্টেশন · 57 শহর_",
-            },
-            languages: ["en", "hi", "ta", "bn"],
-          },
-        });
-        setHealth({
-          avg_aqi: 185, avg_pm25: 95, who_pm25_limit: 15, excess_over_who: 6.3,
-          total_population: 20000000, estimated_excess_hospital_visits_24h: 142,
-          schools_in_affected_zones: 4, hospitals_nearby: 3,
-        });
+        setData(getCityAlertData(alertCity));
+        setHealth(getCityHealthData(alertCity));
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [alertCity]);
 
   return (
     <div className="flex flex-col min-h-screen">

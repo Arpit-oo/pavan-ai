@@ -83,7 +83,7 @@ export default function Dashboard() {
               <ForecastChart selectedCity={dashCity} />
             </div>
             <div className="w-full lg:w-[340px] shrink-0 flex flex-col gap-4">
-              <AgentPanel />
+              <AgentPanel city={dashCity === "All India" ? "Delhi" : dashCity} />
               <DataSources />
             </div>
           </div>
