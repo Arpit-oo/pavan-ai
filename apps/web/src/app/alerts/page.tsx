@@ -176,32 +176,25 @@ export default function AlertsPage() {
                 </div>
               )}
 
-              {/* WhatsApp preview — switches with language tab */}
+              {/* WhatsApp preview — two messages side by side, switches with language tab */}
               {data && (
                 <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
                   <div className="p-6">
                     <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-4">whatsapp broadcast preview · {langNames[lang] || lang}</div>
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-sm">🚨</span>
                           <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">threshold alert</span>
                         </div>
-                        <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
-{data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}
-                        </pre>
+                        <pre className="text-[12px] whitespace-pre-wrap font-sans leading-snug opacity-90">{data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}</pre>
                       </div>
                       <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-sm">📊</span>
                           <span className="font-mono text-[9px] uppercase tracking-wider opacity-60">daily digest</span>
                         </div>
-                        <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
-{lang === "hi" ? `📊 *पवन दैनिक वायु रिपोर्ट — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("hi-IN")}\n\nऔसत AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*स्टेशन रिपोर्ट:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n*24h पूर्वानुमान:* स्थिर — कोई सुधार नहीं\n\n📊 pavan-aqi.vercel.app\n_पवन AI · दैनिक रिपोर्ट_`
-: lang === "ta" ? `📊 *பவன் தினசரி அறிக்கை — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("ta-IN")}\n\nசராசரி AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*நிலைய அறிக்கை:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_பவன் AI · தினசரி அறிக்கை_`
-: lang === "bn" ? `📊 *পবন দৈনিক প্রতিবেদন — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("bn-IN")}\n\nগড় AQI: *${data.alerts.avg_aqi}*\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*স্টেশন প্রতিবেদন:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_পবন AI · দৈনিক প্রতিবেদন_`
-: `📊 *Pavan Daily AQI Report — ${data.city || alertCity}*\n\n📅 ${new Date().toLocaleDateString("en-IN")}\n\nAvg AQI: *${data.alerts.avg_aqi}* (${data.alerts.level.toUpperCase()})\nPM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*Station Report:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — AQI ${z.aqi}`).join("\n")}\n\n*24h Forecast:* Stable — no improvement expected\n\n📊 pavan-aqi.vercel.app\n🤖 @PavanETbot\n_Pavan AI · Daily Digest_`}
-                        </pre>
+                        <pre className="text-[12px] whitespace-pre-wrap font-sans leading-snug opacity-90">{lang === "hi" ? `📊 *पवन दैनिक रिपोर्ट — ${data.city || alertCity}*\n📅 ${new Date().toLocaleDateString("hi-IN")}\nऔसत AQI: *${data.alerts.avg_aqi}* · PM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*स्टेशन:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_पवन AI · दैनिक रिपोर्ट_` : lang === "ta" ? `📊 *பவன் தினசரி — ${data.city || alertCity}*\n📅 ${new Date().toLocaleDateString("ta-IN")}\nசராசரி AQI: *${data.alerts.avg_aqi}* · PM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*நிலையங்கள்:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_பவன் AI · தினசரி_` : lang === "bn" ? `📊 *পবন দৈনিক — ${data.city || alertCity}*\n📅 ${new Date().toLocaleDateString("bn-IN")}\nগড় AQI: *${data.alerts.avg_aqi}* · PM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*স্টেশন:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — ${z.aqi}`).join("\n")}\n\n📊 pavan-aqi.vercel.app\n_পবন AI · দৈনিক_` : `📊 *Pavan Daily — ${data.city || alertCity}*\n📅 ${new Date().toLocaleDateString("en-IN")}\nAvg AQI: *${data.alerts.avg_aqi}* (${data.alerts.level.toUpperCase()}) · PM2.5: ${Math.round(data.alerts.avg_aqi * 0.52)} µg/m³\n\n*Stations:*\n${data.alerts.zone_alerts.map(z => `• ${z.station.split(",")[0]} — ${z.aqi}`).join("\n")}\n\n*Forecast:* Stable — no improvement\n📊 pavan-aqi.vercel.app · @PavanETbot\n_Pavan AI · Daily Digest_`}</pre>
                       </div>
                     </div>
                   </div>
