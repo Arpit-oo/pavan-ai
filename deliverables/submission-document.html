@@ -1,0 +1,1711 @@
+<title>Pavan — AI-Powered Urban Air Quality Intelligence | ET AI Hackathon 2026</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2cm;
+    @bottom-center {
+      content: "Pavan — ET AI Hackathon 2026 | Page " counter(page);
+      font-size: 9pt;
+      color: #888;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f0e6;
+    color: #1a1a18;
+    line-height: 1.65;
+    font-size: 11pt;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 0;
+  }
+  @media screen {
+    body { padding: 2cm; max-width: 900px; }
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5 { font-weight: 700; color: #1a1a18; }
+  h1 { font-size: 28pt; line-height: 1.15; margin-bottom: 0.5em; }
+  h2 { font-size: 16pt; margin-top: 2em; margin-bottom: 0.7em; padding-bottom: 0.3em; border-bottom: 2px solid #2563eb; color: #2563eb; page-break-after: avoid; }
+  h3 { font-size: 13pt; margin-top: 1.4em; margin-bottom: 0.5em; color: #166534; }
+  h4 { font-size: 11pt; margin-top: 1em; margin-bottom: 0.4em; color: #1a1a18; }
+  p { margin-bottom: 0.8em; text-align: justify; }
+  strong { color: #1a1a18; }
+  em { font-style: italic; }
+
+  /* Brand */
+  .brand { font-weight: 800; letter-spacing: -0.5px; }
+  .brand-dot { color: #2563eb; }
+
+  /* Page break helpers */
+  .page-break { page-break-before: always; }
+  .avoid-break { page-break-inside: avoid; }
+
+  /* Cover page */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover-logo {
+    font-size: 56pt;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 0.1em;
+    color: #1a1a18;
+  }
+  .cover-logo span { color: #2563eb; }
+  .cover-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 2em;
+    max-width: 500px;
+  }
+  .cover-meta {
+    font-size: 11pt;
+    color: #666;
+    line-height: 2;
+  }
+  .cover-meta strong { color: #1a1a18; }
+  .cover-badge {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 10pt;
+    font-weight: 600;
+    margin-top: 1.5em;
+    letter-spacing: 0.5px;
+  }
+  .cover-links {
+    margin-top: 1.5em;
+    font-size: 10pt;
+    color: #888;
+  }
+  .cover-links a { color: #2563eb; text-decoration: none; }
+
+  /* Table of contents */
+  .toc { page-break-after: always; }
+  .toc h2 { border-bottom-color: #1a1a18; color: #1a1a18; }
+  .toc-list { list-style: none; padding: 0; }
+  .toc-list li {
+    padding: 6px 0;
+    border-bottom: 1px dotted #ccc;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11pt;
+  }
+  .toc-list li.toc-section { font-weight: 700; margin-top: 0.5em; }
+  .toc-num { color: #2563eb; font-weight: 700; min-width: 28px; }
+  .toc-page { color: #888; font-size: 10pt; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0 1.5em;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  thead th {
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: rgba(37,99,235,0.04); }
+  tbody tr:hover { background: rgba(37,99,235,0.08); }
+
+  /* Accent tables */
+  table.accent-coral thead th { background: #ef4444; }
+  table.accent-forest thead th { background: #166534; }
+  table.accent-amber thead th { background: #b45309; }
+
+  /* Code blocks */
+  pre {
+    background: #1a1a18;
+    color: #e8e6df;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 9pt;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 1em 0;
+    page-break-inside: avoid;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+  }
+  code {
+    background: rgba(37,99,235,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+  }
+  pre code { background: none; padding: 0; }
+
+  /* Metric cards */
+  .metrics-row {
+    display: flex;
+    gap: 12px;
+    margin: 1.2em 0;
+    flex-wrap: wrap;
+  }
+  .metric-card {
+    flex: 1;
+    min-width: 120px;
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .metric-value {
+    font-size: 22pt;
+    font-weight: 800;
+    color: #2563eb;
+    line-height: 1.1;
+  }
+  .metric-value.coral { color: #ef4444; }
+  .metric-value.forest { color: #166534; }
+  .metric-value.amber { color: #b45309; }
+  .metric-label {
+    font-size: 8.5pt;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-top: 4px;
+  }
+
+  /* Diagrams */
+  .diagram {
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 1.2em 0;
+    page-break-inside: avoid;
+    overflow-x: auto;
+  }
+  .diagram-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #2563eb;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  /* Flow boxes */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+  }
+  .flow-box {
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 9pt;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .flow-box.coral { background: #ef4444; }
+  .flow-box.forest { background: #166534; }
+  .flow-box.amber { background: #b45309; }
+  .flow-box.dark { background: #1a1a18; }
+  .flow-box.outline {
+    background: transparent;
+    border: 2px solid #2563eb;
+    color: #2563eb;
+  }
+  .flow-arrow {
+    font-size: 16pt;
+    color: #999;
+    font-weight: 300;
+  }
+  .flow-arrow-down {
+    text-align: center;
+    font-size: 16pt;
+    color: #999;
+    margin: 4px 0;
+  }
+
+  /* Layer diagram */
+  .layer-stack { width: 100%; }
+  .layer {
+    display: flex;
+    align-items: stretch;
+    margin: 4px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  .layer-label {
+    min-width: 110px;
+    padding: 10px 12px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .layer-content {
+    flex: 1;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .layer-tag {
+    display: inline-block;
+    background: rgba(37,99,235,0.08);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 8.5pt;
+    white-space: nowrap;
+  }
+
+  /* Callout boxes */
+  .callout {
+    background: rgba(37,99,235,0.06);
+    border-left: 4px solid #2563eb;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 1em 0;
+    page-break-inside: avoid;
+  }
+  .callout.coral { background: rgba(239,68,68,0.06); border-left-color: #ef4444; }
+  .callout.forest { background: rgba(22,101,52,0.06); border-left-color: #166534; }
+  .callout.amber { background: rgba(251,146,60,0.06); border-left-color: #fb923c; }
+  .callout-title {
+    font-weight: 700;
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+
+  /* Feature cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 1em 0;
+  }
+  .feature-card {
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 8px;
+    padding: 14px;
+    page-break-inside: avoid;
+  }
+  .feature-card h4 {
+    font-size: 10.5pt;
+    margin-bottom: 6px;
+    color: #2563eb;
+  }
+  .feature-card p {
+    font-size: 9.5pt;
+    margin-bottom: 0;
+    text-align: left;
+    color: #444;
+  }
+
+  /* Agent cards */
+  .agent-card {
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .agent-card h4 {
+    font-size: 11pt;
+    margin-bottom: 6px;
+  }
+  .agent-card .agent-meta {
+    font-size: 9pt;
+    color: #666;
+    margin-bottom: 6px;
+  }
+  .agent-card ul {
+    font-size: 9.5pt;
+    padding-left: 18px;
+    margin-bottom: 0;
+  }
+  .agent-card li { margin-bottom: 3px; }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-red { background: #fee2e2; color: #dc2626; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+
+  /* Lists */
+  ul, ol { padding-left: 20px; margin-bottom: 0.8em; }
+  li { margin-bottom: 4px; }
+
+  /* Formula */
+  .formula {
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 1em 0;
+    text-align: center;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+    font-size: 12pt;
+    page-break-inside: avoid;
+  }
+  .formula-label {
+    font-size: 8.5pt;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  /* Section numbering */
+  .section-num {
+    color: #2563eb;
+    font-weight: 800;
+    margin-right: 6px;
+  }
+
+  /* Print tweaks */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .cover { min-height: 100vh; }
+    .no-print { display: none; }
+    a { color: #2563eb; text-decoration: none; }
+    .metric-card, .agent-card, .feature-card, .diagram { box-shadow: none; }
+  }
+</style>
+
+<!-- ============================= COVER PAGE ============================= -->
+<div class="cover">
+  <div class="cover-logo">pavan<span>.</span></div>
+  <div class="cover-subtitle">AI-Powered Urban Air Quality Intelligence for Smart City Intervention</div>
+  <div class="cover-meta">
+    <strong>ET AI Hackathon 2026</strong> &mdash; Problem Statement #5<br>
+    Team <strong>EdgeRunner</strong><br>
+    <br>
+    <span class="cover-badge">SUBMISSION DOCUMENT</span>
+  </div>
+  <div class="cover-links" style="margin-top:2em; line-height:2.2;">
+    <strong>Live Platform:</strong> <a href="https://pavan-aqi.vercel.app">pavan-aqi.vercel.app</a><br>
+    <strong>Telegram Bot:</strong> <a href="https://t.me/PavanETbot">@PavanETbot</a><br>
+    <strong>WhatsApp Channel:</strong> <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L">Join Channel</a><br>
+    <strong>Date:</strong> July 22, 2026
+  </div>
+</div>
+
+
+<!-- ========================= TABLE OF CONTENTS ========================= -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol class="toc-list">
+    <li class="toc-section"><span class="toc-num">1</span> Executive Summary</li>
+    <li class="toc-section"><span class="toc-num">2</span> Problem Analysis</li>
+    <li class="toc-section"><span class="toc-num">3</span> Solution Architecture</li>
+    <li><span style="margin-left:24px;">3.1 Five-Layer System Architecture</span></li>
+    <li><span style="margin-left:24px;">3.2 Multi-Agent Pipeline Flowchart</span></li>
+    <li><span style="margin-left:24px;">3.3 Data Flow Diagram</span></li>
+    <li class="toc-section"><span class="toc-num">4</span> Data Sources</li>
+    <li class="toc-section"><span class="toc-num">5</span> AI Agents Deep Dive</li>
+    <li class="toc-section"><span class="toc-num">6</span> ML Models &amp; Validation</li>
+    <li><span style="margin-left:24px;">6.1 XGBoost Forecast Model</span></li>
+    <li><span style="margin-left:24px;">6.2 Gaussian Plume Atmospheric Dispersion</span></li>
+    <li><span style="margin-left:24px;">6.3 Intervention Simulation</span></li>
+    <li class="toc-section"><span class="toc-num">7</span> Tech Stack</li>
+    <li class="toc-section"><span class="toc-num">8</span> Features Catalog</li>
+    <li class="toc-section"><span class="toc-num">9</span> Addressing Evaluation Criteria</li>
+    <li class="toc-section"><span class="toc-num">10</span> Innovation Highlights</li>
+    <li class="toc-section"><span class="toc-num">11</span> Business Impact</li>
+    <li class="toc-section"><span class="toc-num">12</span> Scalability</li>
+    <li class="toc-section"><span class="toc-num">13</span> API Reference</li>
+    <li class="toc-section"><span class="toc-num">14</span> Database Schema</li>
+    <li class="toc-section"><span class="toc-num">15</span> Deployment &amp; Infrastructure</li>
+    <li class="toc-section"><span class="toc-num">16</span> Accessibility &amp; Inclusivity</li>
+    <li class="toc-section"><span class="toc-num">17</span> Future Roadmap</li>
+    <li class="toc-section"><span class="toc-num">18</span> Team</li>
+    <li class="toc-section"><span class="toc-num">19</span> References</li>
+  </ol>
+</div>
+
+
+<!-- ======================== 1. EXECUTIVE SUMMARY ======================== -->
+<h2><span class="section-num">1.</span> Executive Summary</h2>
+
+<p><strong>India is choking.</strong> Air pollution kills <strong>1.67 million Indians every year</strong> (Lancet Planetary Health, 2024), making it the nation's deadliest environmental crisis. Delhi's average AQI hovers at 218 &mdash; "Very Poor" on the national scale. Yet only 31% of Indian cities have air quality response protocols (CAG Audit, 2024). The data exists. <em>The intelligence layer to act on it does not.</em></p>
+
+<p><strong>Pavan</strong> (Sanskrit: "wind" / "breath of life") bridges this gap. It is a multi-agent AI platform that fuses <strong>5 real-time data sources</strong> through a <strong>6-agent intelligence pipeline</strong>, transforming raw monitoring data into actionable source attribution, hyperlocal forecasts, enforcement recommendations, and multilingual citizen alerts &mdash; in under 3 seconds.</p>
+
+<div class="metrics-row">
+  <div class="metric-card">
+    <div class="metric-value">105</div>
+    <div class="metric-label">Monitoring Stations</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">57</div>
+    <div class="metric-label">Indian Cities</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value coral">86%</div>
+    <div class="metric-label">RMSE Improvement</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value forest">&lt;3s</div>
+    <div class="metric-label">Signal to Recommendation</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value amber">4</div>
+    <div class="metric-label">Languages</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">4</div>
+    <div class="metric-label">Alert Channels</div>
+  </div>
+</div>
+
+<p>Pavan is not a dashboard. It is an <strong>autonomous intelligence system</strong> that can attribute pollution to specific source categories with confidence scores, forecast AQI at hyperlocal resolution 72 hours ahead, generate priority-ranked enforcement recommendations compliant with the GRAP framework, run counterfactual intervention simulations ("what if we ban trucks?"), and broadcast health advisories in English, Hindi, Tamil, and Bengali across Telegram, WhatsApp, email, and web channels.</p>
+
+<div class="callout">
+  <div class="callout-title">Our Thesis</div>
+  <p style="margin-bottom:0;">Multi-agent AI can bridge the gap between environmental monitoring and urban intervention. By orchestrating specialized AI agents that reason over fused data sources &mdash; satellite imagery, ground sensors, weather, traffic, and atmospheric models &mdash; we can compress the <em>signal-to-intervention</em> cycle from hours/days to seconds.</p>
+</div>
+
+
+<!-- ======================== 2. PROBLEM ANALYSIS ======================== -->
+<h2 class="page-break"><span class="section-num">2.</span> Problem Analysis</h2>
+
+<h3>India's Air Quality Crisis by the Numbers</h3>
+
+<table>
+  <thead>
+    <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Annual deaths from air pollution</td><td><strong>1.67 million</strong></td><td>Lancet Planetary Health, 2024</td></tr>
+    <tr><td>Average AQI in Delhi (annual)</td><td><strong>218</strong> (Very Poor)</td><td>CPCB CAAQMS, 2024</td></tr>
+    <tr><td>Cities with response protocols</td><td><strong>31%</strong></td><td>CAG Audit, 2024</td></tr>
+    <tr><td>Total CAAQMS stations nationwide</td><td><strong>900+</strong></td><td>CPCB, 2025</td></tr>
+    <tr><td>Cities experiencing "Severe" AQI days</td><td><strong>22 cities, 100+ days/year</strong></td><td>CPCB Annual Report</td></tr>
+    <tr><td>Economic cost (healthcare + productivity)</td><td><strong>$36 billion/year</strong></td><td>World Bank, 2024</td></tr>
+    <tr><td>WHO PM2.5 guideline exceedance (Delhi)</td><td><strong>14x above</strong> 5 ug/m3 limit</td><td>WHO Air Quality Database</td></tr>
+  </tbody>
+</table>
+
+<h3>The Intelligence Gap</h3>
+
+<p>India has invested heavily in monitoring infrastructure. The CPCB's CAAQMS network spans 900+ stations with 15-minute pollutant readings. Satellite systems like Sentinel-5P provide daily tropospheric column density maps. MODIS/VIIRS detects active fires in near-real-time. <strong>The data exists.</strong></p>
+
+<p>What does <em>not</em> exist is the intelligence layer that can:</p>
+
+<ul>
+  <li><strong>Attribute</strong> &mdash; decompose observed pollution into source categories (vehicular, industrial, construction, burning, background) with confidence scores</li>
+  <li><strong>Predict</strong> &mdash; forecast AQI at hyperlocal (station-level) resolution beyond simple persistence models</li>
+  <li><strong>Recommend</strong> &mdash; generate priority-ranked, zone-specific enforcement actions grounded in GRAP compliance requirements</li>
+  <li><strong>Simulate</strong> &mdash; model counterfactual scenarios to estimate the AQI impact of proposed interventions before deployment</li>
+  <li><strong>Alert</strong> &mdash; reach citizens in their language, on their platform, with actionable health guidance</li>
+</ul>
+
+<h3>Why Dashboards Are Not Enough</h3>
+
+<p>Current air quality platforms (SAMEER, AirVisual, SAFAR) display data. They show you the AQI is 350. They do not tell you <em>why</em> it is 350 (source attribution), <em>when</em> it will change (forecasting), <em>what</em> should be done (enforcement), or <em>how much</em> a proposed action would help (simulation). Municipal officers need decision support, not data visualization. Citizens need health advisories in their language, not English-only web dashboards.</p>
+
+<div class="callout coral">
+  <div class="callout-title">The Problem Statement, verbatim</div>
+  <p style="margin-bottom:0;font-style:italic;">"The data exists. The intelligence layer to act on it does not."</p>
+</div>
+
+<p>Pavan's thesis: a <strong>multi-agent AI system</strong> &mdash; where specialized agents reason over fused data sources in a coordinated pipeline &mdash; can bridge the gap from monitoring to intervention in under 3 seconds.</p>
+
+
+<!-- ====================== 3. SOLUTION ARCHITECTURE ====================== -->
+<h2 class="page-break"><span class="section-num">3.</span> Solution Architecture</h2>
+
+<h3>3.1 Five-Layer System Architecture</h3>
+
+<div class="diagram">
+  <div class="diagram-title">Pavan System Architecture &mdash; 5 Layers</div>
+  <div class="layer-stack">
+
+    <div class="layer">
+      <div class="layer-label" style="background:#2563eb;">Layer 1<br>Presentation</div>
+      <div class="layer-content">
+        <span class="layer-tag">Next.js 16 (App Router)</span>
+        <span class="layer-tag">Mapbox GL JS</span>
+        <span class="layer-tag">deck.gl WebGL</span>
+        <span class="layer-tag">Recharts</span>
+        <span class="layer-tag">Framer Motion</span>
+        <span class="layer-tag">9 Pages</span>
+        <span class="layer-tag">AI Chatbot</span>
+        <span class="layer-tag">Telegram Bot</span>
+        <span class="layer-tag">WhatsApp Channel</span>
+        <span class="layer-tag">Email Alerts</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label" style="background:#166534;">Layer 2<br>API Gateway</div>
+      <div class="layer-content">
+        <span class="layer-tag">FastAPI (Python)</span>
+        <span class="layer-tag">32 Endpoints</span>
+        <span class="layer-tag">6 Routers (AQI, Forecast, Alerts, Compliance, Simulate, Agents)</span>
+        <span class="layer-tag">Async I/O</span>
+        <span class="layer-tag">Auto-docs (OpenAPI)</span>
+        <span class="layer-tag">File-based caching</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label" style="background:#ef4444;">Layer 3<br>Agent Mesh</div>
+      <div class="layer-content">
+        <span class="layer-tag">Orchestrator</span>
+        <span class="layer-tag">Sensor Agent</span>
+        <span class="layer-tag">Weather Agent</span>
+        <span class="layer-tag">Anomaly Agent</span>
+        <span class="layer-tag">Attribution Agent</span>
+        <span class="layer-tag">Enforcement Agent</span>
+        <span class="layer-tag">Citizen Agent</span>
+        <span class="layer-tag">4-Phase Pipeline</span>
+        <span class="layer-tag">Parallel Execution</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label" style="background:#b45309;">Layer 4<br>ML Pipeline</div>
+      <div class="layer-content">
+        <span class="layer-tag">XGBoost Forecast (200 trees, 12 features)</span>
+        <span class="layer-tag">Gaussian Plume Dispersion</span>
+        <span class="layer-tag">Pasquill-Gifford Stability</span>
+        <span class="layer-tag">IDW Interpolation (2500-point grid)</span>
+        <span class="layer-tag">Compound Risk Scoring (5-factor)</span>
+        <span class="layer-tag">US EPA AQI Breakpoints</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label" style="background:#1a1a18;">Layer 5<br>Data Layer</div>
+      <div class="layer-content">
+        <span class="layer-tag">CPCB CAAQMS (105 stations)</span>
+        <span class="layer-tag">Sentinel-5P TROPOMI</span>
+        <span class="layer-tag">MODIS/VIIRS FIRMS</span>
+        <span class="layer-tag">OpenWeatherMap</span>
+        <span class="layer-tag">Traffic Mobility Index</span>
+        <span class="layer-tag">Supabase Postgres (RLS)</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<h3>3.2 Multi-Agent Pipeline Flowchart</h3>
+
+<div class="diagram">
+  <div class="diagram-title">4-Phase Agent Orchestration Pipeline &mdash; Total &lt; 3 seconds</div>
+
+  <div style="text-align:center;">
+
+    <!-- Phase 0 -->
+    <div style="margin-bottom:6px;">
+      <span class="badge badge-amber">Phase 0 &mdash; Satellite + Traffic Prefetch</span>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box dark" style="min-width:180px;">Sentinel-5P NO2/SO2<br><small>Hotspot Detection</small></div>
+      <div class="flow-box dark" style="min-width:180px;">MODIS/VIIRS Fires<br><small>Thermal Anomalies</small></div>
+      <div class="flow-box dark" style="min-width:180px;">Traffic Mobility<br><small>Congestion Index</small></div>
+    </div>
+
+    <div class="flow-arrow-down">&darr;</div>
+
+    <!-- Phase 1 -->
+    <div style="margin-bottom:6px;">
+      <span class="badge badge-blue">Phase 1 &mdash; Parallel Data Collection</span>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box" style="min-width:220px;">Sensor Agent<br><small>CPCB CAAQMS &rarr; 105 stations</small></div>
+      <div style="font-size:10pt;color:#999;padding:0 4px;">||</div>
+      <div class="flow-box" style="min-width:220px;">Weather Agent<br><small>OWM &rarr; Wind, Stability, Inversions</small></div>
+    </div>
+
+    <div class="flow-arrow-down">&darr;</div>
+
+    <!-- Phase 2 -->
+    <div style="margin-bottom:6px;">
+      <span class="badge badge-green">Phase 2 &mdash; Parallel Analysis</span>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box forest" style="min-width:220px;">Anomaly Agent<br><small>Z-score Spikes, PM Ratios</small></div>
+      <div style="font-size:10pt;color:#999;padding:0 4px;">||</div>
+      <div class="flow-box forest" style="min-width:220px;">Attribution Agent<br><small>Source Decomposition, Confidence</small></div>
+    </div>
+
+    <div class="flow-arrow-down">&darr;</div>
+
+    <!-- Phase 3 -->
+    <div style="margin-bottom:6px;">
+      <span class="badge badge-red">Phase 3 &mdash; Sequential Enforcement</span>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box coral" style="min-width:300px;">Enforcement Agent<br><small>Priority-Ranked Recommendations &bull; GRAP Compliance &bull; Zone Actions</small></div>
+    </div>
+
+    <div class="flow-arrow-down">&darr;</div>
+
+    <div class="flow-row">
+      <div class="flow-box dark" style="min-width:400px;">Orchestrator &rarr; Merged Result + Citizen Alerts in 4 Languages<br><small>Total elapsed: &lt; 3 seconds &bull; 5 data sources fused &bull; Confidence-weighted</small></div>
+    </div>
+
+  </div>
+</div>
+
+<h3>3.3 Data Flow Diagram</h3>
+
+<div class="diagram">
+  <div class="diagram-title">Data Source &rarr; Agent &rarr; Output Flow</div>
+  <table style="font-size:9pt;">
+    <thead>
+      <tr><th>Data Source</th><th>Agent Consumer</th><th>Processing</th><th>Output</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CPCB CAAQMS</strong><br>PM2.5, PM10, NO2, SO2, CO, O3</td>
+        <td>Sensor Agent</td>
+        <td>Validation, AQI calculation (US EPA breakpoints), hotspot identification</td>
+        <td>Station readings, avg/max AQI, hotspot list</td>
+      </tr>
+      <tr>
+        <td><strong>OpenWeatherMap</strong><br>Wind, temp, humidity, pressure</td>
+        <td>Weather Agent</td>
+        <td>Stagnation detection, inversion risk, Pasquill-Gifford stability classification</td>
+        <td>Wind analysis, dispersion quality, pollution outlook</td>
+      </tr>
+      <tr>
+        <td><strong>Sentinel-5P TROPOMI</strong><br>Tropospheric NO2/SO2 column</td>
+        <td>Orchestrator &rarr; Attribution Agent</td>
+        <td>40x40 grid interpolation, hotspot mapping to 12 industrial regions</td>
+        <td>NO2 hotspot locations, industrial attribution boost</td>
+      </tr>
+      <tr>
+        <td><strong>MODIS/VIIRS FIRMS</strong><br>Active fire detection, FRP</td>
+        <td>Orchestrator &rarr; Attribution Agent</td>
+        <td>Fire proximity matching (&lt;0.5 degrees), confidence filtering</td>
+        <td>Burning attribution 2.5x boost, crop fire correlation</td>
+      </tr>
+      <tr>
+        <td><strong>Traffic Mobility</strong><br>Congestion index, truck routes</td>
+        <td>Orchestrator &rarr; Attribution Agent</td>
+        <td>TomTom pattern modeling, peak hour adjustment, PM2.5 contribution</td>
+        <td>Vehicular attribution weighting, emission factor</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ========================= 4. DATA SOURCES ========================== -->
+<h2 class="page-break"><span class="section-num">4.</span> Data Sources</h2>
+
+<p>Pavan fuses <strong>5 heterogeneous data sources</strong> spanning ground monitoring, satellite remote sensing, meteorology, and urban mobility. Each source feeds into specific agents through dedicated service modules with caching, fallback, and validation layers.</p>
+
+<table>
+  <thead>
+    <tr><th>Source</th><th>Data</th><th>API / Protocol</th><th>Coverage</th><th>Update Freq</th><th>Integration Method</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>CPCB CAAQMS</strong></td>
+      <td>PM2.5, PM10, NO2, SO2, CO, O3, AQI</td>
+      <td><code>app.cpcbccr.com/caaqms</code> (POST)</td>
+      <td>105 stations, 57 cities</td>
+      <td>15-minute</td>
+      <td>Real-time REST with file-based cache (15-min TTL), US EPA breakpoint AQI formula, synthetic fallback for offline stations</td>
+    </tr>
+    <tr>
+      <td><strong>Sentinel-5P TROPOMI</strong></td>
+      <td>Tropospheric NO2/SO2 column density</td>
+      <td>Copernicus Open Access Hub</td>
+      <td>Pan-India (40x40 grid, 1600 points)</td>
+      <td>Daily</td>
+      <td>TROPOMI L2 product, 12 industrial NO2 hotspot regions, Gaussian-weighted contributions, units: 10<sup>15</sup> molecules/cm<sup>2</sup></td>
+    </tr>
+    <tr>
+      <td><strong>MODIS/VIIRS FIRMS</strong></td>
+      <td>Active fire detection, fire radiative power (FRP)</td>
+      <td>NASA FIRMS NRT C6.1</td>
+      <td>Pan-India (5 fire regions)</td>
+      <td>6-hourly</td>
+      <td>Punjab/Haryana stubble burning, Jharkhand/Odisha industrial fires, confidence 60-99%, FRP 5-50 MW</td>
+    </tr>
+    <tr>
+      <td><strong>OpenWeatherMap</strong></td>
+      <td>Wind speed/direction, temperature, humidity, pressure, cloud cover</td>
+      <td><code>api.openweathermap.org</code> (REST)</td>
+      <td>Per-station (5 cities with coordinates)</td>
+      <td>Hourly</td>
+      <td>Current weather + 3-hour forecast intervals, file-based cache (30/60-min TTL), stagnation and inversion detection</td>
+    </tr>
+    <tr>
+      <td><strong>Traffic Mobility</strong></td>
+      <td>Congestion index, vehicle density, truck routes</td>
+      <td>TomTom Traffic Index patterns</td>
+      <td>8 major metro cities</td>
+      <td>15-minute</td>
+      <td>Empirical model from TomTom data, peak hour adjustment (+5-15 congestion), 20x20 density grid, PM2.5 traffic contribution formula</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout forest">
+  <div class="callout-title">Data Fusion Strategy</div>
+  <p style="margin-bottom:0;">No single data source is sufficient. Ground sensors provide precise but sparse readings. Satellites provide broad but coarse coverage. Weather determines dispersion. Traffic explains vehicular contribution. Fire detection explains burning events. Pavan's orchestrator fuses all five through its agent mesh, with each agent responsible for validating, enriching, and reasoning over its assigned source.</p>
+</div>
+
+
+<!-- ===================== 5. AI AGENTS DEEP DIVE ======================= -->
+<h2 class="page-break"><span class="section-num">5.</span> AI Agents Deep Dive</h2>
+
+<p>Pavan's intelligence core is a <strong>6+1 agent system</strong> built on a shared <code>BaseAgent</code> abstract class. Each agent produces an <code>AgentResult</code> containing structured data, natural-language reasoning, and a confidence score (0.0 to 1.0). The Orchestrator coordinates their execution in a 4-phase pipeline with parallel execution using Python's <code>asyncio.gather</code>.</p>
+
+<div class="agent-card">
+  <h4 style="color:#1a1a18;">Orchestrator <span class="badge badge-blue">Coordinator</span></h4>
+  <div class="agent-meta">File: <code>agents/orchestrator.py</code> &bull; Confidence: N/A (coordinator)</div>
+  <ul>
+    <li><strong>Role:</strong> Coordinates the entire 4-phase pipeline, manages parallel execution, passes data between agents, merges results, tracks timing</li>
+    <li><strong>Phase 0:</strong> Prefetches satellite (Sentinel-5P) and traffic data in parallel</li>
+    <li><strong>Phase 1:</strong> Runs Sensor Agent + Weather Agent concurrently via <code>asyncio.gather</code></li>
+    <li><strong>Phase 2:</strong> Runs Anomaly Agent + Attribution Agent concurrently (receives Phase 1 output)</li>
+    <li><strong>Phase 3:</strong> Runs Enforcement Agent sequentially (requires Phase 2 results)</li>
+    <li><strong>Summary:</strong> Builds executive summary with GRAP stage detection, urgency classification, headline generation</li>
+    <li><strong>Error handling:</strong> Failed agents return confidence=0.0; pipeline continues without them</li>
+    <li><strong>Output:</strong> Complete analysis with per-agent results, run log, timing metrics, data source inventory</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#2563eb;">Sensor Agent <span class="badge badge-blue">Data Collection</span></h4>
+  <div class="agent-meta">File: <code>agents/sensor_agent.py</code> &bull; Confidence: 0.95 (real data) / 0.5 (synthetic fallback)</div>
+  <ul>
+    <li><strong>Role:</strong> Pulls real-time CPCB CAAQMS readings via the CPCB service module</li>
+    <li><strong>Validation:</strong> Checks for missing/null pollutant readings, validates AQI range (0-500), flags stale timestamps</li>
+    <li><strong>Hotspot detection:</strong> Identifies stations with AQI &gt; 200 as hotspots, with separate thresholds for PM2.5 and PM10</li>
+    <li><strong>Synthetic fallback:</strong> When CPCB API is unreachable, generates realistic synthetic readings with diurnal and spatial patterns (confidence drops to 0.5)</li>
+    <li><strong>Output:</strong> Station readings array, average/max/min AQI, station count, hotspot list with coordinates</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#2563eb;">Weather Agent <span class="badge badge-green">Meteorological Analysis</span></h4>
+  <div class="agent-meta">File: <code>agents/weather_agent.py</code> &bull; Confidence: 0.90</div>
+  <ul>
+    <li><strong>Role:</strong> Fetches current weather + forecast from OpenWeatherMap, performs atmospheric stability analysis</li>
+    <li><strong>Stagnation detection:</strong> Wind speed &lt; 2 m/s indicates atmospheric stagnation (poor dispersion)</li>
+    <li><strong>Inversion risk:</strong> Detected when humidity &gt; 70% + calm nighttime conditions trap pollutants near surface</li>
+    <li><strong>Wind shift detection:</strong> Flags wind direction spread &gt; 120 degrees (variable conditions)</li>
+    <li><strong>Pollution outlook:</strong> Classifies as improving/worsening/stable based on wind forecast trends</li>
+    <li><strong>Output:</strong> Current conditions, wind analysis (speed, direction, stagnation, dispersion quality), forecast array, alerts</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#ef4444;">Anomaly Agent <span class="badge badge-red">Spike Detection</span></h4>
+  <div class="agent-meta">File: <code>agents/anomaly_agent.py</code> &bull; Confidence: 0.75</div>
+  <ul>
+    <li><strong>Role:</strong> Detects abnormal pollution readings through statistical methods</li>
+    <li><strong>Method 1 &mdash; Spatial Z-score:</strong> Computes each station's deviation from the citywide mean. Z &gt; 2.0 = anomaly; Z &gt; 3.0 = critical</li>
+    <li><strong>Method 2 &mdash; PM2.5/PM10 ratio:</strong> Ratio &gt; 0.8 flags combustion sources (fine particulate dominance); ratio &lt; 0.4 flags construction dust</li>
+    <li><strong>Cause guessing:</strong> Cross-references detected anomalies with known industrial hotspots and time-of-day patterns</li>
+    <li><strong>Output:</strong> Anomaly list with station, severity (warning/critical), z-score, probable cause, coordinates</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#b45309;">Attribution Agent <span class="badge badge-amber">Source Decomposition</span></h4>
+  <div class="agent-meta">File: <code>agents/attribution_agent.py</code> &bull; Confidence: 0.65</div>
+  <ul>
+    <li><strong>Role:</strong> Decomposes pollution at each station into 5 source categories: vehicular, industrial, construction, burning, background</li>
+    <li><strong>Land use profiles:</strong> 5 Delhi zones (north/south/east/west/central) with distinct industrial/residential/commercial/green/transport ratios</li>
+    <li><strong>Satellite cross-reference:</strong> MODIS fire proximity (&lt;0.5 degrees) boosts burning attribution by 2.5x for crop burning, 1.5x for industrial fires; high-confidence fires (>80%) get additional 1.3x boost</li>
+    <li><strong>Temporal adjustments:</strong> Rush hour (7-10AM, 5-9PM) boosts vehicular 1.8x; burning hours (5-7AM, 7-10PM) boost burning 3.0x; work hours boost construction 1.5x</li>
+    <li><strong>PM ratio correction:</strong> PM2.5/PM10 &gt; 0.7 boosts combustion sources; &lt; 0.4 boosts construction dust</li>
+    <li><strong>Wind adjustment:</strong> Stagnation (&lt;2 m/s) amplifies local vehicular/burning, reduces distant industrial</li>
+    <li><strong>Normalization:</strong> All source fractions sum to 1.0 with per-source confidence scores</li>
+    <li><strong>Output:</strong> Per-station attribution with sources, confidence map, dominant source, city-wide average</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#ef4444;">Enforcement Agent <span class="badge badge-red">Action Generation</span></h4>
+  <div class="agent-meta">File: <code>agents/enforcement_agent.py</code> &bull; Confidence: 0.80</div>
+  <ul>
+    <li><strong>Role:</strong> Generates priority-ranked enforcement recommendations based on anomaly and attribution analysis</li>
+    <li><strong>3-tier recommendation system:</strong></li>
+    <li>Tier 1 (Anomaly-based): Deploy inspection teams to critical anomaly locations</li>
+    <li>Tier 2 (Attribution-based): Industrial &gt; 30% triggers factory inspection; construction &gt; 20% triggers site audit; burning &gt; 15% triggers patrol dispatch</li>
+    <li>Tier 3 (Hotspot-based): Top 3 stations with AQI &gt; 250 get zone-specific recommendations</li>
+    <li><strong>Output:</strong> Up to 10 priority-ranked recommendations with action, location, justification, urgency level</li>
+  </ul>
+</div>
+
+<div class="agent-card">
+  <h4 style="color:#166534;">Citizen Agent <span class="badge badge-green">Public Communication</span></h4>
+  <div class="agent-meta">File: <code>agents/citizen_agent.py</code> &bull; Confidence: 0.85</div>
+  <ul>
+    <li><strong>Role:</strong> Generates multilingual health advisories across 5 severity levels in 4 languages</li>
+    <li><strong>Languages:</strong> English (EN), Hindi (HI), Tamil (TA), Bengali (BN)</li>
+    <li><strong>Severity levels:</strong> Good, Moderate, Poor, Very Poor, Severe &mdash; each with language-specific health guidance</li>
+    <li><strong>Zone alerts:</strong> Per-station alerts for any station in "poor" or worse category</li>
+    <li><strong>WhatsApp formatting:</strong> Emoji-coded messages with bold text, station-specific hotspot list, Pavan branding</li>
+    <li><strong>Output:</strong> City-wide advisory in 4 languages, zone alert list, WhatsApp-formatted messages (EN + HI)</li>
+  </ul>
+</div>
+
+
+<!-- ==================== 6. ML MODELS & VALIDATION ====================== -->
+<h2 class="page-break"><span class="section-num">6.</span> ML Models &amp; Validation</h2>
+
+<h3>6.1 XGBoost AQI Forecast Model</h3>
+
+<p>Pavan uses a gradient-boosted tree ensemble (XGBoost) trained on synthetic data that mimics real Delhi AQI patterns. The model is designed for plug-and-play replacement with real CPCB historical data.</p>
+
+<h4>Feature Engineering (12 features)</h4>
+
+<table class="accent-forest">
+  <thead>
+    <tr><th>#</th><th>Feature</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td><code>hour</code></td><td>Temporal</td><td>Hour of day (0-23) for diurnal patterns</td></tr>
+    <tr><td>2</td><td><code>day_of_week</code></td><td>Temporal</td><td>Day (0-6) for weekday/weekend effects</td></tr>
+    <tr><td>3</td><td><code>month</code></td><td>Temporal</td><td>Month (1-12) for seasonal variation</td></tr>
+    <tr><td>4</td><td><code>temperature</code></td><td>Weather</td><td>Ambient temperature (celsius)</td></tr>
+    <tr><td>5</td><td><code>humidity</code></td><td>Weather</td><td>Relative humidity (%)</td></tr>
+    <tr><td>6</td><td><code>wind_speed</code></td><td>Weather</td><td>Wind speed (m/s) &mdash; key dispersion factor</td></tr>
+    <tr><td>7</td><td><code>wind_dir_sin</code></td><td>Weather</td><td>sin(wind_direction) for circular encoding</td></tr>
+    <tr><td>8</td><td><code>wind_dir_cos</code></td><td>Weather</td><td>cos(wind_direction) for circular encoding</td></tr>
+    <tr><td>9</td><td><code>prev_aqi_1h</code></td><td>Lag</td><td>AQI 1 hour ago (autoregressive component)</td></tr>
+    <tr><td>10</td><td><code>prev_aqi_6h</code></td><td>Lag</td><td>AQI 6 hours ago (short-term trend)</td></tr>
+    <tr><td>11</td><td><code>prev_aqi_24h</code></td><td>Lag</td><td>AQI 24 hours ago (daily cycle)</td></tr>
+    <tr><td>12</td><td><code>is_weekend</code></td><td>Temporal</td><td>Binary weekend flag (reduced traffic)</td></tr>
+  </tbody>
+</table>
+
+<h4>Model Hyperparameters</h4>
+
+<pre><code>xgb.XGBRegressor(
+    n_estimators=200,        # 200 gradient-boosted trees
+    max_depth=6,             # tree depth limit (prevent overfitting)
+    learning_rate=0.1,       # step size shrinkage
+    subsample=0.8,           # row sampling per tree
+    colsample_bytree=0.8,    # feature sampling per tree
+    random_state=42          # reproducibility
+)</code></pre>
+
+<h4>Validation Results</h4>
+
+<div class="metrics-row">
+  <div class="metric-card">
+    <div class="metric-value forest">11.74</div>
+    <div class="metric-label">XGBoost RMSE</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value coral">83.65</div>
+    <div class="metric-label">Persistence RMSE</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">86%</div>
+    <div class="metric-label">RMSE Improvement</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value forest">4.88</div>
+    <div class="metric-label">XGBoost MAE</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value coral">68.69</div>
+    <div class="metric-label">Persistence MAE</div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Metric</th><th>XGBoost Model</th><th>Persistence Baseline</th><th>Improvement</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>RMSE (Root Mean Squared Error)</td><td><strong>11.74</strong></td><td>83.65</td><td style="color:#166534;font-weight:700;">86.0%</td></tr>
+    <tr><td>MAE (Mean Absolute Error)</td><td><strong>4.88</strong></td><td>68.69</td><td style="color:#166534;font-weight:700;">84.8%</td></tr>
+    <tr><td>Test Samples</td><td colspan="3">2,000 (20% holdout from 10,000 training samples)</td></tr>
+    <tr><td>Forecast Horizon</td><td colspan="3">1h to 72h with expanding confidence intervals: &plusmn;(15 + h &times; 2.5)</td></tr>
+    <tr><td>AQI Clipping</td><td colspan="3">Predictions clipped to [10, 500] valid AQI range</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-title">Training Data Pattern Generation</div>
+  <p style="margin-bottom:0;font-size:9.5pt;">The synthetic training data encodes known Delhi AQI dynamics:<br>
+  <code>seasonal = 80 + 120 * cos(pi * (month-1) / 6)</code> &mdash; winter peak (Dec/Jan)<br>
+  <code>diurnal = 20 * sin(pi * (hour-6) / 12)</code> &mdash; morning/evening rush hour peaks<br>
+  <code>wind_effect = -15 * clip(wind_speed - 2, 0, 10)</code> &mdash; wind disperses pollution<br>
+  <code>weekend_effect = -10 * is_weekend</code> &mdash; reduced vehicular traffic on weekends</p>
+</div>
+
+<h3>6.2 Gaussian Plume Atmospheric Dispersion</h3>
+
+<p>Pavan implements a simplified Gaussian plume model for atmospheric dispersion prediction, used by the Attribution Agent to weight source contributions based on wind direction and atmospheric stability.</p>
+
+<div class="formula">
+  C(x,y) = <span style="font-size:14pt;">&nbsp;</span><sup>Q</sup>&frasl;<sub>2&pi;u&sigma;<sub>y</sub>&sigma;<sub>z</sub></sub> &times; exp(-y<sup>2</sup>/2&sigma;<sub>y</sub><sup>2</sup>) &times; [exp(-(z-H)<sup>2</sup>/2&sigma;<sub>z</sub><sup>2</sup>) + exp(-(z+H)<sup>2</sup>/2&sigma;<sub>z</sub><sup>2</sup>)]
+  <div class="formula-label">Gaussian Plume Concentration Formula (ground-level reflection term included)</div>
+</div>
+
+<p>Where: <strong>C</strong> = concentration (ug/m<sup>3</sup>), <strong>Q</strong> = emission rate (ug/s), <strong>u</strong> = wind speed (m/s), <strong>&sigma;<sub>y</sub></strong>, <strong>&sigma;<sub>z</sub></strong> = horizontal and vertical dispersion coefficients, <strong>H</strong> = effective stack height (m), <strong>x</strong> = downwind distance, <strong>y</strong> = crosswind distance.</p>
+
+<h4>Pasquill-Gifford Stability Classes</h4>
+
+<table class="accent-amber">
+  <thead>
+    <tr><th>Class</th><th>&sigma;<sub>y</sub> Coeff</th><th>&sigma;<sub>z</sub> Coeff</th><th>Stability</th><th>Atmospheric Conditions</th><th>Dispersion</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>A</strong></td><td>0.22</td><td>0.20</td><td>Very Unstable</td><td>Strong solar, light wind</td><td>Best</td></tr>
+    <tr><td><strong>B</strong></td><td>0.16</td><td>0.12</td><td>Unstable</td><td>Moderate solar, light wind</td><td>Good</td></tr>
+    <tr><td><strong>C</strong></td><td>0.11</td><td>0.08</td><td>Slightly Unstable</td><td>Weak solar, moderate wind</td><td>Good</td></tr>
+    <tr><td><strong>D</strong></td><td>0.08</td><td>0.06</td><td>Neutral</td><td>Overcast or strong wind</td><td>Moderate</td></tr>
+    <tr><td><strong>E</strong></td><td>0.06</td><td>0.03</td><td>Slightly Stable</td><td>Night, moderate wind</td><td>Poor</td></tr>
+    <tr><td><strong>F</strong></td><td>0.04</td><td>0.016</td><td>Stable</td><td>Night, light wind</td><td>Worst</td></tr>
+  </tbody>
+</table>
+
+<h4>Implementation</h4>
+<pre><code># Dispersion coefficients with distance correction
+sigma_y = sc["sigma_y"] * x * (1 + 0.0001 * x) ** (-0.5)
+sigma_z = sc["sigma_z"] * x * (1 + 0.0001 * x) ** (-0.5)
+
+# Stability classification based on wind speed, hour, cloud cover
+def classify_stability(wind_speed, hour, cloud_cover=50):
+    is_day = 6 <= hour <= 18
+    if is_day:
+        if wind_speed < 2: return "A" if cloud_cover < 50 else "B"
+        elif wind_speed < 5: return "B" if cloud_cover < 50 else "C"
+        else: return "C" if cloud_cover < 50 else "D"
+    else:
+        if wind_speed < 3: return "F"
+        elif wind_speed < 5: return "E"
+        else: return "D"</code></pre>
+
+<h3>6.3 Intervention Simulation</h3>
+
+<p>Pavan's Simulator Service models counterfactual scenarios using empirical reduction factors sourced from published Delhi pollution studies, NGT orders, and SAFAR apportionment research.</p>
+
+<table>
+  <thead>
+    <tr><th>Intervention</th><th>PM2.5 Reduction</th><th>PM10 Reduction</th><th>Time to Effect</th><th>Radius</th><th>Evidence Base</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Truck Ban</strong></td><td>12%</td><td>18%</td><td>4-6 hours</td><td>15 km</td><td>NGT orders 2023: 10-15% PM reduction observed</td></tr>
+    <tr><td><strong>Construction Halt</strong></td><td>5%</td><td>25%</td><td>2-4 hours</td><td>5 km</td><td>GRAP Stage III/IV data: 20-30% PM10 drop</td></tr>
+    <tr><td><strong>Industrial Shutdown</strong></td><td>15%</td><td>10%</td><td>12-24 hours</td><td>10 km</td><td>2023 winter partial shutdowns showed measurable improvement</td></tr>
+    <tr><td><strong>Odd-Even Scheme</strong></td><td>8%</td><td>6%</td><td>24-48 hours</td><td>20 km</td><td>Delhi 2016/2019: 3-13% reduction (study-dependent)</td></tr>
+    <tr><td><strong>Burning Ban</strong></td><td>20%</td><td>15%</td><td>Immediate</td><td>8 km</td><td>SAFAR: stubble burning = 25-40% of Delhi winter PM2.5</td></tr>
+  </tbody>
+</table>
+
+<p>The simulation engine weights reduction factors by the Attribution Agent's source decomposition. A truck ban has maximum effect on stations where vehicular attribution is highest, and minimal effect where industrial sources dominate. This creates <strong>station-level granularity</strong> rather than uniform citywide estimates.</p>
+
+
+<!-- ========================= 7. TECH STACK ============================= -->
+<h2 class="page-break"><span class="section-num">7.</span> Tech Stack</h2>
+
+<table>
+  <thead>
+    <tr><th>Layer</th><th>Technology</th><th>Version</th><th>Why This Choice</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Frontend</strong></td><td>Next.js (App Router)</td><td>16.2</td><td>React Server Components, streaming SSR, edge runtime, file-based routing</td></tr>
+    <tr><td><strong>UI Framework</strong></td><td>React</td><td>19.2</td><td>Concurrent features, use() hook, server components</td></tr>
+    <tr><td><strong>Styling</strong></td><td>Tailwind CSS + shadcn/ui</td><td>4.x</td><td>Utility-first CSS, accessible component primitives, zero-runtime</td></tr>
+    <tr><td><strong>Maps</strong></td><td>Mapbox GL JS + react-map-gl</td><td>3.x</td><td>Vector tiles, 60fps WebGL rendering, custom layers, GeoJSON support</td></tr>
+    <tr><td><strong>Data Viz</strong></td><td>deck.gl + Recharts</td><td>9.x / 2.x</td><td>WebGL heatmaps (deck.gl) + responsive SVG charts (Recharts)</td></tr>
+    <tr><td><strong>Animation</strong></td><td>Framer Motion (motion)</td><td>12.x</td><td>Physics-based, layout animations, gesture support</td></tr>
+    <tr><td><strong>Backend</strong></td><td>FastAPI (Python)</td><td>0.115</td><td>Async ASGI, auto-generated OpenAPI docs, Pydantic validation, type-safe</td></tr>
+    <tr><td><strong>ML</strong></td><td>XGBoost + scikit-learn</td><td>3.0 / 1.6</td><td>State-of-the-art gradient boosting for tabular data, proven on environmental datasets</td></tr>
+    <tr><td><strong>Scientific</strong></td><td>NumPy + SciPy + Pandas</td><td>2.x</td><td>Numerical computing, interpolation, data manipulation</td></tr>
+    <tr><td><strong>Database</strong></td><td>Supabase (Postgres 15)</td><td>2.15</td><td>Row Level Security, real-time subscriptions, edge functions, managed hosting</td></tr>
+    <tr><td><strong>AI Chatbot</strong></td><td>GPT-4o-mini (OpenAI)</td><td>&mdash;</td><td>Multi-language, cost-efficient ($0.15/1M tokens), air quality system prompt</td></tr>
+    <tr><td><strong>Telegram</strong></td><td>Telegram Bot API</td><td>&mdash;</td><td>Webhook-based, 11 commands, free-form AI query forwarding</td></tr>
+    <tr><td><strong>Email</strong></td><td>Nodemailer (Gmail SMTP)</td><td>&mdash;</td><td>Branded HTML emails, reliable delivery, zero cost</td></tr>
+    <tr><td><strong>Scraping</strong></td><td>BeautifulSoup4 + httpx</td><td>4.13 / 0.28</td><td>CPCB data extraction, async HTTP client for all external APIs</td></tr>
+    <tr><td><strong>Frontend Deploy</strong></td><td>Vercel</td><td>&mdash;</td><td>Edge CDN (26 global PoPs), auto-SSL, preview deployments, zero-config</td></tr>
+    <tr><td><strong>Backend Deploy</strong></td><td>Railway</td><td>&mdash;</td><td>Docker containers, auto-deploy from GitHub, managed scaling</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ======================== 8. FEATURES CATALOG ======================== -->
+<h2 class="page-break"><span class="section-num">8.</span> Features Catalog</h2>
+
+<p>Pavan ships with <strong>12 production features</strong> across 9 pages, 4 notification channels, and an AI chatbot. Every feature is live at <strong>pavan-aqi.vercel.app</strong>.</p>
+
+<div class="feature-grid">
+
+  <div class="feature-card">
+    <h4>1. Interactive AQI Dashboard</h4>
+    <p>Real-time Mapbox GL map with 105 CPCB stations rendered as graduated circles (size + color = AQI severity). Three layer toggles: AQI heatmap, NO2 satellite overlay, Traffic density grid. City selector dropdown with 57 cities. Stats bar showing avg AQI, PM2.5, station count, alert status. Powered by deck.gl WebGL for 60fps performance.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>2. Multi-Agent Pipeline Visualizer</h4>
+    <p>Live visualization of the 6-agent pipeline execution. Shows each agent's status (idle/running/complete/error), confidence score, execution time, and reasoning output. Run log displays timestamped entries. Full analysis triggers all 4 phases with real-time progress. Displays data sources used count and total signal-to-recommendation time.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>3. Intervention Simulator</h4>
+    <p>Counterfactual AQI modeling with 5 intervention types. Each simulation shows per-station before/after AQI, PM2.5/PM10 reduction percentages, time-to-effect estimates, affected radius, and historical precedent. Side-by-side comparison mode ranks all 5 interventions by projected AQI reduction. Source-attribution-weighted for station-level granularity.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>4. GRAP Compliance Monitor</h4>
+    <p>Four-stage GRAP (Graded Response Action Plan) visualization aligned with CAQM guidelines. Auto-detects current stage from citywide AQI average. Displays 7 required actions per stage, violation counts, stations exceeding thresholds. One-click compliance report generation via the full Orchestrator pipeline.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>5. Citizen Health Alerts</h4>
+    <p>Health advisories generated in 4 languages (EN, HI, TA, BN) across 5 severity levels. PM2.5 exposure comparison to WHO guidelines (5 ug/m<sup>3</sup>). Zone-specific alerts for stations in "poor" or worse categories. WhatsApp broadcast preview with emoji-coded messages. Notification channel cards for Telegram/WhatsApp/Email enrollment.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>6. Telegram Bot (@PavanETbot)</h4>
+    <p>11 slash commands: /start, /aqi, /delhi, /cities, /health, /subscribe, /daily, /weekly, /threshold, /unsubscribe, /dashboard. Free-form natural language queries forwarded to GPT-4o-mini with air quality knowledge. Auto-detects user language. Webhook-based for instant response.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>7. Email Notifications</h4>
+    <p>Branded HTML email with AQI hero display (color-coded by severity), executive summary, PM2.5/WHO comparison metric tiles, enforcement recommendations, CTA button to dashboard, WhatsApp + Telegram join links. Sent via nodemailer through Gmail SMTP. Fallback HTML preview if SMTP not configured.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>8. WhatsApp Broadcast Channel</h4>
+    <p>Public WhatsApp channel for daily AQI digests, threshold breach alerts, and GRAP notifications. Messages generated in Hindi + English with emoji severity indicators. Station-level hotspot list included. Join link embedded across all platform touchpoints.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>9. AI Chatbot (Claudy)</h4>
+    <p>Floating chat widget powered by GPT-4o-mini with a specialized air quality system prompt. Auto-detects user language. Knows about atmospheric dispersion, GRAP stages, health impacts, AQI categories. Provides conversational access to Pavan's intelligence without navigating the dashboard.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>10. City Comparison</h4>
+    <p>Side-by-side multi-city AQI comparison for up to 6 cities. 22-city ranking chart with sortable columns. Per-city breakdowns showing PM2.5, PM10, dominant pollutant, and station count. Useful for municipal benchmarking and state-level policy comparison.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>11. XGBoost Forecast Chart</h4>
+    <p>24/48/72-hour AQI forecast with confidence band visualization (upper/lower bounds). Per-city switching. Forecast data from the XGBoost model with expanding confidence intervals. Model metadata display showing RMSE, MAE, feature importance.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>12. Accessibility Controls</h4>
+    <p>Theme toggle (light/dark mode). Text size controls (A+/A- buttons, 85%-130% range). Brightness control slider. Focus-visible outlines for keyboard navigation. Responsive design with mobile-first breakpoints. All controls accessible from the persistent navbar.</p>
+  </div>
+
+</div>
+
+
+<!-- ================= 9. ADDRESSING EVALUATION CRITERIA ================= -->
+<h2 class="page-break"><span class="section-num">9.</span> Addressing Evaluation Criteria</h2>
+
+<p>The problem statement specifies five evaluation focus areas. Below, we map each to Pavan's concrete implementation.</p>
+
+<div class="callout">
+  <div class="callout-title">Evaluation Focus (PS verbatim)</div>
+  <p style="margin-bottom:0;font-style:italic;">"Source attribution accuracy versus ground-truth emission inventories, AQI forecast accuracy at hyperlocal resolution (RMSE versus persistence baseline), enforcement recommendation quality rated by domain experts, citizen advisory relevance and language coverage, and demonstrated reduction in response time from signal to intervention."</p>
+</div>
+
+<h3>9.1 Source Attribution Accuracy</h3>
+
+<table>
+  <thead>
+    <tr><th>Criterion</th><th>Pavan Implementation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Source categories</td><td>5 categories: vehicular, industrial, construction, burning, background &mdash; matching SAFAR Delhi apportionment framework</td></tr>
+    <tr><td>Methodology</td><td>Wind-weighted land use correlation with temporal pattern adjustment. 5 Delhi zone profiles (north/south/east/west/central)</td></tr>
+    <tr><td>Satellite cross-reference</td><td>MODIS fire proximity detection: crop burning fires within 0.5 degrees boost burning attribution by <strong>2.5x</strong>; high-confidence (&gt;80%) fires get additional 1.3x</td></tr>
+    <tr><td>PM ratio analysis</td><td>PM2.5/PM10 &gt; 0.7 boosts combustion attribution; &lt; 0.4 boosts construction dust attribution</td></tr>
+    <tr><td>Temporal patterns</td><td>Rush hour vehicular 1.8x, burning hours 3.0x, work hours construction 1.5x, nighttime industrial 0.5x</td></tr>
+    <tr><td>Wind correction</td><td>Stagnation (&lt;2 m/s) amplifies local sources, reduces distant industrial contribution</td></tr>
+    <tr><td>Confidence scoring</td><td>Per-source confidence (0.3 to 0.9) reflecting data quality and method certainty</td></tr>
+    <tr><td>Validation reference</td><td>SAFAR Delhi emission apportionment studies; IITM Pune source profiles</td></tr>
+  </tbody>
+</table>
+
+<h3>9.2 AQI Forecast Accuracy (RMSE vs Persistence)</h3>
+
+<div class="metrics-row">
+  <div class="metric-card" style="flex:2;">
+    <div class="metric-value" style="font-size:32pt;">86%</div>
+    <div class="metric-label">RMSE Improvement Over Persistence Baseline</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value forest">11.74</div>
+    <div class="metric-label">Model RMSE</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value coral">83.65</div>
+    <div class="metric-label">Persistence RMSE</div>
+  </div>
+</div>
+
+<ul>
+  <li><strong>Model:</strong> XGBoost with 200 estimators, 12 features including 3 lag AQI features</li>
+  <li><strong>Resolution:</strong> Per-station (hyperlocal), per-hour predictions up to 72h ahead</li>
+  <li><strong>Confidence intervals:</strong> Expanding with horizon: &plusmn;(15 + hours_ahead &times; 2.5)</li>
+  <li><strong>Baseline comparison:</strong> Persistence model (AQI<sub>t+1</sub> = AQI<sub>t</sub>) as the naive benchmark &mdash; standard practice in environmental forecasting</li>
+</ul>
+
+<h3>9.3 Enforcement Recommendation Quality</h3>
+
+<ul>
+  <li><strong>Priority-ranked:</strong> Recommendations sorted by urgency (critical anomalies first, then attribution-based triggers, then hotspot-based)</li>
+  <li><strong>Zone-specific:</strong> References specific stations, industrial zones, construction clusters, burning areas by name and coordinate</li>
+  <li><strong>GRAP-compliant:</strong> Recommendations align with CAQM's 4-stage GRAP framework with 28 specific actions across stages</li>
+  <li><strong>Actionable format:</strong> Each recommendation includes: action type, target location, justification, urgency level, and responsible authority</li>
+  <li><strong>Simulation-backed:</strong> The Intervention Simulator provides projected AQI impact for each recommended action, with historical precedent citations</li>
+  <li><strong>Compliance reports:</strong> One-click generation of CPCB/SPCB-format compliance reports via the Orchestrator pipeline</li>
+</ul>
+
+<h3>9.4 Citizen Advisory Relevance &amp; Language Coverage</h3>
+
+<table class="accent-forest">
+  <thead>
+    <tr><th>Dimension</th><th>Coverage</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Languages</strong></td><td>English, Hindi, Tamil, Bengali &mdash; covering top 4 languages by urban speaker population</td></tr>
+    <tr><td><strong>Severity levels</strong></td><td>5 levels: Good, Moderate, Poor, Very Poor, Severe &mdash; each with distinct health guidance per language</td></tr>
+    <tr><td><strong>Channels</strong></td><td>4 channels: Web chatbot (AI-powered), Telegram bot (11 commands), WhatsApp broadcast channel, Email notifications (branded HTML)</td></tr>
+    <tr><td><strong>Health guidance</strong></td><td>Actionable advice: mask type (N95), outdoor activity limits, school closure triggers, emergency contacts (112), air purifier guidance</td></tr>
+    <tr><td><strong>Zone specificity</strong></td><td>Per-station alerts for any station in "poor" or worse, with coordinates for proximity matching</td></tr>
+    <tr><td><strong>Vulnerability mapping</strong></td><td>Advisory format suitable for schools, hospitals, outdoor workers &mdash; IVR-ready message structure for future voice channels</td></tr>
+  </tbody>
+</table>
+
+<h3>9.5 Signal to Intervention Response Time</h3>
+
+<div class="diagram">
+  <div class="diagram-title">Signal-to-Recommendation Timing</div>
+  <table style="font-size:9.5pt;">
+    <thead>
+      <tr><th>Phase</th><th>Agents</th><th>Execution</th><th>Duration</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Phase 0</td><td>Satellite + Traffic prefetch</td><td>Parallel</td><td>~0.3s</td></tr>
+      <tr><td>Phase 1</td><td>Sensor Agent + Weather Agent</td><td>Parallel (asyncio.gather)</td><td>~0.8s</td></tr>
+      <tr><td>Phase 2</td><td>Anomaly Agent + Attribution Agent</td><td>Parallel (asyncio.gather)</td><td>~0.5s</td></tr>
+      <tr><td>Phase 3</td><td>Enforcement Agent</td><td>Sequential</td><td>~0.3s</td></tr>
+      <tr><td>Summary</td><td>Orchestrator merge + GRAP detection</td><td>Sequential</td><td>~0.1s</td></tr>
+      <tr><td colspan="3" style="font-weight:700;text-align:right;">Total signal-to-recommendation:</td><td style="font-weight:700;color:#166534;">&lt; 3 seconds</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:8.5pt;color:#666;margin-top:8px;margin-bottom:0;text-align:center;">CPCB data refreshes every 15 minutes. The 3-second figure measures from data availability to complete enforcement recommendation delivery. Measured with <code>datetime.now()</code> timing in the Orchestrator run log.</p>
+</div>
+
+
+<!-- ==================== 10. INNOVATION HIGHLIGHTS ====================== -->
+<h2 class="page-break"><span class="section-num">10.</span> Innovation Highlights</h2>
+
+<p>Pavan is not an incremental improvement on existing air quality dashboards. It introduces seven architectural and functional innovations that, combined, represent a new paradigm for environmental intelligence platforms.</p>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Innovation</th><th>What Exists Today</th><th>What Pavan Does Differently</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Multi-Agent Coordination</td>
+      <td>Monolithic applications with sequential processing</td>
+      <td>6 specialized agents running in a 4-phase pipeline with parallel execution, confidence scoring, and error-tolerant orchestration. Each agent reasons independently and contributes its expertise to a merged analysis.</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Counterfactual Simulation</td>
+      <td>Historical analysis only ("what happened")</td>
+      <td>"What if we ban trucks?" &mdash; models 5 intervention types with per-station granularity, source-attribution-weighted reduction factors, and historical precedent from published Delhi studies.</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>5-Source Data Fusion</td>
+      <td>Single-source (ground sensors only)</td>
+      <td>Fuses CPCB ground sensors + Sentinel-5P satellite NO2 + MODIS fire detection + weather + traffic mobility data through specialized agents, each validating and enriching its assigned source.</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td>Atmospheric Dispersion Modeling</td>
+      <td>Simple averaging or IDW interpolation</td>
+      <td>Gaussian plume model with Pasquill-Gifford stability classes (A-F), wind-direction-aware source attribution, and 15x15 dispersion grids per source.</td>
+    </tr>
+    <tr>
+      <td><strong>5</strong></td>
+      <td>4-Channel Multilingual Alerts</td>
+      <td>English-only web dashboards</td>
+      <td>4 languages (EN/HI/TA/BN) across 4 channels (Telegram/WhatsApp/Email/Web chatbot) with severity-adapted health guidance including N95 advice, school closure triggers, and emergency contacts.</td>
+    </tr>
+    <tr>
+      <td><strong>6</strong></td>
+      <td>GRAP Compliance Automation</td>
+      <td>Manual stage determination by officials</td>
+      <td>Automatic GRAP stage detection (I-IV) with 28 required actions, one-click compliance report generation, and station-level violation counts.</td>
+    </tr>
+    <tr>
+      <td><strong>7</strong></td>
+      <td>Source Attribution with Confidence</td>
+      <td>No attribution or static averages</td>
+      <td>Dynamic decomposition into 5 sources with per-source confidence scores, cross-referenced against satellite fire data, traffic patterns, PM ratios, wind, and time-of-day.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ======================= 11. BUSINESS IMPACT ========================= -->
+<h2><span class="section-num">11.</span> Business Impact</h2>
+
+<h3>Lives at Stake</h3>
+<p>With 1.67 million air pollution deaths annually in India, even a <strong>1% reduction</strong> through better-targeted interventions would save <strong>16,700 lives per year</strong>. Pavan's contribution is not a cure &mdash; it is a decision support system that helps municipal officers deploy resources where they matter most.</p>
+
+<h3>Municipal Decision Support</h3>
+<ul>
+  <li><strong>Where to deploy inspectors:</strong> The Enforcement Agent's priority-ranked recommendations tell officers which zones need attention first, based on anomaly severity and source attribution</li>
+  <li><strong>When to escalate:</strong> Automatic GRAP stage detection eliminates manual AQI monitoring delays</li>
+  <li><strong>What to do:</strong> The Intervention Simulator lets officers compare the projected impact of different actions before committing resources</li>
+  <li><strong>How to communicate:</strong> Multi-language citizen alerts reach non-English-speaking populations who are often the most vulnerable</li>
+</ul>
+
+<h3>Cost of Inaction</h3>
+<table>
+  <thead>
+    <tr><th>Impact Area</th><th>Annual Cost</th><th>How Pavan Helps</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Healthcare burden</td><td>$36 billion (World Bank)</td><td>Targeted interventions reduce exposure in hotspot zones</td></tr>
+    <tr><td>Productivity loss</td><td>$7.6 billion (Lancet)</td><td>Forecast-based advisories enable proactive work-from-home decisions</td></tr>
+    <tr><td>GRAP compliance failures</td><td>Legal penalties, CAG audit findings</td><td>Automated stage detection and compliance reporting</td></tr>
+    <tr><td>Citizen trust deficit</td><td>Incalculable</td><td>Transparent, multilingual communication builds public confidence</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ========================== 12. SCALABILITY ========================== -->
+<h2 class="page-break"><span class="section-num">12.</span> Scalability</h2>
+
+<div class="diagram">
+  <div class="diagram-title">Scaling Trajectory</div>
+  <table style="font-size:9.5pt;">
+    <thead>
+      <tr><th>Dimension</th><th>Current (MVP)</th><th>Near-Term Target</th><th>Full Scale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Monitoring stations</td><td>105 stations</td><td>300+ stations</td><td>900+ CAAQMS stations</td></tr>
+      <tr><td>Cities</td><td>57 cities</td><td>150+ cities</td><td>All Indian cities with CPCB stations</td></tr>
+      <tr><td>Forecast resolution</td><td>Per-station, hourly</td><td>Ward-level, 1km grid</td><td>Street-level with urban canyon modeling</td></tr>
+      <tr><td>Languages</td><td>4 (EN, HI, TA, BN)</td><td>8 (+ TE, KN, MR, GU)</td><td>22 scheduled languages</td></tr>
+      <tr><td>Data sources</td><td>5 sources</td><td>8 sources (+ SAFAR, IITM, IQ Air)</td><td>Plug-and-play source registry</td></tr>
+      <tr><td>Alert channels</td><td>4 channels</td><td>6 (+ IVR, SMS)</td><td>All channels + Smart City dashboards</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Architecture Supports Horizontal Scaling</h3>
+<ul>
+  <li><strong>City-agnostic:</strong> All agents accept a <code>city</code> parameter. Adding a new city requires zero code changes &mdash; only a CPCB station mapping</li>
+  <li><strong>Data source pluggable:</strong> New data sources implement a simple service interface and register with the Orchestrator's Phase 0</li>
+  <li><strong>Agent mesh extensible:</strong> New agents extend <code>BaseAgent</code> with <code>run(query, context) &rarr; AgentResult</code>. The Orchestrator discovers them at startup</li>
+  <li><strong>Cloud-native deployment:</strong> Vercel edge CDN (26 global PoPs), Railway Docker containers (auto-scaling), Supabase managed Postgres (connection pooling, pgvector-ready)</li>
+  <li><strong>Stateless backend:</strong> FastAPI backend is stateless &mdash; horizontal scaling via Railway container replicas requires no code changes</li>
+</ul>
+
+
+<!-- ========================= 13. API REFERENCE ========================= -->
+<h2 class="page-break"><span class="section-num">13.</span> API Reference</h2>
+
+<p>Pavan exposes <strong>32 endpoints</strong> (28 FastAPI backend + 4 Next.js API routes). All backend endpoints are versioned under <code>/api/v1/</code>. The API is documented via FastAPI's auto-generated OpenAPI spec.</p>
+
+<h3>Backend API (FastAPI) &mdash; 28 Endpoints</h3>
+
+<h4>Health</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/health</code></td><td>Service health check. Returns <code>{"status":"ok","service":"pavan-api"}</code></td></tr>
+  </tbody>
+</table>
+
+<h4>AQI Router &mdash; 13 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/all-india</code></td><td>All CPCB stations across India (~105 stations)</td><td>&mdash;</td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/live</code></td><td>Live AQI for a city or single station</td><td><code>city</code>, <code>station_id</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/historical</code></td><td>Historical time series (up to 168h)</td><td><code>city</code>, <code>hours</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/stations</code></td><td>Monitoring station metadata for a city</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/weather</code></td><td>Current weather + wind analysis</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/satellite</code></td><td>Sentinel-5P NO2/SO2 satellite grid data</td><td>&mdash;</td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/fires</code></td><td>MODIS/VIIRS active fire detection</td><td>&mdash;</td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/traffic</code></td><td>City traffic/mobility data</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/traffic/grid</code></td><td>Traffic density grid for map overlay</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/dispersion</code></td><td>Gaussian plume atmospheric dispersion model</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/heatmap</code></td><td>IDW-interpolated AQI grid (2500 points)</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/risk</code></td><td>Compound risk scores (5-factor fusion)</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/aqi/zones</code></td><td>Zone/ward boundaries as GeoJSON</td><td><code>city</code></td></tr>
+  </tbody>
+</table>
+
+<h4>Forecast Router &mdash; 3 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/forecast/city</code></td><td>City-wide XGBoost AQI forecast</td><td><code>city</code>, <code>hours</code> (max 72)</td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/forecast/station/{id}</code></td><td>Per-station forecast</td><td><code>station_id</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/forecast/model</code></td><td>XGBoost model metadata and validation metrics</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h4>Simulate Router &mdash; 3 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/v1/simulate/run</code></td><td>Run single intervention simulation</td><td>Body: <code>{intervention_type, city}</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/simulate/compare</code></td><td>Compare all 5 interventions side by side</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/simulate/types</code></td><td>List available intervention types with metadata</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h4>Compliance Router &mdash; 2 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/compliance/grap</code></td><td>GRAP stage status with 4 stages and 28 actions</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/compliance/report</code></td><td>Full CPCB/SPCB-format compliance report</td><td><code>city</code></td></tr>
+  </tbody>
+</table>
+
+<h4>Alerts Router &mdash; 3 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/alerts/active</code></td><td>Active citizen health alerts</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/alerts/whatsapp</code></td><td>WhatsApp alert in requested language</td><td><code>city</code>, <code>lang</code> (en/hi/ta/bn)</td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/alerts/health-impact</code></td><td>WHO PM2.5 exposure-response health estimate</td><td><code>city</code></td></tr>
+  </tbody>
+</table>
+
+<h4>Agents Router &mdash; 4 Endpoints</h4>
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Key Params</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/v1/agents/analyze</code></td><td>Full 6-agent pipeline analysis</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/v1/agents/ask</code></td><td>Natural language query via orchestrator + AI</td><td>Body: <code>{query, city}</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/agents/quick</code></td><td>Quick sensor-only status</td><td><code>city</code></td></tr>
+    <tr><td><span class="badge badge-green">GET</span></td><td><code>/api/v1/agents/status</code></td><td>List all 7 agents with status</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h3>Frontend API Routes (Next.js) &mdash; 4 Endpoints</h3>
+
+<table style="font-size:9pt;">
+  <thead><tr><th>Method</th><th>Route</th><th>Description</th><th>Integration</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/chat</code></td><td>AI chatbot (GPT-4o-mini with air quality system prompt)</td><td>OpenAI API, multilingual</td></tr>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/telegram</code></td><td>Telegram bot webhook handler (@PavanETbot)</td><td>Telegram Bot API, 11 commands</td></tr>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/whatsapp</code></td><td>WhatsApp message generator (4 languages)</td><td>WhatsApp Business API format</td></tr>
+    <tr><td><span class="badge badge-blue">POST</span></td><td><code>/api/notify</code></td><td>Email notification via Gmail SMTP</td><td>Nodemailer, branded HTML</td></tr>
+  </tbody>
+</table>
+
+<h3>Sample API Response</h3>
+
+<pre><code>// GET /api/v1/agents/analyze?city=Delhi
+{
+  "city": "Delhi",
+  "elapsed_seconds": 2.14,
+  "signal_to_recommendation_seconds": 2.14,
+  "summary": {
+    "status": "Poor",
+    "urgency": "high",
+    "avg_aqi": 267,
+    "max_aqi": 412,
+    "station_count": 30,
+    "hotspot_count": 8,
+    "anomaly_count": 3,
+    "dominant_source": "vehicular",
+    "pollution_outlook": "worsening",
+    "grap_stage": "II — Very Poor",
+    "headline": "POOR air quality — enforcement action recommended. 3 anomalies detected. Conditions expected to worsen"
+  },
+  "data_sources_used": 5,
+  "agents": {
+    "sensor":      { "confidence": 0.95, "data": { "...": "..." } },
+    "weather":     { "confidence": 0.90, "data": { "...": "..." } },
+    "anomaly":     { "confidence": 0.75, "data": { "...": "..." } },
+    "attribution": { "confidence": 0.65, "data": { "...": "..." } },
+    "enforcement": { "confidence": 0.80, "data": { "...": "..." } }
+  }
+}</code></pre>
+
+
+<!-- ====================== 14. DATABASE SCHEMA ========================== -->
+<h2 class="page-break"><span class="section-num">14.</span> Database Schema</h2>
+
+<p>Pavan uses <strong>Supabase Postgres 15</strong> with Row Level Security (RLS) enabled on all tables. The schema consists of 5 tables with performance indexes and role-based access policies.</p>
+
+<div class="diagram">
+  <div class="diagram-title">Entity Relationship Diagram</div>
+  <div style="text-align:center;">
+    <div class="flow-row">
+      <div class="flow-box dark" style="min-width:140px;">stations<br><small>61 records</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box" style="min-width:140px;">readings<br><small>1,464 records</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box forest" style="min-width:140px;">forecasts<br><small>XGBoost predictions</small></div>
+    </div>
+    <div class="flow-row" style="margin-top:8px;">
+      <div class="flow-box coral" style="min-width:140px;">alerts<br><small>Active city alerts</small></div>
+      <div style="width:40px;"></div>
+      <div class="flow-box amber" style="min-width:140px;">anomalies<br><small>Detected events</small></div>
+    </div>
+  </div>
+</div>
+
+<table style="font-size:9pt;">
+  <thead>
+    <tr><th>Table</th><th>Key Columns</th><th>Indexes</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>stations</strong></td>
+      <td><code>station_id</code> (UNIQUE), <code>name</code>, <code>city</code>, <code>state</code>, <code>latitude</code>, <code>longitude</code>, <code>is_active</code></td>
+      <td>Primary key (UUID)</td>
+      <td>Monitoring station registry. Seeded with 61 stations.</td>
+    </tr>
+    <tr>
+      <td><strong>readings</strong></td>
+      <td><code>station_id</code>, <code>timestamp</code>, <code>aqi</code>, <code>pm25</code>, <code>pm10</code>, <code>no2</code>, <code>so2</code>, <code>co</code>, <code>o3</code>, <code>temperature</code>, <code>humidity</code>, <code>wind_speed</code>, <code>wind_direction</code>, <code>city</code></td>
+      <td><code>idx_readings_station_time</code>, <code>idx_readings_city</code></td>
+      <td>Pollutant readings time series. 1,464 seeded records.</td>
+    </tr>
+    <tr>
+      <td><strong>forecasts</strong></td>
+      <td><code>station_id</code>, <code>forecast_time</code>, <code>target_time</code>, <code>predicted_aqi</code>, <code>confidence_lower</code>, <code>confidence_upper</code>, <code>model_version</code></td>
+      <td><code>idx_forecasts_station</code></td>
+      <td>XGBoost AQI predictions with confidence intervals.</td>
+    </tr>
+    <tr>
+      <td><strong>alerts</strong></td>
+      <td><code>city</code>, <code>level</code>, <code>message_en</code>, <code>message_hi</code>, <code>is_active</code>, <code>expires_at</code></td>
+      <td><code>idx_alerts_active</code></td>
+      <td>Active health alerts with bilingual messages.</td>
+    </tr>
+    <tr>
+      <td><strong>anomalies</strong></td>
+      <td><code>station_id</code>, <code>detected_at</code>, <code>anomaly_type</code>, <code>severity</code>, <code>description</code>, <code>probable_cause</code>, <code>is_resolved</code></td>
+      <td><code>idx_anomalies_station</code></td>
+      <td>Detected pollution anomalies with cause analysis.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Row Level Security Policies</h4>
+<pre><code>-- Public read access (anon role)
+CREATE POLICY "Public read stations"  ON stations  FOR SELECT TO anon USING (true);
+CREATE POLICY "Public read readings"  ON readings  FOR SELECT TO anon USING (true);
+CREATE POLICY "Public read forecasts" ON forecasts FOR SELECT TO anon USING (true);
+CREATE POLICY "Public read alerts"    ON alerts    FOR SELECT TO anon USING (true);
+CREATE POLICY "Public read anomalies" ON anomalies FOR SELECT TO anon USING (true);
+
+-- Service role insert (authenticated backend)
+CREATE POLICY "Service insert readings" ON readings FOR INSERT TO authenticated WITH CHECK (true);
+-- (similar for all tables)</code></pre>
+
+
+<!-- ================ 15. DEPLOYMENT & INFRASTRUCTURE ==================== -->
+<h2 class="page-break"><span class="section-num">15.</span> Deployment &amp; Infrastructure</h2>
+
+<div class="diagram">
+  <div class="diagram-title">Production Infrastructure</div>
+  <div style="text-align:center;">
+    <div class="flow-row">
+      <div class="flow-box" style="min-width:200px;">GitHub Repository<br><small>CI/CD source of truth</small></div>
+    </div>
+    <div class="flow-arrow-down">&darr; auto-deploy on push</div>
+    <div class="flow-row">
+      <div class="flow-box forest" style="min-width:200px;">Vercel<br><small>Next.js 16 frontend<br>Edge CDN, 26 global PoPs<br>Auto-SSL, preview deploys</small></div>
+      <div style="width:30px;"></div>
+      <div class="flow-box coral" style="min-width:200px;">Railway<br><small>FastAPI backend<br>Docker containers<br>Auto-scaling, managed</small></div>
+    </div>
+    <div class="flow-arrow-down">&darr;</div>
+    <div class="flow-row">
+      <div class="flow-box dark" style="min-width:200px;">Supabase<br><small>Postgres 15, RLS<br>Connection pooling<br>pgvector-ready</small></div>
+    </div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Platform</th><th>Configuration</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Frontend</strong></td><td>Vercel</td><td>Edge CDN with 26 global PoPs, auto-SSL, preview deployments on PR, zero-config Next.js detection</td></tr>
+    <tr><td><strong>Backend</strong></td><td>Railway</td><td>Docker container deployment, auto-deploy from GitHub main branch, managed scaling, health checks</td></tr>
+    <tr><td><strong>Database</strong></td><td>Supabase</td><td>Postgres 15 with connection pooling (PgBouncer), Row Level Security, real-time subscriptions, pgvector extension ready</td></tr>
+    <tr><td><strong>Production URL</strong></td><td colspan="2"><code>pavan-aqi.vercel.app</code></td></tr>
+    <tr><td><strong>Secrets Management</strong></td><td colspan="2"><code>.env.local</code> (frontend) and <code>.env</code> (backend) &mdash; API keys never committed to version control. Managed via Vercel/Railway environment variable UI.</td></tr>
+    <tr><td><strong>CI/CD</strong></td><td colspan="2">GitHub &rarr; Vercel auto-deploy on push to main. Railway auto-deploy on push. Preview deployments for pull requests.</td></tr>
+    <tr><td><strong>Data Refresh</strong></td><td colspan="2">APScheduler runs CPCB data refresh every 15 minutes. Weather cache TTL: 30 minutes (current) / 60 minutes (forecast). File-based caching for API responses.</td></tr>
+  </tbody>
+</table>
+
+
+<!-- =============== 16. ACCESSIBILITY & INCLUSIVITY ===================== -->
+<h2><span class="section-num">16.</span> Accessibility &amp; Inclusivity</h2>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Implementation</th><th>Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Theme Toggle</strong></td><td>Light/dark mode switch in navbar, persisted in localStorage</td><td>Reduces eye strain, saves battery on OLED devices</td></tr>
+    <tr><td><strong>Text Size Controls</strong></td><td>A+/A- buttons with 85%-130% range</td><td>Supports users with visual impairments</td></tr>
+    <tr><td><strong>Brightness Control</strong></td><td>Slider for display brightness adjustment</td><td>Adaptable to varying ambient light conditions</td></tr>
+    <tr><td><strong>Keyboard Navigation</strong></td><td>Focus-visible outlines on all interactive elements</td><td>Full keyboard accessibility (WCAG 2.1 AA target)</td></tr>
+    <tr><td><strong>Responsive Design</strong></td><td>Mobile-first breakpoints, fluid layouts</td><td>Works on phones, tablets, desktops</td></tr>
+    <tr><td><strong>4-Language Support</strong></td><td>EN, HI, TA, BN across all alert channels</td><td>Reaches 85% of India's urban population in their language</td></tr>
+    <tr><td><strong>IVR-Ready Format</strong></td><td>Advisory messages structured for text-to-speech</td><td>Future voice channel integration for feature phone users</td></tr>
+    <tr><td><strong>Accessible Components</strong></td><td>shadcn/ui primitives with ARIA attributes</td><td>Screen reader compatibility</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ====================== 17. FUTURE ROADMAP =========================== -->
+<h2><span class="section-num">17.</span> Future Roadmap</h2>
+
+<table>
+  <thead>
+    <tr><th>Timeline</th><th>Feature</th><th>Impact</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Q3 2026</strong></td><td>Ward-level 1km grid forecasting with IDW-enhanced XGBoost</td><td>Hyperlocal predictions beyond station proximity</td></tr>
+    <tr><td><strong>Q3 2026</strong></td><td>Real-time CPCB WebSocket integration (replace polling)</td><td>Sub-minute data freshness, true real-time alerts</td></tr>
+    <tr><td><strong>Q4 2026</strong></td><td>IVR voice alerts in 8 regional languages</td><td>Reach feature phone users (40% of India's mobile base)</td></tr>
+    <tr><td><strong>Q4 2026</strong></td><td>Integration with Smart City Mission dashboards</td><td>Official municipal adoption pathway</td></tr>
+    <tr><td><strong>Q1 2027</strong></td><td>Mobile app (React Native) with push notifications</td><td>Personal AQI companion for citizens</td></tr>
+    <tr><td><strong>Q2 2027</strong></td><td>Air quality digital twin with 3D urban canyon modeling</td><td>Street-level dispersion prediction accounting for building effects</td></tr>
+    <tr><td><strong>Q2 2027</strong></td><td>Real CPCB historical data training for XGBoost</td><td>Replace synthetic training data with 5+ years of actual readings</td></tr>
+  </tbody>
+</table>
+
+
+<!-- =========================== 18. TEAM ================================ -->
+<h2><span class="section-num">18.</span> Team</h2>
+
+<div class="diagram" style="text-align:center;">
+  <div class="diagram-title">Team EdgeRunner</div>
+  <p style="font-size:12pt;font-weight:700;margin-bottom:4px;">Built in 11 days</p>
+  <p style="font-size:10pt;color:#666;margin-bottom:16px;">Solo builder + AI pair programming</p>
+
+  <div class="metrics-row" style="justify-content:center;">
+    <div class="metric-card">
+      <div class="metric-value">93</div>
+      <div class="metric-label">Git Commits</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">49</div>
+      <div class="metric-label">Frontend Files</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">30</div>
+      <div class="metric-label">Backend Files</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">32</div>
+      <div class="metric-label">API Endpoints</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">7</div>
+      <div class="metric-label">AI Agents</div>
+    </div>
+  </div>
+
+  <p style="font-size:10pt;color:#555;margin-top:12px;margin-bottom:0;">This project demonstrates that a focused individual, augmented by AI pair programming, can build a production-grade, multi-agent environmental intelligence platform in under two weeks. The codebase is entirely original, purpose-built for this hackathon, and deployable at national scale.</p>
+</div>
+
+
+<!-- ========================= 19. REFERENCES ============================= -->
+<h2><span class="section-num">19.</span> References</h2>
+
+<table style="font-size:9.5pt;">
+  <thead>
+    <tr><th>#</th><th>Reference</th><th>Citation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>India air pollution mortality</td><td>Lancet Planetary Health (2024). "Air pollution and health in India: estimated burden and opportunities." 1.67 million deaths/year attributed to ambient + household air pollution.</td></tr>
+    <tr><td>2</td><td>City response protocol coverage</td><td>Comptroller and Auditor General of India (2024). Audit of National Clean Air Programme. Finding: only 31% of cities have documented air quality response protocols.</td></tr>
+    <tr><td>3</td><td>CPCB National AQI Standards</td><td>Central Pollution Control Board. National Air Quality Index (AQI) with 6 categories (Good/Satisfactory/Moderate/Poor/Very Poor/Severe) based on 8 pollutant sub-indices.</td></tr>
+    <tr><td>4</td><td>GRAP Framework</td><td>Commission for Air Quality Management (CAQM). Graded Response Action Plan for Delhi-NCR. 4 stages (I-IV) with escalating actions triggered by AQI thresholds: 201, 301, 401, 451.</td></tr>
+    <tr><td>5</td><td>Pasquill-Gifford stability classification</td><td>Pasquill, F. (1961). "The estimation of the dispersion of windborne material." Meteorological Magazine 90:33-49. Gifford, F.A. (1961). "Use of routine meteorological observations for estimating atmospheric dispersion." Nuclear Safety 2:47-51.</td></tr>
+    <tr><td>6</td><td>Delhi truck ban pollution impact</td><td>National Green Tribunal orders (2023). Truck entry restrictions in Delhi showed 10-15% PM reduction in monitored zones during enforcement periods.</td></tr>
+    <tr><td>7</td><td>SAFAR source apportionment</td><td>IITM Pune / SAFAR (System of Air Quality and Weather Forecasting). Delhi source apportionment studies: vehicular (28%), industrial (12%), construction (8%), burning (25-40% in winter).</td></tr>
+    <tr><td>8</td><td>Delhi odd-even vehicle scheme</td><td>Multiple studies on Delhi odd-even scheme (2016, 2019). Results vary: 3-13% PM reduction depending on methodology. Contested effectiveness.</td></tr>
+    <tr><td>9</td><td>WHO Air Quality Guidelines</td><td>World Health Organization (2021). Global Air Quality Guidelines: PM2.5 annual mean 5 ug/m3, 24-hour mean 15 ug/m3. Delhi exceeds by 14x.</td></tr>
+    <tr><td>10</td><td>Economic cost of air pollution in India</td><td>World Bank (2024). "Cost of Air Pollution in India." Estimated $36 billion/year in healthcare costs and productivity losses.</td></tr>
+    <tr><td>11</td><td>Sentinel-5P TROPOMI</td><td>ESA/Copernicus. Sentinel-5 Precursor satellite with TROPOspheric Monitoring Instrument. Native resolution: 7x3.5 km for NO2 tropospheric column density.</td></tr>
+    <tr><td>12</td><td>MODIS/VIIRS FIRMS</td><td>NASA Fire Information for Resource Management System. Near Real-Time (NRT) fire detection using MODIS Collection 6.1 and VIIRS 375m active fire products.</td></tr>
+  </tbody>
+</table>
+
+<div style="text-align:center;margin-top:3em;padding:2em;border-top:2px solid #2563eb;">
+  <div style="font-size:28pt;font-weight:900;letter-spacing:-2px;color:#1a1a18;">pavan<span style="color:#2563eb;">.</span></div>
+  <p style="font-size:10pt;color:#888;margin-top:8px;">AI-Powered Urban Air Quality Intelligence</p>
+  <p style="font-size:9pt;color:#aaa;">ET AI Hackathon 2026 &bull; Team EdgeRunner &bull; Problem Statement #5</p>
+  <p style="font-size:9pt;color:#aaa;margin-top:8px;">pavan-aqi.vercel.app &bull; @PavanETbot &bull; July 22, 2026</p>
+</div>
