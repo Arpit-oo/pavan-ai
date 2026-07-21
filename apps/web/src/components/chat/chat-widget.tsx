@@ -21,7 +21,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "hey! i'm pavan — your air quality intelligence assistant. ask me anything about delhi's air quality, pollution sources, or what interventions could help.",
+      content: "hey! i'm claudy — your air quality intelligence assistant. ask me anything about air quality, pollution sources, or what interventions could help.",
       timestamp: new Date(),
     },
   ]);
@@ -104,7 +104,7 @@ export default function ChatWidget() {
             <div className="flex items-center gap-2">
               <img src="/claudy/pray.png" alt="Claudy" className="w-9 h-9 rounded-full object-cover bg-secondary" style={{ objectPosition: "center 20%" }} />
               <div>
-                <p className="text-[13px]" style={{ fontVariationSettings: "'wght' 620" }}>pavan assistant</p>
+                <p className="text-[13px]" style={{ fontVariationSettings: "'wght' 620" }}>claudy</p>
                 <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">air quality intelligence</p>
               </div>
               <div className="ml-auto flex items-center gap-1.5">

@@ -176,16 +176,32 @@ export default function AlertsPage() {
                 </div>
               )}
 
-              {/* WhatsApp preview */}
+              {/* WhatsApp previews — all 4 languages */}
               {data && (
-                <div className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
-                  <div className="p-6">
-                    <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70 mb-4">whatsapp preview</div>
-                    <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4 max-w-md">
-                      <pre className="text-[13px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
-                        {data.alerts.whatsapp_message[lang] || data.alerts.whatsapp_message.en}
-                      </pre>
-                    </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="inline-block h-2 w-2 rounded-[2px]" style={{ background: "var(--entity-good)" }} />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em]">whatsapp broadcast preview</span>
+                    <span className="ml-auto font-mono text-[10px] tabular-nums text-muted-foreground">
+                      {data.alerts.languages.length.toString().padStart(2, "0")} languages
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {data.alerts.languages.map((l) => (
+                      <div key={l} className="ru-bento" style={{ "--bento-bg": "var(--entity-good)", "--bento-fg": "#ffffff" } as React.CSSProperties}>
+                        <div className="p-5">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-lg">💬</span>
+                            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-80">{langNames[l] || l}</span>
+                          </div>
+                          <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4">
+                            <pre className="text-[12px] whitespace-pre-wrap font-sans leading-relaxed opacity-90">
+                              {data.alerts.whatsapp_message[l] || data.alerts.whatsapp_message.en}
+                            </pre>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}

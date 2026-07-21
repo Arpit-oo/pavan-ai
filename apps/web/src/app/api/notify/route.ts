@@ -112,8 +112,28 @@ function generateAlertEmail(data: {
         ` : ''}
 
         <!-- CTA -->
-        <tr><td style="padding: 8px 0 24px 0; text-align: center;">
+        <tr><td style="padding: 8px 0 16px 0; text-align: center;">
           <a href="https://pavan-aqi.vercel.app" style="display: inline-block; background: #1a1a18; color: #f5f0e6; padding: 14px 32px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500;">Open Pavan Dashboard &rarr;</a>
+        </td></tr>
+
+        <!-- WhatsApp + Telegram -->
+        <tr><td style="padding: 0 0 24px 0;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="50%" style="padding-right: 6px;">
+                <table width="100%" style="background: #25D366; border-radius: 20px;"><tr><td style="padding: 18px 20px; text-align: center;">
+                  <a href="https://whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600;">💬 Join WhatsApp Channel</a>
+                  <p style="font-size: 10px; color: rgba(255,255,255,0.7); margin: 6px 0 0 0;">Daily AQI digests in 4 languages</p>
+                </td></tr></table>
+              </td>
+              <td width="50%" style="padding-left: 6px;">
+                <table width="100%" style="background: #0088cc; border-radius: 20px;"><tr><td style="padding: 18px 20px; text-align: center;">
+                  <a href="https://t.me/PavanETbot" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600;">🤖 Telegram Bot</a>
+                  <p style="font-size: 10px; color: rgba(255,255,255,0.7); margin: 6px 0 0 0;">Real-time alerts + AI questions</p>
+                </td></tr></table>
+              </td>
+            </tr>
+          </table>
         </td></tr>
 
         <!-- Footer -->
