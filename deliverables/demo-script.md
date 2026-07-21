@@ -1,6 +1,6 @@
-# Pavan — Demo Video Script (Final v3)
+# Pavan — Demo Video Script (Final)
 
-**Duration:** 2-3 minutes
+**Duration:** 3-4 minutes (no limit specified)
 **URL:** https://pavan-aqi.vercel.app
 **Bot:** @PavanETbot on Telegram
 **WhatsApp:** whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L
@@ -10,163 +10,158 @@
 
 ## SCRIPT
 
-### 0:00–0:20 — Landing Page (Piyush's hero)
-> "This is Pavan — AI-powered air quality intelligence for India. We fuse 5 data sources through a 6-agent pipeline to turn raw monitoring data into actionable intelligence."
+### 0:00–0:25 — Introduction (face to camera or voiceover)
 
-**Action:** Let the hero animation play — smog clears to blue sky. Scroll slowly through:
-- Stakes section (1.67M deaths, 900+ stations, 31% gap)
-- Data fusion section (5 sources shown visually)
-- Capabilities section
+> "Hi, I'm Arpit, and this is Pavan.
 
-> "Built for the ET AI Hackathon 2026, Problem Statement 5. Team EdgeRunner."
+> Last year, 1.67 million Indians died from air pollution. Not because we didn't have the data — India has over 900 monitoring stations. They died because nobody built the intelligence layer to act on that data. Only 31% of cities with monitoring stations have any actionable response protocol.
 
----
+> We built Pavan to change that. It's an AI-powered air quality intelligence platform that fuses 5 data sources through a 6-agent pipeline — and turns raw numbers into decisions that save lives. Team EdgeRunner. Let me show you what it does."
 
-### 0:20–0:45 — Dashboard
-> "The dashboard shows live AQI across all India — 105 stations, 57 cities. Watch what happens when I switch layers..."
-
-**Action:** Click "Dashboard" from landing CTA. Show the map with AQI stations.
-
-> "Satellite NO2 view from Sentinel-5P..."
-
-**Action:** Click 🛰️ NO2 toggle — map changes to purple heatmap, numbers change.
-
-> "Traffic congestion overlay..."
-
-**Action:** Click 🚗 Traffic toggle — map changes to blue, values change.
-
-> "Our XGBoost forecast — 86% better than persistence baseline. I can switch cities..."
-
-**Action:** Click "Mumbai" pill under forecast chart. Then "Lucknow" — shows higher AQI.
-
-> "All 5 data sources feeding in real-time on the right."
-
-**Action:** Point at Data Sources panel.
+**Action:** Show landing page. Let the hero animation play — smog clears to blue sky. Scroll slowly through the stakes section.
 
 ---
 
-### 0:45–1:05 — Intervention Simulator
-> "Our killer feature — counterfactual intervention simulation."
+### 0:25–0:55 — Dashboard
 
-**Action:** Click "Simulator" in navbar. Select "Mumbai" from city selector.
+> "This is the dashboard. 105 CPCB monitoring stations across 57 Indian cities — every state capital covered. But here's what makes Pavan different from a dashboard."
 
-> "What happens if Mumbai bans trucks?"
+**Action:** Click "Dashboard" from landing CTA. Show the map.
 
-**Action:** Click "Truck Ban" card. Watch 3-step loading animation. Show results.
+> "We don't just show AQI numbers. We fuse satellite data..."
 
-> "AQI drops by 8 points. Empirical factors from published studies. Now compare all five..."
+**Action:** Click 🛰️ NO2 toggle — map changes to purple.
 
-**Action:** Click "Compare All Interventions." Show ranking — burning ban highest.
+> "...traffic congestion..."
 
----
+**Action:** Click 🚗 Traffic toggle — map changes to blue.
 
-### 1:05–1:25 — GRAP Compliance + Agents
-> "GRAP compliance — all 4 stages detected automatically."
+> "...and five data sources total, all visible here on the right."
 
-**Action:** Click "GRAP" in navbar. Select "Delhi" from city selector. Show 4 stages — all visible, readable.
+**Action:** Point at Data Sources panel showing 5 green dots.
 
-> "Generate a full compliance report..."
+> "Our XGBoost forecast is 86% more accurate than persistence baseline. And I can switch between cities in real time."
 
-**Action:** Click "Generate Compliance Report." Watch 3-step loading. Show report with executive summary + enforcement recs.
-
-> "Powered by 6 AI agents..."
-
-**Action:** Click "Agents." Select a city. Click "Run Full Analysis." Watch phase 1→2→3 animation with colored dots.
-
-> "Signal to recommendation — under 3 seconds."
+**Action:** Click "Mumbai" pill under forecast. Then "Lucknow" — higher AQI.
 
 ---
 
-### 1:25–1:50 — Alerts + Chatbot + Channels
-> "4 notification channels — all live."
+### 0:55–1:25 — Intervention Simulator
 
-**Action:** Click "Alerts." Show Telegram (blue), Email (orange), WhatsApp (green) cards.
+> "This is the feature I'm most proud of. Nobody else at this hackathon built this."
 
-> "Our Telegram bot has 10 commands, responds in Hindi..."
+**Action:** Click "Simulator" in navbar. Select a city from the city selector.
 
-**Action:** Switch to phone — show @PavanETbot. Type /start. Show command menu.
+> "What happens if we ban trucks in this city? Pavan doesn't guess — it uses empirical reduction factors from published Delhi pollution studies."
 
-> "WhatsApp broadcast channel with daily digests..."
+**Action:** Click "Truck Ban." Watch 3-step loading animation. Show before/after results.
 
-**Action:** Show WhatsApp channel with seeded messages on phone.
+> "AQI drops. Per station. With evidence. And we can compare all five interventions side by side."
 
-> "AI chatbot — multilingual. Watch..."
+**Action:** Click "Compare All Interventions." Show the ranking with bars.
 
-**Action:** Back to laptop. Click blue chat bubble. Type "दिल्ली में हवा कैसी है?" — show Hindi response.
-
----
-
-### 1:50–2:10 — Compare + Login
-> "Compare 57 cities side by side."
-
-**Action:** Click "Compare." Show ranking. Click different cities.
-
-> "Users subscribe for alerts — choose cities, frequency, channels."
-
-**Action:** Click "Subscribe" in navbar. Show login page with multi-city selector, frequency options, channel checkboxes.
+> "Burning ban has the highest impact — 20% PM2.5 reduction, immediate effect. These are real numbers from real studies."
 
 ---
 
-### 2:10–2:20 — Architecture
-> "Under the hood — 5 data sources, 6 agents, 28 API endpoints, Gaussian plume atmospheric dispersion."
+### 1:25–1:55 — GRAP Compliance + Agents
 
-**Action:** Click "Architecture." Quick scroll through layers.
+> "For government compliance, Pavan auto-detects all four GRAP stages and generates full compliance reports."
+
+**Action:** Click "GRAP." Show the 4 stages — all visible and readable.
+
+> "One click generates a complete report with executive summary, enforcement recommendations, and source attribution."
+
+**Action:** Click "Generate Compliance Report." Watch the 3-step loading. Show the report.
+
+> "This report was generated by our 6-agent AI pipeline. Let me show you how it works."
+
+**Action:** Click "Agents." Select a city. Click "Run Full Analysis."
+
+> "Watch — phase 1 collects data from CPCB and weather. Phase 2 runs anomaly detection and source attribution in parallel. Phase 3 generates enforcement recommendations. All coordinated by the orchestrator. Signal to recommendation — under 3 seconds."
+
+**Action:** Watch phase 1→2→3 animation with colored dots lighting up.
 
 ---
 
-### 2:20–2:30 — Close
-> "Pavan. 5 data sources fused. 105 stations. 57 cities. 6 AI agents. 86% RMSE improvement. 4 live channels. Signal to recommendation under 3 seconds. Team EdgeRunner. Thank you."
+### 1:55–2:30 — Alerts + Channels + Chatbot
 
-**Action:** Scroll to landing page CTA or show pavan. logo.
+> "Intelligence is useless if it doesn't reach people. Pavan delivers alerts through 4 channels — all of them live right now."
+
+**Action:** Click "Alerts." Show the three notification channel cards.
+
+> "Our Telegram bot has 10 commands. You can subscribe to daily digests, weekly reports, or instant threshold alerts."
+
+**Action:** Switch to phone. Show @PavanETbot. Type /start. Show the command menu.
+
+> "Our WhatsApp broadcast channel sends daily AQI digests and health advisories."
+
+**Action:** Show WhatsApp channel with seeded messages.
+
+> "And our AI chatbot understands any Indian language. Watch this."
+
+**Action:** Back to laptop. Click the blue chat bubble. Type "दिल्ली में हवा कैसी है?" Show the Hindi response.
+
+> "It detected Hindi automatically and responded with real data from our agent pipeline."
 
 ---
 
-## KEY NUMBERS TO SAY
+### 2:30–2:55 — Compare + Subscribe + Architecture
 
-- **5** data sources (CPCB, Sentinel-5P, MODIS, weather, traffic)
+> "City administrators can compare air quality across all 57 cities."
+
+**Action:** Click "Compare." Show the ranking. Click a few cities.
+
+> "Citizens can subscribe for alerts — choose their cities, pick a frequency, select their channels."
+
+**Action:** Click "Subscribe." Quick flash of login page with multi-city selector and frequency options.
+
+> "Under the hood — 5 layers, 28 API endpoints, Gaussian plume atmospheric dispersion modeling, and everything deployed on Vercel, Railway, and Supabase."
+
+**Action:** Click "Architecture." Quick scroll through the layers.
+
+---
+
+### 2:55–3:15 — Close (face to camera or voiceover)
+
+> "We started with a simple question: why do 1.67 million Indians die from air pollution when 900 stations are already collecting the data?
+
+> The answer is that data without intelligence is just numbers on a screen. Pavan turns those numbers into source attribution, forecasts, enforcement recommendations, and citizen alerts — in under 3 seconds, in 4 languages, across 4 channels.
+
+> 5 data sources. 105 stations. 57 cities. 6 AI agents. Built in 11 days by Team EdgeRunner.
+
+> This is Pavan. Clean air intelligence for every Indian citizen. Thank you."
+
+**Action:** Show landing page or pavan. logo.
+
+---
+
+## KEY NUMBERS TO MENTION
+
+- **1.67 million** deaths (the WHY)
+- **31%** cities with protocols (the GAP)
+- **5** data sources fused
 - **105** stations, **57** cities
 - **6** AI agents, **3** phases
+- **86%** RMSE improvement
+- **< 3 seconds** signal to recommendation
+- **4** channels, **4** languages
 - **28** API endpoints
-- **86%** RMSE improvement over baseline
-- **4** notification channels (web, telegram, email, whatsapp)
-- **<3 seconds** signal to recommendation
-- **4** languages (auto-detect)
-- **10** Telegram commands
+- **11 days** build time
 
 ## RECORDING TIPS
 
 1. **Chrome full screen (F11)**, 1080p
-2. **Pre-click everything once** — pages cached = fast loading
-3. **OBS or Win+G** to record screen
-4. **Show the hero animation** — let smog→clear play, it's impressive
-5. **Show layer toggles** — judges MUST see map change
-6. **Show loading animations** — 3-step dots on simulator/compliance/agents
-7. **Show Hindi chatbot** — proves multilingual
-8. **Phone for Telegram + WhatsApp** — split screen or quick switch
-9. **Slow deliberate mouse** — don't rush
-10. **Confident voice** — slightly fast pace, 2:30 is tight
+2. **Pre-open all pages in tabs** — switch tabs, don't navigate
+3. **Have phone propped up** with Telegram + WhatsApp pre-opened
+4. **Copy paste** the Hindi text "दिल्ली में हवा कैसी है?" — don't type live
+5. **Let hero animation play fully** — it's your best visual moment
+6. **Show loading animations** — they prove multi-agent coordination
+7. **Speak from the heart** — you're not presenting a product, you're presenting a mission
+8. **Pause after big numbers** — let "1.67 million" land before moving on
+9. **OBS or Win+G** to record
+10. **Practice once** — walk through all tabs in order before hitting record
 
-## PAGE ORDER
+## TONE
 
-1. Landing (/) — hero animation, scroll through sections — 20s
-2. Dashboard (/dashboard) — map layers, forecast city switch — 25s
-3. Simulator (/simulate) — city select, run, compare — 20s
-4. GRAP (/compliance) — stages, generate report — 10s
-5. Agents (/agents) — phase animation — 10s
-6. Alerts (/alerts) — channels + chatbot in Hindi — 25s
-7. Compare (/compare) — city ranking — 10s
-8. Login (/login) — subscribe flow — 10s
-9. Architecture (/architecture) — quick scroll — 10s
-10. Close — 10s
-
-## WHAT'S LIVE RIGHT NOW
-
-```
-Website:   pavan-aqi.vercel.app (10 pages)
-Telegram:  @PavanETbot (10 commands, multilingual)
-WhatsApp:  whatsapp.com/channel/0029Vb92jm97IUYYREzcKk0L
-Email:     Gmail SMTP (sends real branded emails)
-Chatbot:   GPT-4o (auto-detects Hindi/Tamil/Bengali/Punjabi)
-Backend:   Railway (28 endpoints)
-Database:  Supabase (61 stations, 1464 readings)
-```
+This isn't a tech demo. This is a founder presenting something they believe in. The numbers are devastating. The solution is real. Speak like someone who looked at this problem and decided to actually do something about it. Be confident, be specific, but be human.
