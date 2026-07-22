@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Map, { Marker, Popup, NavigationControl, Source, Layer } from "react-map-gl/mapbox";
 import {
   type StationReading,
@@ -23,6 +23,7 @@ const DELHI_DEFAULT = {
 interface AQIMapProps {
   stations: StationReading[];
   heatmapPoints?: HeatmapPoint[];
+  selectedCity?: string;
   onStationClick?: (station: StationReading) => void;
 }
 
@@ -55,6 +56,30 @@ export default function AQIMap({
   const [selectedStation, setSelectedStation] =
     useState<StationReading | null>(null);
   const [activeLayer, setActiveLayer] = useState<MapLayer>("aqi");
+
+  // Auto-pan to selected city when stations change
+  useEffect(() => {
+    if (stations.length === 0) return;
+
+    const avgLat = stations.reduce((sum, s) => sum + s.latitude, 0) / stations.length;
+    const avgLng = stations.reduce((sum, s) => sum + s.longitude, 0) / stations.length;
+
+    let zoom: number;
+    if (stations.length <= 5) {
+      zoom = 11;
+    } else if (stations.length <= 20) {
+      zoom = 10;
+    } else {
+      zoom = 4.5;
+    }
+
+    setViewState((prev) => ({
+      ...prev,
+      latitude: avgLat,
+      longitude: avgLng,
+      zoom,
+    }));
+  }, [stations]);
 
   const handleStationClick = useCallback(
     (station: StationReading) => {

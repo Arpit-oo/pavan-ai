@@ -10,11 +10,13 @@ const SOURCES = [
 
 export default function DataSources() {
   return (
-    <div className="ru-bento">
-      <div className="p-5 max-h-[320px] overflow-y-auto">
-        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-3">
+    <div className="ru-bento h-full flex flex-col">
+      <div className="p-5 pb-2 shrink-0">
+        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
           data sources · 5 active
         </div>
+      </div>
+      <div className="flex-1 overflow-y-auto min-h-0 px-5 pb-5 fade-edge-bottom">
         <div className="space-y-3">
           {SOURCES.map((s) => (
             <div key={s.name} className="flex items-center gap-3">

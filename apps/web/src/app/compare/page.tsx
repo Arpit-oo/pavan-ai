@@ -1,16 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import NavBar from "@/components/nav/navbar";
 import { MOCK_STATIONS } from "@/lib/mock-data";
 import { getAQIGradientColor, getAQICategory } from "@/lib/api";
+import { ALL_CITIES } from "@/components/dashboard/city-selector";
 
-const CITIES = [
-  "Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata", "Hyderabad",
-  "Pune", "Ahmedabad", "Lucknow", "Jaipur", "Patna", "Chandigarh",
-  "Dehradun", "Shimla", "Bhubaneswar", "Raipur", "Guwahati", "Thiruvananthapuram",
-  "Srinagar", "Kochi", "Indore", "Nagpur",
-];
+/* Build a deduplicated list of cities that have mock station data */
+function getCitiesWithData(): string[] {
+  const found = new Set<string>();
+  for (const s of MOCK_STATIONS) {
+    const parts = s.station_name.split(",");
+    if (parts.length >= 2) {
+      found.add(parts[parts.length - 1].trim());
+    }
+  }
+  // Keep ALL_CITIES order first, then append any extras from mock data
+  const ordered: string[] = [];
+  const seen = new Set<string>();
+  for (const c of ALL_CITIES) {
+    if (found.has(c) && !seen.has(c)) { ordered.push(c); seen.add(c); }
+  }
+  for (const c of found) {
+    if (!seen.has(c)) { ordered.push(c); seen.add(c); }
+  }
+  return ordered;
+}
+
+const CITIES = getCitiesWithData();
 
 function getCityStats(city: string) {
   const stations = MOCK_STATIONS.filter((s) =>
@@ -34,6 +51,21 @@ function Sticker({ children, tilt = -3 }: { children: React.ReactNode; tilt?: nu
 
 export default function ComparePage() {
   const [selected, setSelected] = useState<string[]>(["Delhi", "Mumbai", "Bangalore"]);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close search dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+        setQuery("");
+      }
+    }
+    if (searchOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [searchOpen]);
 
   const allStats = CITIES.map(getCityStats).filter(Boolean).sort((a, b) => b!.avgAqi - a!.avgAqi);
   const selectedStats = selected.map(getCityStats).filter(Boolean);
@@ -83,6 +115,68 @@ export default function ComparePage() {
                 </button>
               );
             })}
+
+            {/* Add city search button */}
+            <div className="relative" ref={searchRef}>
+              <button
+                onClick={() => { setSearchOpen(!searchOpen); setQuery(""); }}
+                className="px-3 py-1.5 rounded-full text-[13px] bg-secondary text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all flex items-center gap-1"
+                style={{ fontVariationSettings: "'wght' 540" }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                add city
+              </button>
+
+              {searchOpen && (
+                <div className="absolute top-full mt-2 left-0 z-50 w-72 bg-popover border border-border rounded-2xl shadow-xl p-3 space-y-2">
+                  <input
+                    autoFocus
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="search cities..."
+                    className="w-full px-3 py-2 rounded-xl bg-secondary text-[13px] outline-none placeholder:text-muted-foreground/60"
+                  />
+                  <div className="max-h-52 overflow-y-auto space-y-1">
+                    {ALL_CITIES.filter((c) =>
+                      c.toLowerCase().includes(query.toLowerCase()) && !CITIES.includes(c)
+                    ).length === 0 && CITIES.filter((c) =>
+                      c.toLowerCase().includes(query.toLowerCase())
+                    ).length === 0 && query.length > 0 && (
+                      <p className="text-[12px] text-muted-foreground px-2 py-1.5">no cities found</p>
+                    )}
+                    {ALL_CITIES.filter((c) =>
+                      c.toLowerCase().includes(query.toLowerCase())
+                    ).map((city) => {
+                      const isSelected = selected.includes(city);
+                      const hasData = getCityStats(city) !== null;
+                      return (
+                        <button
+                          key={city}
+                          onClick={() => {
+                            if (isSelected) {
+                              if (selected.length > 1) setSelected(selected.filter((c) => c !== city));
+                            } else if (selected.length < 6) {
+                              setSelected([...selected, city]);
+                            }
+                          }}
+                          className={`w-full text-left px-3 py-1.5 rounded-xl text-[13px] transition-all flex items-center justify-between ${
+                            isSelected
+                              ? "bg-foreground text-background"
+                              : "hover:bg-secondary text-foreground"
+                          }`}
+                          style={{ fontVariationSettings: isSelected ? "'wght' 620" : "'wght' 440" }}
+                        >
+                          <span>{city.toLowerCase()}</span>
+                          {!hasData && (
+                            <span className="text-[10px] text-muted-foreground opacity-60">no data</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Selected city comparison tiles */}

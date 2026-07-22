@@ -152,7 +152,7 @@ const alertDataMap: Record<string, AlertData> = {
     alerts: {
       avg_aqi: 105,
       level: "moderate",
-      alert_count: 2,
+      alert_count: 4,
       city_advisory: {
         en: "Mumbai air quality is MODERATE (AQI 105). Generally acceptable. Unusually sensitive individuals may experience respiratory symptoms near Colaba and Kurla industrial zones.",
         hi: "मुंबई की वायु गुणवत्ता मध्यम है (AQI 105)। सामान्यतः स्वीकार्य। कोलाबा और कुर्ला औद्योगिक क्षेत्रों के पास संवेदनशील लोगों को श्वसन समस्या हो सकती है।",
@@ -160,6 +160,8 @@ const alertDataMap: Record<string, AlertData> = {
         bn: "মুম্বাইয়ের বায়ুর মান মাঝারি (AQI ১০৫)। সাধারণত গ্রহণযোগ্য। কোলাবা ও কুর্লা শিল্প এলাকার কাছে সংবেদনশীল ব্যক্তিদের শ্বাসকষ্ট হতে পারে।",
       },
       zone_alerts: [
+        { station: "Bandra", aqi: 84, level: "moderate", message_en: "Moderate AQI at Bandra (84). Coastal winds aiding dispersion.", message_hi: "बांद्रा में मध्यम AQI (84)। तटीय हवाएं प्रदूषण फैलाने में मदद कर रही हैं।" },
+        { station: "Chembur", aqi: 103, level: "moderate", message_en: "Moderate AQI at Chembur (103). Refinery cluster emissions detected.", message_hi: "चेम्बूर में मध्यम AQI (103)। रिफाइनरी क्लस्टर से उत्सर्जन।" },
         { station: "Colaba", aqi: 130, level: "moderate", message_en: "Moderate AQI at Colaba (130). Sea breeze may improve conditions.", message_hi: "कोलाबा में मध्यम AQI (130)। समुद्री हवा से सुधार संभव।" },
         { station: "Kurla", aqi: 111, level: "moderate", message_en: "Moderate AQI at Kurla (111). Industrial area — sensitive groups take care.", message_hi: "कुर्ला में मध्यम AQI (111)। औद्योगिक क्षेत्र — संवेदनशील लोग सावधानी बरतें।" },
       ],
@@ -178,14 +180,17 @@ const alertDataMap: Record<string, AlertData> = {
     alerts: {
       avg_aqi: 60,
       level: "moderate",
-      alert_count: 0,
+      alert_count: 2,
       city_advisory: {
         en: "Bangalore air quality is SATISFACTORY (AQI 60). No health advisory needed. Enjoy outdoor activities across the city including BTM Layout and Jayanagar.",
         hi: "बैंगलोर की वायु गुणवत्ता संतोषजनक है (AQI 60)। किसी स्वास्थ्य सलाह की जरूरत नहीं। BTM लेआउट और जयनगर सहित शहर भर में बाहरी गतिविधियों का आनंद लें।",
         ta: "பெங்களூரு காற்றின் தரம் திருப்திகரமாக உள்ளது (AQI 60). சுகாதார ஆலோசனை தேவையில்லை. BTM Layout மற்றும் ஜெயநகர் உள்ளிட்ட பகுதிகளில் வெளிப்புற செயல்பாடுகளை அனுபவிக்கவும்.",
         bn: "ব্যাঙ্গালোরের বায়ুর মান সন্তোষজনক (AQI ৬০)। কোনো স্বাস্থ্য পরামর্শের প্রয়োজন নেই।",
       },
-      zone_alerts: [],
+      zone_alerts: [
+        { station: "BTM Layout", aqi: 86, level: "moderate", message_en: "Moderate AQI at BTM Layout (86). Traffic density slightly elevated.", message_hi: "BTM लेआउट में मध्यम AQI (86)। यातायात घनत्व थोड़ा बढ़ा हुआ है।" },
+        { station: "Peenya", aqi: 45, level: "good", message_en: "Good AQI at Peenya (45). Industrial corridor well within limits.", message_hi: "पीन्या में अच्छा AQI (45)। औद्योगिक गलियारा सीमा में है।" },
+      ],
       whatsapp_message: {
         en: "Bangalore Air Quality\nAQI: 60 (Satisfactory)\n\nStations:\n- BTM Layout: 86\n- Peenya: 45\n- Silk Board: 34\n- Jayanagar: 69\n\nAir quality is good. No restrictions on outdoor activities.",
         hi: "बैंगलोर वायु गुणवत्ता\nAQI: 60 (संतोषजनक)\n\nस्टेशन:\n- BTM लेआउट: 86\n- पीन्या: 45\n- सिल्क बोर्ड: 34\n- जयनगर: 69\n\nवायु गुणवत्ता अच्छी है।",
@@ -201,7 +206,7 @@ const alertDataMap: Record<string, AlertData> = {
     alerts: {
       avg_aqi: 55,
       level: "moderate",
-      alert_count: 1,
+      alert_count: 2,
       city_advisory: {
         en: "Chennai air quality is SATISFACTORY (AQI 55). Manali industrial zone shows elevated PM2.5. Coastal areas like Velachery and Alandur remain clean.",
         hi: "चेन्नई की वायु गुणवत्ता संतोषजनक है (AQI 55)। मनाली औद्योगिक क्षेत्र में PM2.5 बढ़ा हुआ है। वेलाचेरी और अलंदूर जैसे तटीय क्षेत्र साफ हैं।",
@@ -210,6 +215,7 @@ const alertDataMap: Record<string, AlertData> = {
       },
       zone_alerts: [
         { station: "Manali", aqi: 87, level: "moderate", message_en: "Moderate AQI at Manali (87). Petrochemical complex emissions detected.", message_hi: "मनाली में मध्यम AQI (87)। पेट्रोकेमिकल कॉम्प्लेक्स से उत्सर्जन।" },
+        { station: "Anna Nagar", aqi: 69, level: "moderate", message_en: "Moderate AQI at Anna Nagar (69). Metro construction dust contributing.", message_hi: "अन्ना नगर में मध्यम AQI (69)। मेट्रो निर्माण की धूल से प्रदूषण।" },
       ],
       whatsapp_message: {
         en: "Chennai Air Quality\nAQI: 55 (Satisfactory)\n\nStations:\n- Alandur: 35\n- Velachery: 30\n- Manali: 87\n- Anna Nagar: 69\n\nGenerally good. Manali industrial zone slightly elevated. Sea breeze helping dispersion.",
